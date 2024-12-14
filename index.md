@@ -1,5 +1,5 @@
 +++
-title = "Astro 416 Website"
+title = "Astro 497 Website"
 tags = ["logistics"]
 +++
 
@@ -7,4 +7,4 @@ tags = ["logistics"]
 @@h3 {{ class_number}}  ({{ semester}}) @@
 
 ## Course Overview
-Students will build data science skills (e.g., querying astronomical databases, data storage and manipulation, data visualization, exploratory and explanatory data analysis, Bayesian modeling workflows, and reproducible research practices) and practice applying them to analyze astronomical datasets.
+Students will build data science skills (e.g., querying astronomical databases, data storage and manipulation, data visualization, exploratory and explanatory data analysis, Bayesian modeling workflows, and reproducible research practices) and applying them to analyze astronomical data sets. 

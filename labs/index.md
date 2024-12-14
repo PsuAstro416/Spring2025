@@ -2,6 +2,8 @@
 title = "Labs"
 tags = ["labs", "logistics", "overview"]
 lab_list = [("labs/lab1.md","lab1"),
+             ]
++++
 <!--
             ("labs/lab2.md","lab2"),
             ("labs/lab3.md","lab3"),
@@ -12,8 +14,6 @@ lab_list = [("labs/lab1.md","lab1"),
             ("labs/lab8.md","lab8"),
             ("labs/lab9.md","lab9"),
 -->
-             ]
-+++
 
 ## Lab/Homework Exercises
 
