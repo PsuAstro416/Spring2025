@@ -6,7 +6,7 @@ title = "Create Account on Roar"
 
 \\
 
-All students should [request an account on Roar Collab](https://www.icds.psu.edu/computing-services/account-setup/) before the end of the __first day of class__.  
+All students should [request an account on Roar Collab](https://www.icds.psu.edu/account-setup/) before the end of the __first day of class__.  
 On the account request form,
 
 - specify ebf11 as the sponsor account,

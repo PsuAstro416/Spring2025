@@ -591,11 +591,3 @@ PlutoUI 0.7.39
 
 _To run this tutorial locally, download [this file](/notebooks/week1day3.jl) and open it with
 [Pluto.jl](https://plutojl.org)._
-
-
-_To run this tutorial locally, download [this file](/notebooks/week1day3.jl) and open it with
-[Pluto.jl](https://plutojl.org)._
-
-
-_To run this tutorial locally, download [this file](/notebooks/week1day3.jl) and open it with
-[Pluto.jl](https://plutojl.org)._
