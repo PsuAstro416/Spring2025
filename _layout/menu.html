@@ -1,26 +1,99 @@
 <div class="docs-navbar">
     <a class="off-canvas-toggle btn btn-link btn-action" href="#sidebar"><i class="icon icon-menu"></i></a>
     <div class="btns d-flex">
-      <a class="btn btn-primary ml-1" href="https://github.com/rikhuijzer/JuliaTutorialsTemplate">GitHub</a>
+      <a class="btn btn-primary ml-1" href="https://portal.hpc.psu.edu">Roar Portal</a>
+      <a class="btn btn-primary ml-1" href="https://github.com/PsuAstro416/Spring2025">Improve this site</a>
+
     </div>
 </div>
 
 <div id="sidebar" class="docs-sidebar off-canvas-sidebar">
 
 <div class="docs-brand">
-    <h5><a href="/">Julia Tutorials Template</a></h5>
+    <h5><a href="/">{{fill class_number}}</a></h5>
 </div>
 
 <div class="docs-nav">
 <div class="accordion-container">
   <ul class="menu menu-nav">
-    <div class="menu-header">Using this template</div>
-    {{menuitem "getting-started" "Getting started"}}
-    <br/>
-    <div class="menu-header">Example Pluto tutorials</div>
-    {{menuitem "tutorials/linear-model" "Linear model"}}
-    {{menuitem "tutorials/ode" "Harmonic oscillator"}}
-    {{menuitem "tutorials/benchmarking" "Benchmarking"}}
+    <div class="menu-header"><a href="/syllabus/">Syllabus</a></div>
+    {{ispage syllabus/*}}
+    {{menuitem "syllabus/basics"  "Basic Info"}}
+    {{menuitem "syllabus/goals"   "Goals"     }}
+    {{menuitem "syllabus/schedule"  "Schedule"    }}
+    {{menuitem "syllabus/preparation"  "Preparation"    }}
+    {{menuitem "syllabus/relation_to_other_courses"  "Relation to Other Courses"    }}
+    {{menuitem "syllabus/reading" "Reading"   }}
+    {{menuitem "syllabus/assessment"  "Assessment"    }}
+    {{menuitem "syllabus/safety"  "Safety"    }}
+    {{menuitem "syllabus/academic_integrity"  "Academic Integrity"    }}
+    {{menuitem "syllabus/additional_statements"  "Additional Statements"    }}
+    {{end}}
+    <div class="menu-header"><a href="/lessons/">Lessons</a></div>
+    {{ispage lessons/*}}
+    {{menuitem "lessons/week1"  "Week 1"   }}
+    <!--
+    {{menuitem "lessons/week2"  "Week 2"    }}
+    {{menuitem "lessons/week3"  "Week 3"    }}
+    {{menuitem "lessons/week4"  "Week 4"    }}
+    {{menuitem "lessons/week5"  "Week 5"    }}
+    {{menuitem "lessons/week6"  "Week 6"    }}
+    {{menuitem "lessons/week7"  "Week 7"    }}
+
+    {{menuitem "lessons/week8"  "Week 8"    }}
+    {{menuitem "lessons/week9"  "Week 9"    }}
+    {{menuitem "lessons/week10"  "Week 10"    }}
+    {{menuitem "lessons/week11"  "Week 11"    }}
+    {{menuitem "lessons/week12"  "Week 12"    }}
+    {{menuitem "lessons/week13"  "Week 13"    }}
+    {{menuitem "lessons/week14"  "Week 14"    }}
+    {{menuitem "lessons/week15"  "Week 15"    }}
+    {{menuitem "lessons/week16"  "Week 16"    }}
+    -->
+    
+    {{end}}
+    <div class="menu-header"><a href="/labs/">Labs</a></div>
+    {{ispage labs/*}}
+    {{menuitem "labs/lab1"  "Lab 1"    }}
+    <!--
+    {{menuitem "labs/lab2"  "Lab 2"    }}
+    {{menuitem "labs/lab3"  "Lab 3"    }}
+    {{menuitem "labs/lab4"  "Lab 4"    }}
+    {{menuitem "labs/lab5"  "Lab 5"    }}
+    {{menuitem "labs/lab6"  "Lab 6"    }}
+    {{menuitem "labs/lab7"  "Lab 7"    }}
+    {{menuitem "labs/lab8"  "Lab 8"    }}
+    {{menuitem "labs/lab9"  "Lab 9"    }}
+    -->
+    {{end}}
+    
+    <div class="menu-header"><a href="/project/">Class Project</a></div>
+    {{ispage project/*}}
+    {{menuitem "project/plan"  "Plan"    }}
+    <!--
+    {{menuitem "project/checkpoint"  "Checkpoints"    }}
+    {{menuitem "project/dashboard"  "Final Dashboard"    }}
+    {{menuitem "project/presentation"  "Group Presentation"    }}
+    {{menuitem "project/report"  "Individual Report"    }}
+    -->
+    {{end}}
+    <div class="menu-header"><a href="/tips/">Tips</a></div>
+    {{ispage tips/*}}
+    {{menuitem "tips/roar"  "Using Roar"    }}
+    <!--
+    {{menuitem "tips/roar/pluto"  "Starting Pluto"    }}
+    {{menuitem "tips/labs"  "Using Labs"    }}
+    {{ispage tips/labs/*}}
+      {{menuitem "tips/labs/starting"  "Starting"    }}
+      {{menuitem "tips/labs/commit"  "Commiting"    }}
+      {{menuitem "tips/labs/submitting"  "Submitting"    }}
+      {{menuitem "tips/labs/feedback"  "Feedback"    }}
+    {{end}}
+    -->
+    {{end}}
+
+    <div class="menu-header"><a href="/resources/">Resources</a></div>
+
   </ul>
 </div>
 </div>
