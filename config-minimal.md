@@ -1,6 +1,7 @@
 +++
 author = "Eric Ford"
 mintoclevel = 2
+title = "Edit this configuration file for each semester"
 
 # Add here files or directories that should be ignored by Franklin, otherwise
 # these files might be copied and, if markdown, processed by Franklin which

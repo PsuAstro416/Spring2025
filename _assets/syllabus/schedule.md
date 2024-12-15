@@ -1,36 +1,37 @@
 ## Course Content & Structure
 
 In a typical week:  
-- Friday lectures will focus on an Exoplanets topic.  
-- Monday lectures will focus on a Data Science topic.  
-- Wednesday computer labs will aim to combine the two.
+- Monday lectures will introduce foundational a Data Science knowledge.  
+- Wednesday computer labs give students a chance to apply that knowledge.
+- Friday discussions will focus on practical challenges
 
-There will be a short reading to be completed prior to class on most Mondays and Fridays.  Students will continue working on the computer lab begun on Wednesday as homework, typically due prior to class the following Monday.  Inevitably, there will be some deviations (e.g., getting started week, weeks with a holiday or exam, week of student presentations, etc.).   
+There will be a short reading to be completed prior to class on most Mondays (and).  Students will continue working on the computer lab begun on Wednesday as homework, typically due prior to class the following Monday.  Inevitably, there will be some deviations (e.g., getting started week, weeks with a holiday or exam, week of student presentations, etc.).   
 
 \\
 ### Schedule of Topics
 
-| Week | Data Science | Exoplanets |
-| ---- | ------------ | ---------- |
-| 1 | What is Data Science? | Overview of Known Exoplanets |
-| 2 | Exploratory Data Analysis | Transits |
-| 3 | (Labor Day)  Model Building | Transit Timing |
-| 4 | Model Assessment | Radial Velocities |
-| 5 | Bayesian Inference | Rossiter-MchLaughlin Effect |
-| 6 | Explanatory Data Analysis | Masses & Orbits |
-| 7 | Exam week | Intro to Class Projects |
-| 8 | Databases & Data Wrangling | Exoplanet Populations |
-| 9 | Data Science Workflow | Transmission Spectroscopy |
-| 10 | Data Storage | Emission Spectroscopy |
-| 11 | Data Visualization | Microlensing |
-| 12 | Reports & Dashboards | Disks  |
-| 13 | Reproducible Research | Future of Exoplanet Detection |
-| 14 | (Thanksgiving Holiday) | - |
-| 15 | Retrospective | Future of Exoplanet Characterization |
-| 16 | Student Presentations | Student Presentations |
-<!-- | 17 | (Exam Week) | - | -->
+
+| Week | Data Science |
+| ---- | ------------ |
+| 1  | What is Data Science? |
+| 2  | Exploratory Data Analysis |
+| 3  | (Labor Day)  Model Building | 
+| 4  | Model Assessment | 
+| 5  | Data Wrangling | 
+| 6  | Data Storage |
+| 7  | Exam week | 
+| 8  | Non-linear models |
+| SB | (Thanksgiving Holiday) |
+| 9  | Explanatory Data Analysis |
+| 10 | Data Visualization |
+| 11 | Data Science Workflow | 
+| 12 | Reports & Dashboards | 
+| 13 | Reproducible Research |
+| 14 | Retrospective & Student Presentations |  
+| 15 | Student Presentations |
+<!-- | 16 | (Exam Week) | - | -->
 
 \\
 The schedule is subject to change.  Any changes will be announced via Canvas.  
 
-{{fill topic lessons/week1.md}}
+<!-- {{fill topic lessons/week1.md}} -->
