@@ -15,13 +15,13 @@ There will be a short reading to be completed prior to class on most Mondays (an
 | ---- | ------------ |
 | 1  | What is Data Science? |
 | 2  | Exploratory Data Analysis |
-| 3  | (Labor Day)  Model Building | 
+| 3  | Model Building | 
 | 4  | Model Assessment | 
 | 5  | Data Wrangling | 
 | 6  | Data Storage |
 | 7  | Exam week | 
 | 8  | Non-linear models |
-| SB | (Thanksgiving Holiday) |
+| SB | Spring Break |
 | 9  | Explanatory Data Analysis |
 | 10 | Data Visualization |
 | 11 | Data Science Workflow | 
