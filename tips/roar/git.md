@@ -4,7 +4,7 @@ title = "Setting up Git"
 
 ### Setup Git
 
-For students using Roar for the first time, open a terminal tab in your sessions, and run commands like the following from the terminal
+For students using Roar for the first time, open a terminal tab in one of your sessions, and run commands like the following from the terminal
 ```shell
 git config --global user.email "nobody@nowhere.org"
 git config --global user.name "Your Github Id"
@@ -17,4 +17,5 @@ Either is fine.
 
 \\
 
-The next step is to [run a setup script](../initial_setup/).
+<!-- The next step is to [run a setup script](../initial_setup/). -->
+Now you're ready to move on to [starting Pluto](../pluto/)

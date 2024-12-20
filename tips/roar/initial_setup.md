@@ -4,19 +4,29 @@ title = "Setup Script on Roar"
 
 ### Run Setup Script on Roar
 
-We'll want to make a few updates to your Roar environment.  To make this easy, Justin has provided a script that you can easily run from a terminal window on Roar,
+To initially set up the users environment for ASTRO 416's use of Julia and Pluto, a user must run a setup script. 
+This initial setup step should only be performed once all semester. 
+(If you're curious, the setup script loads modules providing access to julia and python anaconda python.  It sets some environment variables that we'll use later in the class and moves the current .julia directory (if it exists) from home to work. 
+It then creates a symlink ~/.julia -> ~/work/julia_astro416.  Finally, it installs the Pluto and IJulia packages in Julia, so you can use Julia inside the JupyterLab and Pluto servers.)  
+
+
+To make all those steps easy, ICDS has provided a script that you can easily run from a terminal window on Roar.
+To run this script, first, make sure you have an account on ACI and have completed the [initial setup](../tips/roar/) steps.
+Then, 
+- Browse to [portal.hpc.psu.edu](https://portal.hpc.psu.edu).  Using "guest" or "incognito" mode is recommended. 
+- Login and authenticate (as necessary).
+- Click _Clusters_ and select _>RC Shell Access_.  
+- Login with your Penn State password.  You'll likely need to complete the two-factor authentication process.  
+- You'll now have a terminal where you can enter commands.  Type (or copy and paste)
 ```shell
 bash /gpfs/group/RISE/classroom/astro_497/scripts/julia_setup
 ```
-<!--
-If you’re curious, this will update your .bashrc startup script so that it automatically loads a module (so software for the course is in your path; `module use /gpfs/group/RISE/sw7/modules`), and move your .julia and .conda directories from the home filesystem to the work filesystem (since those can get rather large).  
--->
-If you already have customized your Roar environment for your research, then you may get a warning message and need to ask for help configuring your account.  
-<!--
-If something does break, you can run `/gpfs/group/RISE/classroom/astro_528/scripts/class_setup restore` to undo the setup changes above.  
--->
-After you exit the terminal, your next Roar session will automatically use those settings.
+If you already have customized your Roar environment for your research, then you may get a warning message and need to ask for help configuring your account.
+- When the script has finished running and you have a new command prompt, exit the terminal by typeing 
+```shell
+exit
+```
+Your next Roar session will automatically use those settings.
 
 \\
-
 Now you're ready to move on to [starting Pluto](../pluto/)

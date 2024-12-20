@@ -9,7 +9,7 @@ tags = ["tips","labs","git","pluto"]
 
 
 ## Start a new Roar Session
-- Request a "**BYOE Jupyter server**" session via the [Roar Collab portal](https://portal.hpc.psu.edu/) (see [starting Pluto Server](../../roar/pluto/))
+- Request a "**Jupyter Lab server**" session via the [Roar Collab portal](https://portal.hpc.psu.edu/) using our class's custom environment (see [starting Pluto Server](../../roar/pluto/)).
 - You can proceed to the next step, while you're waiting for it to star.
 
 ## Clone your github repository to begin a new assignment
@@ -46,9 +46,10 @@ julia --project -e 'using Pkg; Pkg.instantiate(); '
 - Most labs will contain one or more Pluto notebooks (their file names will end in .jl).  To open one in Pluto,
    + Click the Pluto tile.  A new tab will open in your browser for the Pluto session.
    + In the box labeled "Open from file" or "Open a notebook" (depending on Pluto version), type the path to the directory containing the repo, a forward slash and the name of the first notebook (e.g., 'lab1-yourgithubid/ex1.jl').  Tab completion is often helpful.
+   + Click "Run notebook code" in the upper right.
 - Do your work in the notebook.
 - When you're done with a notebook, make sure it is saved (Ctrl+S) and close the tab.
 
 ---
 ## Commit your changes
-Ideally, you'd commit small changes as you go.  At a minimum, make sure that you [commit your changes](../commit) each time you are wrapping up a coding session or about to take a break.
+Ideally, you'd commit small changes as you go.  I'd strongly suggest that you [commit your changes](../commit) each time you are wrapping up a coding session or about to take a break.  At a minimum, [commit your changes](../commit) before submitting your assignment.

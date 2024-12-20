@@ -4,9 +4,9 @@ tags = ["tips","labs"]
 +++
 
 ### Updating files from a lab
-- In case the instructor makes changes to the template after you've cloned the template, it would be useful to be able to merge in those changes easily.  To prepare for that, you can set a remote upstream repository.  Here I assume that your REPO_URL was https://github.com/GITHUBID/example-GITHUBID.git.  Notice that we're replacing the first GITHUB id by the organization name "PsuAstro497" and remove the "-GITHUBID" at the end.
+- In case the instructor makes changes to the template after you've cloned the template, it would be useful to be able to merge in those changes easily.  To prepare for that, you can set a remote upstream repository.  Here I assume that your REPO_URL was https://github.com/GITHUBID/example-GITHUBID.git.  Notice that we're replacing the first GITHUB id by the organization name "PsuAstro416" and remove the "-GITHUBID" at the end.
 ```shell
-git remote add upstream git@github.com:PsuAstro497/example.git
+git remote add upstream git@github.com:PsuAstro416/example.git
 ```
 
 If you haven't started or have only made a few minor changes to existing cells, then you can attempt to have git merge changes from the starting repository by running either

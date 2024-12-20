@@ -4,7 +4,7 @@ tags = ["tips","labs","git"]
 +++
 
 # Review the feedback on your lab submission
-Once the labs have been "graded", you can review any feedback from the instructor and/or TA.
+Once the labs have been reviewed by the instructor or TA, you can review their feedback:
 - Browse to your github repository.
 - GitHub classroom opens a pull request for each assignment automatrically
 - Click _Pull Requests_, then click on _Feedback_, the name of the pull request that GitHub classroom created for us.
