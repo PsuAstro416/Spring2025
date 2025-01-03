@@ -16,9 +16,9 @@ Login and authenticate (as necessary).
    - Environment Setup:  `source /storage/group/RISE/classroom/astro_416/scripts/env_setup`
    - Account:  `dsa2astro_bc` (if that's not avaliable choose _open_)
    - Partition: `dsa2astro_bc` (if that's not avaliable choose _open_; this option might not be displayed) 
-   - Number of hours: 2 hours  (can choose longer if you plan to continue after class or outside of class)
+   - Number of hours: 2 hours  (you can choose longer if you plan to continue after class or outside of class)
    - Number of cores: 3
-   - Memory per core: 6 GB
+   - Memory per core: 4 GB
    - Enable advanced Slurm options: Leave unchecked
    - I would like to receive an email when the session starts: Your choice of whether to check or not.
 3. Click _Launch_.  And wait while your job starts.

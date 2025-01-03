@@ -19,7 +19,7 @@ Then,
 - Login with your Penn State password.  You'll likely need to complete the two-factor authentication process.  
 - You'll now have a terminal where you can enter commands.  Type (or copy and paste)
 ```shell
-bash /gpfs/group/RISE/classroom/astro_497/scripts/julia_setup
+bash /storage/group/RISE/classroom/astro_416/scripts/class_setup 
 ```
 If you already have customized your Roar environment for your research, then you may get a warning message and need to ask for help configuring your account.
 - When the script has finished running and you have a new command prompt, exit the terminal by typeing 

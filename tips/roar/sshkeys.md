@@ -21,6 +21,6 @@ Once you run this script, then you'll need to [add the new ssh key to the list o
 - In the "Key" box paste the contents of the line after "Key:" (starting with ssh) 
 - Click "Add SSH Key".  
 
-If you want to use this same SSH key again, you can find your public key in the file ~/.ssh/id_ed25519.pub on the Roar Collab system.  You can get your ssh public key by running 'cat  ~/.ssh/id_ed25519.pub' from the command line while logged into Roar Collab.  
+If you want to use this same SSH key again, you can find your public key in the file `~/.ssh/id_ed25519.pub` on the Roar Collab system.  You can get your ssh public key by running `cat  ~/.ssh/id_ed25519.pub` from the command line while logged into Roar Collab.  
 
 The next step is to [configure git on Roar](../git/)
