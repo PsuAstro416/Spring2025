@@ -3,7 +3,7 @@
 All Penn State and Eberly College of Science policies regarding [academic integrity](http://senate.psu.edu/policies-and-rules-for-undergraduate-students/47-00-48-00-and-49-00-grades/#49-20), ethics and honorable behavior apply to this course.  In light of the fact that group work is highly encouraged, and to fully facilitate best ethical practices and academic integrity, the following rules apply:
 
 \\
-
+![Limited AI Use](https://commonwealthteaching.psu.edu/wp-content/uploads/2024/05/Limited-AI-Use-290x300.png)
 The intellectual content of all submitted assignments should be _the student's own work_ and not the output of AI tool.  
 Using an AI-based grammar checker is acceptible and does not need to be disclosed for the labs or project in this course.
 Otherwise, students must fully disclose any and all use of artificial intelligence (AI) in completing their assignemnts at the time of submission.  
