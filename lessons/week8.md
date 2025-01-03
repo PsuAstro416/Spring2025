@@ -2,7 +2,7 @@
 title = "Week 8"
 week_num = 8
 tags = ["lessons"]
-topic = "Model Building III: Bayesian Inference & Non-linear Models""
+topic = "Model Building III: Bayesian Inference & Non-linear Models"
 ds_topic = "Model Building III: Bayesian Inference & Non-linear Models"
 exo_topic =  "Exoplanet Populations"
 +++
