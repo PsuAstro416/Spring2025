@@ -23,8 +23,7 @@ tags = ["lessons","overview"]
 ## Unit 1:  
 - [Week 1](week1/): {{fill topic lessons/week1.md}}
 - [Week 2](week2/): {{fill topic lessons/week2.md}}
-- [Week 3](week3/): Model Building 
-- [Week 3](week3/): {{fill topic lessons/week3.md}} <!-- Why broken? -->
+- [Week 3](week3/): {{fill topic lessons/week3.md}}
 - [Week 4](week4/): {{fill topic lessons/week4.md}}
 - [Week 5](week5/): {{fill topic lessons/week5.md}}
 - [Week 6](week6/): {{fill topic lessons/week6.md}}

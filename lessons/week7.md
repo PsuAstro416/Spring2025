@@ -2,7 +2,7 @@
 title = "Week 7"
 week_num = 7
 tags = ["lessons"]
-topic = "Exam & Intro to Class Projects"
+topic = "Exam Week"
 ds_topic = "Introduction to Class Projects"
 exo_topic =  "Multiple Planet Systems"
 +++
