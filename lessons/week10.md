@@ -11,6 +11,7 @@ Week {{week_num}}
 # {{topic}}
 
 ## Readings
+- See Lab for info about {{ds_topic}}
 
-## [Lab 9](../../labs/lab8/): {{fill title labs/lab8.md}}
+## [Lab 9](../../labs/lab9/): {{fill title labs/lab9.md}}
 

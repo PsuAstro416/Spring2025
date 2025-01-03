@@ -11,6 +11,7 @@ Week {{week_num}}
 # {{topic}}
 
 ## Readings
+- See Lab for info about {{ds_topic}}
 - Read [Julia Data Science, Ch 4.6-4.9](https://juliadatascience.io/join).
 - Optionally, read earlier sections of [Ch 4](https://juliadatascience.io/dataframes) if those are helpful to you now.
 
