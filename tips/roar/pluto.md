@@ -13,7 +13,8 @@ Login and authenticate (as necessary).
 1. Under _Interactive Apps_, choose _Jupyter_ (under Server Applications).
 2. Select:
    - Jupyter Interface: "Jupyter Lab"
-   - Environment Setup:  `source /storage/group/RISE/classroom/astro_416/scripts/env_setup`
+   - Environment type: "Use custom environment"
+   - Environment setup:  `source /storage/group/RISE/classroom/astro_416/scripts/env_setup`
    - Account:  `dsa2astro_bc` (if that's not avaliable choose _open_)
    - Partition: `dsa2astro_bc` (if that's not avaliable choose _open_; this option might not be displayed) 
    - Number of hours: 2 hours  (you can choose longer if you plan to continue after class or outside of class)

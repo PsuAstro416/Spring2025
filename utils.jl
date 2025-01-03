@@ -79,7 +79,11 @@ function hfun_menuitem(params::Vector{String})::String
     active = current_location == location ? "active" : ""
 
     pre = "<li class='menu-item $active'>"
-    link = "<a href='/$location/'>$title</a>"
+    if occursin("#", location)
+        link = "<a href='/$location'>$title</a>"
+    else
+        link = "<a href='/$location/'>$title</a>"
+    end
     post = "</li>"
     return string(pre, link, post)
 end

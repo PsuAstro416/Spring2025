@@ -2,9 +2,6 @@
 title = "Labs"
 tags = ["labs", "logistics", "overview"]
 lab_list = [("labs/lab1.md","lab1"),
-             ]
-+++
-<!--
             ("labs/lab2.md","lab2"),
             ("labs/lab3.md","lab3"),
             ("labs/lab4.md","lab4"),
@@ -13,12 +10,11 @@ lab_list = [("labs/lab1.md","lab1"),
             ("labs/lab7.md","lab7"),
             ("labs/lab8.md","lab8"),
             ("labs/lab9.md","lab9"),
--->
+             ]
++++
 
-## Lab/Homework Exercises
-
+# Lab/Homework Exercises
 - [Lab 1](lab1/): {{fill title labs/lab1.md}} ([github](https://github.com/PsuAstro416/lab1))
-<!--
 - [Lab 2](lab2/): {{fill title labs/lab2.md}} ([github](https://github.com/PsuAstro416/lab2))
 - [Lab 3](lab3/): {{fill title labs/lab3.md}} ([github](https://github.com/PsuAstro416/lab3))
 - [Lab 4](lab4/): {{fill title labs/lab4.md}} ([github](https://github.com/PsuAstro416/lab4))
@@ -27,7 +23,6 @@ lab_list = [("labs/lab1.md","lab1"),
 - [Lab 7](lab7/): {{fill title labs/lab7.md}} ([github](https://github.com/PsuAstro416/lab7))
 - [Lab 8](lab8/): {{fill title labs/lab8.md}} ([github](https://github.com/PsuAstro416/lab8))
 - [Lab 9](lab9/): {{fill title labs/lab9.md}} ([github](https://github.com/PsuAstro416/lab9))
--->
 
 <!--
 {{for (page,lab) in lab_list }}

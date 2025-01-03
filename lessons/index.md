@@ -15,20 +15,16 @@ lessons =  [("lessons/week1.md","week1"),
             ("lessons/week13.md","week13"),
             ("lessons/week14.md","week14"),
             ("lessons/week15.md","week15"),
-            ("lessons/week16.md","week16"),
             ]
 tags = ["lessons","overview"]
 +++
 
-## Lessons
-### Unit 1:  
+# Lessons
+## Unit 1:  
 - [Week 1](week1/): {{fill topic lessons/week1.md}}
-<!--
 - [Week 2](week2/): {{fill topic lessons/week2.md}}
-- [Week 3](week3/): Model Building & Transit Timing Variations 
--->
-<!-- {{fill topic lessons/week3.md}} -->  <!-- Why broken? -->
-<!--
+- [Week 3](week3/): Model Building 
+- [Week 3](week3/): {{fill topic lessons/week3.md}} <!-- Why broken? -->
 - [Week 4](week4/): {{fill topic lessons/week4.md}}
 - [Week 5](week5/): {{fill topic lessons/week5.md}}
 - [Week 6](week6/): {{fill topic lessons/week6.md}}
@@ -39,10 +35,8 @@ tags = ["lessons","overview"]
 - [Week 11](week11/): {{fill topic lessons/week11.md}}
 - [Week 12](week12/): {{fill topic lessons/week12.md}}
 - [Week 13](week13/): {{fill topic lessons/week13.md}}
-- [Week 14](week14/): Thanksgiving Holiday
+- [Week 14](week14/): {{fill topic lessons/week14.md}}
 - [Week 15](week15/): {{fill topic lessons/week15.md}}
-- [Week 16](week16/): {{fill topic lessons/week16.md}}
--->
 
 <!--
 ## Lessons (automatic, but broken)

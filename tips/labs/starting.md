@@ -10,7 +10,8 @@ tags = ["tips","labs","git","pluto"]
 
 ## Start a new Roar Session
 - Request a "**Jupyter Lab server**" session via the [Roar Collab portal](https://portal.hpc.psu.edu/) using our class's custom environment (see [starting Pluto Server](../../roar/pluto/)).
-- You can proceed to the next step, while you're waiting for it to star.
+- You can proceed to the section on cloning your github repositorystep, while you're waiting for it to start.
+- When it and you are ready, click the _Connect to Jupyter Server_ button. 
 
 ## Clone your github repository to begin a new assignment
 - Lookup the url for the repo to be cloned (from email, Canvas announcement, or Canvas lab page).
@@ -19,9 +20,10 @@ tags = ["tips","labs","git","pluto"]
     + Click _Clone or download_.
     + If it says "Clone with https", click "Use ssh".
     + Click the clipboard icon to copy the url onto your clipboard
-- Return to your browser tab with "My Interactive Sessions".
-- Hopefully, there's now a _Connect to Jupyter Server_ button. Click it.
-- Go to the newly opened tab, you'll have a Jupyter Lab Server.
+- Open a tab with a JupyterLab server.  If you don't have one open yet, then
+    + Return to your browser tab with "My Interactive Sessions".
+    + Hopefully, there's now a _Connect to Jupyter Server_ button. Click it.
+    + Go to the newly opened tab, where you'll have a Jupyter Lab Server.
 - If you don't see tiles for Python, Julia and Pluto Notebooks, then click _File.NewLauncher_.
 - Find the _Terminal_ tile or in the menu system, _File.New.Terminal_.
 - In the new terminal tab, clone your github repo by running
