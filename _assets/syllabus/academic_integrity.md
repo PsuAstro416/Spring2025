@@ -4,7 +4,14 @@ All Penn State and Eberly College of Science policies regarding [academic integr
 
 \\
 
-All work submitted for an exam must be entirely the student's own work.  
+The intellectual content of all submitted assignments should be _the student's own work_ and not the output of AI tool.  
+Using an AI-based grammar checker is acceptible and does not need to be disclosed for the labs or project in this course.
+Otherwise, students must fully disclose any and all use of artificial intelligence (AI) in completing their assignemnts at the time of submission.  
+Students may receive reduced credit for assignments where AI tools were used.  If you're unsure what's appropriate, then ask in advance of submission.
+
+\\
+
+All work submitted for an exam must be _entirely the student's own work_.  
 For other assignments (i.e., homework/labs and class project), all ideas and work derived from resources beyond class notes must properly acknowledge or reference sources including: assigned readings (including textbooks and online sources), websites, classmates, other students, and solution sets from other or prior courses, etc.  
 This means you should work together on labs/homework assignments, but each student should respond to questions individually and make liberal use of acknowledgments.
 For the class project, students will be encouraged to work in small teams of two or three students.  In the final report, students are required to describe their contributions to the project accurately and to give credit to their teammates for their contributions.  

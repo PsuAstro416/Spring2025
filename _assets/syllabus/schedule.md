@@ -3,16 +3,18 @@
 In a typical week:  
 - Monday lectures will introduce foundational a Data Science knowledge.  
 - Wednesday computer labs give students a chance to apply that knowledge.
-- Friday discussions will focus on practical challenges
+- Friday discussions will focus on practical challenges.
 
-There will be a short reading to be completed prior to class on most Mondays (and).  Students will continue working on the computer lab begun on Wednesday as homework, typically due prior to class the following Monday.  Inevitably, there will be some deviations (e.g., getting started week, weeks with a holiday or exam, week of student presentations, etc.).   
+Students will continue working on the computer lab begun on Wednesday as homework, typically due prior to class the following Monday.  Inevitably, there will be some deviations (e.g., getting started week, weeks with a holiday or exam, week of student presentations, etc.).   
 
+Students will submit at least one questions about the week's content prior to Friday class to help inform the Friday discussion.
 \\
+
 ### Schedule of Topics
 
 
 | Week | Data Science |
-| ---- | ------------ |
+|:---- |:------------ |
 | 1  | What is Data Science? |
 | 2  | Exploratory Data Analysis |
 | 3  | Model Building | 

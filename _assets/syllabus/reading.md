@@ -2,7 +2,8 @@
 
 ### Textbooks
 
-The required textbooks for this course are:
+While there will be required readings, we will primarily use open online sources, so that students do not need to purchase a physical textbook.  
+Formally, the required textbooks for this course are:
 - [Julia Data Science](https://juliadatascience.io/) (Storopoli et al.; online version available for free)
 - [Bayesian Statistics using Julia & Turing](https://storopoli.github.io/Bayesian-Julia/) (Storopoli; online version available for free)
 - [Think Julia](https://benlauwens.github.io/ThinkJulia.jl/latest/book.html) (Lauwens & Downey; online version available for free)
