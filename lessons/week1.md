@@ -20,11 +20,10 @@ Week {{week_num}}
 - Read [Think Julia](https://benlauwens.github.io/ThinkJulia.jl/latest/book.html#chap01): Ch 1 "The Way of the Program" (after you've started on the lab is ok)
 - Optionally read [Julia Data Science](https://juliadatascience.io/): Ch 2.2-2.3, 3-3.2, 3.3-3.5, 4-4.2 (if/when it would be helpful for you)
 
-<!--
-## Notebooks from class
-- [Day 1](https://psuastro497.github.io/Fall2022/notebooks/week1day1/)
-- [Day 3](https://psuastro497.github.io/Fall2022/notebooks/week1day3/)
--->
-
 ## [Lab 1](../../labs/lab1/): {{fill title labs/lab1.md}}
 
+<!--
+## Notebooks from class
+- [Day 1](https://psuastro416.github.io/Spring2025/notebooks/week1day1/)
+- [Day 3](https://psuastro416.github.io/Spring2025/notebooks/week1day3/)
+-->
