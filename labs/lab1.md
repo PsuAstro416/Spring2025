@@ -4,7 +4,7 @@ lab_num = 1
 tags = ["labs", "logistics"]
 +++
 
-## Lab {{lab_num}}: [{{title}}](https://github.com/PsuAstro416/lab1)
+## [Lab {{lab_num}}: {{title}}](https://github.com/PsuAstro416/lab1)
 
 Start {{lab1_start}} ---
 Due {{lab1_due}}
