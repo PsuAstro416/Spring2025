@@ -2,4 +2,5 @@
 
 [Astro 416 (Spring 2025) Website](https://psuastro416.github.io/Spring2025/)
 
-See <http://rikhuijzer.github.io/JuliaTutorialsTemplate/> for more information.
+
+See <http://rikhuijzer.github.io/JuliaTutorialsTemplate/> for more information on the template used for creating this website.

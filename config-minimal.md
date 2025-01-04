@@ -14,7 +14,7 @@ prepath = "Spring2025"
 # RSS (the website_{title, descr, url} must be defined to get RSS)
 generate_rss = false
 website_title = "Astro 416"
-website_descr = "Penn State Astro 416: Data Science for Astronomy (Spring 2025)"
+website_descr = "Penn State Astro 416: Data Science to Astronomy (Spring 2025)"
 website_url   = "https://psuastro416.github.io/Spring2025/"
 +++
 
