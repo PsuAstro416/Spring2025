@@ -20,7 +20,7 @@
   <link rel="stylesheet" href="/css/docs.min.css">
 
   <title>{{fill title}} - {{fill website_title}}</title>
-  <meta name="description" content="Penn State Astro 416: Data Science Applications for Astronomy">
+  <meta name="description" content="Penn State Astro 416: Data Science Applications to Astronomy">
 
 
     {{if hasplotly}}
@@ -55,9 +55,10 @@
 
 </head>
 <body>
+{{isnotpage syllabus/print/*}}
   <div class="docs-container off-canvas off-canvas-sidebar-show">
   {{insert menu.html}}
-
+{{end}}
 
 <div class="off-canvas-content">
 <div id="content" class="docs-content">

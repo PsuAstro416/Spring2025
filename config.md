@@ -20,7 +20,7 @@ website_url   = "https://PsuAstro416.github.io/Spring2025/"
 version = "v0.1"
 
 # Class specific variables
-class_name = "Data Science Applications for Astronomy"
+class_name = "Data Science Applications to Astronomy"
 class_number = "Astro 416"
 semester = "Spring 2025"
 class_times = "10:10-11:00am MWF"
@@ -29,10 +29,11 @@ class_location_long = "Davey Lab 538"
 instructor_name = "Eric Ford"
 instructor_link = "[Eric Ford](https://science.psu.edu/astro/people/ebf11)"
 instructor_email = "ebf11 _at_ psu.edu"
-#instructor_phone = "x3-5558"
-ta_name = ""
-ta_link = ""
-ta_email = "TBD _at_ psu.edu"
+instructor_loc = "408A Davey Lab"
+ta_name = "Andrew Pellegrino"
+ta_link = "[Andrew Pellegrino](https://science.psu.edu/astro/people/axp1175)"
+ta_email = "axp1175 _at_ psu.edu"
+ta_loc = "532C Davey Laboratory"
 office_hours = "TBD" 
 
 # Assignment deadlines
@@ -60,7 +61,7 @@ lab6_start = "Feb 19"   # Week 6, Day 2
 lab6_due =   "Feb 24"   # Week 7, Day 1
 exam1_date = "Feb 26"   # Week 7, Day 2
 #OLD: lab7_title = "Data Wrangling"
-lab7_title = "Model Building III: Non-linear models & Bayesian Inference"
+lab7_title = "Model Building III: Non-linear models"
 lab7_start = "Mar  5"   # Week 8, Day 2
 lab7_due =   "Mar 19"    # Week 9, Day 2 (shift to Day 2 so not 2 things do right after SB)
 # Potentially Spring Break Week
