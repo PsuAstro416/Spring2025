@@ -48,7 +48,7 @@ lab3_due =   "Feb 3"    # Week 4, Day 1
 lab4_title = "Model Building II: Model Assessment"
 lab4_start = "Feb 5"    # Week 4, Day 2
 lab4_due =   "Feb 12"   # Week 5, Day 2 (shift to Day 2 so not 2 things due on same day)
-project_checkpoint1_title = "Project Plan"
+project_checkpoint1_title = "Project Checkpoint 1: Plan"
 project_checkpoint1_due = "Feb 10"  # Week 5, Day 1
 #OLD: lab5_title = "Model Building III: Non-linear models & Bayesian Inference"
 lab5_title = "Data Wrangling"
@@ -64,7 +64,7 @@ lab7_title = "Model Building III: Non-linear models & Bayesian Inference"
 lab7_start = "Mar  5"   # Week 8, Day 2
 lab7_due =   "Mar 19"    # Week 9, Day 2 (shift to Day 2 so not 2 things do right after SB)
 # Potentially Spring Break Week
-project_checkpoint2_title = "Project Step 1"
+project_checkpoint2_title = "Project Checkpoint 2: Gets Data Ready for Analysis"
 project_checkpoint2_due = "Mar  17" # Week 9, Day 1
 #OLD: lab8_title = "Data Storage" 
 lab8_title = "Explanatory Data Analysis"
@@ -74,7 +74,7 @@ lab9_title = "Data Visualization"
 lab9_start = "Mar 26"    # Week 10, Day 2   # Eric traveling in 2025
 lab9_due =   "Mar 31"    # Week 11, Day 1 
 # Week 11 to focus on project
-project_checkpoint3_title = "Project Step 2" 
+project_checkpoint3_title = "Project Checkpoint 3: Perofrms Data Analysis" 
 project_checkpoint3_due = "Apr 7" # Week 12, Day 1
 # Potentially Thanksgiving Week
 # Week 13 to focus on project
