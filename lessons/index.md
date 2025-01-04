@@ -20,7 +20,6 @@ tags = ["lessons","overview"]
 +++
 
 # Lessons
-## Unit 1:  
 - [Week 1](week1/): {{fill topic lessons/week1.md}}
 - [Week 2](week2/): {{fill topic lessons/week2.md}}
 - [Week 3](week3/): {{fill topic lessons/week3.md}}
@@ -38,12 +37,10 @@ tags = ["lessons","overview"]
 - [Week 15](week15/): {{fill topic lessons/week15.md}}
 
 <!--
-## Lessons (automatic, but broken)
+# Lessons (automatic, but broken)
 {{for (page,lesson) in lessons }}
 - Week {{fill week_num page}}: [{{lesson}}]({{fill topic page}})
 {{end}}
 -->
 
-\\
-
-See also [labs](/labs/).
+<!-- See also [labs](/labs/).  -->
