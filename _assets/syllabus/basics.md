@@ -9,7 +9,4 @@
 - Graduate Teaching Assistant: {{fill ta_name}}
 - Email: {{ta_email}}
 - Office Hours: {{office_hours}}
-- Website: [{{website_url}}]({{website_url}})
-
-
-## PARTS BELOW STILL NEEDS TO BE UPDATED
+<!-- - Website: [{{website_url}}]({{website_url}}) -->

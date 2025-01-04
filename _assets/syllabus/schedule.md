@@ -1,9 +1,9 @@
 ## Course Content & Structure
 
 In a typical week:  
-- Monday lectures will introduce foundational a Data Science knowledge.  
+- Monday lectures will introduce foundational Data Science knowledge.  
 - Wednesday computer labs give students a chance to apply that knowledge.
-- Friday discussions will focus on practical challenges.
+- Friday discussions will focus on practical challenges for astronomical applications.
 
 Students will continue working on the computer lab begun on Wednesday as homework, typically due prior to class the following Monday.  Inevitably, there will be some deviations (e.g., getting started week, weeks with a holiday or exam, week of student presentations, etc.).   
 
