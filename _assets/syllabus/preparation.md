@@ -11,3 +11,4 @@ Formally, the prerequisites for the class are:
 - ( PHYS 211 )
 
 Any student who is interested in the class and has not completed the above, should consult with the instructor before starting the class.  
+For example, students with programming experience from Astro 97 are encouraged to participate, but must submit a prerequisite override course in LionPATH to be allowed to register.  
