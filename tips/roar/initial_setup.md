@@ -12,7 +12,7 @@ It then creates a symlink ~/.julia -> ~/work/julia_astro416.  Finally, it instal
 
 
 To make all those steps easy, ICDS has provided a script that you can easily run from a terminal window on Roar.
-To run this script, first, make sure you have an account on ACI and have completed the [initial setup](../tips/roar/) steps.
+To run this script, first, make sure you have an account on ACI and have completed the [initial setup](../tips/create_account/) steps.
 Then, 
 - Browse to [portal.hpc.psu.edu](https://portal.hpc.psu.edu).  Using "guest" or "incognito" mode is recommended. 
 - Login and authenticate (as necessary).

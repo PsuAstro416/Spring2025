@@ -4,7 +4,7 @@ title = "Pluto Notebooks on Roar"
 
 # Start Roar Session with Pluto Server
 
-If this is your first time to run Pluto on Roar, then first make sure you have an account on ACI and have completed the [initial setup](../tips/roar/) steps.
+If this is your first time to run Pluto on Roar, then first make sure you have an account on ACI and have completed the [initial setup](/tips/roar/) steps.
 Then, each time you want to start a Jupyter notebook session on Roar, you'll follow the instructions below:
 1. Browse to [portal.hpc.psu.edu](https://portal.hpc.psu.edu).
 Using "guest" or "incognito" mode is recommended.
