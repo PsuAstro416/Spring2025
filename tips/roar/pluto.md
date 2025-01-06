@@ -22,6 +22,7 @@ Login and authenticate (as necessary).
    - Memory per core: 4 GB
    - Enable advanced Slurm options: Leave unchecked
    - I would like to receive an email when the session starts: Your choice of whether to check or not.
+   - Note that the script and account above will be avaliable between January 13 and the end of the semester.
 3. Click _Launch_.  And wait while your job starts.
 4. Once the _Connect to Jupyter Server_ button appears, click it.
    + The top row of tiles (labeled "Notebook") should include a tile labeled "Pluto.jl".  Click it.  
