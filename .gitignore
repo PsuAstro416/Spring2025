@@ -20,3 +20,4 @@ notebooks/*.md
 notebooks/**/*.html
 **/_tmp_*.jl
 **/*backup*.jl
+settings.json
