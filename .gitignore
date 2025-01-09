@@ -21,3 +21,7 @@ notebooks/**/*.html
 **/_tmp_*.jl
 **/*backup*.jl
 settings.json
+
+_assets/week1/*.jpg
+_assets/week1/StatisticalRethinkingCover.png
+
