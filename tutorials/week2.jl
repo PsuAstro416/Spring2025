@@ -25,7 +25,8 @@ end
 # hideall
 begin
 	title = "Data Science Applications to Astronomy";
-	week = 1
+	week = 2
+	topic = "Exploratory Data Analysis"
 end;
 
 # ╔═╡ fd7a7050-3b8c-41e3-b75e-3a84d98e4a93
@@ -33,249 +34,14 @@ end;
 +++
 title = "$title"
 week = "$week"
+topic = "$topic"
 +++
 """ |> Base.Text;
 
 # ╔═╡ 81a1258f-b31b-4356-aabc-5f9a0e831b39
 md"""
-### Welcome to Astro 416: 
 # $title
-### Week $week
-"""
-
-# ╔═╡ ef24c3ba-e027-465d-995f-efc5941843a2
-md"""
-# Course Logistics
-"""
-
-# ╔═╡ d3c6dede-be22-467f-8c81-698ec3448684
-#TwoColumn(
-md"""
-$(RobustLocalResource("https://ecos-appdev-production.s3.amazonaws.com/science_site/s3fs-public/styles/f_story_image/public/2021-01/astro_ford_2.jpg?h=9b93ffa5&itok=BnJbMiNK","../_assets/week1/Ford.jpg", :width=>"50%"))
-Instructor: [Eric Ford](https://science.psu.edu/astro/people/ebf11) (Davey Lab 408A) 
-"""
-#)
-
-
-# ╔═╡ 8408e3e3-1794-48a4-8ddc-2a393e47cb50
-md"""
-
-$(RobustLocalResource("https://ecos-appdev-production.s3.amazonaws.com/science_site/s3fs-public/styles/f_story_image/public/2019-12/astro_pellegrino.jpg?h=97d9446b&itok=yjDNcByF","../_assets/week1/Pellegrino.jpg",:width=>"50%"))
-TA: [Andrew Pellegrino](https://science.psu.edu/astro/people/axp1175) (Davey Lab 532C)
-"""
-
-# ╔═╡ 2a9bf396-c7a7-4e39-82d9-724b66923510
-md"""
-## Class workflow (for a typical week) 
-- Mondays:  Introduce topic
-- Wednesdays:  Start computer lab (bring laptop)
-- Fridays:  Discussion (submit question before class)
-- Following Monday: (deadline for previous lab)
-- Watch Canvas for deivations 
-  + e.g., First lab due Wednesday due to MLK day, etc.
-"""
-
-# ╔═╡ 19575253-08f8-48f8-b1ec-89b4074b8108
-md"""
-## Website 
-#### [https://psuastro416.github.io/Spring2025/](https://psuastro416.github.io/Spring2025) contains:
-- Syllabus
-- Info for each week's lessons (e.g., goals, readings & links to additional resources)
-- Links & info for to labs/homework exercises.
-- Info for class project (e..g, explanation, key due dates, rubric) 
-- Practical Tips (e.g., step-by-step instructions for accessing Roar Collab)
-
-### Canvas
-- Announcements
-- Deadlines for assignments
-- Space to upload some assignments (e.g. project checkpoints)
-- Links to create your personal GitHub repository for each lab
-- Links for TopHat Questions
-- Grades
-- Most info via embedded version of website 
-  + Canvas doesn't allow some pages to be embedded
-  + If you get an error, try following that link in a separate window/tab.
-
-### Zoom 
-- Backup plan avliable for classes if I'm sick, snowstorm, etc.
-"""
-
-# ╔═╡ db79a1cc-0cec-4cae-a24b-d2f4e256eb2c
-md"""
-## Creating Accounts:
-### Roar Collab: 
-- Penn State's supercomputer (for non-sensitive data)
-- We will use Roar Collab for running labs/homework exercises starting Wednesday (& for class projects)
-- Please [request Roar Collab account](http://psuastro416.github.io/Spring2025/tips/roar/create_account/) by end of today.
-- Please create a [GitHub account](https://github.com/) (if you don't have one or want to use a separate account for this class)
-- I'll walk people through the setup steps for Roar Collab and starting labs this Wednesday, so you need your account to be active _before class on Wednesday_.
-"""
-
-# ╔═╡ 6c9684cd-3952-4e01-b3bc-d111d47b48ff
-md"""
-## TopHat:
-- Mostly for you to submit your questions (e.g., "Muddiest point")
-- Might also include some short questions about reading or previous class.
-- Submit TopHat responces by 9am on day of relevant class.
-- Aim for at least 1 question a week.  
-- I'll drop a few from grade no questions asked.
-- [Create TopHat account](https://success.tophat.com/s/article/Student-Top-Hat-Overview-and-Getting-Started-Guide#accountcreation) in time to submit reading question before class on Friday
-   - No need to give them phone number or credit card info.
-"""
-
-# ╔═╡ dba2b51e-0dc7-48f2-a975-ead2280dca54
-md"""
-## Textbook & Readings
-- No need to buy a physical textbook.
-
-Several readings from online sources, e.g.: 
-- [Julia Data Science](https://www.amazon.com/dp/B09KMRKQ96/) (Storopoli & Huljzer; ISBN-13: 979-8489859165) or [online](https://juliadatascience.io/)
-- [Think Julia](https://www.amazon.com/Think-Julia-Like-Computer-Scientist/dp/1492045039) (Lauwens; ISBN: 1492045039) or [online](https://benlauwens.github.io/ThinkJulia.jl/latest/book.html)
-- [Bayesian Statistics using Julia and Turing](https://storopoli.github.io/Bayesian-Julia/)
-- [Statistical Rethinking](https://www.amazon.com/Statistical-Rethinking-Bayesian-Examples-Chapman/dp/036713991X/ref=sr_1_1?crid=JO8TIWJDRM3S&dib=eyJ2IjoiMSJ9.Mu7bPKmEvkNfw_6ElyUdt2qi8i-8SmH8RIu5GTgt24iKbUl9uYQIpMvYgLFSUrM2V6Pf22PO6NRexuMinM6tUq7KhNfYahpRoyEUsJvBqXc.wHgA4Z-o-84ZOMxDEVyCrTrAk-ssBYTcaGoigWaBs-s&dib_tag=se&keywords=statistical+rethinking+mcelreath&qid=1736349871&sprefix=statistical+reth%2Caps%2C96&sr=8-1) (McElreath ; ISBN-13: 978-0367139919) (free [PDF of Ch 1 & 2](https://xcelab.net/rm/) online) 
-"""
-
-# ╔═╡ 4ead033d-0001-4479-86ac-f420ecbf15d3
-RobustLocalResource("https://images-na.ssl-images-amazon.com/images/I/41IR7AhnnpL._SX348_BO1,204,203,200_.jpg", "../_assets/week1/JuliaDataScienceCover.jpg", :width=>"50%")
-
-# ╔═╡ 37f0e64b-fc92-4351-8ebb-ae318de7d447
-RobustLocalResource("https://images-na.ssl-images-amazon.com/images/I/51IsffDG4jL._SX379_BO1,204,203,200_.jpg","../_assets/week1/ThinkJuliaCover.jpg",:width=>"50%")
-
-# ╔═╡ e9dfdedc-2d04-4f0a-b3c7-707628ab3580
-RobustLocalResource("https://xcelab.net/rm/sr2edcover-1-187x300.png","../_assets/week1/StatisticalRethinkingCover.png",:width=>"50%")
-
-# ╔═╡ 502d38bd-8b97-484d-9618-bed479bf648a
-md"""
-## Safety
-
-- Please err on side of caution 
-- Let me know if you'll be missing several classes for health reasons.
-- You can still submit TopHat questions, labs, etc.  
-- Follow university policy.  As of January 2025:
-
-> Stay home and away from others if you are experiencing fever or respiratory symptoms such as but not limited to cough, sore throat, runny nose, chills, fatigue, headache, body aches. Return to normal activities when, for at least 24 hours, both are true:
-> - Your symptoms are getting better overall, AND
-> - You have not had a fever (and are not using fever-reducing medication)
-> Then, take these additional precautions for the next five days to limit the spread of infection:
-> - Wear a well-fitting mask
-> - Keep a distance from others and/or
-> - Get tested to inform your actions to prevent the spread to others
-> If you begin feeling worse and/or fever returns, stay home and away from others for at least 24 hours until both are true:
-> - Your symptoms are getting better overall, and
-> - You have not had a fever (and are not using fever-reducing medication)
-
-
-"""
-
-# ╔═╡ bb7cda4e-2876-403f-8194-baa0f33e2ada
-md"""
-## Academic Integrity
-### Collaboration
-- Exams/quizzes:  No collaboration.
-- Labs:  
-  + Collaboration with classmates is encouraged.  
-  + Each student should respond to questions individually.
-  + Make liberal use of acknowledgments. 
-- Project:  
-  + Working in teams in strongly encouraged.  
-  + Present/submit most parts of project jointly.
-  + In separate final reports/reflections, each students describes their contributions to the project accurately and to give credit to teammates for their contributions.
-"""
-
-# ╔═╡ 3b7dd562-9db1-40bb-bb06-9476694e14ec
-#TwoColumn(
-md"""
-### Artifical Intelligence (AI) 
-- Exams/quizzes:  No AI.
-- Limited AI Use:  Using an AI-based grammar checker is acceptible and does not need to be disclosed for the labs or project in this course. 
-- Disclose AI Use:  Otherwise, students must fully disclose any and all use of AI in completing their assignemnts at the time of submission. 
-- Students may receive reduced credit for assignments where AI tools were used. If you're unsure what's appropriate, then ask in advance of submission.
-$(LocalResource("../_assets/week1/Limited_AI_Use_290x300.png"))
-"""
-#""", LocalResource("../_assets/week1/Limited_AI_Use_290x300.png"))
-
-# ╔═╡ d2f1789a-3d21-40e9-8d98-bdd52e54554e
-md"""
-# Introduction to Course
-
-## What is Data Science?
-
-### What do you think?
-- pause 
-## One oversimplified take...
-"""
-
-# ╔═╡ b2376e4d-4d13-42d6-a484-217f1dbcabb7
-RobustLocalResource("https://images.squarespace-cdn.com/content/v1/5150aec6e4b0e340ec52710a/1364352051365-HZAS3CLBF7ABLE3F5OBY/Data_Science_VD.png?format=750w","../_assets/week1/Data_Science_VD.png")
-
-# ╔═╡ a12f0d4d-12d9-4c13-81c1-69889e7aabf4
-md"The Data Science Venn Diagram is from Drew Conway and is licensed as [Creative Commons Attribution-NonCommercial](http://creativecommons.org/licenses/by-nc/3.0/legalcode)"
-
-# ╔═╡ 07851600-44d6-4b44-9839-8bf19c647884
-md"""
-## This class is *not* meant to teach:
-- Programming (e.g., CMPSC 121, 122)
-- Numerical Methods (see ASTRO 410)
-- Linear Algebra (see MATH 220)
-- Statistics (e.g., ASTRO 415)
-- Machine Learning (e.g., DS 310)
-- Astronomical Techniques (see ASTOR 451)
-- How to conduct Astronomy Research (e.g., a summer project or thesis)
-"""
-
-# ╔═╡ 75eecba2-fb5f-4dfc-b2af-b3041c9357b0
-md"""
-## So what does this class do?
-### Data Science:
-- Develop *Data Acumen*[^1]
-  - Model building
-  - Data visualization
-  - Reproducible research
-- Practice "soft skills"
-  - Technical collaboration
-  - Effective visualization
-  - Scientific communications
-- Provide taste of Data Science
-"""
-
-# ╔═╡ 44755795-c2f7-44dc-86a2-ba6e848f3a67
-md"""
-### Data Acumen
-[^1]: "We define data acumen as the ability to make good judgements about the use of data to support problem solutions." ([Keller et al. 2020](https://doi.org/10.1162/99608f92.2d83f7f5))
-"""
-
-# ╔═╡ d6ae7f04-0c93-4c9b-b0a1-ec966d87e2c0
-md"""
-### Along the way...
-You'll learn and/or reinforce foundational concepts that are covered in much more detail in other courses:
-- Programming (build experience, likely a new language)
-- Numerical Methods (e.g., integration, sampling)
-- Linear Algebra (e.g., solving linear systems)
-- Statistics (e.g., likelihood, priors, distributions) 
-- Machine Learning (e.g., optimization)
-- Astronomical Techniques (e.g., observational biases)
-"""
-
-# ╔═╡ d8015168-9c59-45b5-81c3-7b37fbf26319
-md"""
-# Course Overview
-Students will build practical data science skills (e.g., querying astronomical databases, data storage and manipulation, data visualization, exploratory and explanatory data analysis, Bayesian modeling workflows, and reproducible research practices) and apply these lessons to analyzing data from astronomical surveys.
-
-## Goals
-- Increase their data acumen, and
-- Appreciate how building data science skills can benefit astronomy & astrophysics research.
-
-## Objectives
-- Ingest and manipulate data from astronomical surveys.
-- Build, apply, assess and update astrophysically motivated models for astronomical observations.
-- Create visualizations for exploratory and explanatory data analyses of observations from astronomical surveys.
-- Synthesize the above into a dashboard to support the efficient analysis of astronomical observations.
-- Incorporate principles of reproducible research into their class project.
-"""
-
-# ╔═╡ 5370fe50-add3-4886-9ef5-a6e1aecd1cc4
-md"""
-# Remebmer to request Roar account so can log in on Wednesday!
+### Week $week: $topic
 """
 
 # ╔═╡ ff9410f3-73e4-4fbe-8560-c7fb671fffb4
@@ -285,7 +51,8 @@ md"""
 
 # ╔═╡ 0016cc4f-e869-4e58-9eb5-1e5504e15292
 md"""
-## What's the goal of an analysis?
+## What's the goal of your data analysis?
+- pause
 
 ## Example Goals
 - Test a precisely formulated hypothesis 
@@ -299,6 +66,17 @@ md"""
 
 #### Different Goals require Different Approaches 
 """
+
+# ╔═╡ 12569430-24f5-44af-87aa-8ab5cdd986f5
+md"""
+## Categories of Goals
+- Design future inquiry
+- Improve understanding from data
+- Make predictions
+"""
+
+# ╔═╡ 9cc5442c-cacb-434e-942c-97ba0c7537d6
+tip(md"The introduction to the course Statistical Rethinking (both a [textbook](https://xcelab.net/rm/) and on [youtube](https://www.youtube.com/watch?v=FdnMWdICdRs&list=PLDcUM9US4XdPz-KxHM4XHt7uUVGWWVSus)) provides a nice discussion of the philosophy of statistical modeling, including the challenges of using statistics to impute causality.  ")
 
 # ╔═╡ 9c73eb52-7002-42be-8e99-0e7037cfd8e1
 md"""
@@ -971,31 +749,10 @@ version = "17.4.0+2"
 # ╟─39aca95d-6e93-4e18-8789-0928e881d3d9
 # ╟─fd7a7050-3b8c-41e3-b75e-3a84d98e4a93
 # ╟─81a1258f-b31b-4356-aabc-5f9a0e831b39
-# ╟─ef24c3ba-e027-465d-995f-efc5941843a2
-# ╟─d3c6dede-be22-467f-8c81-698ec3448684
-# ╟─8408e3e3-1794-48a4-8ddc-2a393e47cb50
-# ╟─2a9bf396-c7a7-4e39-82d9-724b66923510
-# ╟─19575253-08f8-48f8-b1ec-89b4074b8108
-# ╟─db79a1cc-0cec-4cae-a24b-d2f4e256eb2c
-# ╟─6c9684cd-3952-4e01-b3bc-d111d47b48ff
-# ╟─dba2b51e-0dc7-48f2-a975-ead2280dca54
-# ╟─4ead033d-0001-4479-86ac-f420ecbf15d3
-# ╟─37f0e64b-fc92-4351-8ebb-ae318de7d447
-# ╟─e9dfdedc-2d04-4f0a-b3c7-707628ab3580
-# ╟─502d38bd-8b97-484d-9618-bed479bf648a
-# ╟─bb7cda4e-2876-403f-8194-baa0f33e2ada
-# ╟─3b7dd562-9db1-40bb-bb06-9476694e14ec
-# ╟─d2f1789a-3d21-40e9-8d98-bdd52e54554e
-# ╟─b2376e4d-4d13-42d6-a484-217f1dbcabb7
-# ╟─a12f0d4d-12d9-4c13-81c1-69889e7aabf4
-# ╟─07851600-44d6-4b44-9839-8bf19c647884
-# ╟─75eecba2-fb5f-4dfc-b2af-b3041c9357b0
-# ╟─44755795-c2f7-44dc-86a2-ba6e848f3a67
-# ╟─d6ae7f04-0c93-4c9b-b0a1-ec966d87e2c0
-# ╟─d8015168-9c59-45b5-81c3-7b37fbf26319
-# ╟─5370fe50-add3-4886-9ef5-a6e1aecd1cc4
 # ╟─ff9410f3-73e4-4fbe-8560-c7fb671fffb4
 # ╟─0016cc4f-e869-4e58-9eb5-1e5504e15292
+# ╟─12569430-24f5-44af-87aa-8ab5cdd986f5
+# ╟─9cc5442c-cacb-434e-942c-97ba0c7537d6
 # ╟─9c73eb52-7002-42be-8e99-0e7037cfd8e1
 # ╟─71df7883-35d2-448a-80b7-7d20662ab438
 # ╟─a3b3421a-5740-49eb-b9c1-b4a715c0a5c6
