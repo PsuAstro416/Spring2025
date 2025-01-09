@@ -1,5 +1,5 @@
 ### A Pluto.jl notebook ###
-# v0.20.1
+# v0.20.4
 
 #> [frontmatter]
 #> license_url = "https://creativecommons.org/licenses/by/4.0/"
@@ -168,7 +168,7 @@ TwoColumn(
 - Limited AI Use:  Using an AI-based grammar checker is acceptible and does not need to be disclosed for the labs or project in this course. 
 - Disclose AI Use:  Otherwise, students must fully disclose any and all use of AI in completing their assignemnts at the time of submission. 
 - Students may receive reduced credit for assignments where AI tools were used. If you're unsure what's appropriate, then ask in advance of submission.
-""", LocalResource("Limited_AI_Use_290x300.png"))
+""", LocalResource("../_assets/week1/Limited_AI_Use_290x300.png"))
 
 # ╔═╡ d2f1789a-3d21-40e9-8d98-bdd52e54554e
 md"""
@@ -182,7 +182,7 @@ md"""
 """
 
 # ╔═╡ b2376e4d-4d13-42d6-a484-217f1dbcabb7
-Resource("https://images.squarespace-cdn.com/content/v1/5150aec6e4b0e340ec52710a/1364352051365-HZAS3CLBF7ABLE3F5OBY/Data_Science_VD.png?format=750w")
+RobustLocalResource("https://images.squarespace-cdn.com/content/v1/5150aec6e4b0e340ec52710a/1364352051365-HZAS3CLBF7ABLE3F5OBY/Data_Science_VD.png?format=750w","../_assets/week1/Data_Science_VD.png")
 
 # ╔═╡ a12f0d4d-12d9-4c13-81c1-69889e7aabf4
 md"The Data Science Venn Diagram is from Drew Conway and is licensed as [Creative Commons Attribution-NonCommercial](http://creativecommons.org/licenses/by-nc/3.0/legalcode)"
