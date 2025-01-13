@@ -14,3 +14,7 @@ Week {{week_num}}
 - See Lab for info about {{ds_topic}}
 
 ## [Lab 2](../../labs/lab2/): {{fill title labs/lab2.md}}
+
+## Notebooks from class
+- No class on MLK Day, so see notebook from [Week 1, Day 3](https://psuastro416.github.io/Spring2025/tutorials/week2/)
+

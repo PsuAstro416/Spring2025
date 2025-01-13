@@ -22,8 +22,6 @@ Week {{week_num}}
 
 ## [Lab 1](../../labs/lab1/): {{fill title labs/lab1.md}}
 
-<!--
 ## Notebooks from class
-- [Day 1](https://psuastro416.github.io/Spring2025/notebooks/week1day1/)
-- [Day 3](https://psuastro416.github.io/Spring2025/notebooks/week1day3/)
--->
+- [Day 1](https://psuastro416.github.io/Spring2025/tutorials/week1/)
+- [Day 3](https://psuastro416.github.io/Spring2025/tutorials/week2/)
