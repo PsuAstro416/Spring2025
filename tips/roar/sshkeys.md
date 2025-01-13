@@ -13,11 +13,6 @@ bash /storage/group/dsa2astro/default/astro_416/scripts/gitkeys_setup
 ```
 once at the beginning of the semester.  
 
-Note that the script above should be active starting Monday, January 13.  Any students wanting to start before then, can instead use 
-```shell
-source /storage/group/RISE/classroom/astro_416/scripts/gitkeys_setup
-```
-
 Once you run this script, then you'll need to add the new ssh key to the list of authorized keys for your github account in order to push code from Roar to GitHub.
 - Follow the link to your github repository for Lab 1 (the one like https://github.com/PsuAstro416/lab1-yourgithubid),
 - Look for the green "Code" button near the top.  There will be a message about not having SSH keys setup.  Click "add a new public key".  
