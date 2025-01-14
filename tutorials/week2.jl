@@ -1,5 +1,5 @@
 ### A Pluto.jl notebook ###
-# v0.20.4
+# v0.20.1
 
 #> [frontmatter]
 #> license_url = "https://creativecommons.org/licenses/by/4.0/"
@@ -42,79 +42,6 @@ topic = "$topic"
 md"""
 # $title
 ### Week $week: $topic
-"""
-
-# ╔═╡ ff9410f3-73e4-4fbe-8560-c7fb671fffb4
-md"""
-# Philosophy of Data Analysis
-"""
-
-# ╔═╡ 0016cc4f-e869-4e58-9eb5-1e5504e15292
-md"""
-## What's the goal of your data analysis?
-- pause
-
-## Example Goals
-- Test a precisely formulated hypothesis 
-- Make predicitons with an well-established model
-- Make predictions, but you don't (yet?) have a trustworthy model
-- Refine an exisiting model with additional data
-- Compare multiple competing models to gain physical insight
-- Compare multiple models to pick one to use for making predictions 
-- Take a first look at a new dataset and find something interesting
-- Prioritize what portions of analysis will require the most attention
-
-#### Different Goals require Different Approaches 
-"""
-
-# ╔═╡ 12569430-24f5-44af-87aa-8ab5cdd986f5
-md"""
-## Categories of Goals
-- Design future inquiry
-- Improve understanding from data
-- Make predictions
-"""
-
-# ╔═╡ 9cc5442c-cacb-434e-942c-97ba0c7537d6
-tip(md"The introduction to the course Statistical Rethinking (both a [textbook](https://xcelab.net/rm/) and on [youtube](https://www.youtube.com/watch?v=FdnMWdICdRs&list=PLDcUM9US4XdPz-KxHM4XHt7uUVGWWVSus)) provides a nice discussion of the philosophy of statistical modeling, including the challenges of using statistics to impute causality.  ")
-
-# ╔═╡ 9c73eb52-7002-42be-8e99-0e7037cfd8e1
-md"""
-## Prototypical Approaches
-#### Tradditional physics/first-principles approach
-- Start with a model we trust
-- Add data to infer model parameters
-#### Machine learning/Data-driven approach
-- Start with large dataset
-- Find a model that would have made good predictions
-"""
-
-# ╔═╡ 71df7883-35d2-448a-80b7-7d20662ab438
-md"""
-## Limitations of the Prototypical Approaches
-#### First-principles approach
-- Start with a **model we trust**
-- Add data to infer model parameters
-#### Machine learning/Data-driven approach
-- Start with **large** dataset
-- Find a model that **would have** made **good** predictions
-"""
-
-# ╔═╡ a3b3421a-5740-49eb-b9c1-b4a715c0a5c6
-md"""
-## Prototypical Astronomical Problem
-- Significant astrophysical knowledge
-  + but model is an approximation & incomplete
-- Significant quantity of data
-  + observing time is limited,
-  + data collection process is complicated, and
-  + constantly pushing limits of capabilities.
-
-#### How can we integrate these effectively?
-- What tool(s) are best for our task?
-- Learning to apply an existing tool to data is (usually) relatively straightforward. 
-- Developing experience to apply tools wisely is more challenging.  
-- Acquiring the breath of experience to choose best tools for a task is a lifetime of learning.
 """
 
 # ╔═╡ 19d8ddbc-0ad0-4933-af0e-b970d1bb3a93
@@ -749,13 +676,6 @@ version = "17.4.0+2"
 # ╟─39aca95d-6e93-4e18-8789-0928e881d3d9
 # ╟─fd7a7050-3b8c-41e3-b75e-3a84d98e4a93
 # ╟─81a1258f-b31b-4356-aabc-5f9a0e831b39
-# ╟─ff9410f3-73e4-4fbe-8560-c7fb671fffb4
-# ╟─0016cc4f-e869-4e58-9eb5-1e5504e15292
-# ╟─12569430-24f5-44af-87aa-8ab5cdd986f5
-# ╟─9cc5442c-cacb-434e-942c-97ba0c7537d6
-# ╟─9c73eb52-7002-42be-8e99-0e7037cfd8e1
-# ╟─71df7883-35d2-448a-80b7-7d20662ab438
-# ╟─a3b3421a-5740-49eb-b9c1-b4a715c0a5c6
 # ╟─19d8ddbc-0ad0-4933-af0e-b970d1bb3a93
 # ╟─596a20fb-b146-442f-b5ac-2d875c6390eb
 # ╟─2f43220d-18ff-45fd-a699-b56f10c2da2b

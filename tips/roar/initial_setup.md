@@ -23,10 +23,6 @@ Then,
 bash /storage/group/dsa2astro/default/astro_416/scripts/class_setup
 ```
 If you already have customized your Roar environment for your research, then you may get a warning message and need to ask for help configuring your account.
-Note that the script above should be active starting Monday, January 13.  Any students wanting to start before then, can instead use 
-```shell
-bash /storage/group/RISE/classroom/astro_416/scripts/class_setup 
-```
 
 - When the script has finished running and you have a new command prompt, exit the terminal by typeing 
 ```shell
