@@ -20,9 +20,8 @@ In this lab, students will learn to:
 - Clone git repository and commit changes
 - Assign variables in Julia
 - Organize code into functions
-- Test functions
-and reflect on their goals for the course.
-
+- Test functions, and 
+- Reflect on their goals for the course.
 
 ### Instructions
 - [Request an account on Roar](/tips/roar/create_account/) by end of Monday
