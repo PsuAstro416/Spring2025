@@ -18,4 +18,4 @@ git add ex*
 git commit -m "note describing these changes"
 ```
 
-- Note that this commits the changes to the repository on the computer you're using, but does *not* [push those changes to GitHub](../labs/submitting/).  
+- Note that this commits the changes to the repository on the computer you're using, but does *not* [push those changes to GitHub](../submitting/).  
