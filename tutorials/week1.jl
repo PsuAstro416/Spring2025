@@ -26,6 +26,7 @@ end
 begin
 	title = "Data Science Applications to Astronomy";
 	week = 1
+  topic = "Course Overview"
 end;
 
 # ╔═╡ fd7a7050-3b8c-41e3-b75e-3a84d98e4a93
@@ -33,7 +34,7 @@ end;
 +++
 title = "$title"
 week = "$week"
-topic = "Course Overview"
+topic = "$topic"
 +++
 """ |> Base.Text;
 
