@@ -1,5 +1,5 @@
 ### A Pluto.jl notebook ###
-# v0.20.1
+# v0.20.4
 
 #> [frontmatter]
 #> license_url = "https://creativecommons.org/licenses/by/4.0/"
@@ -40,8 +40,8 @@ topic = "$topic"
 
 # ╔═╡ 81a1258f-b31b-4356-aabc-5f9a0e831b39
 md"""
-# $title
-### Week $week: $topic
+#### $title
+# Week $week: $topic
 """
 
 # ╔═╡ 19d8ddbc-0ad0-4933-af0e-b970d1bb3a93

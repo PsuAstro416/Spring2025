@@ -33,6 +33,7 @@ end;
 +++
 title = "$title"
 week = "$week"
+topic = "Course Overview"
 +++
 """ |> Base.Text;
 
@@ -40,7 +41,8 @@ week = "$week"
 md"""
 ### Welcome to Astro 416: 
 # $title
-### Week $week
+#### Week $week
+### $topic
 """
 
 # ╔═╡ ef24c3ba-e027-465d-995f-efc5941843a2
