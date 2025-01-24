@@ -236,6 +236,118 @@ md"""
   + (e.g., neural network)
 """
 
+# ╔═╡ 705acbf3-24e5-449b-97e8-07e2039b8371
+md"""
+### Finding Middle Ground
+This course aims to prepare you to combine the power of:
+- Astronomical surveys
+- Astrophysical knowledge, and
+- Modern data science tools
+"""
+
+# ╔═╡ 7ed5d185-b087-42f8-93b0-c981ecc55729
+md"""
+# Questions
+"""
+
+# ╔═╡ 10180c46-0cf7-4c69-aa14-4d6689ec3538
+md"""
+### Git
+"""
+
+# ╔═╡ 2d81dcd1-8bd9-4a06-8a1b-e85791ceea2e
+question_box(md"""
+ I understand that `git commit` is a type of save command, but does it save locally to my computer? Or in some sort of “middle-ground” computer space? Or does it send it to github to store without publishing until git push is used?
+""")
+
+# ╔═╡ 1bde1d71-da59-4ca9-86ed-4c0ca2f039fd
+question_box(md"""
+What exactly is a local repository? """)
+
+# ╔═╡ b2f2b675-5089-4764-8595-8d6e818e232d
+question_box(md"""What is the difference between saving to a local repository and pushing to github? """)
+
+# ╔═╡ 5e5dc610-9c76-4380-acc3-64c86fab38d7
+question_box(md"""Why are there two separate terminal commands to commit and push to GitHub? I don't quite understand the nuances between them.
+""")
+
+# ╔═╡ b85f1f92-d277-4599-8634-93308c7c0063
+md"""
+### Julia
+"""
+
+# ╔═╡ 544ea0db-9d2b-4e3b-9af5-190c638ea591
+question_box(md"""
+Why was Julia in particular chosen as the language for this class?""")
+
+# ╔═╡ f7f948a7-cbf8-4756-a438-8d2fdb82c58e
+question_box(md"""
+In python, I can look up functions that are part of libraries pretty easily - there are websites dedicated to numpy, matplotlib, etc.. Does this same thing exist with Julia libraries or is it a little more underground?python, I can look up functions that are part of libraries pretty easily - there are websites dedicated to numpy, matplotlib, etc.. Does this same thing exist with Julia libraries or is it a little more underground?
+""")
+
+# ╔═╡ 50236d1a-b196-486b-be64-afac7f62ef85
+md"""
+### Julia Resources
+- [Julia Manual](http://docs.julialang.org/en/v1/)
+- [Think Julia](https://benlauwens.github.io/ThinkJulia.jl/latest/book.html) (Lauwens & Downey; online version available for free)
+- [Learn Julia in Y Minutes](https://learnxinyminutes.com/docs/julia/)
+- [The Fasttrack to Julia](https://cheatsheet.juliadocs.org/)
+- [Julia<->Python<->Matlap Cheatsheet](https://cheatsheets.quantecon.org/)
+- [Julia Language Discourse](https://discourse.julialang.org/)
+- [The Julia Language Slack](https://julialang.org/slack/)
+"""
+
+# ╔═╡ 93f77cec-4887-4807-b7c6-c76643edbdf4
+md"""
+Now there's also an AI package ([https://github.com/svilupp/AIHelpMe.jl](AIHelpMe.jl)) trained on Julia manual and Discourse content
+  + Can access without installing via [JuliaHub](https://juliahub.com/ui/Home)
+  + But first need to create an account there
+  + Or can install and add an API key from a LLM provider (see [https://github.com/svilupp/AIHelpMe.jl](README) for details)
+  + Or can setup your own local LLM server (e.g., [Ollama](https://ollama.com/)), but this is only for the brave/people with time to mess around
+
+"""
+
+# ╔═╡ dc911ace-5b91-4ef5-b234-03623a3d7347
+blockquote(md"""Please read the lists of goals and objectives from students in the attached document, Astro 416 Lab 1 Goals.docx .  Then summarize the most common goals.""")
+
+# ╔═╡ 70e3edbb-b773-46be-83e3-2b46c66236b0
+md"""
+I reviewed the goals and objectives listed by students in the document. Here are the most common goals:
+
+#### Learning Data Science Techniques:
+
+Many students aim to develop strong foundational skills in data science, including methodologies and techniques commonly used in the field.
+
+#### Programming Proficiency:
+
+A significant number of students want to become proficient in programming languages such as Julia and Python, and improve their coding skills.
+#### GitHub and Version Control:
+
+Several students mentioned the goal of becoming more familiar with GitHub, learning its commands, and using it effectively for version control.
+#### Data Handling and Analysis:
+
+Students expressed a desire to handle large datasets, improve data modeling skills, and apply statistical tests for data analysis.
+#### Visualization and Presentation:
+
+Improving the ability to create effective data visualizations and making plots that are clear and compelling is a common objective.
+#### Application to Research:
+
+Many students want to apply the skills learned in the course to their own research projects, bridging the gap between coursework and practical applications.
+#### Efficiency and Best Practices:
+
+Goals include learning best practices for data documentation, reproducible research, and writing cleaner, more efficient code.
+#### Confidence and Independence:
+
+Increasing confidence in coding, especially in new languages, and learning to solve problems independently were also frequently mentioned.
+
+These goals reflect a strong focus on practical skills and their application in both academic and professional contexts. Is there anything specific you would like to delve deeper into?
+"""
+
+# ╔═╡ b9546ddc-a73a-4bb6-a597-73b60726d4e4
+md"""
+### Lab
+"""
+
 # ╔═╡ c87c0610-5d5b-4760-ba5b-a8cdda19b144
 md"""
 ## What’s hard about Big Data?
@@ -260,15 +372,6 @@ md"""
 - Data-driven models can be hard to interpret (& explain)
 - Communicating results (and their limitations)
 - Rapidly evolving toolkits
-"""
-
-# ╔═╡ 705acbf3-24e5-449b-97e8-07e2039b8371
-md"""
-### Finding Middle Ground
-This course aims to prepare you to combine the power of:
-- Astronomical surveys
-- Astrophysical knowledge, and
-- Modern data science tools
 """
 
 # ╔═╡ 02a0991e-8ebe-4307-b277-59d39d612c78
@@ -688,8 +791,22 @@ version = "17.4.0+2"
 # ╟─fe1b9315-355f-4641-988d-9fdcef4af440
 # ╟─82e983be-5ebf-49d7-875f-a6985a10adb8
 # ╟─bf102453-2a18-4c44-a09b-2ca8fda59833
-# ╟─c87c0610-5d5b-4760-ba5b-a8cdda19b144
 # ╟─705acbf3-24e5-449b-97e8-07e2039b8371
+# ╟─7ed5d185-b087-42f8-93b0-c981ecc55729
+# ╟─10180c46-0cf7-4c69-aa14-4d6689ec3538
+# ╟─2d81dcd1-8bd9-4a06-8a1b-e85791ceea2e
+# ╟─1bde1d71-da59-4ca9-86ed-4c0ca2f039fd
+# ╟─b2f2b675-5089-4764-8595-8d6e818e232d
+# ╟─5e5dc610-9c76-4380-acc3-64c86fab38d7
+# ╟─b85f1f92-d277-4599-8634-93308c7c0063
+# ╟─544ea0db-9d2b-4e3b-9af5-190c638ea591
+# ╟─f7f948a7-cbf8-4756-a438-8d2fdb82c58e
+# ╟─50236d1a-b196-486b-be64-afac7f62ef85
+# ╟─93f77cec-4887-4807-b7c6-c76643edbdf4
+# ╟─dc911ace-5b91-4ef5-b234-03623a3d7347
+# ╟─70e3edbb-b773-46be-83e3-2b46c66236b0
+# ╟─b9546ddc-a73a-4bb6-a597-73b60726d4e4
+# ╟─c87c0610-5d5b-4760-ba5b-a8cdda19b144
 # ╟─02a0991e-8ebe-4307-b277-59d39d612c78
 # ╟─9a4a6761-8c60-4a7d-92d3-cdfbc85c76d9
 # ╟─ffd38b51-b872-432b-a9bf-7568681d3aa1
