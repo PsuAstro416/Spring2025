@@ -13,6 +13,7 @@ using PlutoUI, PlutoTeachingTools
 begin
   title = "Data Science Applications to Astronomy";
   topic = "Model Building I"
+  subtopic = "Probability"
   week = 3
 end;
 
@@ -20,7 +21,7 @@ end;
 # hideall
 md"""
 +++
-title =$title
+title =$topic
 week_num = $week
 +++
 """  |> Base.Text;
@@ -29,6 +30,7 @@ week_num = $week
 md"""
 #### $title
 # Week $week: $topic
+## $subtopic
 """
 
 # ╔═╡ 6e391d26-008c-4dee-b0d6-5b031e1ea7c7
@@ -39,19 +41,37 @@ md"""
 # Terminology
 """
 
-# ╔═╡ 70cabb45-ad16-4f15-b05b-27400f5deb11
+# ╔═╡ 235b2ed8-b82c-4697-a5c4-d06d69f173ea
 md"""
 # Model
 ## Scientific Model vs Statistical Model
 - What are the differences?
 
+## Scientific Model
+- Describes what's happening, irrespective of our measurements
+- Can be extremely well tested or highly uncertain
+
 ## Statistical Model
 - Describes process for generating data
 - Inevitably includes assumptions
 - Reecognizes that uncertainy is inevitable
-
+ 
 ### Think of example sources of uncertainty
 - pause
+"""
+
+# ╔═╡ 692dd077-6af8-46fb-aaac-bfdc9d35a3dd
+md"""
+## Example Scientific Models
+- Newton's equation of motion & gravitation
+- Keplerian motion of planets
+- Salpeter initial mass function for stars
+- ΛCMD model for growth of large scale structure
+
+## Example Statistical Models
+- Gaussian or Normal distribution for measurement uncertainties
+- Poisson distribution for number of photons hitting detector given expected photon rate
+- Binomial distribution for number of "successes" given number of trials and probability of success
 """
 
 # ╔═╡ 0cb84e29-c874-4a30-aaea-bf2d57fa7bb0
@@ -158,7 +178,7 @@ tip(md"""
 - For some models there are very efficienct methods for computing $\hat{\theta}$.
 - However, it is just a point estimate.
 - Be careful when many parameters, few observations, large uncertainties.
-- We'll MLE as a short cut for more rigorous analysis.
+- We'll use MLE as a short cut or starting point for more rigorous analysis.
 """)
 
 # ╔═╡ e7c929bf-2458-4056-8a77-ec04c2119d3d
@@ -179,7 +199,7 @@ $(RobustLocalResource("https://upload.wikimedia.org/wikipedia/commons/thumb/9/95
 -- Image Credit: [Wikipedia](https://en.wikipedia.org/wiki/Joint_probability_distribution#/media/File:Multivariate_normal_sample.svg) [CC BY-SA 3.0](https://creativecommons.org/licenses/by-sa/3.0)
 """
 
-# ╔═╡ 231cd73e-d97d-49c8-b9c0-f4e729872a75
+# ╔═╡ 02129b94-55ee-49e2-80b4-2a0fc27c7670
 md"""
 ## Bayes Theorem
 Start with Law of Conditional Probability:
@@ -206,6 +226,17 @@ $p( \theta| M, D) = \frac{p(\theta | M) p(D | \theta, M )}{p(D | M )}$
 
 #### Interpretation of Bayes Theorem:
 $\mathrm{(Posterior)} = \mathrm{(Prior)} \times \mathrm{(Likelihood)} / \mathrm{(Evidence)}$
+"""
+
+# ╔═╡ d4cb86b5-5df5-49a3-ad2f-85d456084ee2
+md"""
+#### Evidence term is often hard to calculate
+- Evidence is sometimes refered to as the "fully marginalized likelihood"
+##### Discrete case:
+$p(D | M ) = \sum_{i} p(\theta_i|M) p(D|\theta_i,M)$
+##### Continuous case:
+$p(D | M ) = \int d\theta \, p(\theta|M) p(D|\theta,M)$
+
 """
 
 # ╔═╡ 93e8268d-13b3-40f0-ab4d-3cdc42d12464
@@ -669,7 +700,8 @@ version = "17.4.0+2"
 # ╟─bf5a7be5-b5bb-4d2f-92b2-3f45528b94bf
 # ╟─6e391d26-008c-4dee-b0d6-5b031e1ea7c7
 # ╟─fe2f5bef-44b8-4b3b-9a53-f0de97e74018
-# ╟─70cabb45-ad16-4f15-b05b-27400f5deb11
+# ╟─235b2ed8-b82c-4697-a5c4-d06d69f173ea
+# ╟─692dd077-6af8-46fb-aaac-bfdc9d35a3dd
 # ╟─0cb84e29-c874-4a30-aaea-bf2d57fa7bb0
 # ╟─0a04bbbf-0a78-4b1e-8003-a7a5e12beace
 # ╟─81d8f7ae-e579-429b-a1ca-f587183ed985
@@ -684,7 +716,8 @@ version = "17.4.0+2"
 # ╟─01f95803-6dea-4ebb-a614-967377fcb78b
 # ╟─e7c929bf-2458-4056-8a77-ec04c2119d3d
 # ╟─bdb9af02-ee4a-48a5-b58e-6a00308f1008
-# ╟─231cd73e-d97d-49c8-b9c0-f4e729872a75
+# ╟─02129b94-55ee-49e2-80b4-2a0fc27c7670
+# ╟─d4cb86b5-5df5-49a3-ad2f-85d456084ee2
 # ╟─93e8268d-13b3-40f0-ab4d-3cdc42d12464
 # ╟─21c7ccc3-2bad-4d6e-b03f-3a78bb19ef16
 # ╟─0044b980-d515-4ad1-be8f-cbc7393651bf
