@@ -295,7 +295,7 @@ md"""
 aside(question_box(
   md"""
 ## After working through the labs, compare the Bayesian and frequentist approaches.   What are pros/cons?
-""")
+"""))
 
 # ╔═╡ ea483b33-2c65-4f6d-b27f-1a8cb1b2df4e
 aside(question_box(md"Has anyone taken a course or been part of a project that emphasized Frequentist approach?  What contributed to that choice?"))
