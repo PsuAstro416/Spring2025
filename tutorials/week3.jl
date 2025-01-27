@@ -39,6 +39,9 @@ TableOfContents()
 # ╔═╡ fe2f5bef-44b8-4b3b-9a53-f0de97e74018
 md"""
 # Terminology
+We'll use words that sound familiar, but have technical meanings distinct from their everyday usage.  E.g.,
+- Model
+- Likelihood
 """
 
 # ╔═╡ 235b2ed8-b82c-4697-a5c4-d06d69f173ea
@@ -170,6 +173,8 @@ md"""
 ####  Scientists often perform inference based on $\mathcal{L(\theta)}$
 - E.g., Maximum Likelihood Estimate 
 $\hat{\theta}_{\mathrm{MLE}} = \mathrm{argmax}_\theta \, \mathcal{L(\theta)}$
+- Confidence Interval
+$[\theta_l,\theta_u] = \cup \theta \; \mathrm{s.t.} \; \mathcal{L(\theta)} \le \mathcal{L}(\hat{\theta}_{\mathrm{MLE}}) + \Delta\mathcal{L}_{\mathrm{thresh}}$
 """
 
 # ╔═╡ 01f95803-6dea-4ebb-a614-967377fcb78b
@@ -179,6 +184,11 @@ tip(md"""
 - However, it is just a point estimate.
 - Be careful when many parameters, few observations, large uncertainties.
 - We'll use MLE as a short cut or starting point for more rigorous analysis.
+""")
+
+# ╔═╡ bf2eaf16-62c2-46cb-b22b-d644c22803f8
+tip(md"""
+In an ideal world, we'd use a Bayesian approach to uncertainty quantification.  But confidence intervals are used commonly enough that we at least need to understand what they are (and what they aren't).  
 """)
 
 # ╔═╡ e7c929bf-2458-4056-8a77-ec04c2119d3d
@@ -210,13 +220,21 @@ OR we might explicitly writeout the asumption of using model $M$:
 
 $p(A,B|M) = p(A|M) p(B|A,M) = p(B|M) p(A|B,M)$
 
-Substitute 
+Can compute the marginal probabilities using law of total (conditional) probability:
+- Discrete case:
+$p(A) = \sum_{i} p(B_i) p(A|B_i)$
+$p(B) = \sum_{i} p(A_i) p(B|A_i)$
+- Continuous case:
+$p(A ) = \int dB \, p(B) p(A|B)$
+$p(B ) = \int dA \, p(A) p(B|A)$
+
+
+To derive Baye's Theorem, substitute: 
 - A → $\theta$: model parameters
 - B → $D$: observed data 
 - [**Prior PDF**](https://en.wikipedia.org/wiki/Prior_probability) for model parameters $p(\theta|M)$ for $p(A)$ 
 - Likelihood for observed data given model $\mathcal{L} = p(D|\theta, M)$ for $p(B)$
-into joint probability for both model parameters and observed data given the model $M$
-$p(D, \theta, M )$.
+into $p(D, \theta, M )$, the joint probability for both model parameters and observed data given the model $M$.
  
 $p(\theta, D, M) = p(\theta | M) p(D | \theta, M ) =  p(D | M ) p( \theta| M, D)$ 
 
@@ -270,17 +288,17 @@ md"""
 
 # ╔═╡ 0044b980-d515-4ad1-be8f-cbc7393651bf
 md"""
-# Example Application
+## See Example Applications in Labs
 """
 
 # ╔═╡ 2c514d9f-3c1d-493f-9ec9-02cf523bbe57
-md"""
-## Bayesian vs Frequentist approaches
-- What are pros/cons?
-"""
+aside(question_box(
+  md"""
+## After working through the labs, compare the Bayesian and frequentist approaches.   What are pros/cons?
+""")
 
 # ╔═╡ ea483b33-2c65-4f6d-b27f-1a8cb1b2df4e
-aside(question_box(md"Has anyone taken a course or been part of a project that emphasized Frequentist approach?"))
+aside(question_box(md"Has anyone taken a course or been part of a project that emphasized Frequentist approach?  What contributed to that choice?"))
 
 # ╔═╡ 7bd07b0e-5caa-45f6-a704-504a8eb6a9c4
 #hideall
@@ -714,6 +732,7 @@ version = "17.4.0+2"
 # ╟─5d1ce928-4923-408c-9a0c-ccb6e5674616
 # ╟─cb2de54f-2625-4a14-94d7-65b120c41995
 # ╟─01f95803-6dea-4ebb-a614-967377fcb78b
+# ╟─bf2eaf16-62c2-46cb-b22b-d644c22803f8
 # ╟─e7c929bf-2458-4056-8a77-ec04c2119d3d
 # ╟─bdb9af02-ee4a-48a5-b58e-6a00308f1008
 # ╟─02129b94-55ee-49e2-80b4-2a0fc27c7670

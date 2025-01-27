@@ -14,3 +14,6 @@ Week {{week_num}}
 - See Lab for info about {{ds_topic}}
 
 ## [Lab 3](../../labs/lab3/): {{fill title labs/lab3.md}}
+
+## Notebooks from class
+- [Day 1](https://psuastro416.github.io/Spring2025/tutorials/week3/)
