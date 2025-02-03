@@ -53,7 +53,7 @@ md"""
 
 # ╔═╡ e251d327-aaff-4b19-86a1-7e5230e22910
 md"""
-## Overview of Workflow for Asessing Models
+## Overview of Workflow for Assessing Models
 1. Validate methods using simulated data
 2. Validate computation
 3. Compare Likelihood to expected distribution
@@ -2066,11 +2066,11 @@ version = "1.4.1+2"
 # ╟─d031150e-28ce-489f-8d9a-d397a1473f05
 # ╟─504e22c9-d7ba-4cc6-bb68-f05f101db340
 # ╟─a3bb5429-4336-43bf-9838-c35748617a17
-# ╠═2824ff96-5186-4d22-bea1-7c4df5f5e4bc
+# ╟─2824ff96-5186-4d22-bea1-7c4df5f5e4bc
 # ╟─5f1b7dc1-516f-43e3-97bf-afaf42a11362
 # ╟─129f6c44-4529-4b10-a1bb-77e0c6b7ebe2
 # ╟─6da5a233-9772-43b0-928a-bc9a5382c136
 # ╟─bdfa802d-2ae9-4b70-aa9c-0f94213a6e57
-# ╠═896d9fe9-fbaf-43f0-9736-be6e88d07a75
+# ╟─896d9fe9-fbaf-43f0-9736-be6e88d07a75
 # ╟─00000000-0000-0000-0000-000000000001
 # ╟─00000000-0000-0000-0000-000000000002
