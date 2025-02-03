@@ -1,27 +1,25 @@
 ### A Pluto.jl notebook ###
-# v0.20.4
+# v0.20.1
 
 using Markdown
 using InteractiveUtils
 
 # This Pluto notebook uses @bind for interactivity. When running this notebook outside of Pluto, the following 'mock version' of @bind gives bound variables a default value (instead of an error).
 macro bind(def, element)
-    #! format: off
     quote
         local iv = try Base.loaded_modules[Base.PkgId(Base.UUID("6e696c72-6542-2067-7265-42206c756150"), "AbstractPlutoDingetjes")].Bonds.initial_value catch; b -> missing; end
         local el = $(esc(element))
         global $(esc(def)) = Core.applicable(Base.get, el) ? Base.get(el) : iv(el)
         el
     end
-    #! format: on
 end
-
-# ╔═╡ b0150a6a-6989-407f-832e-9fb927644274
-using Distributions, Plots
 
 # ╔═╡ 1f4b4c8c-fee3-4e9b-a650-30b73db58a77
 # hideall
+begin
 using PlutoUI, PlutoTeachingTools
+using Distributions, Plots
+end
 
 # ╔═╡ 24ac7416-ed2f-44ae-88b2-0b7944c46a6c
 #hideall
@@ -48,6 +46,9 @@ md"""
 ## $subtopic
 """
 
+# ╔═╡ 191f960d-e369-4176-b2c2-9ac52e83e3d1
+WidthOverDocs()
+
 # ╔═╡ 6e391d26-008c-4dee-b0d6-5b031e1ea7c7
 TableOfContents()
 
@@ -61,8 +62,13 @@ md"""
 - One common approach is to perform a **sensitivity analysis**, where we repeat the analysis using multiple different priors to see how much the posterior distribution changes. 
 """
 
+# ╔═╡ 9d1e8ef8-162f-4260-b759-1818250ae18b
+md"""
+## Sensitivity to Prior
+"""
+
 # ╔═╡ 5749c39b-0378-40c8-9d8d-a1a2a1872a76
-p_true = 0.5;
+p_true = 0.9;
 
 # ╔═╡ 65233aa4-fc9a-456e-83b5-0fc1cd27e7ac
 begin 
@@ -71,7 +77,7 @@ begin
 end;
 
 # ╔═╡ f28119b5-8dbf-4ee0-a869-11e052c97c9d
-num_obs = 50;
+num_obs = 10;
 
 # ╔═╡ 3ac33e9f-1203-4c3c-bfee-48883f03514b
 prior = Beta(α,β)
@@ -96,11 +102,16 @@ md"""
 ### How posterior evolves with more data
 """
 
+# ╔═╡ d8158b3c-3d9e-44d1-ad48-36aa0a9ceada
+md"""
+ Make Animations $(@bind make_anim CheckBox(default=true))
+"""
+
 # ╔═╡ 36eff636-6df9-4658-a833-69308ee42b4e
 dist_one_draw = Bernoulli(p_true)
 
 # ╔═╡ 6cd82a8d-4419-403b-ada0-07a4448d5c31
-begin
+if make_anim
 	recalc
 	obs_history = zeros(num_obs)
 	obs_history[1] = rand(dist_one_draw)
@@ -110,19 +121,21 @@ begin
 end
 
 # ╔═╡ 0b5ee3d6-8a6e-442f-acc9-5112e0756b49
-function plot_prior_and_posterior(obs, num_obs, prior; max_y=2)
+function plot_prior_and_posterior(obs, num_obs, prior; max_y=0)
 	@assert 1 <= num_obs 
 	@assert 0 <= obs <= num_obs
-	x = range(0,stop=1,length=100)
-	
+	x = range(0,stop=1,length=200)
+	# Can compute posterior analytically 
 	posterior = Beta(prior.α+obs, prior.β+num_obs-obs)
 	
-	plt = plot(x,pdf.(prior,x), label="Prior", xlabel="p", ylabel="PDF")
+	plt = plot(x,pdf.(prior,x), label="Prior", xlabel="p", ylabel="PDF", lweight=2)
 	posterior = Beta(prior.α+obs, prior.β+num_obs-obs)
 	
-	plot!(plt,x,pdf.(posterior,x), label="Posterior")
+	plot!(plt,x,pdf.(posterior,x), label="Posterior", lweight=2)
 	frac_success = obs/num_obs
-	#max_y = ylims(plt)[2]
+	if max_y==0
+		max_y = ylims(plt)[2]
+	end
 	plot!(plt,fill(frac_success,2), [0,max_y], label="Observed Rate")
 	plt
 end
@@ -131,19 +144,21 @@ end
 plot_prior_and_posterior(obs,num_obs,prior)
 
 # ╔═╡ 3123c9f7-02a0-478d-be03-8b2600c5a881
-begin
+if make_anim
 	anim = @animate for i ∈ 1:num_obs
 	    plot_prior_and_posterior(obs_history[i],i, prior; max_y=8)
 	end
-	gif(anim,fps=5)
+	gif(anim,fps=10)
 end
 
 # ╔═╡ 8f38df2c-2443-4d07-bd28-acbb6e765f8f
+if make_anim
 plot_prior_and_posterior(obs_history[end],num_obs, prior; max_y=8)
+end
 
 # ╔═╡ 562b4e2b-c066-4e55-aac3-d74de7bdbe63
 question_box(md"""
-Can we discuss how command line syntax works. What is happening when you type `julia --project -e 'using Pkg; Pkg.instantiate();`?""")
+Can we discuss how command line syntax works. What is happening when you type `julia --project -e "using Pkg; Pkg.instantiate();"?""")
 
 # ╔═╡ 958d3e74-3414-43ef-b0f1-369cdb7a3a66
 md"""
@@ -181,270 +196,6 @@ question_box(md"""
 Maybe it's just because we didn't get there yet, but why does the linear model for the Hubble constant start to deteriorate at longer distances/higher velocities?
 """)
 
-# ╔═╡ fe2f5bef-44b8-4b3b-9a53-f0de97e74018
-md"""
-# Terminology
-We'll use words that sound familiar, but have technical meanings distinct from their everyday usage.  E.g.,
-- Model
-- Likelihood
-"""
-
-# ╔═╡ 235b2ed8-b82c-4697-a5c4-d06d69f173ea
-md"""
-# Model
-## Scientific Model vs Statistical Model
-- What are the differences?
-
-## Scientific Model
-- Describes what's happening, irrespective of our measurements
-- Can be extremely well tested or highly uncertain
-
-## Statistical Model
-- Describes process for generating data
-- Inevitably includes assumptions
-- Reecognizes that uncertainy is inevitable
- 
-### Think of example sources of uncertainty
-- pause
-"""
-
-# ╔═╡ 692dd077-6af8-46fb-aaac-bfdc9d35a3dd
-md"""
-## Example Scientific Models
-- Newton's equation of motion & gravitation
-- Keplerian motion of planets
-- Salpeter initial mass function for stars
-- ΛCMD model for growth of large scale structure
-
-## Example Statistical Models
-- Gaussian or Normal distribution for measurement uncertainties
-- Poisson distribution for number of photons hitting detector given expected photon rate
-- Binomial distribution for number of "successes" given number of trials and probability of success
-"""
-
-# ╔═╡ 0cb84e29-c874-4a30-aaea-bf2d57fa7bb0
-blockquote(md"All models are wrong, but some are useful.", md"-- [George Box](https://en.wikipedia.org/wiki/All_models_are_wrong)")
-
-# ╔═╡ 0a04bbbf-0a78-4b1e-8003-a7a5e12beace
-md"""
-### What is a (good) model useful for?
-- Making predictions
-- Incorporating new data to refine one's knowledge
-- Planning future science
-"""
-
-# ╔═╡ 81d8f7ae-e579-429b-a1ca-f587183ed985
-md"""
-#### Why are all models wrong?
-- pause
-"""
-
-# ╔═╡ de283d10-ce96-11ef-1f04-f35f70350b2b
-md"""
-# Probability
-- Multiple definitions and use cases
-- Surprisingly deep philosophical question
-- We'll adopt a [Bayesian interpretation of probability](https://en.wikipedia.org/wiki/Bayesian_probability)
-- We'll start with the Objective Bayesian interpretation of probability
-- Later we'll discuss the Subjective Bayesian interpretation
-
-Objective Bayesian
-- Formalization of quantiative logic
-- Results of statistical inference depend only on the model and the data
-"""
-
-# ╔═╡ d03b6a2c-ef53-481c-9284-75be3483b921
-md"""
-## Probability Function
-- Assigns a weight to each possible event/outcome of an experiment or observation.
-"""
-
-# ╔═╡ c3573769-4b4b-4ff7-a293-7fc226b114d5
-md"""
-### Probability Mass Function
-- For discrete events/outcomes
-- Examples:  (pause to ask class)
-
-## Examples of Probability Mass Functions
-  - Flip coin:  heads (H) or tails (T).  P(H) = P(T) = ½ 
-  - Roll an n-sided die:   P(V) = $\frac{1}{n}$
-  - Inspect locations a globe asking land or water:  
-
-$p(\mathrm{Water}) = w$ 
-
-$p(\mathrm{Land}) = 1-w$
-"""
-
-# ╔═╡ f10bda05-aaa2-4ad3-95df-2966dea569fa
-md"""
-## Axioms of Probability
-- Non-negativity: $p(E)\ge0$
-- Sum to unity:  $\sum_i p(E_i) = 1$ for complete list of possible events
-- Sum of probabilities of mutually exclusive events: $p(\bigcup_i E_i) = \sum_i p(E_i)$
-"""
-
-# ╔═╡ 77a3192e-97c3-4b5f-9c83-cb488e5f7a4c
-md"""
-## Probability Density Function (PDF)
-- Allows for continuous events/outcomes
-- Examples: (ask class)
-"""
-
-# ╔═╡ 64b6f9a8-be12-4fb1-b46b-7023e0fb28a8
-md"""
-## Examples of Probability Density Functions
-- Fraction of a planet covered with water: $p(w)$
-- Mass of a star:  $p(M_\star)$
-- Luminosity of a star:  $p(L_\star)$
-- Value of future measurement of flux from a star:  $p(f_{\star,obs})$ 
-"""
-
-# ╔═╡ 5d1ce928-4923-408c-9a0c-ccb6e5674616
-md"""
-## Probability function is about the state of knowledge. 
-#### It is not an intrinsic property of the system.
-"""
-
-# ╔═╡ cb2de54f-2625-4a14-94d7-65b120c41995
-md"""
-## Likelihood function ($\mathcal{L(\theta)}$)
-- Probability distribution for the outcome of an experiment/observation that was made in the past, ignoring any current knowledge about the actual outcome.
-- A likelihood is a probability density function.  
-- Not all PDFs are likelihoods.
-- Likelihood function assumes a statistical model (commonly written $\mathcal{M}$).
-- Models often have parameters (commonly written as $\theta$)
-- Likelihood function often written: $\mathcal{L}(\theta)$ or $\mathcal{L_M}(\theta)$
-
-####  Scientists often perform inference based on $\mathcal{L(\theta)}$
-- E.g., Maximum Likelihood Estimate 
-$\hat{\theta}_{\mathrm{MLE}} = \mathrm{argmax}_\theta \, \mathcal{L(\theta)}$
-- Confidence Interval
-$[\theta_l,\theta_u] = \cup \theta \; \mathrm{s.t.} \; \mathcal{L(\theta)} \le \mathcal{L}(\hat{\theta}_{\mathrm{MLE}}) + \Delta\mathcal{L}_{\mathrm{thresh}}$
-"""
-
-# ╔═╡ 01f95803-6dea-4ebb-a614-967377fcb78b
-tip(md"""
-- The MLE is useful tool for your toolbox.  
-- For some models there are very efficienct methods for computing $\hat{\theta}$.
-- However, it is just a point estimate.
-- Be careful when many parameters, few observations, large uncertainties.
-- We'll use MLE as a short cut or starting point for more rigorous analysis.
-""")
-
-# ╔═╡ bf2eaf16-62c2-46cb-b22b-d644c22803f8
-tip(md"""
-In an ideal world, we'd use a Bayesian approach to uncertainty quantification.  But confidence intervals are used commonly enough that we at least need to understand what they are (and what they aren't).  
-""")
-
-# ╔═╡ e7c929bf-2458-4056-8a77-ec04c2119d3d
-md"""
-# Conditional Probability
-- Consider two events:                              $A$ & $B$
-- Let each event have its own probability function: $p(A)$ & $p(B)$ 
-- **[Joint probabilty](https://en.wikipedia.org/wiki/Joint_probability_distribution)** of both events:              $p(A,B)$   
-- **[Conditional probability](https://en.wikipedia.org/wiki/Conditional_probability)** of $A$ given $B$:     $p(A|B)$ 
-- Axiom of Conditional Probability:
-  $p(A,B) = p(A) \, p(B|A)$ 
-- Alternatively could write Conditional probability of $B$ given $A$:         $p(B|A) = p(B) \, p(A|B)$ 
-   """
-
-# ╔═╡ bdb9af02-ee4a-48a5-b58e-6a00308f1008
-md"""
-$(RobustLocalResource("https://upload.wikimedia.org/wikipedia/commons/thumb/9/95/Multivariate_normal_sample.svg/450px-Multivariate_normal_sample.svg.png","450px-Multivariate_normal_sample.svg.png",:width=>400))
--- Image Credit: [Wikipedia](https://en.wikipedia.org/wiki/Joint_probability_distribution#/media/File:Multivariate_normal_sample.svg) [CC BY-SA 3.0](https://creativecommons.org/licenses/by-sa/3.0)
-"""
-
-# ╔═╡ 02129b94-55ee-49e2-80b4-2a0fc27c7670
-md"""
-## Bayes Theorem
-Start with Law of Conditional Probability:
-
-$p(A,B) = p(A) p(B|A) = p(B) p(A|B)$
-
-OR we might explicitly writeout the asumption of using model $M$:
-
-$p(A,B|M) = p(A|M) p(B|A,M) = p(B|M) p(A|B,M)$
-
-Can compute the marginal probabilities using law of total (conditional) probability:
-- Discrete case:
-$p(A) = \sum_{i} p(B_i) p(A|B_i)$
-$p(B) = \sum_{i} p(A_i) p(B|A_i)$
-- Continuous case:
-$p(A ) = \int dB \, p(B) p(A|B)$
-$p(B ) = \int dA \, p(A) p(B|A)$
-
-
-To derive Baye's Theorem, substitute: 
-- A → $\theta$: model parameters
-- B → $D$: observed data 
-- [**Prior PDF**](https://en.wikipedia.org/wiki/Prior_probability) for model parameters $p(\theta|M)$ for $p(A)$ 
-- Likelihood for observed data given model $\mathcal{L} = p(D|\theta, M)$ for $p(B)$
-into $p(D, \theta, M )$, the joint probability for both model parameters and observed data given the model $M$.
- 
-$p(\theta, D, M) = p(\theta | M) p(D | \theta, M ) =  p(D | M ) p( \theta| M, D)$ 
-
-Solve for $p( \theta| M, D)$:
-
-$p( \theta| M, D) = \frac{p(\theta | M) p(D | \theta, M )}{p(D | M )}$ 
-
-#### Interpretation of Bayes Theorem:
-$\mathrm{(Posterior)} = \mathrm{(Prior)} \times \mathrm{(Likelihood)} / \mathrm{(Evidence)}$
-"""
-
-# ╔═╡ d4cb86b5-5df5-49a3-ad2f-85d456084ee2
-md"""
-#### Evidence term is often hard to calculate
-- Evidence is sometimes refered to as the "fully marginalized likelihood"
-##### Discrete case:
-$p(D | M ) = \sum_{i} p(\theta_i|M) p(D|\theta_i,M)$
-##### Continuous case:
-$p(D | M ) = \int d\theta \, p(\theta|M) p(D|\theta,M)$
-
-"""
-
-# ╔═╡ 93e8268d-13b3-40f0-ab4d-3cdc42d12464
-md"""
-## Bayesian Inference
-- Bayesian inference about model parameters is based on the [**posterior probability distribution**](https://en.wikipedia.org/wiki/Posterior_probability). 
-- Ideally, one uses the full posterior distribution.
-- Often, is can be helpful to summarize the posterior:  
-   + Approximate posterior distribution with a [**Normal Distribution**](https://en.wikipedia.org/wiki/Normal_distribution)
-   + Maximunm *a posteriori* Estimator (MAP): $$\hat{\theta}_{\mathrm{MAP}} = \mathrm{argmax}_\theta \, p(\theta ) \, \mathcal{L(\theta )}$$ 
-   + Fischer Information Matrix: Curvature of $p(\theta|D,M)$ evaluated at MAP
-
-$I_{i,j} = \left. \frac{\partial}{\partial \theta_i} \frac{\partial}{\partial \theta_j} \log p(\theta|D,M) \right|_{\hat{\theta}_{MAP}}$ 
-- For many cases if you have a large, high-quality datasets and a model with few parameters, then the posterior distribution may be well approximated by a Gaussian Distribution, and  $\hat{\theta}_{\mathrm{MAP}} \approx \hat{\theta}_{\mathrm{MLE}}$.
-- However, there are also plenty of times when:
-  + MAP & MLE differ
-  + MAP & MLE throws away infortant information about uncertainties.
-  + Posterior might not be well approximated by a Gaussian (e.g., skewed, not unimodal).
-- We want to build a toolbox that can work in both regimes.
-"""
-
-# ╔═╡ 21c7ccc3-2bad-4d6e-b03f-3a78bb19ef16
-md"""
-# Simplified Bayesian Model Building
-## Steps
-1. Develop a statistical model describing how your data are generated.  This dictates the likelihood function and model parameters.
-2. Choose prior distributions
-3. Perform computations to estimate (or sample from) the posterior distribution.
-4. Make decisions based on posterior distribution.
-"""
-
-# ╔═╡ 0044b980-d515-4ad1-be8f-cbc7393651bf
-md"""
-## See Example Applications in Labs
-"""
-
-# ╔═╡ 2c514d9f-3c1d-493f-9ec9-02cf523bbe57
-aside(question_box(
-  md"""
-## After working through the labs, compare the Bayesian and frequentist approaches.   What are pros/cons?
-"""))
-
-# ╔═╡ ea483b33-2c65-4f6d-b27f-1a8cb1b2df4e
-aside(question_box(md"Has anyone taken a course or been part of a project that emphasized Frequentist approach?  What contributed to that choice?"))
-
 # ╔═╡ 7bd07b0e-5caa-45f6-a704-504a8eb6a9c4
 #hideall
 md"""
@@ -452,17 +203,8 @@ md"""
 """
 
 # ╔═╡ 40419686-4d7e-4dea-8c29-735f04049f40
+# hideall
 WidthOverDocs()
-
-# ╔═╡ bb25b929-6f60-4a6c-b405-553edabb047a
-md"""
-## Axioms of Conditional Probability
-$p(A|B)\ge0, \; \; \mathrm{if} \, p(B)>0$.
-
-$\sum_i p(A_i|B) = p(B)$ 
-
-$p(\bigcup_i A_i | B) = \sum_i p(A_i | B)$
-"""
 
 # ╔═╡ 00000000-0000-0000-0000-000000000001
 PLUTO_PROJECT_TOML_CONTENTS = """
@@ -1801,13 +1543,14 @@ version = "1.4.1+2"
 """
 
 # ╔═╡ Cell order:
-# ╠═24ac7416-ed2f-44ae-88b2-0b7944c46a6c
+# ╟─24ac7416-ed2f-44ae-88b2-0b7944c46a6c
 # ╟─7c5224a8-ab22-487a-8336-07e520f8c8f6
 # ╟─bf5a7be5-b5bb-4d2f-92b2-3f45528b94bf
+# ╟─191f960d-e369-4176-b2c2-9ac52e83e3d1
 # ╟─6e391d26-008c-4dee-b0d6-5b031e1ea7c7
 # ╟─c4bc86c9-60e5-4bb1-8291-4ae7ee688455
 # ╟─7c81b69c-eb65-4322-a898-6d8abda2f062
-# ╠═b0150a6a-6989-407f-832e-9fb927644274
+# ╟─9d1e8ef8-162f-4260-b759-1818250ae18b
 # ╠═5749c39b-0378-40c8-9d8d-a1a2a1872a76
 # ╠═65233aa4-fc9a-456e-83b5-0fc1cd27e7ac
 # ╠═f28119b5-8dbf-4ee0-a869-11e052c97c9d
@@ -1818,6 +1561,7 @@ version = "1.4.1+2"
 # ╠═6955c596-d5df-4788-a7bb-b0d5acea918c
 # ╟─3b7c62e4-253b-4082-be31-9de1c2be3e2d
 # ╟─7c6d477a-7394-4023-801c-592c738de165
+# ╟─d8158b3c-3d9e-44d1-ad48-36aa0a9ceada
 # ╟─36eff636-6df9-4658-a833-69308ee42b4e
 # ╟─6cd82a8d-4419-403b-ada0-07a4448d5c31
 # ╟─3123c9f7-02a0-478d-be03-8b2600c5a881
@@ -1830,34 +1574,8 @@ version = "1.4.1+2"
 # ╟─4c450872-2faa-4200-a4fb-d9561c7dbc7d
 # ╟─e3ea3707-d4fe-4700-9503-25964bf1a88e
 # ╟─b681a40a-6222-4c75-930c-74e130a6676a
-# ╟─fe2f5bef-44b8-4b3b-9a53-f0de97e74018
-# ╟─235b2ed8-b82c-4697-a5c4-d06d69f173ea
-# ╟─692dd077-6af8-46fb-aaac-bfdc9d35a3dd
-# ╟─0cb84e29-c874-4a30-aaea-bf2d57fa7bb0
-# ╟─0a04bbbf-0a78-4b1e-8003-a7a5e12beace
-# ╟─81d8f7ae-e579-429b-a1ca-f587183ed985
-# ╟─de283d10-ce96-11ef-1f04-f35f70350b2b
-# ╟─d03b6a2c-ef53-481c-9284-75be3483b921
-# ╟─c3573769-4b4b-4ff7-a293-7fc226b114d5
-# ╟─f10bda05-aaa2-4ad3-95df-2966dea569fa
-# ╟─77a3192e-97c3-4b5f-9c83-cb488e5f7a4c
-# ╟─64b6f9a8-be12-4fb1-b46b-7023e0fb28a8
-# ╟─5d1ce928-4923-408c-9a0c-ccb6e5674616
-# ╟─cb2de54f-2625-4a14-94d7-65b120c41995
-# ╟─01f95803-6dea-4ebb-a614-967377fcb78b
-# ╟─bf2eaf16-62c2-46cb-b22b-d644c22803f8
-# ╟─e7c929bf-2458-4056-8a77-ec04c2119d3d
-# ╟─bdb9af02-ee4a-48a5-b58e-6a00308f1008
-# ╟─02129b94-55ee-49e2-80b4-2a0fc27c7670
-# ╟─d4cb86b5-5df5-49a3-ad2f-85d456084ee2
-# ╟─93e8268d-13b3-40f0-ab4d-3cdc42d12464
-# ╟─21c7ccc3-2bad-4d6e-b03f-3a78bb19ef16
-# ╟─0044b980-d515-4ad1-be8f-cbc7393651bf
-# ╟─2c514d9f-3c1d-493f-9ec9-02cf523bbe57
-# ╟─ea483b33-2c65-4f6d-b27f-1a8cb1b2df4e
 # ╟─7bd07b0e-5caa-45f6-a704-504a8eb6a9c4
 # ╟─40419686-4d7e-4dea-8c29-735f04049f40
 # ╟─1f4b4c8c-fee3-4e9b-a650-30b73db58a77
-# ╟─bb25b929-6f60-4a6c-b405-553edabb047a
 # ╟─00000000-0000-0000-0000-000000000001
 # ╟─00000000-0000-0000-0000-000000000002
