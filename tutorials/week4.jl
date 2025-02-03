@@ -51,7 +51,7 @@ md"""
 
 # ╔═╡ e251d327-aaff-4b19-86a1-7e5230e22910
 md"""
-## Overview of Workflow for Asessing Models
+## Overview of Workflow for Assessing Models
 1. Validate methods using simulated data
 2. Validate computation
 3. Compare Likelihood to expected distribution
