@@ -1,19 +1,17 @@
 ### A Pluto.jl notebook ###
-# v0.20.4
+# v0.20.1
 
 using Markdown
 using InteractiveUtils
 
 # This Pluto notebook uses @bind for interactivity. When running this notebook outside of Pluto, the following 'mock version' of @bind gives bound variables a default value (instead of an error).
 macro bind(def, element)
-    #! format: off
     quote
         local iv = try Base.loaded_modules[Base.PkgId(Base.UUID("6e696c72-6542-2067-7265-42206c756150"), "AbstractPlutoDingetjes")].Bonds.initial_value catch; b -> missing; end
         local el = $(esc(element))
         global $(esc(def)) = Core.applicable(Base.get, el) ? Base.get(el) : iv(el)
         el
     end
-    #! format: on
 end
 
 # ╔═╡ 2824ff96-5186-4d22-bea1-7c4df5f5e4bc
@@ -209,13 +207,16 @@ Number of simulated datasets: $(@bind n_datasets NumberField(100:100:10_000, def
 $(@bind redraw Button("Perform new simulations"))
 """
 
-# ╔═╡ 59f91ee5-94cc-4029-8882-15f17775782b
+# ╔═╡ 386ef6f1-969e-4283-84fa-138ff8d05796
 md"""
-What would have happend if we included only the intercept and slope terms (and not $x^2$ or $x^3$ terms)?
+## Fallacy of Greek Letters
 """
 
-# ╔═╡ 386ef6f1-969e-4283-84fa-138ff8d05796
-#plot_parameter_histograms(results_linear_model, θ_true, title="Results using linear model")
+# ╔═╡ fef7f622-49d3-4e69-b3b8-0e7496ec3cd0
+question_box(md"""What happens if we fit the data with a simpler model than used to generate the data?""")
+
+# ╔═╡ bd115270-76b9-4372-8779-530f162bd2a4
+question_box(md""" What happens if we fit the data with a more complex model than used to generate the data?""")
 
 # ╔═╡ 881cd551-f535-494d-87d5-f2cb4a59066b
 md"""
@@ -285,29 +286,6 @@ function generate_data(θ::AbstractVector, n::Integer, σ::Real; n_outliers::Int
 	end
 	y_obs = y_true .+ σ_true .* randn(n)
 	return (;x_obs = x, y_obs, design_matrix=A, y_true, σ_true, idx_outliers)
-end
-
-# ╔═╡ 129f6c44-4529-4b10-a1bb-77e0c6b7ebe2
-"""
-`predict_linear_model(A, b)`
-Computes the predictions of a linear model with design matrix `A` and parameters `b`.
-"""
-function predict_linear_model(A::AbstractMatrix, b::AbstractVector)
-	@assert size(A,2) == length(b)
-	A*b
-end
-
-# ╔═╡ 6da5a233-9772-43b0-928a-bc9a5382c136
-"""
-`calc_mle_linear_model(A, y_obs, covar)`
-Computes the maximum likelihood estimator for b for the linear model
-`y = A b`
-where measurements errors of `y_obs` are normally distributed and have covariance `covar`.
-"""
-function calc_mle_linear_model(A::AbstractMatrix, y_obs::AbstractVector, covar::AbstractMatrix)
-	@assert size(A,1) == length(y_obs) == size(covar,1) == size(covar,2)
-	@assert size(A,2) >= 1
-	(A' * (covar \ A)) \ (A' * (covar \ y_obs) )
 end
 
 # ╔═╡ 52a6c867-a8d1-4c2a-a75d-cd2ca9a8a2fb
@@ -393,6 +371,29 @@ begin
 	histogram!(plt_histo_χ²_cv, loss_test_dist, bins=bins, alpha=0.5, label="Test")
 end;
 
+# ╔═╡ 129f6c44-4529-4b10-a1bb-77e0c6b7ebe2
+"""
+`predict_linear_model(A, b)`
+Computes the predictions of a linear model with design matrix `A` and parameters `b`.
+"""
+function predict_linear_model(A::AbstractMatrix, b::AbstractVector)
+	@assert size(A,2) == length(b)
+	A*b
+end
+
+# ╔═╡ 6da5a233-9772-43b0-928a-bc9a5382c136
+"""
+`calc_mle_linear_model(A, y_obs, covar)`
+Computes the maximum likelihood estimator for b for the linear model
+`y = A b`
+where measurements errors of `y_obs` are normally distributed and have covariance `covar`.
+"""
+function calc_mle_linear_model(A::AbstractMatrix, y_obs::AbstractVector, covar::AbstractMatrix)
+	@assert size(A,1) == length(y_obs) == size(covar,1) == size(covar,2)
+	@assert size(A,2) >= 1
+	(A' * (covar \ A)) \ (A' * (covar \ y_obs) )
+end
+
 # ╔═╡ bdfa802d-2ae9-4b70-aa9c-0f94213a6e57
 function generate_θ_fit_distribution(θ::AbstractVector, n_obs::Integer, σ::Real; n_sim::Integer = 100, order_fit::Integer = length(θ)-1, n_outliers::Integer=0) 
 	output = zeros(order_fit+1, n_sim)
@@ -465,7 +466,6 @@ Statistics = "10745b16-79ce-11e8-11f9-7d13ad32a3b2"
 LaTeXStrings = "~1.3.0"
 MLUtils = "~0.4.5"
 Plots = "~1.40.9"
-PlutoTeachingTools = "~0.1.4"
 PlutoUI = "~0.7.39"
 Statistics = "~1.11.1"
 """
@@ -476,7 +476,7 @@ PLUTO_MANIFEST_TOML_CONTENTS = """
 
 julia_version = "1.11.2"
 manifest_format = "2.0"
-project_hash = "12b2f61bcb158cee2d66aa8d1054de7ef5833138"
+project_hash = "06798512e41f21b85733b9385a6bcf7e3c7ce8b6"
 
 [[deps.AbstractPlutoDingetjes]]
 deps = ["Pkg"]
@@ -824,11 +824,10 @@ git-tree-sha1 = "21fac3c77d7b5a9fc03b0ec503aa1a6392c34d2b"
 uuid = "a3f928ae-7b40-5064-980b-68af3947d34b"
 version = "2.15.0+0"
 
-[[deps.Formatting]]
-deps = ["Logging", "Printf"]
-git-tree-sha1 = "fb409abab2caf118986fc597ba84b50cbaf00b87"
-uuid = "59287772-0a20-5a39-b81b-1366585eb4c0"
-version = "0.4.3"
+[[deps.Format]]
+git-tree-sha1 = "9c68794ef81b08086aeb32eeaf33531668d5f5fc"
+uuid = "1fa38f19-a742-5d3f-a2b9-30dd87b9d5f8"
+version = "1.3.7"
 
 [[deps.FreeType2_jll]]
 deps = ["Artifacts", "Bzip2_jll", "JLLWrappers", "Libdl", "Zlib_jll"]
@@ -945,9 +944,9 @@ weakdeps = ["Dates", "Test"]
     InverseFunctionsTestExt = "Test"
 
 [[deps.IrrationalConstants]]
-git-tree-sha1 = "630b497eafcc20001bba38a4651b327dcfc491d2"
+git-tree-sha1 = "e2222959fbc6c19554dc15174c81bf7bf3aa691c"
 uuid = "92d709cd-6900-40b7-9082-c6be49f344b6"
-version = "0.2.2"
+version = "0.2.4"
 
 [[deps.IteratorInterfaceExtensions]]
 git-tree-sha1 = "a3f24677c21f5bbe9d2a714f95dcd58337fb2856"
@@ -1036,21 +1035,19 @@ uuid = "b964fa9f-0449-5b57-a5c2-d3ea65f4040f"
 version = "1.3.1"
 
 [[deps.Latexify]]
-deps = ["Formatting", "InteractiveUtils", "LaTeXStrings", "MacroTools", "Markdown", "OrderedCollections", "Printf", "Requires"]
-git-tree-sha1 = "8c57307b5d9bb3be1ff2da469063628631d4d51e"
+deps = ["Format", "InteractiveUtils", "LaTeXStrings", "MacroTools", "Markdown", "OrderedCollections", "Requires"]
+git-tree-sha1 = "ce5f5621cac23a86011836badfedf664a612cee4"
 uuid = "23fbe1c1-3f47-55db-b15f-69d7ec21a316"
-version = "0.15.21"
+version = "0.16.5"
 
     [deps.Latexify.extensions]
     DataFramesExt = "DataFrames"
-    DiffEqBiologicalExt = "DiffEqBiological"
-    ParameterizedFunctionsExt = "DiffEqBase"
+    SparseArraysExt = "SparseArrays"
     SymEngineExt = "SymEngine"
 
     [deps.Latexify.weakdeps]
     DataFrames = "a93c6f00-e57d-5684-b7b6-d8193f3e46c0"
-    DiffEqBase = "2b5f629d-d688-5b77-993f-72d75c75574e"
-    DiffEqBiological = "eb300fae-53e8-50a0-950c-e21f52c2b7e0"
+    SparseArrays = "2f01184e-e22b-5df5-ae63-d93ebab69eaf"
     SymEngine = "123dc426-2d89-5057-bbad-38513e3affd8"
 
 [[deps.LibCURL]]
@@ -1168,9 +1165,9 @@ uuid = "6f1432cf-f94c-5a45-995e-cdbf5db27b0b"
 version = "3.1.0"
 
 [[deps.MIMEs]]
-git-tree-sha1 = "65f28ad4b594aebe22157d6fac869786a255b7eb"
+git-tree-sha1 = "1833212fd6f580c20d4291da9c1b4e8a655b128e"
 uuid = "6c6e2e6c-3030-632d-7369-2d6c69616d65"
-version = "0.1.4"
+version = "1.0.0"
 
 [[deps.MLStyle]]
 git-tree-sha1 = "bc38dff0548128765760c79eb7388a4b37fae2c8"
@@ -1388,16 +1385,16 @@ uuid = "0ff47ea0-7a50-410d-8455-4348d5de0420"
 version = "0.1.6"
 
 [[deps.PlutoTeachingTools]]
-deps = ["Downloads", "HypertextLiteral", "LaTeXStrings", "Latexify", "Markdown", "PlutoLinks", "PlutoUI", "Random"]
-git-tree-sha1 = "67c917d383c783aeadd25babad6625b834294b30"
+deps = ["Downloads", "HypertextLiteral", "Latexify", "Markdown", "PlutoLinks", "PlutoUI"]
+git-tree-sha1 = "8252b5de1f81dc103eb0293523ddf917695adea1"
 uuid = "661c6b06-c737-4d37-b85c-46df65de6f69"
-version = "0.1.7"
+version = "0.3.1"
 
 [[deps.PlutoUI]]
 deps = ["AbstractPlutoDingetjes", "Base64", "ColorTypes", "Dates", "FixedPointNumbers", "Hyperscript", "HypertextLiteral", "IOCapture", "InteractiveUtils", "JSON", "Logging", "MIMEs", "Markdown", "Random", "Reexport", "URIs", "UUIDs"]
-git-tree-sha1 = "eba4810d5e6a01f612b948c9fa94f905b49087b0"
+git-tree-sha1 = "7e71a55b87222942f0f9337be62e26b1f103d3e4"
 uuid = "7f904dfe-b85e-4ff6-b463-dae2292396a8"
-version = "0.7.60"
+version = "0.7.61"
 
 [[deps.PrecompileTools]]
 deps = ["Preferences"]
@@ -1570,9 +1567,9 @@ version = "1.0.2"
 
 [[deps.StaticArrays]]
 deps = ["LinearAlgebra", "PrecompileTools", "Random", "StaticArraysCore"]
-git-tree-sha1 = "47091a0340a675c738b1304b58161f3b0839d454"
+git-tree-sha1 = "02c8bd479d26dbeff8a7eb1d77edfc10dacabc01"
 uuid = "90137ffa-7385-5640-81b9-e52037218182"
-version = "1.9.10"
+version = "1.9.11"
 weakdeps = ["ChainRulesCore", "Statistics"]
 
     [deps.StaticArrays.extensions]
@@ -1985,9 +1982,9 @@ version = "1.18.0+0"
 
 [[deps.libpng_jll]]
 deps = ["Artifacts", "JLLWrappers", "Libdl", "Zlib_jll"]
-git-tree-sha1 = "d7b5bbf1efbafb5eca466700949625e07533aff2"
+git-tree-sha1 = "055a96774f383318750a1a5e10fd4151f04c29c5"
 uuid = "b53b4c65-9356-5827-b1ea-8c7a1a84506f"
-version = "1.6.45+1"
+version = "1.6.46+0"
 
 [[deps.libvorbis_jll]]
 deps = ["Artifacts", "JLLWrappers", "Libdl", "Ogg_jll", "Pkg"]
@@ -2053,8 +2050,9 @@ version = "1.4.1+2"
 # ╟─30ff4e19-b106-449c-adac-e47c3104cab8
 # ╟─4336bb9c-66a2-4635-b9ed-85e095eadffa
 # ╟─777dd589-eb50-438e-a127-a486bfc3f378
-# ╟─59f91ee5-94cc-4029-8882-15f17775782b
 # ╟─386ef6f1-969e-4283-84fa-138ff8d05796
+# ╟─fef7f622-49d3-4e69-b3b8-0e7496ec3cd0
+# ╟─bd115270-76b9-4372-8779-530f162bd2a4
 # ╟─881cd551-f535-494d-87d5-f2cb4a59066b
 # ╟─e2c0d53c-b3bd-4564-b3df-01d0d7cae0b0
 # ╟─484fd7a0-76d7-464d-a414-0ba48d7304b8
