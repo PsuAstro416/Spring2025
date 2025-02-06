@@ -49,6 +49,9 @@ md"""
 ## $subtitle
 """
 
+# ╔═╡ b3b57127-99cc-4e6e-83ae-367db9e81a4b
+tip(md"""Remember to start planning class projects.""")
+
 # ╔═╡ e251d327-aaff-4b19-86a1-7e5230e22910
 md"""
 ## Overview of Workflow for Assessing Models
@@ -288,6 +291,29 @@ function generate_data(θ::AbstractVector, n::Integer, σ::Real; n_outliers::Int
 	return (;x_obs = x, y_obs, design_matrix=A, y_true, σ_true, idx_outliers)
 end
 
+# ╔═╡ 129f6c44-4529-4b10-a1bb-77e0c6b7ebe2
+"""
+`predict_linear_model(A, b)`
+Computes the predictions of a linear model with design matrix `A` and parameters `b`.
+"""
+function predict_linear_model(A::AbstractMatrix, b::AbstractVector)
+	@assert size(A,2) == length(b)
+	A*b
+end
+
+# ╔═╡ 6da5a233-9772-43b0-928a-bc9a5382c136
+"""
+`calc_mle_linear_model(A, y_obs, covar)`
+Computes the maximum likelihood estimator for b for the linear model
+`y = A b`
+where measurements errors of `y_obs` are normally distributed and have covariance `covar`.
+"""
+function calc_mle_linear_model(A::AbstractMatrix, y_obs::AbstractVector, covar::AbstractMatrix)
+	@assert size(A,1) == length(y_obs) == size(covar,1) == size(covar,2)
+	@assert size(A,2) >= 1
+	(A' * (covar \ A)) \ (A' * (covar \ y_obs) )
+end
+
 # ╔═╡ 52a6c867-a8d1-4c2a-a75d-cd2ca9a8a2fb
 begin
 	redraw_for_plot 
@@ -370,29 +396,6 @@ begin
 	plt_histo_χ²_cv = histogram(loss_cv_dist, bins=bins, alpha=0.5, xlabel="χ²/dof", ylabel="Number of samples", label="Training")
 	histogram!(plt_histo_χ²_cv, loss_test_dist, bins=bins, alpha=0.5, label="Test")
 end;
-
-# ╔═╡ 129f6c44-4529-4b10-a1bb-77e0c6b7ebe2
-"""
-`predict_linear_model(A, b)`
-Computes the predictions of a linear model with design matrix `A` and parameters `b`.
-"""
-function predict_linear_model(A::AbstractMatrix, b::AbstractVector)
-	@assert size(A,2) == length(b)
-	A*b
-end
-
-# ╔═╡ 6da5a233-9772-43b0-928a-bc9a5382c136
-"""
-`calc_mle_linear_model(A, y_obs, covar)`
-Computes the maximum likelihood estimator for b for the linear model
-`y = A b`
-where measurements errors of `y_obs` are normally distributed and have covariance `covar`.
-"""
-function calc_mle_linear_model(A::AbstractMatrix, y_obs::AbstractVector, covar::AbstractMatrix)
-	@assert size(A,1) == length(y_obs) == size(covar,1) == size(covar,2)
-	@assert size(A,2) >= 1
-	(A' * (covar \ A)) \ (A' * (covar \ y_obs) )
-end
 
 # ╔═╡ bdfa802d-2ae9-4b70-aa9c-0f94213a6e57
 function generate_θ_fit_distribution(θ::AbstractVector, n_obs::Integer, σ::Real; n_sim::Integer = 100, order_fit::Integer = length(θ)-1, n_outliers::Integer=0) 
@@ -2030,6 +2033,7 @@ version = "1.4.1+2"
 # ╔═╡ Cell order:
 # ╟─03a53515-3346-472c-9918-e8a4c8fa185c
 # ╟─5ba080fb-6546-445e-946d-816e0c3f2034
+# ╟─b3b57127-99cc-4e6e-83ae-367db9e81a4b
 # ╟─95538698-17ec-4034-978e-b737247c74b8
 # ╟─e251d327-aaff-4b19-86a1-7e5230e22910
 # ╟─a1dce1e6-7d0d-4caa-8252-adeffde662fa
@@ -2042,10 +2046,10 @@ version = "1.4.1+2"
 # ╟─bb245952-e8de-4bd3-bd4c-e7b5a5b59ff4
 # ╟─ed1508b6-3456-4947-9f04-b3cee90aa191
 # ╟─52a6c867-a8d1-4c2a-a75d-cd2ca9a8a2fb
-# ╟─2a553b66-9ceb-44e1-862d-a577f6029ded
 # ╟─d3c0e27b-da6c-460d-84a3-3150b75f4071
 # ╟─031643af-e327-444c-b01d-87d06f8fbaf5
 # ╟─88010ce4-b007-4dfe-af8c-20360da2559c
+# ╟─2a553b66-9ceb-44e1-862d-a577f6029ded
 # ╟─16268ece-5b3b-460e-be5e-a87199b3e0d3
 # ╟─30ff4e19-b106-449c-adac-e47c3104cab8
 # ╟─4336bb9c-66a2-4635-b9ed-85e095eadffa
