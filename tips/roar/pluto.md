@@ -19,7 +19,7 @@ Login and authenticate (as necessary).
    - Partition: `dsa2astro_bc` (if that's not avaliable choose _open_; this option might not be displayed) 
    - Number of hours: 2 hours  (you can choose longer if you plan to continue after class or outside of class)
    - Number of cores: 3
-   - Memory per core: 4 GB
+   - Memory: 12 GB  **(Note increase from previous suggestion)**
    - Enable advanced Slurm options: Leave unchecked
    - I would like to receive an email when the session starts: Your choice of whether to check or not.
    - Note that the script and account above will be avaliable between January 13 and the end of the semester.
