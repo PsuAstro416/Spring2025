@@ -40,6 +40,11 @@ where `REPO_URL` is what you'll paste from the clipboard
 cd REPO_DIR
 julia --project -e 'using Pkg; Pkg.instantiate(); '
 ```
+Each Pluto notebook contains its own Project.toml file embedded in the notebook.  Starting with Lab 4, I've created a script to  setup all the dependencies for each notebook outside of the JupyterLab environment.  You can run those by running 
+```shell
+cd REPO_DIR
+cd deps ; julia --project=.. build.jl ; cd ..
+```
 ---
 ## Open Pluto notebook
 

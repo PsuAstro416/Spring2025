@@ -8,16 +8,14 @@ title = "Testing your labs"
 - Make sure you've saved all your changes (Ctrl+S)
 - Make sure you've [committed your changes to your local repository](../commit).
 - Check that your code passes any tests embedded in each notebook as you go.  
-- To test a single exercise, you can use a terminal window, change into your repo directory, and run either:
-```julia
-julia --project=test test/test1.jl
-```
-- To test al the exercises, you can run
+- Some labs include a set of (often very simple) tests.  If there is a test subdirectory in the lab, then you can run these either for one lab at a time or for To test a single exercise, you can use a terminal window, change into your repo directory, and run
 ```julia
 julia --project=test test/runtests.jl
 ```
 
+<!-- 
 - Once you've pushed your changes, it's also good to double check that your lab passes the same test via the continuous integration testing provided by GitHub actions.
+-->
 
 - If you get an error message about packages not being installed, then run
 ```julia

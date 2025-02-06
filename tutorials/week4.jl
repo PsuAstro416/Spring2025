@@ -1,17 +1,19 @@
 ### A Pluto.jl notebook ###
-# v0.20.1
+# v0.20.4
 
 using Markdown
 using InteractiveUtils
 
 # This Pluto notebook uses @bind for interactivity. When running this notebook outside of Pluto, the following 'mock version' of @bind gives bound variables a default value (instead of an error).
 macro bind(def, element)
+    #! format: off
     quote
         local iv = try Base.loaded_modules[Base.PkgId(Base.UUID("6e696c72-6542-2067-7265-42206c756150"), "AbstractPlutoDingetjes")].Bonds.initial_value catch; b -> missing; end
         local el = $(esc(element))
         global $(esc(def)) = Core.applicable(Base.get, el) ? Base.get(el) : iv(el)
         el
     end
+    #! format: on
 end
 
 # ╔═╡ 2824ff96-5186-4d22-bea1-7c4df5f5e4bc
@@ -24,7 +26,7 @@ begin
 end;
 
 # ╔═╡ 03a53515-3346-472c-9918-e8a4c8fa185c
-#hideall
+# hideall
 begin
   title = "Data Science Applications to Astronomy";
   topic = "Model Building II"
@@ -314,6 +316,29 @@ function calc_mle_linear_model(A::AbstractMatrix, y_obs::AbstractVector, covar::
 	(A' * (covar \ A)) \ (A' * (covar \ y_obs) )
 end
 
+# ╔═╡ 129f6c44-4529-4b10-a1bb-77e0c6b7ebe2
+"""
+`predict_linear_model(A, b)`
+Computes the predictions of a linear model with design matrix `A` and parameters `b`.
+"""
+function predict_linear_model(A::AbstractMatrix, b::AbstractVector)
+	@assert size(A,2) == length(b)
+	A*b
+end
+
+# ╔═╡ 6da5a233-9772-43b0-928a-bc9a5382c136
+"""
+`calc_mle_linear_model(A, y_obs, covar)`
+Computes the maximum likelihood estimator for b for the linear model
+`y = A b`
+where measurements errors of `y_obs` are normally distributed and have covariance `covar`.
+"""
+function calc_mle_linear_model(A::AbstractMatrix, y_obs::AbstractVector, covar::AbstractMatrix)
+	@assert size(A,1) == length(y_obs) == size(covar,1) == size(covar,2)
+	@assert size(A,2) >= 1
+	(A' * (covar \ A)) \ (A' * (covar \ y_obs) )
+end
+
 # ╔═╡ 52a6c867-a8d1-4c2a-a75d-cd2ca9a8a2fb
 begin
 	redraw_for_plot 
@@ -397,6 +422,9 @@ begin
 	histogram!(plt_histo_χ²_cv, loss_test_dist, bins=bins, alpha=0.5, label="Test")
 end;
 
+# ╔═╡ d73e3ec5-f875-4648-bb5f-e398ec58ba36
+plt_histo_χ²_cv	
+
 # ╔═╡ bdfa802d-2ae9-4b70-aa9c-0f94213a6e57
 function generate_θ_fit_distribution(θ::AbstractVector, n_obs::Integer, σ::Real; n_sim::Integer = 100, order_fit::Integer = length(θ)-1, n_outliers::Integer=0) 
 	output = zeros(order_fit+1, n_sim)
@@ -447,12 +475,14 @@ function plot_parameter_histograms(results::AbstractMatrix, θ_true; title::Stri
   plot(plts..., layout=(n_param,1))
 end
 
-# ╔═╡ 30ff4e19-b106-449c-adac-e47c3104cab8
-PlutoTeachingTools.TwoColumn(plot_parameter_histograms(results_full_model, θ_true, title="Results using full model"), 
-	plot_parameter_histograms(results_linear_model, θ_true, title="Results using linear model"))
+# ╔═╡ 38daf54b-a3c7-4c57-bbc2-d7037d8441d5
+plot_parameter_histograms(results_full_model, θ_true, title="Results using full model")
 
-# ╔═╡ d73e3ec5-f875-4648-bb5f-e398ec58ba36
-PlutoTeachingTools.TwoColumn(plt_histo_χ²_cv,plot_parameter_histograms(θ_cv_dist, θ_true))
+# ╔═╡ 6c40fdb8-0c43-4f25-8501-f3f0f69e2c23
+plot_parameter_histograms(results_linear_model, θ_true, title="Results using linear model")
+
+# ╔═╡ 9ab76f62-15fb-4c5c-8aec-f5db4f5662d1
+plot_parameter_histograms(θ_cv_dist, θ_true)
 
 # ╔═╡ 00000000-0000-0000-0000-000000000001
 PLUTO_PROJECT_TOML_CONTENTS = """
@@ -2035,6 +2065,8 @@ version = "1.4.1+2"
 # ╟─5ba080fb-6546-445e-946d-816e0c3f2034
 # ╟─b3b57127-99cc-4e6e-83ae-367db9e81a4b
 # ╟─95538698-17ec-4034-978e-b737247c74b8
+# ╠═5ba080fb-6546-445e-946d-816e0c3f2034
+# ╠═95538698-17ec-4034-978e-b737247c74b8
 # ╟─e251d327-aaff-4b19-86a1-7e5230e22910
 # ╟─a1dce1e6-7d0d-4caa-8252-adeffde662fa
 # ╟─6f96e5c6-79df-472c-ab9f-32126d2967d8
@@ -2051,7 +2083,8 @@ version = "1.4.1+2"
 # ╟─88010ce4-b007-4dfe-af8c-20360da2559c
 # ╟─2a553b66-9ceb-44e1-862d-a577f6029ded
 # ╟─16268ece-5b3b-460e-be5e-a87199b3e0d3
-# ╟─30ff4e19-b106-449c-adac-e47c3104cab8
+# ╟─38daf54b-a3c7-4c57-bbc2-d7037d8441d5
+# ╟─6c40fdb8-0c43-4f25-8501-f3f0f69e2c23
 # ╟─4336bb9c-66a2-4635-b9ed-85e095eadffa
 # ╟─777dd589-eb50-438e-a127-a486bfc3f378
 # ╟─386ef6f1-969e-4283-84fa-138ff8d05796
@@ -2062,13 +2095,14 @@ version = "1.4.1+2"
 # ╟─484fd7a0-76d7-464d-a414-0ba48d7304b8
 # ╟─b0dd87d7-c4d7-48a1-9bf5-62f7f99a3d06
 # ╟─d73e3ec5-f875-4648-bb5f-e398ec58ba36
+# ╟─9ab76f62-15fb-4c5c-8aec-f5db4f5662d1
 # ╟─d7aa10a1-8982-4693-8c51-3d04099cc404
 # ╟─ad28f385-94b6-4542-9c1c-364516be08c3
 # ╟─be85c7bb-baab-463d-b69f-898eaf4316a4
 # ╟─d031150e-28ce-489f-8d9a-d397a1473f05
 # ╟─504e22c9-d7ba-4cc6-bb68-f05f101db340
 # ╟─a3bb5429-4336-43bf-9838-c35748617a17
-# ╟─2824ff96-5186-4d22-bea1-7c4df5f5e4bc
+# ╠═2824ff96-5186-4d22-bea1-7c4df5f5e4bc
 # ╟─5f1b7dc1-516f-43e3-97bf-afaf42a11362
 # ╟─129f6c44-4529-4b10-a1bb-77e0c6b7ebe2
 # ╟─6da5a233-9772-43b0-928a-bc9a5382c136
