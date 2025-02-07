@@ -1,26 +1,28 @@
 ### A Pluto.jl notebook ###
-# v0.20.4
+# v0.20.1
 
 using Markdown
 using InteractiveUtils
 
 # This Pluto notebook uses @bind for interactivity. When running this notebook outside of Pluto, the following 'mock version' of @bind gives bound variables a default value (instead of an error).
 macro bind(def, element)
-    #! format: off
     quote
         local iv = try Base.loaded_modules[Base.PkgId(Base.UUID("6e696c72-6542-2067-7265-42206c756150"), "AbstractPlutoDingetjes")].Bonds.initial_value catch; b -> missing; end
         local el = $(esc(element))
         global $(esc(def)) = Core.applicable(Base.get, el) ? Base.get(el) : iv(el)
         el
     end
-    #! format: on
 end
+
+# ╔═╡ 5cdade8b-fb26-4130-b6ad-78586bc86391
+using Printf
 
 # ╔═╡ 2824ff96-5186-4d22-bea1-7c4df5f5e4bc
 # hideall 
 begin
 	using PlutoUI, PlutoTeachingTools
 	using LinearAlgebra, Statistics
+	using PDMats
 	using Plots, LaTeXStrings
 	using MLUtils
 end;
@@ -44,15 +46,15 @@ week_num = $week
 +++
 """  |> Base.Text;
 
+# ╔═╡ b3b57127-99cc-4e6e-83ae-367db9e81a4b
+tip(md"""Remember to start planning class projects.""")
+
 # ╔═╡ 95538698-17ec-4034-978e-b737247c74b8
 md"""
 #### $title
 # Week $week: $topic:
 ## $subtitle
 """
-
-# ╔═╡ b3b57127-99cc-4e6e-83ae-367db9e81a4b
-tip(md"""Remember to start planning class projects.""")
 
 # ╔═╡ e251d327-aaff-4b19-86a1-7e5230e22910
 md"""
@@ -176,9 +178,6 @@ md"""
 ## Simualted dataset & best-fit model
 """
 
-# ╔═╡ 2a553b66-9ceb-44e1-862d-a577f6029ded
-@bind redraw_for_plot Button("Redraw for plot of model & observations") 
-
 # ╔═╡ 031643af-e327-444c-b01d-87d06f8fbaf5
 md"""
 Order of polynominal to generate data: $(@bind order_true NumberField(1:3, default=1)) $br
@@ -201,6 +200,9 @@ Measurement uncertainty: $(@bind σ_obs NumberField(0:0.01:1, default=0.1))
 md"""
 Now let's repeat that analysis many times and compare the MLE estimates for each parameter with the true values.
 """
+
+# ╔═╡ 2a553b66-9ceb-44e1-862d-a577f6029ded
+@bind redraw_for_plot Button("Redraw for plot of model & observations") 
 
 # ╔═╡ 4336bb9c-66a2-4635-b9ed-85e095eadffa
 #plot_parameter_histograms(results_full_model, θ_true, title="Results using full model")
@@ -260,9 +262,264 @@ Order of polynominal to use for cross validation: $(@bind order_cv NumberField(1
 """
 
 # ╔═╡ be85c7bb-baab-463d-b69f-898eaf4316a4
-tip(md"""
-**Questions?**
+question_box(md"""
+**Any Questions?**
 """)
+
+# ╔═╡ da30d58c-0263-4589-96a7-c3a34d00249a
+md"""
+# Your Questions
+"""
+
+# ╔═╡ a5923341-b960-4228-b489-ba2ca570fbe8
+md"""
+## Priors"""
+
+# ╔═╡ a5275eca-31ac-4b17-b267-92df216618f2
+question_box(md"""Is prior and posterior the same thing?""")
+
+# ╔═╡ f41c843e-6bdd-461d-b323-a1dd9725dd6b
+md"""
+Both are PDFs.  But in any given analysis (with non-zero data), they are different functions:
+
+$$\mathrm{(Posterior)} = \mathrm{(Prior)} \times \mathrm{(Likelihood)} / \mathrm{(Evidence)}$$
+
+$$p( \theta| M, D) = \frac{p(\theta | M) p(D | \theta, M )}{p(D | M )}$$
+"""
+
+# ╔═╡ 5b7fb006-a062-43a7-a8a0-10b2e8093078
+question_box(md"""If a model is sensitive to priors, what are ways to justify the physicality of one prior over another? """)
+
+# ╔═╡ 7a0bb0e4-35e5-417d-81e1-8a9394844e5a
+md"""
+## Model fitting
+"""
+
+# ╔═╡ c6c2fd3a-43e5-41ce-8d0d-36887951aa33
+question_box(md"""
+Is there a specific technique for making good initial predictions?
+I noticed in this lab that [a good initial guess] helps [the optimizer find good] results.  Is there a good way of making optimal ones?
+""")
+
+# ╔═╡ 1543e260-7738-46f1-ab85-4ffee0143b30
+question_box(md"""
+How often do we use optimization techniques parameters vs use statistical modeling techniques like regression to solve problems?
+""")
+
+# ╔═╡ 461b2468-a1f1-4719-84cc-05a4e86b8546
+md"## Uncertainty quantification"
+
+# ╔═╡ b8c37e6f-cd26-47fd-b221-ca091f09acba
+question_box(md"""There are uncertainties in the data itself for collection and uncertainties when making a fit to a model. Do the uncertainties in the data itself have a major effect on the uncertainty on the fit of the model and how do we account for that error?""")
+
+# ╔═╡ 8ecb443d-adc8-4d62-a3e2-0a0e2ce9acd3
+begin
+	n = 40
+	x = rand(n)
+	y = 1 .+ 0.5 .* x
+	eps =  randn(n)
+end
+
+# ╔═╡ cc9dcb95-58fa-4989-9084-b4ab747946f9
+begin
+	σ_y = fill(0.2, n)
+	σ_y = 0.1 .* x .+ 0.1
+	y_measured = y .+ σ_y .*eps
+end;
+
+# ╔═╡ c7fff9b3-4465-4de2-acab-e65b1a312ee6
+scatter(x,y_measured,yerr=σ_y)
+
+# ╔═╡ 58c32dde-800b-4b64-a35c-49280742dd03
+question_box(md"""In what situations would a parametric model... be insufficient, and why might a non-parametric or semi-parametric approach be more appropriate for modeling them?""")
+
+# ╔═╡ 474397ba-a21e-4235-876b-26ebfce9c2ec
+question_box(md"""Can you provide such an example of where the measurement uncertainties are not well modeled by a Gaussian distribution?  How do we deal with that?""")
+
+# ╔═╡ 7401a74d-04f0-452e-af50-98a2494ed3e2
+md"## Model comparison"
+
+# ╔═╡ 125741fa-66f4-449f-8782-8df9d7efad25
+question_box(md"""When creating a model, how do you know when it is important to add a more flexible polynomial? Since this adds more parameters, how do we know when we are trying to overfit data?""")
+
+# ╔═╡ a758f203-ec3d-4944-b48f-3b4401161d52
+question_box(md"""
+How do different goodness-of-fit tests (like AIC, BIC, or likelihood ratio tests etc) compare in terms of model selection when using MLE for time-series or other data in astronomy? I just found AIC while googling and didn't really get it mathmatically and wanted to see it with a known reference point.""")
+
+# ╔═╡ 76083993-c17b-403d-ab40-f104d781fb39
+md"""## Computing Hardware"""
+
+# ╔═╡ 5f1a59af-fa38-47ea-b88d-8a75ec0d8f6a
+question_box(md"""What exactly are the nodes on ROAR and how does this setup allow for faster computing?""")
+
+# ╔═╡ a37925a5-ad01-46a6-812a-38179a52f15f
+md"""
+- Basic Memory Node: 
+  - 4 GB/core
+  - Ethernet connections between nodes
+  - For minimal memory and high throughput jobs. 
+- Standard Node: 
+  - 8 GB/core, 
+  - Low-latency Infiniband networking for multi-node jobs
+  - For moderate memory jobs and multicore processing. - 
+- High Memory nodes: 
+  - For large memory jobs and multicore processing. 
+  - 20 GB/core, >= 1 TB RAM per node
+  - Low-latency Infiniband networking for multi-node jobs.  
+- GPU nodes: 
+  - A100 or P100 GPUs
+  - For highly parallel, high-compute density calculations that can run on a GPU
+"""
+
+# ╔═╡ 4147620c-1a5a-41c7-bdca-7127f78941f2
+md"## Project Questions"
+
+# ╔═╡ 0c488ec0-0b24-4999-bbb0-f9f67ba59547
+question_box(md"""When picking a topic for the project are we limited to the resources that are provided or will we be able to find others?  How do we go about finding data?""")
+
+# ╔═╡ 6c10bf58-24de-41a5-b018-c6e54fbc5018
+md"""
+- You're welcome to pick a project that uses dataset we won't be using in class.
+- It's up to you to find a dataset that's appropriate and publically avaliable for your project.
+- If that's intimidating, then you can use a data source from one of the labs (e.g., Gaia, Exoplanet Archive, Kepler/K2/TESS light curves, Kepler TTV measurements, California Planet Survey RV).
+"""
+
+# ╔═╡ 6ebcdebe-a074-49c4-b96d-0002d8fb7308
+question_box(md"""What sort of information is expected to be on our project dashboard?""")
+
+# ╔═╡ 7a28c7ce-9b3c-4dc4-be8e-44cb84a03935
+question_box(md"""Is it a hub where anybody can upload data of a certain type, feed the constraints, and receive some analysis?""")
+
+# ╔═╡ a9eb5f9d-4098-42b2-a317-df4c5304e242
+md"""That wasn't the intent.  If you think this makes sense for your purpose, then let's discuss."""
+
+# ╔═╡ b0649ee6-18d6-48d3-87b3-40d936309af4
+question_box(md"""Or should it store its own data and have a way for users to select what source they want to know about?""")
+
+# ╔═╡ 5545fbdc-2c46-4690-ab23-fdbaa97cd24c
+md"""That's one good option.
+
+Another good option is for the user to specify a target and have your dashboard query a database, so that it doesn't have to store all the data from a large survey."""
+
+# ╔═╡ c555ad01-860b-49c3-83df-f3f8daa4e19e
+md"## Random Julia Questions"
+
+# ╔═╡ 0bd87310-2633-4b7d-bb6e-23b17038ba39
+question_box(md"""How do I write fstrings in Julia?""")
+
+# ╔═╡ b89b7645-bf4b-4de9-9953-c31e281828ab
+begin 
+	a = 42
+	b = π
+end
+
+# ╔═╡ 9f2959c1-2ffe-4a34-aac8-417aa953a729
+md"""
+> `The value of a is $a.`
+
+The value of a is $a.
+
+> `The value of a+2 is $(a+2).`
+
+The value of a+2 is $(a+2).
+
+> `The value of b is $(string(round(b,digits=2))).`
+
+The value of b is $(string(round(b,digits=2))).  
+
+If you're already familar with printf, then [`Printf.@sprintf`](https://docs.julialang.org/en/v1/stdlib/Printf/#Printf.@sprintf) is useful.
+"""
+
+# ╔═╡ 13f7d392-6f74-4a6b-9e30-8107b40900dd
+formated_string = @sprintf "The value of a is %d.  The value of b is %1.2f." a b
+
+# ╔═╡ 8600fad9-b5c0-446f-a4b0-359a310b466f
+"You can also embed inside a string or markdown text like y = $(@sprintf "%1.2f" b)."
+
+# ╔═╡ eebe2058-9744-4d1a-82c2-fc3fc08b9700
+md"# Lab logisics"
+
+# ╔═╡ 35beb34b-9428-4c97-b793-518bb2b68901
+question_box(md"""After we first clone the repository, we change into its directory through the terminal. The instructions on the class website say to then run the command 
+```julia
+cd REPO_DIR
+julia --project -e 'using Pkg; Pkg.instantiate(); '
+```
+but the Lab 4 Canvas assignment description says to run 
+```julia
+cd REPO_DIR
+cd deps ; julia --project=.. build.jl ; cd ..
+```
+
+What is the difference between these two, and should we run both of them?
+""")
+
+# ╔═╡ 634567ee-9a15-44bf-88ce-d41f8957cd83
+md"""
+Let's look at `Project.toml` and `build.jl`.
+```toml
+name = "Lab4"
+uuid = "3f08caa0-4af4-4e06-87fc-90af5fc7315e"
+authors = ["Eric Ford <ebf11@psu.edu>"]
+version = "0.1.0"
+
+[deps]
+Pkg = "44cfe95a-1eb2-52ea-b672-e2afdf69b78f"
+Pluto = "c3e4b0f8-55cb-11ea-2926-15256bba5781"
+
+[compat]
+Pkg = "1.11.0"
+Pluto = "0.20.4"
+```
+and `build.jl`
+```julia
+println("Making sure Pluto is installed")
+import Pkg; 
+Pkg.add(name="Pluto", version="0.20.4");
+import Pluto; 
+
+println("Installing ex1.jl")
+Pluto.activate_notebook_environment("../ex1.jl"); 
+Pkg.instantiate(); 
+
+println("Installing ex2.jl")
+Pluto.activate_notebook_environment("../ex2.jl"); 
+Pkg.instantiate(); 
+```
+
+One cell inside `ex1.jl`
+```julia
+PLUTO_PROJECT_TOML_CONTENTS = \"\"\"
+[deps]
+CSV = "336ed68f-0bac-5ca0-87d4-7b16caf5d00b"
+DataFrames = "a93c6f00-e57d-5684-b7b6-d8193f3e46c0"
+Distributions = "31c24e10-a181-5473-b8eb-7969acd0382f"
+Downloads = "f43a241f-c20a-4ad4-852c-f6b1247861c6"
+LinearAlgebra = "37e2e46d-f89d-539d-b4ee-838fcccc9c8e"
+MCMCChains = "c7f686f2-ff18-58e9-bc7b-31028e88f75d"
+Optim = "429524aa-4258-5aef-a3af-852621145aeb"
+PDMats = "90014a1f-27ba-587c-ab20-58faa44d9150"
+Plots = "91a5bcdd-55d7-5caf-9e0b-520d859cae80"
+PlutoTeachingTools = "661c6b06-c737-4d37-b85c-46df65de6f69"
+PlutoUI = "7f904dfe-b85e-4ff6-b463-dae2292396a8"
+QuadGK = "1fd47b50-473d-5c70-9696-f719f8f3bcdc"
+Turing = "fce5fe82-541a-59a6-adf8-730c64b5f9a0"
+
+[compat]
+CSV = "~0.10.15"
+DataFrames = "~1.7.0"
+Distributions = "~0.25.116"
+MCMCChains = "~6.0.7"
+Optim = "~1.10.0"
+PDMats = "~0.11.31"
+Plots = "~1.40.9"
+PlutoTeachingTools = "~0.3.1"
+PlutoUI = "~0.7.60"
+QuadGK = "~2.11.1"
+Turing = "~0.35.5"
+\"\"\"
+```
+"""
 
 # ╔═╡ d031150e-28ce-489f-8d9a-d397a1473f05
 md"# Helper Code"
@@ -291,29 +548,6 @@ function generate_data(θ::AbstractVector, n::Integer, σ::Real; n_outliers::Int
 	end
 	y_obs = y_true .+ σ_true .* randn(n)
 	return (;x_obs = x, y_obs, design_matrix=A, y_true, σ_true, idx_outliers)
-end
-
-# ╔═╡ 129f6c44-4529-4b10-a1bb-77e0c6b7ebe2
-"""
-`predict_linear_model(A, b)`
-Computes the predictions of a linear model with design matrix `A` and parameters `b`.
-"""
-function predict_linear_model(A::AbstractMatrix, b::AbstractVector)
-	@assert size(A,2) == length(b)
-	A*b
-end
-
-# ╔═╡ 6da5a233-9772-43b0-928a-bc9a5382c136
-"""
-`calc_mle_linear_model(A, y_obs, covar)`
-Computes the maximum likelihood estimator for b for the linear model
-`y = A b`
-where measurements errors of `y_obs` are normally distributed and have covariance `covar`.
-"""
-function calc_mle_linear_model(A::AbstractMatrix, y_obs::AbstractVector, covar::AbstractMatrix)
-	@assert size(A,1) == length(y_obs) == size(covar,1) == size(covar,2)
-	@assert size(A,2) >= 1
-	(A' * (covar \ A)) \ (A' * (covar \ y_obs) )
 end
 
 # ╔═╡ 129f6c44-4529-4b10-a1bb-77e0c6b7ebe2
@@ -425,6 +659,44 @@ end;
 # ╔═╡ d73e3ec5-f875-4648-bb5f-e398ec58ba36
 plt_histo_χ²_cv	
 
+# ╔═╡ 8366d8ae-8320-4f24-8d6e-acf190bc2c85
+let 
+	A = hcat( ones(n), x )
+	Σ = PDiagMat(σ_y.^2)
+	fit_coef = calc_mle_linear_model(A, y_measured, Σ)
+	#calc_sigma_mle_linear_model(A, Σ)
+end
+
+# ╔═╡ 6c354c09-28c1-424f-b9dd-7ccc6951ef7f
+"""
+`calc_fisher_matrix_linear_model(A, covar)`
+
+Computes the Fisher information matrix for θ for the linear model
+`y = A θ`
+where measurements errors of `y_obs` are normally distributed and have covariance `covar`.
+Note that `y_obs` is not passed to this function, because it does not affect results.
+"""
+function calc_fisher_matrix_linear_model(A::AbstractMatrix, covar::AbstractMatrix)
+	@assert size(A,1) == size(covar,1) == size(covar,2)
+	@assert size(A,2) >= 1
+	(A' * (covar \ A))
+end
+
+# ╔═╡ f94d3f03-cbf9-4a5c-b35d-7b6223b10f05
+"""
+`calc_sigma_mle_linear_model(A, covar)`
+
+Computes the uncertainty in the maximum likelihood estimate of θ for the linear model
+`y = A θ`
+where measurements errors of `y_obs` are normally distributed and have covariance `covar`.
+Note that `y_obs` is not passed to this function, because it does not affect results.
+"""
+function calc_sigma_mle_linear_model(A::AbstractMatrix, covar::AbstractMatrix)
+	@assert size(A,1) == size(covar,1) == size(covar,2)
+	@assert size(A,2) >= 1
+	sqrt.(diag(inv(PDMat(calc_fisher_matrix_linear_model(A,covar)))))
+end
+
 # ╔═╡ bdfa802d-2ae9-4b70-aa9c-0f94213a6e57
 function generate_θ_fit_distribution(θ::AbstractVector, n_obs::Integer, σ::Real; n_sim::Integer = 100, order_fit::Integer = length(θ)-1, n_outliers::Integer=0) 
 	output = zeros(order_fit+1, n_sim)
@@ -490,16 +762,20 @@ PLUTO_PROJECT_TOML_CONTENTS = """
 LaTeXStrings = "b964fa9f-0449-5b57-a5c2-d3ea65f4040f"
 LinearAlgebra = "37e2e46d-f89d-539d-b4ee-838fcccc9c8e"
 MLUtils = "f1d291b0-491e-4a28-83b9-f70985020b54"
+PDMats = "90014a1f-27ba-587c-ab20-58faa44d9150"
 Plots = "91a5bcdd-55d7-5caf-9e0b-520d859cae80"
 PlutoTeachingTools = "661c6b06-c737-4d37-b85c-46df65de6f69"
 PlutoUI = "7f904dfe-b85e-4ff6-b463-dae2292396a8"
+Printf = "de0858da-6303-5e67-8744-51eddeeeb8d7"
 Statistics = "10745b16-79ce-11e8-11f9-7d13ad32a3b2"
 
 [compat]
-LaTeXStrings = "~1.3.0"
+LaTeXStrings = "~1.4.0"
 MLUtils = "~0.4.5"
+PDMats = "~0.11.32"
 Plots = "~1.40.9"
-PlutoUI = "~0.7.39"
+PlutoTeachingTools = "~0.3.1"
+PlutoUI = "~0.7.61"
 Statistics = "~1.11.1"
 """
 
@@ -509,7 +785,7 @@ PLUTO_MANIFEST_TOML_CONTENTS = """
 
 julia_version = "1.11.2"
 manifest_format = "2.0"
-project_hash = "06798512e41f21b85733b9385a6bcf7e3c7ce8b6"
+project_hash = "93a2b885af511b497b625a48fc320b6409f011c2"
 
 [[deps.AbstractPlutoDingetjes]]
 deps = ["Pkg"]
@@ -626,10 +902,10 @@ uuid = "d1d4a3ce-64b1-5f1a-9ba4-7e7e69966f35"
 version = "0.1.9"
 
 [[deps.Bzip2_jll]]
-deps = ["Artifacts", "JLLWrappers", "Libdl", "Pkg"]
-git-tree-sha1 = "8873e196c2eb87962a2048b3b8e08946535864a1"
+deps = ["Artifacts", "JLLWrappers", "Libdl"]
+git-tree-sha1 = "1b96ea4a01afe0ea4090c5c8039690672dd13f2e"
 uuid = "6e34b625-4abd-537c-b88f-471c36dfa7a0"
-version = "1.0.8+4"
+version = "1.0.9+0"
 
 [[deps.Cairo_jll]]
 deps = ["Artifacts", "Bzip2_jll", "CompilerSupportLibraries_jll", "Fontconfig_jll", "FreeType2_jll", "Glib_jll", "JLLWrappers", "LZO_jll", "Libdl", "Pixman_jll", "Xorg_libXext_jll", "Xorg_libXrender_jll", "Zlib_jll", "libpng_jll"]
@@ -655,9 +931,9 @@ version = "1.3.6"
 
 [[deps.CodecZlib]]
 deps = ["TranscodingStreams", "Zlib_jll"]
-git-tree-sha1 = "bce6804e5e6044c6daab27bb533d1295e4a2e759"
+git-tree-sha1 = "545a177179195e442472a1c4dc86982aa7a1bef0"
 uuid = "944b1d66-785c-5afd-91f1-9de20f533193"
-version = "0.7.6"
+version = "0.7.7"
 
 [[deps.ColorSchemes]]
 deps = ["ColorTypes", "ColorVectorSpace", "Colors", "FixedPointNumbers", "PrecompileTools", "Random"]
@@ -813,9 +1089,9 @@ version = "0.1.11"
 
 [[deps.Expat_jll]]
 deps = ["Artifacts", "JLLWrappers", "Libdl"]
-git-tree-sha1 = "e51db81749b0777b2147fbe7b783ee79045b8e99"
+git-tree-sha1 = "d55dffd9ae73ff72f1c0482454dcf2ec6c6c4a63"
 uuid = "2e619515-83b5-522b-bb60-26c02a35a201"
-version = "2.6.4+3"
+version = "2.6.5+0"
 
 [[deps.FFMPEG]]
 deps = ["FFMPEG_jll"]
@@ -1063,9 +1339,9 @@ uuid = "dd4b983a-f0e5-5f8d-a1b7-129d4a5fb1ac"
 version = "2.10.3+0"
 
 [[deps.LaTeXStrings]]
-git-tree-sha1 = "50901ebc375ed41dbf8058da26f9de442febbbec"
+git-tree-sha1 = "dda21b8cbd6a6c40d9d02a73230f9d70fed6918c"
 uuid = "b964fa9f-0449-5b57-a5c2-d3ea65f4040f"
-version = "1.3.1"
+version = "1.4.0"
 
 [[deps.Latexify]]
 deps = ["Format", "InteractiveUtils", "LaTeXStrings", "MacroTools", "Markdown", "OrderedCollections", "Requires"]
@@ -1283,9 +1559,9 @@ version = "0.9.27"
 
 [[deps.NaNMath]]
 deps = ["OpenLibm_jll"]
-git-tree-sha1 = "fe891aea7ccd23897520db7f16931212454e277e"
+git-tree-sha1 = "cc0a5deefdb12ab3a096f00a6d42133af4560d71"
 uuid = "77ba4419-2d1f-58cd-9bb1-8ffee604a2e3"
-version = "1.1.1"
+version = "1.1.2"
 
 [[deps.NameResolution]]
 deps = ["PrettyPrint"]
@@ -1332,14 +1608,20 @@ uuid = "91d4177d-7536-5919-b921-800302f37372"
 version = "1.3.3+0"
 
 [[deps.OrderedCollections]]
-git-tree-sha1 = "12f1439c4f986bb868acda6ea33ebc78e19b95ad"
+git-tree-sha1 = "cc4054e898b852042d7b503313f7ad03de99c3dd"
 uuid = "bac558e1-5e72-5ebc-8fee-abe8a469f55d"
-version = "1.7.0"
+version = "1.8.0"
 
 [[deps.PCRE2_jll]]
 deps = ["Artifacts", "Libdl"]
 uuid = "efcefdf7-47ab-520b-bdef-62a2eaa19f15"
 version = "10.42.0+1"
+
+[[deps.PDMats]]
+deps = ["LinearAlgebra", "SparseArrays", "SuiteSparse"]
+git-tree-sha1 = "966b85253e959ea89c53a9abebbf2e964fbf593b"
+uuid = "90014a1f-27ba-587c-ab20-58faa44d9150"
+version = "0.11.32"
 
 [[deps.Pango_jll]]
 deps = ["Artifacts", "Cairo_jll", "Fontconfig_jll", "FreeType2_jll", "FriBidi_jll", "Glib_jll", "HarfBuzz_jll", "JLLWrappers", "Libdl"]
@@ -1639,6 +1921,10 @@ version = "0.34.4"
 [[deps.StyledStrings]]
 uuid = "f489334b-da3d-4c2e-b8f0-e476e12c162b"
 version = "1.11.0"
+
+[[deps.SuiteSparse]]
+deps = ["Libdl", "LinearAlgebra", "Serialization", "SparseArrays"]
+uuid = "4607b0f0-06f3-5cda-b6b1-a6196a1729e9"
 
 [[deps.SuiteSparse_jll]]
 deps = ["Artifacts", "Libdl", "libblastrampoline_jll"]
@@ -2065,8 +2351,6 @@ version = "1.4.1+2"
 # ╟─5ba080fb-6546-445e-946d-816e0c3f2034
 # ╟─b3b57127-99cc-4e6e-83ae-367db9e81a4b
 # ╟─95538698-17ec-4034-978e-b737247c74b8
-# ╠═5ba080fb-6546-445e-946d-816e0c3f2034
-# ╠═95538698-17ec-4034-978e-b737247c74b8
 # ╟─e251d327-aaff-4b19-86a1-7e5230e22910
 # ╟─a1dce1e6-7d0d-4caa-8252-adeffde662fa
 # ╟─6f96e5c6-79df-472c-ab9f-32126d2967d8
@@ -2099,13 +2383,55 @@ version = "1.4.1+2"
 # ╟─d7aa10a1-8982-4693-8c51-3d04099cc404
 # ╟─ad28f385-94b6-4542-9c1c-364516be08c3
 # ╟─be85c7bb-baab-463d-b69f-898eaf4316a4
+# ╟─da30d58c-0263-4589-96a7-c3a34d00249a
+# ╟─a5923341-b960-4228-b489-ba2ca570fbe8
+# ╟─a5275eca-31ac-4b17-b267-92df216618f2
+# ╟─f41c843e-6bdd-461d-b323-a1dd9725dd6b
+# ╟─5b7fb006-a062-43a7-a8a0-10b2e8093078
+# ╟─7a0bb0e4-35e5-417d-81e1-8a9394844e5a
+# ╟─c6c2fd3a-43e5-41ce-8d0d-36887951aa33
+# ╟─1543e260-7738-46f1-ab85-4ffee0143b30
+# ╟─461b2468-a1f1-4719-84cc-05a4e86b8546
+# ╟─b8c37e6f-cd26-47fd-b221-ca091f09acba
+# ╠═8ecb443d-adc8-4d62-a3e2-0a0e2ce9acd3
+# ╠═cc9dcb95-58fa-4989-9084-b4ab747946f9
+# ╠═8366d8ae-8320-4f24-8d6e-acf190bc2c85
+# ╟─c7fff9b3-4465-4de2-acab-e65b1a312ee6
+# ╟─58c32dde-800b-4b64-a35c-49280742dd03
+# ╟─474397ba-a21e-4235-876b-26ebfce9c2ec
+# ╟─7401a74d-04f0-452e-af50-98a2494ed3e2
+# ╟─125741fa-66f4-449f-8782-8df9d7efad25
+# ╟─a758f203-ec3d-4944-b48f-3b4401161d52
+# ╟─76083993-c17b-403d-ab40-f104d781fb39
+# ╟─5f1a59af-fa38-47ea-b88d-8a75ec0d8f6a
+# ╟─a37925a5-ad01-46a6-812a-38179a52f15f
+# ╟─4147620c-1a5a-41c7-bdca-7127f78941f2
+# ╟─0c488ec0-0b24-4999-bbb0-f9f67ba59547
+# ╟─6c10bf58-24de-41a5-b018-c6e54fbc5018
+# ╟─6ebcdebe-a074-49c4-b96d-0002d8fb7308
+# ╟─7a28c7ce-9b3c-4dc4-be8e-44cb84a03935
+# ╟─a9eb5f9d-4098-42b2-a317-df4c5304e242
+# ╟─b0649ee6-18d6-48d3-87b3-40d936309af4
+# ╟─5545fbdc-2c46-4690-ab23-fdbaa97cd24c
+# ╟─c555ad01-860b-49c3-83df-f3f8daa4e19e
+# ╟─0bd87310-2633-4b7d-bb6e-23b17038ba39
+# ╠═b89b7645-bf4b-4de9-9953-c31e281828ab
+# ╟─9f2959c1-2ffe-4a34-aac8-417aa953a729
+# ╠═5cdade8b-fb26-4130-b6ad-78586bc86391
+# ╠═13f7d392-6f74-4a6b-9e30-8107b40900dd
+# ╠═8600fad9-b5c0-446f-a4b0-359a310b466f
+# ╟─eebe2058-9744-4d1a-82c2-fc3fc08b9700
+# ╟─35beb34b-9428-4c97-b793-518bb2b68901
+# ╟─634567ee-9a15-44bf-88ce-d41f8957cd83
 # ╟─d031150e-28ce-489f-8d9a-d397a1473f05
 # ╟─504e22c9-d7ba-4cc6-bb68-f05f101db340
 # ╟─a3bb5429-4336-43bf-9838-c35748617a17
-# ╠═2824ff96-5186-4d22-bea1-7c4df5f5e4bc
+# ╟─2824ff96-5186-4d22-bea1-7c4df5f5e4bc
 # ╟─5f1b7dc1-516f-43e3-97bf-afaf42a11362
 # ╟─129f6c44-4529-4b10-a1bb-77e0c6b7ebe2
 # ╟─6da5a233-9772-43b0-928a-bc9a5382c136
+# ╟─f94d3f03-cbf9-4a5c-b35d-7b6223b10f05
+# ╟─6c354c09-28c1-424f-b9dd-7ccc6951ef7f
 # ╟─bdfa802d-2ae9-4b70-aa9c-0f94213a6e57
 # ╟─896d9fe9-fbaf-43f0-9736-be6e88d07a75
 # ╟─00000000-0000-0000-0000-000000000001
