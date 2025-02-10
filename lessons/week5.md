@@ -4,7 +4,6 @@ week_num = 5
 tags = ["lessons"]
 topic = "Data Wrangling"
 ds_topic = "Data Wrangling"
-exo_topic =  "Exoplanet Characterization: Rossiter McLaughlin Effect"
 +++
 
 Week {{week_num}}
@@ -16,6 +15,9 @@ Week {{week_num}}
 - Optionally, read earlier sections of [Ch 4](https://juliadatascience.io/dataframes) if those are helpful to you now.
 
 ## [Lab 5](../../labs/lab5/): {{fill title labs/lab5.md}}
+
+## Notebooks from class
+- [Day 1](https://psuastro416.github.io/Spring2025/tutorials/week5/)
 
 ## Resources
 - More information about building queries:
