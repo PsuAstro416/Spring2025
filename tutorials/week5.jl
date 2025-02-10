@@ -12,10 +12,30 @@ begin
 	using PlutoUI, PlutoTeachingTools
 end
 
-# ╔═╡ 3a2210fa-478f-11ed-059b-6f5c943fb80d
+# ╔═╡ 38400125-b41e-4df2-be70-991b5aa50be9
+# hideall
+begin
+  title = "Data Science Applications to Astronomy";
+  topic = "Data Wrangling"
+  subtitle = "Databases & Queries"
+  week = 5
+end;
+
+# ╔═╡ 0b9fed6d-c472-4292-befb-39c7874a329a
+# hideall
 md"""
-**Astro 416, Week 5**
-# Data Wrangling
++++
+title = $topic
+subtitle = $subtitle
+week_num = $week
++++
+"""  |> Base.Text;
+
+# ╔═╡ ec8a13fb-3d55-4c3b-897e-c468f752a41f
+md"""
+#### $title
+# Week $week: $topic:
+## $subtitle
 """
 
 # ╔═╡ a629d501-0dbc-4be8-b1fb-984af4fe2fd8
@@ -286,7 +306,12 @@ md"""
 
 # ╔═╡ 49bf3268-bb0f-484c-972a-14f94d7c4151
 md"""
-### Examples
+# Examples
+"""
+
+# ╔═╡ 553cf2df-dd96-4167-bfd7-ea23c24b8a83
+md"""
+## Join on Gaia ID
 """
 
 # ╔═╡ 70fe782a-bcd8-4239-b922-f6949435d865
@@ -294,12 +319,12 @@ tip(md"Originally, both tables contained columns named `ra` and `dec`.  The join
 
 # ╔═╡ 6d00e16e-0556-440f-bb7b-29a347e65272
 md"""
-#### What if we didn't know the Gaia designation?
+## Find by position
 """
 
 # ╔═╡ ccfcbbe1-a358-41e8-a562-f5db25e2a9fc
 md"""
-#### Wait, which row is the best match?
+## Which row is the best match?
 """
 
 # ╔═╡ 540c6982-2759-4b63-b5a4-e360bddfa4e1
@@ -379,7 +404,7 @@ df_ex1 = query_to_df(url_ex1)
 targetpos = (; ra = df_ex1.ra[1], dec = df_ex1.dec[1] )
 
 # ╔═╡ 29ab2b94-1aba-4831-ba1f-044c7f2843d1
-url_ex4 = make_tap_query_url(gaia_query_base_url, "gaiadr3.gaia_source", where="1=contains(POINT($(targetpos.ra),$(targetpos.dec)),CIRCLE(ra,dec,30./3600.))", select_cols="*,DISTANCE(POINT($(targetpos.ra),$(targetpos.dec)),POINT(ra,dec))+AS+ang_sep",order_by_cols="ang_sep",max_rows=1000, format="csv")
+url_ex4 = make_tap_query_url(gaia_query_base_url, "gaiadr3.gaia_source", where="1=contains(POINT($(targetpos.ra),$(targetpos.dec)),CIRCLE(ra,dec,30./3600.))", select_cols="*,DISTANCE(POINT($(targetpos.ra),$(targetpos.dec)),POINT(ra,dec))+AS+ang_sep",order_by_cols="ang_sep",max_rows=100, format="csv")
 
 # ╔═╡ 41dfc658-2e54-4408-8e52-4879e209b022
 df_ex1.sy_kepmag[row_to_study]
@@ -407,10 +432,41 @@ url_ex2 = make_tap_query_url(gaia_query_base_url, "gaiadr2.gaia_source", where="
 df_ex2 = query_to_df(url_ex2)
 
 # ╔═╡ 8fb6efb1-6493-449a-b5cb-49763b7d361c
-df_ex3 = innerjoin(df_ex1,df_ex2, on=:gaia_id=>:designation, matchmissing=:notequal, makeunique=true )
+df_ex3_inner = innerjoin(df_ex1,df_ex2, on=:gaia_id=>:designation, matchmissing=:notequal, makeunique=true )
 
 # ╔═╡ 1775c8de-0dc3-44c9-b36d-40b5eb2922e1
-names(df_ex3)
+names(df_ex3_inner)
+
+# ╔═╡ 18a45746-6435-41d7-8385-b2240fd35028
+df_ex3_left = leftjoin(df_ex1,df_ex2, on=:gaia_id=>:designation, matchmissing=:notequal, makeunique=true )
+
+# ╔═╡ 0a9cd597-530f-4c4f-8319-f2ebca4185f3
+df_ex3_right = rightjoin(df_ex1,df_ex2, on=:gaia_id=>:designation, matchmissing=:notequal, makeunique=true )
+
+# ╔═╡ 65c6a7a3-fd6a-44ad-b35f-9b21b7c9a9ce
+nrow(df_ex3_left), nrow(df_ex3_right)
+
+# ╔═╡ c0c07e4b-4720-4c34-b1e9-ce76789d246c
+try
+	df_ex3_outer_fails = outerjoin(df_ex1,df_ex2, on=:gaia_id=>:designation, matchmissing=:notequal, makeunique=true )
+catch ex
+	warning_box(ex.msg)
+end
+
+# ╔═╡ 759e8774-f07f-4996-92f7-14c914bf852e
+df_ex3_outer = outerjoin(filter(r->!ismissing(r.gaia_id),df_ex1),df_ex2, on=:gaia_id=>:designation, makeunique=true )
+
+# ╔═╡ 1438dd04-ca0b-4aa7-9951-8f767db28925
+nrow(df_ex3_inner), nrow(df_ex3_outer), nrow(filter(r->!ismissing(r.gaia_id),df_ex1))
+
+# ╔═╡ 8be5e540-8a79-4622-ada1-bc27e01f1ccd
+df_ex3_anti = antijoin(df_ex1,df_ex2, on=:gaia_id=>:designation, matchmissing=:notequal, makeunique=true )
+
+# ╔═╡ b3d00ec9-21c6-4cd8-b625-907e464f54a8
+ncol(df_ex1), ncol(df_ex2), ncol(df_ex3_inner), ncol(df_ex3_outer), ncol(df_ex3_left), ncol(df_ex3_anti)
+
+# ╔═╡ 9460a180-85e0-4032-acac-94626537fac4
+nrow(df_ex1), nrow(df_ex2)
 
 # ╔═╡ c784f6bd-0843-4682-bcaa-f26a8fd5f7b5
 begin
@@ -1076,7 +1132,9 @@ version = "17.4.0+2"
 """
 
 # ╔═╡ Cell order:
-# ╟─3a2210fa-478f-11ed-059b-6f5c943fb80d
+# ╟─38400125-b41e-4df2-be70-991b5aa50be9
+# ╟─0b9fed6d-c472-4292-befb-39c7874a329a
+# ╟─ec8a13fb-3d55-4c3b-897e-c468f752a41f
 # ╟─a629d501-0dbc-4be8-b1fb-984af4fe2fd8
 # ╟─c801d8b3-d439-4d55-be1b-111207dd1bf5
 # ╟─16243631-00ec-4ffd-8eb5-1281a4d00f02
@@ -1110,9 +1168,19 @@ version = "17.4.0+2"
 # ╟─5afb074f-8416-4441-be7e-96f73d448940
 # ╟─04f2fa13-057e-4b26-a2db-2a02055dc61d
 # ╟─49bf3268-bb0f-484c-972a-14f94d7c4151
+# ╟─553cf2df-dd96-4167-bfd7-ea23c24b8a83
 # ╠═8fb6efb1-6493-449a-b5cb-49763b7d361c
 # ╠═1775c8de-0dc3-44c9-b36d-40b5eb2922e1
 # ╟─70fe782a-bcd8-4239-b922-f6949435d865
+# ╠═18a45746-6435-41d7-8385-b2240fd35028
+# ╠═0a9cd597-530f-4c4f-8319-f2ebca4185f3
+# ╠═c0c07e4b-4720-4c34-b1e9-ce76789d246c
+# ╠═759e8774-f07f-4996-92f7-14c914bf852e
+# ╠═8be5e540-8a79-4622-ada1-bc27e01f1ccd
+# ╠═b3d00ec9-21c6-4cd8-b625-907e464f54a8
+# ╠═9460a180-85e0-4032-acac-94626537fac4
+# ╠═1438dd04-ca0b-4aa7-9951-8f767db28925
+# ╠═65c6a7a3-fd6a-44ad-b35f-9b21b7c9a9ce
 # ╟─6d00e16e-0556-440f-bb7b-29a347e65272
 # ╠═91aab994-2b5f-4de2-b78e-828868c3ead5
 # ╠═29ab2b94-1aba-4831-ba1f-044c7f2843d1
