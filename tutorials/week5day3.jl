@@ -1,19 +1,17 @@
 ### A Pluto.jl notebook ###
-# v0.20.4
+# v0.20.1
 
 using Markdown
 using InteractiveUtils
 
 # This Pluto notebook uses @bind for interactivity. When running this notebook outside of Pluto, the following 'mock version' of @bind gives bound variables a default value (instead of an error).
 macro bind(def, element)
-    #! format: off
     quote
         local iv = try Base.loaded_modules[Base.PkgId(Base.UUID("6e696c72-6542-2067-7265-42206c756150"), "AbstractPlutoDingetjes")].Bonds.initial_value catch; b -> missing; end
         local el = $(esc(element))
         global $(esc(def)) = Core.applicable(Base.get, el) ? Base.get(el) : iv(el)
         el
     end
-    #! format: on
 end
 
 # ╔═╡ 5ced3d86-ead9-11ef-33ff-ed46688b580f
@@ -25,8 +23,50 @@ end
 # ╔═╡ be929eb0-7eff-47bf-9449-ace39705089d
 question_box(md"How do we decide which optimizer is best for a given problem?")
 
+# ╔═╡ 324d51ec-46d1-4f4b-8fee-1fba62670dd0
+md"""
+Questions to consider:
+- How much do I know about my loss function?
+- Is my implementation of the loss function deterministic or stochastic?
+- Do I know that there a single global minimum or could there be multiple minima?
+- Do I really need to find the global minimum or is another minimum likely as good for my purposes?
+- Could there be saddle points?
+- Do I have a good initial guess of where the global minimum will be?
+- Can I place bounds on where the global minimum will be?
+- Are there non-trivial constraints that the minimum must satisfy?
+
+
+- Is the loss function smooth?
+- Do I know the length scale over which the function is smooth?
+- Can I compute the gradient of the loss function efficiently?
+- How many dimensions are the input parameters?
+"""
+
+# ╔═╡ 03b52a29-8286-420a-a173-1131e9504821
+md"""
+# Rules of thumb:
+- If you have a function that's linear in all (or even a significant fraction of parameters), use that information to your advantage.
+- If you can make a good initial guess or provide bounds, use them.
+- If you can compute gradients of loss function eficiently, choose an algorithm that uses them.
+- For small dimensional problems [BFGS](https://julianlsolvers.github.io/Optim.jl/v0.9.3/algo/lbfgs/) is a very common choice.
+- For high-dimensional problems, some version of gradient descent is a very common choice.  
+- There are many variants (e.g., stochastic, batched, add momentum), particularly if you don't need to find the true minimum.
+- [ADAM](https://arxiv.org/abs/1412.6980) (or some variant on it) is a common choice.
+"""
+
 # ╔═╡ 855d6d11-a838-427a-a2f8-ef0b1a457f84
 question_box(md"How does Julia create a python object / use python code inside julia?")
+
+# ╔═╡ 3a120c36-bb42-4758-96c3-5edb68e356d7
+md"""
+- Most compiled languages built to be self-contained.  
+- Julia was designed to make cross-language development a little easier.
+- Built-in support for calling libraries written in C/C++/Fortran via [ccall](https://docs.julialang.org/en/v1/base/c/)
+- [PyCall.jl](https://github.com/JuliaPy/PyCall.jl), [PythonCall.jl](https://github.com/JuliaPy/PythonCall.jl), and [RCall.jl](https://github.com/JuliaInterop/RCall.jl) provide support for launching an  interpretted languages like Python and R, sending commands, and accessing results.
+- Built-in types (e.g., Integer, Float64, String) are usually implemented very similarly and can be accessed directly.
+- Compoud types (e.g., n-dimensional array, table, file handle) aren't standardized, so need either to be converted or extra code to allow direct access.
+- Trade-off between doing more behind-the-scenes automatically versus knowing precisely what your code is doing.
+"""
 
 # ╔═╡ fac46990-b819-43b0-aacf-fd54dd361ff4
 md"# Archives"
@@ -34,8 +74,28 @@ md"# Archives"
 # ╔═╡ cde44ca7-0271-44f6-beab-1ab7ab5d4bed
 question_box(md"What other popular archives can we query besides MAST? Which other ones are used frequently in astro/physics?")
 
+# ╔═╡ 1871f29b-14e2-4ca1-86b0-b1de9d314b79
+md"""
+- Many archives listed in [documentation for astroquery](https://astroquery.readthedocs.io/en/latest/index.html#available-services)
+- Most major observatories have their own archive:
+  - [Keck Observatory Archive](https://koa.ipac.caltech.edu/cgi-bin/KOA/nph-KOAlogin)
+  - [NOIRLab Astro Data Archive](https://noirlab.edu/public/projects/astrodataarchive/)
+  - [Gravitational Wave Open Science Center](https://noirlab.edu/public/projects/astrodataarchive/)
+"""
+
 # ╔═╡ e720373c-a731-4a14-8b5e-2cd859930dd7
 question_box(md"What’s the most efficient way to query a large number of targets without running into rate limits?")
+
+# ╔═╡ c150bded-bb74-4d82-a4dd-b2f38afbea00
+md"""
+- Create an accout with the archive you're querying.
+- Figure out how to authenticate via API.
+- Use [Asynchronous queries](https://astroquery.readthedocs.io/en/latest/gaia/gaia.html#asynchronous-query)
+- Call asynchronously, so your code doesn't block.
+"""
+
+# ╔═╡ ba7e48b5-a867-4324-ac84-c5a87f8cfe2d
+@async begin sleep(3); @info "Done." end
 
 # ╔═╡ 1f8b1347-0df2-413e-9e7b-b36ac85a8819
 md"# Project"
@@ -44,11 +104,17 @@ md"# Project"
 question_box(md"How interactive is the final project dashboard expected to be? I noticed in the rubric that the data selection is user-driven—are there additional interactive features that need to be included?")
 
 # ╔═╡ 91718cf7-738e-4687-a217-7f940c9839b6
-a = 1
+a_cell = 1
+
+# ╔═╡ 4a14e4ce-1a04-48ba-b818-5a31e3eb6fde
+@bind a_box NumberField(-3:0.1:3, default = 1.0)
+
+# ╔═╡ a28dca8b-4921-42ad-8aa9-b9eba6441b48
+@bind a_slider Slider(-3:0.1:3, default = 1.0)
 
 # ╔═╡ c116cf1c-95fd-4591-bd73-fa14fe2d4cc8
 md"""
-Your value for slope: $(@bind aa NumberField(-3:0.1:3, default = 1.0))
+Your value for slope: $(@bind a_fancy NumberField(-3:0.1:3, default = 1.0))
 """
 
 # ╔═╡ 864d3966-633b-436e-b846-c0a3bd0e50e9
@@ -62,6 +128,7 @@ end;
 
 # ╔═╡ fa2759a6-d3ca-40ec-8165-4ff5e51a5af8
 let
+	a = a_cell
 	scatter(x,y, yerr=fill(0.1,n), ms=3)
 	plot!(x,x.*a)
 end
@@ -69,11 +136,31 @@ end
 # ╔═╡ 75070375-3ed9-4199-a011-068ec985ef4a
 question_box(md"When data is non linear and we know it is (e.g sinusoidal, exponential or quartic) then how do we formulate a predictive formula that we can derive our chi squared from?")
 
-# ╔═╡ cc4160dd-f3c5-4f6e-adc2-b502eec8bcf2
-question_box(md"Could you explain how to interpret the residuals when assessing the smoothness of a nonlinear regression model, (what can different things like linear non linear, noisy and pattern following residuals mean)?")
+# ╔═╡ e4e10807-ebb5-402b-8a44-9c1862b7d0fa
+md"""
+For uncorrelated measurement noise:
+
+$$\chi^2 = \sum_{i=1}^{N}  \left(\frac{y_i - f(x_i)}{\sigma_i}\right)^2$$
+"""
+
+# ╔═╡ 533f7d96-72cc-4093-bcd9-69b52f532145
+md"""
+For non-diagonal covariance matrix:
+
+$$\chi^2 = \sum_{i=1}^{N}  \left(y_i - f(x_i)\right)^{T} \Sigma^{-1} \left(y_i - f(x_i)\right)$$
+"""
+
+# ╔═╡ 6dbb7e71-a3f0-4e7a-911b-22050397c88d
+md"""
+# Project specific questions
+"""
 
 # ╔═╡ a574beaa-a6ef-4008-a96a-9b8a51d4a3be
 question_box(md"How can a waveform with varying amplitude and varying frequency be broken down for statistical analysis other than moving averages andFourier transform?")
+
+# ╔═╡ cc4160dd-f3c5-4f6e-adc2-b502eec8bcf2
+# I can't figure out what they're asking
+# question_box(md"Could you explain how to interpret the residuals when assessing the smoothness of a nonlinear regression model, (what can different things like linear non linear, noisy and pattern following residuals mean)?")
 
 # ╔═╡ d3fe86ef-fdff-4c54-ac09-3cc8924c4982
 question_box(md"")
@@ -166,9 +253,9 @@ version = "1.3.6"
 
 [[deps.CodecZlib]]
 deps = ["TranscodingStreams", "Zlib_jll"]
-git-tree-sha1 = "962834c22b66e32aa10f7611c08c8ca4e20749a9"
+git-tree-sha1 = "545a177179195e442472a1c4dc86982aa7a1bef0"
 uuid = "944b1d66-785c-5afd-91f1-9de20f533193"
-version = "0.7.8"
+version = "0.7.7"
 
 [[deps.ColorSchemes]]
 deps = ["ColorTypes", "ColorVectorSpace", "Colors", "FixedPointNumbers", "PrecompileTools", "Random"]
@@ -677,9 +764,9 @@ version = "1.4.3"
 
 [[deps.OpenSSL_jll]]
 deps = ["Artifacts", "JLLWrappers", "Libdl"]
-git-tree-sha1 = "a9697f1d06cc3eb3fb3ad49cc67f2cfabaac31ea"
+git-tree-sha1 = "7493f61f55a6cce7325f197443aa80d32554ba10"
 uuid = "458c3c95-2e84-50aa-8efc-19380b2a3a95"
-version = "3.0.16+0"
+version = "3.0.15+3"
 
 [[deps.Opus_jll]]
 deps = ["Artifacts", "JLLWrappers", "Libdl"]
@@ -1334,19 +1421,30 @@ version = "1.4.1+2"
 
 # ╔═╡ Cell order:
 # ╟─be929eb0-7eff-47bf-9449-ace39705089d
+# ╟─324d51ec-46d1-4f4b-8fee-1fba62670dd0
+# ╟─03b52a29-8286-420a-a173-1131e9504821
 # ╟─855d6d11-a838-427a-a2f8-ef0b1a457f84
+# ╟─3a120c36-bb42-4758-96c3-5edb68e356d7
 # ╟─fac46990-b819-43b0-aacf-fd54dd361ff4
 # ╟─cde44ca7-0271-44f6-beab-1ab7ab5d4bed
+# ╟─1871f29b-14e2-4ca1-86b0-b1de9d314b79
 # ╟─e720373c-a731-4a14-8b5e-2cd859930dd7
+# ╟─c150bded-bb74-4d82-a4dd-b2f38afbea00
+# ╠═ba7e48b5-a867-4324-ac84-c5a87f8cfe2d
 # ╟─1f8b1347-0df2-413e-9e7b-b36ac85a8819
 # ╟─7088d54b-dcad-47dc-8a56-d9e9297d57f8
 # ╠═91718cf7-738e-4687-a217-7f940c9839b6
-# ╟─c116cf1c-95fd-4591-bd73-fa14fe2d4cc8
-# ╠═864d3966-633b-436e-b846-c0a3bd0e50e9
+# ╠═4a14e4ce-1a04-48ba-b818-5a31e3eb6fde
+# ╠═a28dca8b-4921-42ad-8aa9-b9eba6441b48
+# ╠═c116cf1c-95fd-4591-bd73-fa14fe2d4cc8
+# ╟─864d3966-633b-436e-b846-c0a3bd0e50e9
 # ╠═fa2759a6-d3ca-40ec-8165-4ff5e51a5af8
 # ╟─75070375-3ed9-4199-a011-068ec985ef4a
-# ╟─cc4160dd-f3c5-4f6e-adc2-b502eec8bcf2
+# ╟─e4e10807-ebb5-402b-8a44-9c1862b7d0fa
+# ╟─533f7d96-72cc-4093-bcd9-69b52f532145
+# ╟─6dbb7e71-a3f0-4e7a-911b-22050397c88d
 # ╟─a574beaa-a6ef-4008-a96a-9b8a51d4a3be
+# ╟─cc4160dd-f3c5-4f6e-adc2-b502eec8bcf2
 # ╠═d3fe86ef-fdff-4c54-ac09-3cc8924c4982
 # ╠═60b29860-8888-4350-b3e3-deac59530178
 # ╟─64bd091e-7ec2-4f99-8eb8-c6a8bc25d19f
