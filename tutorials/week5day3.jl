@@ -95,7 +95,7 @@ md"""
 """
 
 # ╔═╡ ba7e48b5-a867-4324-ac84-c5a87f8cfe2d
-@async begin sleep(3); @info "Done." end
+#@async begin sleep(5); @info "Done." end
 
 # ╔═╡ 1f8b1347-0df2-413e-9e7b-b36ac85a8819
 md"# Project"

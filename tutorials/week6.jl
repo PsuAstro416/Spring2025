@@ -4,9 +4,19 @@
 using Markdown
 using InteractiveUtils
 
+# This Pluto notebook uses @bind for interactivity. When running this notebook outside of Pluto, the following 'mock version' of @bind gives bound variables a default value (instead of an error).
+macro bind(def, element)
+    quote
+        local iv = try Base.loaded_modules[Base.PkgId(Base.UUID("6e696c72-6542-2067-7265-42206c756150"), "AbstractPlutoDingetjes")].Bonds.initial_value catch; b -> missing; end
+        local el = $(esc(element))
+        global $(esc(def)) = Core.applicable(Base.get, el) ? Base.get(el) : iv(el)
+        el
+    end
+end
+
 # ╔═╡ c771a5b6-50df-11ed-31c6-dbf7aa47c90a
 # hideall 
-using PlutoUI, PlutoTeachingTools
+using PlutoUI, PlutoTeachingTools, Plots
 
 # ╔═╡ 1e322a5a-3075-495d-be74-37a98cb9157e
 # hideall
@@ -39,10 +49,46 @@ TableOfContents()
 
 # ╔═╡ 11de5fd5-9250-4998-876b-50a006615423
 md"""
-## Logistics
-- Should have received Project Plan feedback via Canvas
-- If you/your team didn't address one or more of the plan components, then please address those as part of your checkpoint 1 (or before if it would be helpful).  
+# Class Logistics
+- MSEEQs:  Today - March 2
+- Exam next Wednesday, Feb 26
 """
+
+# ╔═╡ edad7f6a-66de-481c-a815-65fe3c7d53df
+md"# Project"
+
+# ╔═╡ bdd4bcf2-7ce3-48ba-93da-bf3466dc367c
+question_box(md"How interactive is the final project dashboard expected to be? I noticed in the rubric that the data selection is user-driven—are there additional interactive features that need to be included?")
+
+# ╔═╡ 80d49b81-35bb-48f5-8c25-22232962d9cf
+a_cell = 1
+
+# ╔═╡ a371780c-b227-4a48-9f94-6a6dbe0ac858
+@bind a_box NumberField(-3:0.1:3, default = 1.0)
+
+# ╔═╡ 0cbf9020-94e8-4726-b0de-0500194a8413
+@bind a_slider Slider(-3:0.1:3, default = 1.0)
+
+# ╔═╡ 40bbb713-e6a9-49cb-ba1f-522ab405de58
+md"""
+Your value for slope: $(@bind a_fancy NumberField(-3:0.1:3, default = 1.0))
+"""
+
+# ╔═╡ 009d55c7-480d-4871-bb92-30714d53711c
+begin
+	n = 20
+	a_true = 2
+	x = rand(n)
+	sort!(x)
+	y = a_true * x .+ 0.1 .* randn(n)
+end;
+
+# ╔═╡ 5c0cb93e-1551-42d3-91dd-b185393ee047
+let
+	a = a_cell
+	scatter(x,y, yerr=fill(0.1,n), ms=3)
+	plot!(x,x.*a)
+end
 
 # ╔═╡ afd8e60d-b96b-4c06-8246-d1592dff222d
 md"""
@@ -52,7 +98,7 @@ md"""
 - RAM
 - Local disk storage
 - Non-local disks
-- Tape storage (e.g., Roar Near-line storage)
+- Tape storage 
 """
 
 # ╔═╡ 97976480-c802-490e-856f-17dc21dee021
@@ -110,7 +156,6 @@ md"""
   - Very high latency
   - Can still have high throughput
   - Efficient in terms cost, energy & reliability
-  - On Roar, known as "near-line archival storage"
 """
 
 # ╔═╡ 5dc6dc68-9e3e-45f1-abba-48381adf6a3a
@@ -162,21 +207,22 @@ From highest to lowest priority:
 5. Minimize[^1] unnecessary memory allocations on heap
 6. Choose data types that promote linear access, e.g.,
    - Vectors & Arrays (rather than Dictionaries)
-   - Arrays of values (rather than arrays of pointers)7. Group reads/writes of nearby data 
+   - Arrays of values (rather than arrays of pointers)
+7. Group reads/writes of nearby data 
    - For matrices, inner loop over minor dimension
      - Fortran, Matlab, R & Julia[^2] matrices are column-major
      - C/C++ & Python[^2] matrices are row-major
    - For large matrices, there are clever strategies of working on smaller blocks at a time.  Use cache-optimized libraries, e.g., 
      - BLAS, LAPACK, IntelMKL
    - For datasets with many columns, structures of arrays (rather than arrays of structures)
-7. Use programming patterns that make it easy to parallelize the "embarrassingly parallel" portions of your code.
+8. Use programming patterns that make it easy to parallelize the "embarrassingly parallel" portions of your code.
    - E.g., `map`, `mapreduce`, `split-apply-combine`
    - Once fully tested in serial, then can turn on parallelism for those sections easily.
-8. Only after ensuring that you've done all of the above, should you even consider using "advanced" programming techniques that obfuscate the code, make it hard to maintain, or are likely to soon become out-of-date. 
+9. Only after ensuring that you've done all of the above, should you even consider using "advanced" programming techniques that obfuscate the code, make it hard to maintain, or are likely to soon become out-of-date. 
 
 [^1]: Use it when you need it, but don't add lots of extra small read/writes to disk or memory allocations.  
 
-[^2]: By default.  With Julia & Numby, one can explicitly specify a variable to be stored in the opposite format.  
+[^2]: By default.  With Julia & Numpy, one can explicitly specify a variable to be stored in the opposite format.  
 """
 
 # ╔═╡ c1509525-20e4-40dd-96fb-629fe993beda
@@ -198,8 +244,6 @@ In many places, vectorization, as in the programming pattern, can make code easi
 # ╔═╡ 5315a4ec-d56e-4339-8b48-2e4e651dca5f
 md"""
 ## Compiled vs Interpretted Languages
-**Q:** When optimizing Python [or R, IDL,...] code I've been told to eliminate for loops wherever possible. 
-For Julia (or C/C++, Fortran, Java,...) for loops are not detrimental. Why is this?
 
 - Interpretted languages: 
    + Loops are very slow
@@ -355,7 +399,6 @@ PlutoTeachingTools = "661c6b06-c737-4d37-b85c-46df65de6f69"
 PlutoUI = "7f904dfe-b85e-4ff6-b463-dae2292396a8"
 
 [compat]
-PlutoTeachingTools = "~0.3.1"
 PlutoUI = "~0.7.43"
 """
 
@@ -365,7 +408,7 @@ PLUTO_MANIFEST_TOML_CONTENTS = """
 
 julia_version = "1.11.2"
 manifest_format = "2.0"
-project_hash = "b182bafaa8f25a5a24f51c39b1c5225cf1d1ef66"
+project_hash = "682386f1ddaaa61c3eb145691e6722c11fa7a13c"
 
 [[deps.AbstractPlutoDingetjes]]
 deps = ["Pkg"]
@@ -747,6 +790,14 @@ version = "17.4.0+2"
 # ╟─046e52fb-dcc6-4cda-a6d0-a5e10881b3f1
 # ╟─3dfec25d-4600-4425-90a6-c652dd2b5ebc
 # ╟─11de5fd5-9250-4998-876b-50a006615423
+# ╠═edad7f6a-66de-481c-a815-65fe3c7d53df
+# ╠═bdd4bcf2-7ce3-48ba-93da-bf3466dc367c
+# ╠═80d49b81-35bb-48f5-8c25-22232962d9cf
+# ╠═a371780c-b227-4a48-9f94-6a6dbe0ac858
+# ╠═0cbf9020-94e8-4726-b0de-0500194a8413
+# ╠═40bbb713-e6a9-49cb-ba1f-522ab405de58
+# ╠═009d55c7-480d-4871-bb92-30714d53711c
+# ╠═5c0cb93e-1551-42d3-91dd-b185393ee047
 # ╟─afd8e60d-b96b-4c06-8246-d1592dff222d
 # ╟─97976480-c802-490e-856f-17dc21dee021
 # ╟─4a452891-744e-403c-ace5-d9d3c72616f2
@@ -769,7 +820,7 @@ version = "17.4.0+2"
 # ╟─a936e673-0017-459c-81c0-973f4fb450b2
 # ╟─44a59fba-7530-44d3-911a-c73683a45ade
 # ╟─f4b3eceb-b365-4abb-925d-4e14a88c7b28
-# ╟─2e6842b2-f8ac-44a2-a355-1904553cb754
+# ╠═2e6842b2-f8ac-44a2-a355-1904553cb754
 # ╟─c771a5b6-50df-11ed-31c6-dbf7aa47c90a
 # ╟─00000000-0000-0000-0000-000000000001
 # ╟─00000000-0000-0000-0000-000000000002
