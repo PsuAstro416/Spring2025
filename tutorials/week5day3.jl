@@ -95,7 +95,7 @@ md"""
 """
 
 # ╔═╡ ba7e48b5-a867-4324-ac84-c5a87f8cfe2d
-#@async begin sleep(5); @info "Done." end
+#@async begin sleep(2); @info "Done." end
 
 # ╔═╡ 1f8b1347-0df2-413e-9e7b-b36ac85a8819
 md"# Project"
@@ -159,15 +159,13 @@ md"""
 question_box(md"How can a waveform with varying amplitude and varying frequency be broken down for statistical analysis other than moving averages andFourier transform?")
 
 # ╔═╡ cc4160dd-f3c5-4f6e-adc2-b502eec8bcf2
-# I can't figure out what they're asking
-# question_box(md"Could you explain how to interpret the residuals when assessing the smoothness of a nonlinear regression model, (what can different things like linear non linear, noisy and pattern following residuals mean)?")
+
 
 # ╔═╡ d3fe86ef-fdff-4c54-ac09-3cc8924c4982
-question_box(md"")
+
 
 # ╔═╡ 60b29860-8888-4350-b3e3-deac59530178
 
-question_box(md"")
 
 # ╔═╡ 64bd091e-7ec2-4f99-8eb8-c6a8bc25d19f
 md"""
@@ -1444,7 +1442,7 @@ version = "1.4.1+2"
 # ╟─533f7d96-72cc-4093-bcd9-69b52f532145
 # ╟─6dbb7e71-a3f0-4e7a-911b-22050397c88d
 # ╟─a574beaa-a6ef-4008-a96a-9b8a51d4a3be
-# ╟─cc4160dd-f3c5-4f6e-adc2-b502eec8bcf2
+# ╠═cc4160dd-f3c5-4f6e-adc2-b502eec8bcf2
 # ╠═d3fe86ef-fdff-4c54-ac09-3cc8924c4982
 # ╠═60b29860-8888-4350-b3e3-deac59530178
 # ╟─64bd091e-7ec2-4f99-8eb8-c6a8bc25d19f
