@@ -15,4 +15,4 @@ Week {{week_num}}
 
 ## Notebooks from class
 - [Day 1](https://psuastro416.github.io/Spring2025/tutorials/week6/)
-
+- [Day 3 (Q&A)](https://psuastro416.github.io/Spring2025/tutorials/week6day3/)
