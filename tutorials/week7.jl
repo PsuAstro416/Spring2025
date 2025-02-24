@@ -15,11 +15,11 @@ end
 # ╔═╡ 4b11c897-b45f-4852-bf85-caed6d1e79dc
 md"""
 ### Astro 416
-# Week 6:  Q&A 
+# Week 7: Review for Exam 
 """
 
 # ╔═╡ a4b4d437-420d-439e-8c1a-13115b3a5dc7
-# hideall
+# hideall 
 TableOfContents()
 
 # ╔═╡ 01565ff9-05d2-478a-9711-9c998fcd0ee8
@@ -134,6 +134,154 @@ Should I use Julia’s try-catch blocks, or are there any more efficient metho
 
 # ╔═╡ 8909bdbb-abf9-450e-9568-fb372503d6f5
 md"# Exam"
+
+# ╔═╡ 7c7d2fde-97d3-4cb6-a167-e3463b70d403
+question_box(md"Until what point in the course content will the test cover?")
+
+# ╔═╡ ed451d50-0c42-441d-9c1a-ca67e73e8c7b
+md"""
+- Lessons from Weeks 1-6
+- Labs 1-5
+"""
+
+# ╔═╡ 33226f98-6c85-4224-ab14-e5474776dc10
+
+question_box(md"""What types of question would be asked - theory or coding?
+""")
+
+# ╔═╡ 36bc1fde-2c23-42f6-9836-611dbc86bff5
+md"""
+- I won't ask you to write code.
+- I will likely ask you to read code, figure out what it does, and explain choices/alternatives.
+"""
+
+# ╔═╡ cae588d9-4911-4497-95f8-6336bd15c034
+question_box(md"What types of questions will be on the exam? In particular, is it going to include multiple choice, short answer, true/false, etc?")
+
+# ╔═╡ 5bd36427-c226-42d5-b630-d701ffe4b3b2
+md"Some short answer (1-3 sentances), some multiple choice."
+
+# ╔═╡ 95bf5725-4acb-4a64-b18b-557f07f57854
+question_box(md"Should I study the notes from lectures as well as the past labs?")
+
+# ╔═╡ 4ea92490-e4f6-4099-9749-b9237e1c747a
+question_box(md"Should you focus more on studying the labs or the lessons?")
+
+# ╔═╡ 0dec150b-0ae5-4d51-8cc9-a2a226b37540
+md"""
+- I'll try to draw from both.  
+- If you've already spent several times longer thinking about the labs than the lessons, then it might make sense to spend more time review your notes from Mondays.
+"""
+
+# ╔═╡ 0aa6eb92-70af-41ba-b3ef-8e075553dc8e
+question_box(md"Are there any specific topics that I should focus on while studying?")
+
+# ╔═╡ 78a3f9b8-e191-41b4-9059-c8c932885c76
+md"""
+- Topics that I planned more than the less structured questions from you all.
+- When a student asked to clarify something I already discussed, then that's probably a sign it's both important and potentially confusing.
+"""
+
+# ╔═╡ 1dde318c-8714-4439-852b-aa42e8494cc3
+md"""
+# New questions for Monday
+"""
+
+# ╔═╡ 96b0d417-acdb-40c4-92c6-6ba973309c35
+md"""
+## First-principles vs Machine learning approaches
+"""
+
+# ╔═╡ 1e4f97ab-b656-4605-badf-9b8a6b73a976
+question_box(md"""Could you compare the first principles approach with the machine learning approach, and explain when it is appropriate to use each?""")
+
+# ╔═╡ 2c1f84c9-aac4-4e6b-b800-fbe6ff22f79c
+blockquote(md"Are the specific values of  model parameters more likely to be of scientific interest when applying a first-principles approach or a machine learning approach to modeling data?  Explain your reasoning.")
+
+
+
+# ╔═╡ 8de6edc1-d0bf-4dbb-a75b-db1367e0133b
+blockquote(md"Imagine that you would like to predict the trajectory of a newly discovered Kuiper belt object based on 6 previous observations, so that you can schedule observations next year.  Would this problem be better suited to a first-principles or machine learning approach?  Explain your reasoning.")
+
+
+
+# ╔═╡ a74938fa-a406-46d5-bac0-078c29ab6fc2
+blockquote(md"Imagine that you would like to predict the absolute magnitude of the brightest galaxy in a galaxy cluster using its surface brightness, effective radius and redshift and data on similar galaxies from the Sloan Digital Sky Survey (SDSS).  Would this problem be better suited to a first-principles or machine learning approach?  Explain your reasoning.")
+
+# ╔═╡ a86babfc-e061-4317-9bd3-3cbe39d666d0
+md"""
+## Bayesian inference
+"""
+
+# ╔═╡ 356667b7-cb2f-4b07-949f-18fa8f1ef91f
+question_box(md"""Can we do a quick 2 minute review on Bayesian statistics?""")
+
+# ╔═╡ 371771cd-7f36-42a1-bbce-12ea75362267
+md"""
+$p( \theta| M, D) = \frac{p(\theta | M) p(D | \theta, M )}{p(D | M )}$
+"""
+
+# ╔═╡ 983ae94d-8720-4989-87d1-006353fa3699
+hint(md"""
+$\mathrm{(Posterior)} = \mathrm{(Prior)} \times \mathrm{(Likelihood)} / \mathrm{(Evidence)}$
+""")
+
+# ╔═╡ 13becab2-f716-4384-b31e-c810f05e6ffe
+blockquote(md"When applying an explanatory model in a Bayesian statistical framework, inferences about the values of model parameters are primarily based on the:
+1. Prior PDF
+2. Likelihood function
+3. Posterior PDF
+4. Posterior predictive PDF
+5. Fully marginalized likelihood
+6. Evidence
+7. Bayes Factor
+")
+
+# ╔═╡ 81bceba6-75f7-4777-afda-22bc74b9f350
+md"""
+The next questions will be about the following Turing model:
+```julia
+@model function model(v, d_obs, σ_d_obs)
+    @assert size(v) == size(d_obs) == size(σ_d_obs)
+    H₀ ~ LogNormal(log(100), 1.0)
+    d_true = v / H₀
+    d_obs ~ MvNormal(d_true, σ_d_obs)
+end
+model_given_data = model(v, dₗ, σ_dₗ)
+chain = sample(model_given_data, NUTS(0.65))
+```
+"""
+
+# ╔═╡ 7213ee0c-aa27-42cc-a6e6-d50ad194d438
+blockquote(md"Explain this model in your own words, including the function of each line of code (except ‘end’).
+Which line(s) specify the likelihood function?
+What line(s) specify prior distribution(s)?")
+
+# ╔═╡ 1a95434c-d1a4-483f-a5b9-e870ec91eb4a
+blockquote(md"If you wanted to evaluate the sensitivity of results to different choices for the prior, what changes would you make?  Be sure to specify the line number(s) of code that you’d change.")
+
+# ╔═╡ 27ff3de8-4616-436d-97ef-b8fe612da70d
+blockquote(md"""In the statistical modeling of astronomical observations, which one(s) of the following could be a reasonable choice for the prior probability density function:
+- A very broad probability distribution that only excludes physically impossible combinations of model parameters. 
+- A probability distribution summarizing one’s state of knowledge of model parameters prior to analyzing the most recent set of observations.
+- A probability distribution for the outcome of an experiment/observation.
+- A function of the data that maximizes the a priori probability.
+- The ratio of the posterior probability distribution function over the prior probability distribution function.""")
+
+
+# ╔═╡ 1af0bfaa-9687-4c2e-bc6c-d278afa36e18
+blockquote(md"""Explain the meaning of the posterior predictive distribution in a Bayesian model.""")
+
+# ╔═╡ af88827d-7c31-4a1f-a0b9-b479ff09e2c1
+md"""
+## Miscellaneous
+"""
+
+# ╔═╡ 0a614472-1d23-4c92-ac9e-398bb9204188
+question_box(md"""How does the size of data change the models we choose? Most of the time we use giant data sets and then make them smaller but use different approaches. So does size ever play a role?""")
+
+# ╔═╡ 61db28d5-926b-4638-9406-095c69a95a08
+blockquote(md"Is having a very large dataset typically more important when applying a first-principles approach or a machine learning approach to modeling data?  Explain your reasoning.")
 
 # ╔═╡ 2706b44c-283b-4cda-ad45-36b7bfa64e3b
 md"""
@@ -607,7 +755,7 @@ version = "17.4.0+2"
 
 # ╔═╡ Cell order:
 # ╟─4b11c897-b45f-4852-bf85-caed6d1e79dc
-# ╟─a4b4d437-420d-439e-8c1a-13115b3a5dc7
+# ╠═a4b4d437-420d-439e-8c1a-13115b3a5dc7
 # ╟─01565ff9-05d2-478a-9711-9c998fcd0ee8
 # ╟─53c5d63f-4a1b-4bea-a3a9-26a4ad73324f
 # ╠═49657f9a-5a81-4c50-929a-1502a2c560da
@@ -634,6 +782,36 @@ version = "17.4.0+2"
 # ╟─2b53030f-ec1f-4155-9271-e67704cdb324
 # ╟─19df6054-2697-4c36-98bf-f7898600673b
 # ╟─8909bdbb-abf9-450e-9568-fb372503d6f5
+# ╟─7c7d2fde-97d3-4cb6-a167-e3463b70d403
+# ╟─ed451d50-0c42-441d-9c1a-ca67e73e8c7b
+# ╟─33226f98-6c85-4224-ab14-e5474776dc10
+# ╟─36bc1fde-2c23-42f6-9836-611dbc86bff5
+# ╟─cae588d9-4911-4497-95f8-6336bd15c034
+# ╟─5bd36427-c226-42d5-b630-d701ffe4b3b2
+# ╟─95bf5725-4acb-4a64-b18b-557f07f57854
+# ╟─4ea92490-e4f6-4099-9749-b9237e1c747a
+# ╟─0dec150b-0ae5-4d51-8cc9-a2a226b37540
+# ╟─0aa6eb92-70af-41ba-b3ef-8e075553dc8e
+# ╟─78a3f9b8-e191-41b4-9059-c8c932885c76
+# ╟─1dde318c-8714-4439-852b-aa42e8494cc3
+# ╟─96b0d417-acdb-40c4-92c6-6ba973309c35
+# ╟─1e4f97ab-b656-4605-badf-9b8a6b73a976
+# ╟─2c1f84c9-aac4-4e6b-b800-fbe6ff22f79c
+# ╟─8de6edc1-d0bf-4dbb-a75b-db1367e0133b
+# ╟─a74938fa-a406-46d5-bac0-078c29ab6fc2
+# ╟─a86babfc-e061-4317-9bd3-3cbe39d666d0
+# ╟─356667b7-cb2f-4b07-949f-18fa8f1ef91f
+# ╟─371771cd-7f36-42a1-bbce-12ea75362267
+# ╟─983ae94d-8720-4989-87d1-006353fa3699
+# ╟─13becab2-f716-4384-b31e-c810f05e6ffe
+# ╟─81bceba6-75f7-4777-afda-22bc74b9f350
+# ╟─7213ee0c-aa27-42cc-a6e6-d50ad194d438
+# ╟─1a95434c-d1a4-483f-a5b9-e870ec91eb4a
+# ╟─27ff3de8-4616-436d-97ef-b8fe612da70d
+# ╟─1af0bfaa-9687-4c2e-bc6c-d278afa36e18
+# ╟─af88827d-7c31-4a1f-a0b9-b479ff09e2c1
+# ╟─0a614472-1d23-4c92-ac9e-398bb9204188
+# ╟─61db28d5-926b-4638-9406-095c69a95a08
 # ╟─2706b44c-283b-4cda-ad45-36b7bfa64e3b
 # ╟─9037225c-b08c-4c5d-b1bd-20ed347dfc70
 # ╟─94b46de7-e386-4d4f-b3a5-98dcceb18e55
