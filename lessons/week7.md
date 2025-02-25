@@ -4,7 +4,6 @@ week_num = 7
 tags = ["lessons"]
 topic = "Exam Week"
 ds_topic = "Introduction to Class Projects"
-exo_topic =  "Multiple Planet Systems"
 +++
 
 Week {{week_num}}
@@ -12,6 +11,10 @@ Week {{week_num}}
 
 ## Exam Preparation
 - Before Monday's class, submit questions via TopHat
+- Review practice problems for Exam
 
 ## Exam
 - During class on Wednesday
+- Bring pencils & eraser to class
+
+
