@@ -2,9 +2,8 @@
 title = "Week 9"
 week_num = 9
 tags = ["lessons"]
-topic = "Explanatory Data Analysis"
-ds_topic = "Explanatory Data Analysis"
-exo_topic =  "Exoplanet Characterization: Transmission Spectroscopy"
+topic = "Model Building IV"
+ds_topic = "Model Building IV"
 +++
 
 Week {{week_num}}
