@@ -22,7 +22,7 @@ Students will submit at least one questions about the week's content prior to Fr
 | 5  | Data Wrangling | 
 | 6  | Data Storage |
 | 7  | Exam week | 
-| 8  | Non-linear models |
+| 8  | Regularizaton & Cross-Validation |
 | SB | Spring Break |
 | 9  | Explanatory Data Analysis |
 | 10 | Data Visualization |

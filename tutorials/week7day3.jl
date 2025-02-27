@@ -187,29 +187,6 @@ function generate_data(θ::AbstractVector, n::Integer, σ::Real; n_outliers::Int
 	return (;x_obs = x, y_obs, design_matrix=A, y_true, σ_true, idx_outliers)
 end
 
-# ╔═╡ 129f6c44-4529-4b10-a1bb-77e0c6b7ebe2
-"""
-`predict_linear_model(A, b)`
-Computes the predictions of a linear model with design matrix `A` and parameters `b`.
-"""
-function predict_linear_model(A::AbstractMatrix, b::AbstractVector)
-	@assert size(A,2) == length(b)
-	A*b
-end
-
-# ╔═╡ 6da5a233-9772-43b0-928a-bc9a5382c136
-"""
-`calc_mle_linear_model(A, y_obs, covar)`
-Computes the maximum likelihood estimator for b for the linear model
-`y = A b`
-where measurements errors of `y_obs` are normally distributed and have covariance `covar`.
-"""
-function calc_mle_linear_model(A::AbstractMatrix, y_obs::AbstractVector, covar::AbstractMatrix)
-	@assert size(A,1) == length(y_obs) == size(covar,1) == size(covar,2)
-	@assert size(A,2) >= 1
-	(A' * (covar \ A)) \ (A' * (covar \ y_obs) )
-end
-
 # ╔═╡ 52a6c867-a8d1-4c2a-a75d-cd2ca9a8a2fb
 begin
 	redraw_for_plot 
@@ -293,19 +270,27 @@ begin
 	histogram!(plt_histo_χ²_cv, loss_test_dist, bins=bins, alpha=0.5, label="Test")
 end
 
-# ╔═╡ 6c354c09-28c1-424f-b9dd-7ccc6951ef7f
+# ╔═╡ 129f6c44-4529-4b10-a1bb-77e0c6b7ebe2
 """
-`calc_fisher_matrix_linear_model(A, covar)`
+`predict_linear_model(A, b)`
+Computes the predictions of a linear model with design matrix `A` and parameters `b`.
+"""
+function predict_linear_model(A::AbstractMatrix, b::AbstractVector)
+	@assert size(A,2) == length(b)
+	A*b
+end
 
-Computes the Fisher information matrix for θ for the linear model
-`y = A θ`
-where measurements errors of `y_obs` are normally distributed and have covariance `covar`.
-Note that `y_obs` is not passed to this function, because it does not affect results.
+# ╔═╡ 6da5a233-9772-43b0-928a-bc9a5382c136
 """
-function calc_fisher_matrix_linear_model(A::AbstractMatrix, covar::AbstractMatrix)
-	@assert size(A,1) == size(covar,1) == size(covar,2)
+`calc_mle_linear_model(A, y_obs, covar)`
+Computes the maximum likelihood estimator for b for the linear model
+`y = A b`
+where measurements errors of `y_obs` are normally distributed and have covariance `covar`.
+"""
+function calc_mle_linear_model(A::AbstractMatrix, y_obs::AbstractVector, covar::AbstractMatrix)
+	@assert size(A,1) == length(y_obs) == size(covar,1) == size(covar,2)
 	@assert size(A,2) >= 1
-	(A' * (covar \ A))
+	(A' * (covar \ A)) \ (A' * (covar \ y_obs) )
 end
 
 # ╔═╡ f94d3f03-cbf9-4a5c-b35d-7b6223b10f05
@@ -321,6 +306,21 @@ function calc_sigma_mle_linear_model(A::AbstractMatrix, covar::AbstractMatrix)
 	@assert size(A,1) == size(covar,1) == size(covar,2)
 	@assert size(A,2) >= 1
 	sqrt.(diag(inv(PDMat(calc_fisher_matrix_linear_model(A,covar)))))
+end
+
+# ╔═╡ 6c354c09-28c1-424f-b9dd-7ccc6951ef7f
+"""
+`calc_fisher_matrix_linear_model(A, covar)`
+
+Computes the Fisher information matrix for θ for the linear model
+`y = A θ`
+where measurements errors of `y_obs` are normally distributed and have covariance `covar`.
+Note that `y_obs` is not passed to this function, because it does not affect results.
+"""
+function calc_fisher_matrix_linear_model(A::AbstractMatrix, covar::AbstractMatrix)
+	@assert size(A,1) == size(covar,1) == size(covar,2)
+	@assert size(A,2) >= 1
+	(A' * (covar \ A))
 end
 
 # ╔═╡ bdfa802d-2ae9-4b70-aa9c-0f94213a6e57

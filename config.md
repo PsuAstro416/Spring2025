@@ -17,7 +17,7 @@ generate_rss = false
 website_title = "Astro 416"
 website_descr = "Astro 416 (Spring 2025)"
 website_url   = "https://PsuAstro416.github.io/Spring2025/"
-version = "v0.1"
+version = "v0.2"
 
 # Class specific variables
 class_name = "Data Science Applications to Astronomy"

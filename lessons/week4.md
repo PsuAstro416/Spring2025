@@ -11,6 +11,8 @@ Week {{week_num}}
 
 ## Reading
 - See Lab for info about {{ds_topic}}
+- [What is Bayesian Statistics?](https://storopoli.github.io/Bayesian-Julia/pages/02_bayes_stats/)
+- [How to Use Turing](https://storopoli.github.io/Bayesian-Julia/pages/04_Turing/)
 
 ## [Lab 4](../../labs/lab4/): {{fill title labs/lab4.md}}
 
