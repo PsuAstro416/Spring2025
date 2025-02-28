@@ -17,4 +17,5 @@ Week {{week_num}}
 - During class on Wednesday
 - Bring pencils & eraser to class
 
-
+## Notebooks from class
+- [Day 3 (Q&A)](https://psuastro416.github.io/Spring2025/tutorials/week7day3/)

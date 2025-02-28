@@ -1,19 +1,17 @@
 ### A Pluto.jl notebook ###
-# v0.20.4
+# v0.20.1
 
 using Markdown
 using InteractiveUtils
 
 # This Pluto notebook uses @bind for interactivity. When running this notebook outside of Pluto, the following 'mock version' of @bind gives bound variables a default value (instead of an error).
 macro bind(def, element)
-    #! format: off
     quote
         local iv = try Base.loaded_modules[Base.PkgId(Base.UUID("6e696c72-6542-2067-7265-42206c756150"), "AbstractPlutoDingetjes")].Bonds.initial_value catch; b -> missing; end
         local el = $(esc(element))
         global $(esc(def)) = Core.applicable(Base.get, el) ? Base.get(el) : iv(el)
         el
     end
-    #! format: on
 end
 
 # ╔═╡ 2824ff96-5186-4d22-bea1-7c4df5f5e4bc
@@ -30,8 +28,8 @@ end;
 # hideall
 begin
   title = "Data Science Applications to Astronomy";
-  topic = "Model Building III"
-  subtitle = "Cross Validation"
+  topic = "Project Questions +"
+  subtitle = "(Model Building III: Cross Validation)"
   week = 7
 end;
 
@@ -52,8 +50,57 @@ md"""
 ## $subtitle
 """
 
+# ╔═╡ e30ce2b2-32b1-498d-bb3c-86d7f3e57c76
+md"""
+## Logistics"""
+
 # ╔═╡ b3b57127-99cc-4e6e-83ae-367db9e81a4b
 tip(md"""Remember MSEEQ window closing soon.""")
+
+# ╔═╡ 541d4f13-10c3-45cb-8dc6-fa190fc83eb9
+md"""
+## Project Questions
+"""
+
+# ╔═╡ d172d21b-3a34-4f31-af6f-847239d72afd
+question_box(md"For the project, how do we link the git repo containing our code to ROAR?")
+
+# ╔═╡ d5fea177-6336-4a4d-9fa8-3d2f05b5e68d
+md"""
+I created a [starter project repository](https://github.com/PsuAstro416/astro416-project-project-template).
+"""
+
+# ╔═╡ a69eaefd-b4c6-40b8-af4d-0e0dcce6793e
+question_box(md"What level of interactivity is required for the final dashboard?")
+
+# ╔═╡ 435b5e5e-6775-4246-ac0c-5c15ac535244
+md"""
+- Minimum:  
+  - Allow use to choose which data to be analyzed
+- Suggested:
+   - Allow users to adjust initial guesses for itterative fitting (if relevant)
+- Optional (as makes sense for your project): 
+  - Allow user to change parameter(s)
+  - Allow users to adjust visualization(s) 
+"""
+
+# ╔═╡ 33653887-1f07-4da9-9428-0a417d519fbd
+question_box(md"How should we physically set up our dashboard so that it's easiest for us to work on it as a group?")
+
+# ╔═╡ 260e7420-8363-4e7c-8d90-ae51397c21d3
+md"""
+#### Strongly recommend:
+- Organize code into small functions.
+- When initially writting functions, it can be convenient to write them in Pluto.
+- Once you have a working version, move functions into separate file(s).
+- Use a Pluto notebook to load/call functions stored in files and dispaly dashboard.
+
+
+#### Optionally: 
+- Organize your file(s) in src directory, so you create a Julia "package".
+- I find it's best to organize my file(s) in a src directory and to create a Project.toml, so I create an unregistered Julia "package".
+- The `@ingredients` macro is helpful for having Pluto call code in an unregistered package that I'm developing.  (See example in Lab 2 or project template reo.)
+"""
 
 # ╔═╡ e251d327-aaff-4b19-86a1-7e5230e22910
 md"""
@@ -187,6 +234,29 @@ function generate_data(θ::AbstractVector, n::Integer, σ::Real; n_outliers::Int
 	return (;x_obs = x, y_obs, design_matrix=A, y_true, σ_true, idx_outliers)
 end
 
+# ╔═╡ 129f6c44-4529-4b10-a1bb-77e0c6b7ebe2
+"""
+`predict_linear_model(A, b)`
+Computes the predictions of a linear model with design matrix `A` and parameters `b`.
+"""
+function predict_linear_model(A::AbstractMatrix, b::AbstractVector)
+	@assert size(A,2) == length(b)
+	A*b
+end
+
+# ╔═╡ 6da5a233-9772-43b0-928a-bc9a5382c136
+"""
+`calc_mle_linear_model(A, y_obs, covar)`
+Computes the maximum likelihood estimator for b for the linear model
+`y = A b`
+where measurements errors of `y_obs` are normally distributed and have covariance `covar`.
+"""
+function calc_mle_linear_model(A::AbstractMatrix, y_obs::AbstractVector, covar::AbstractMatrix)
+	@assert size(A,1) == length(y_obs) == size(covar,1) == size(covar,2)
+	@assert size(A,2) >= 1
+	(A' * (covar \ A)) \ (A' * (covar \ y_obs) )
+end
+
 # ╔═╡ 52a6c867-a8d1-4c2a-a75d-cd2ca9a8a2fb
 begin
 	redraw_for_plot 
@@ -270,27 +340,19 @@ begin
 	histogram!(plt_histo_χ²_cv, loss_test_dist, bins=bins, alpha=0.5, label="Test")
 end
 
-# ╔═╡ 129f6c44-4529-4b10-a1bb-77e0c6b7ebe2
+# ╔═╡ 6c354c09-28c1-424f-b9dd-7ccc6951ef7f
 """
-`predict_linear_model(A, b)`
-Computes the predictions of a linear model with design matrix `A` and parameters `b`.
-"""
-function predict_linear_model(A::AbstractMatrix, b::AbstractVector)
-	@assert size(A,2) == length(b)
-	A*b
-end
+`calc_fisher_matrix_linear_model(A, covar)`
 
-# ╔═╡ 6da5a233-9772-43b0-928a-bc9a5382c136
-"""
-`calc_mle_linear_model(A, y_obs, covar)`
-Computes the maximum likelihood estimator for b for the linear model
-`y = A b`
+Computes the Fisher information matrix for θ for the linear model
+`y = A θ`
 where measurements errors of `y_obs` are normally distributed and have covariance `covar`.
+Note that `y_obs` is not passed to this function, because it does not affect results.
 """
-function calc_mle_linear_model(A::AbstractMatrix, y_obs::AbstractVector, covar::AbstractMatrix)
-	@assert size(A,1) == length(y_obs) == size(covar,1) == size(covar,2)
+function calc_fisher_matrix_linear_model(A::AbstractMatrix, covar::AbstractMatrix)
+	@assert size(A,1) == size(covar,1) == size(covar,2)
 	@assert size(A,2) >= 1
-	(A' * (covar \ A)) \ (A' * (covar \ y_obs) )
+	(A' * (covar \ A))
 end
 
 # ╔═╡ f94d3f03-cbf9-4a5c-b35d-7b6223b10f05
@@ -306,21 +368,6 @@ function calc_sigma_mle_linear_model(A::AbstractMatrix, covar::AbstractMatrix)
 	@assert size(A,1) == size(covar,1) == size(covar,2)
 	@assert size(A,2) >= 1
 	sqrt.(diag(inv(PDMat(calc_fisher_matrix_linear_model(A,covar)))))
-end
-
-# ╔═╡ 6c354c09-28c1-424f-b9dd-7ccc6951ef7f
-"""
-`calc_fisher_matrix_linear_model(A, covar)`
-
-Computes the Fisher information matrix for θ for the linear model
-`y = A θ`
-where measurements errors of `y_obs` are normally distributed and have covariance `covar`.
-Note that `y_obs` is not passed to this function, because it does not affect results.
-"""
-function calc_fisher_matrix_linear_model(A::AbstractMatrix, covar::AbstractMatrix)
-	@assert size(A,1) == size(covar,1) == size(covar,2)
-	@assert size(A,2) >= 1
-	(A' * (covar \ A))
 end
 
 # ╔═╡ bdfa802d-2ae9-4b70-aa9c-0f94213a6e57
@@ -1979,7 +2026,15 @@ version = "1.4.1+2"
 # ╟─03a53515-3346-472c-9918-e8a4c8fa185c
 # ╟─5ba080fb-6546-445e-946d-816e0c3f2034
 # ╟─95538698-17ec-4034-978e-b737247c74b8
+# ╟─e30ce2b2-32b1-498d-bb3c-86d7f3e57c76
 # ╟─b3b57127-99cc-4e6e-83ae-367db9e81a4b
+# ╟─541d4f13-10c3-45cb-8dc6-fa190fc83eb9
+# ╟─d172d21b-3a34-4f31-af6f-847239d72afd
+# ╟─d5fea177-6336-4a4d-9fa8-3d2f05b5e68d
+# ╟─a69eaefd-b4c6-40b8-af4d-0e0dcce6793e
+# ╟─435b5e5e-6775-4246-ac0c-5c15ac535244
+# ╟─33653887-1f07-4da9-9428-0a417d519fbd
+# ╟─260e7420-8363-4e7c-8d90-ae51397c21d3
 # ╟─e251d327-aaff-4b19-86a1-7e5230e22910
 # ╟─bb245952-e8de-4bd3-bd4c-e7b5a5b59ff4
 # ╟─ed1508b6-3456-4947-9f04-b3cee90aa191
