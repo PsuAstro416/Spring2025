@@ -10,6 +10,8 @@ Week {{week_num}}
 # {{topic}}
 
 ## Work on Project
+- See [template project repo](https://github.com/PsuAstro416/project-template)
+- Link to create your own in PsuAstro416 org in Canvas (Assignments.Project.Project Dashboard)
 
 ## [Lab 7](../../labs/lab7/): {{fill title labs/lab7.md}}
 
