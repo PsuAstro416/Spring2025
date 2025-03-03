@@ -15,6 +15,9 @@ Week {{week_num}}
 
 ## [Lab 7](../../labs/lab7/): {{fill title labs/lab7.md}}
 
+## Notebooks from class
+- [Day 1](https://psuastro416.github.io/Spring2025/tutorials/week8/)
+
 ## Resources
 - [Bayesian Linear Regression](https://storopoli.github.io/Bayesian-Julia/pages/06_linear_reg/)
 
