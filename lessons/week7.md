@@ -3,7 +3,7 @@ title = "Week 7"
 week_num = 7
 tags = ["lessons"]
 topic = "Exam Week"
-ds_topic = "Model Building III:  Cross-Validation
+ds_topic = "Model Building III:  Cross-Validation"
 +++
 
 Week {{week_num}}
