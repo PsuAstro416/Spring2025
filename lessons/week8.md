@@ -2,7 +2,7 @@
 title = "Week 8"
 week_num = 8
 tags = ["lessons"]
-topic = "Model Building III:  Regularization
+topic = "Model Building III:  Regularization"
 ds_topic = "Model Building III: Regularization"
 +++
 
