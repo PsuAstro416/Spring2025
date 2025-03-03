@@ -61,7 +61,7 @@ lab6_start = "Feb 19"   # Week 6, Day 2
 lab6_due =   "Feb 24"   # Week 7, Day 1
 exam1_date = "Feb 26"   # Week 7, Day 2
 #OLD: lab7_title = "Data Wrangling"
-lab7_title = "Model Building III: Non-linear models"
+lab7_title = "Model Building III: Regularization"
 lab7_start = "Mar  5"   # Week 8, Day 2
 lab7_due =   "Mar 19"    # Week 9, Day 2 (shift to Day 2 so not 2 things do right after SB)
 # Potentially Spring Break Week
@@ -75,7 +75,7 @@ lab9_title = "Data Visualization"
 lab9_start = "Mar 26"    # Week 10, Day 2   # Eric traveling in 2025
 lab9_due =   "Mar 31"    # Week 11, Day 1 
 # Week 11 to focus on project
-project_checkpoint3_title = "Project Checkpoint 3: Perofrms Data Analysis" 
+project_checkpoint3_title = "Project Checkpoint 3: Performs Data Analysis" 
 project_checkpoint3_due = "Apr 7" # Week 12, Day 1
 # Potentially Thanksgiving Week
 # Week 13 to focus on project

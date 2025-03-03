@@ -3,6 +3,7 @@ title = "Week 6"
 week_num = 6
 tags = ["lessons"]
 topic = "Data Storage"
+ds_topic = "Data Storage"
 +++
 
 Week {{week_num}}

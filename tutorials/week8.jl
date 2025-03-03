@@ -1,19 +1,17 @@
 ### A Pluto.jl notebook ###
-# v0.20.4
+# v0.20.1
 
 using Markdown
 using InteractiveUtils
 
 # This Pluto notebook uses @bind for interactivity. When running this notebook outside of Pluto, the following 'mock version' of @bind gives bound variables a default value (instead of an error).
 macro bind(def, element)
-    #! format: off
     quote
         local iv = try Base.loaded_modules[Base.PkgId(Base.UUID("6e696c72-6542-2067-7265-42206c756150"), "AbstractPlutoDingetjes")].Bonds.initial_value catch; b -> missing; end
         local el = $(esc(element))
         global $(esc(def)) = Core.applicable(Base.get, el) ? Base.get(el) : iv(el)
         el
     end
-    #! format: on
 end
 
 # ╔═╡ 2ec1a511-54bd-407b-8c58-0cfe2a7498c4
@@ -93,25 +91,6 @@ md"""
 $\mathrm{loss}_{L2,\lambda}(\theta) = -\frac{1}{2}\left(y-A \theta\right)^T \Sigma^{-1} \left(y-A \theta\right) -\frac{\lambda}{2} \sum_i \theta_i^2  + \mathrm{const}$
 """
 
-# ╔═╡ 7dc5af9e-94cc-46aa-b64b-f8007b907371
-let
-	plt = plot(xlims=(-6,6), ylims=(-6,6), size=(500,500), xlabel="θ₁", ylabel="θ₂")
-	local lx = 2
-	local ly = 3
-	scatter!(plt,[lx], [ly], mc=:blue, ms=4, label="Likelihood")
-	plot_elipse!(plt, lx,ly; rotation=165, scale_x=1, scale_y=0.5, lc=:blue)
-	plot_elipse!(plt, lx,ly; rotation=165, scale_x=2, scale_y=1, lc=:blue)
-	plot_elipse!(plt, lx,ly; rotation=165, scale_x=3, scale_y=1.5, lc=:blue)
-	plot_elipse!(plt, lx,ly; rotation=165, scale_x=4, scale_y=2, lc=:blue)
-	
-	scatter!(plt,[0], [0], mc=:red, ms=4, label="L2 Prior")
-	plot_elipse!(plt, 0,0; scale_x=0.5, scale_y=0.5, lc=:red)
-	plot_elipse!(plt, 0,0; scale_x=1, scale_y=1.0, lc=:red)
-	plot_elipse!(plt, 0,0; scale_x=1.5, scale_y=1.5, lc=:red)
-	local f = 0.42
-	scatter!(plt,[0+f*lx], [0+f*ly], mc=:black, ms=4, label=L"\hat{\theta}_{L2}")	
-end
-
 # ╔═╡ f8114f2c-c913-49bd-817b-b2f5be264d11
 md"""
 With some algebra, one can show that 
@@ -128,26 +107,6 @@ $\mathrm{loss}_{L1,\lambda}(\theta) = -\frac{1}{2}\left(y-A \theta\right)^T \Sig
 -\frac{\lambda}{2} \sum_i \left|\theta_i\right|  + \mathrm{const}$
 """
 
-# ╔═╡ 231ffc1c-fe9a-4e52-aac3-b95e00445bb8
-let
-	plt = plot(xlims=(-6,6), ylims=(-6,6), size=(500,500), xlabel="θ₁", ylabel="θ₂")
-	local lx = 2
-	local ly = 3
-	scatter!(plt,[lx], [ly], mc=:blue, ms=4, label="Likelihood")
-	plot_elipse!(plt, lx,ly; rotation=165, scale_x=1, scale_y=0.5, lc=:blue)
-	plot_elipse!(plt, lx,ly; rotation=165, scale_x=2, scale_y=1, lc=:blue)
-	plot_elipse!(plt, lx,ly; rotation=165, scale_x=3, scale_y=1.5, lc=:blue)
-	plot_elipse!(plt, lx,ly; rotation=165, scale_x=4, scale_y=2, lc=:blue)
-
-	scatter!(plt,[0], [0], mc=:red, ms=4, label="L1 Prior")
-	plot_diamond!(plt, 0,0; scale=1, lc=:red)
-	plot_diamond!(plt, 0,0; scale=1.6, lc=:red)
-	plot_diamond!(plt, 0,0; scale=2.3, lc=:red)
-		
-	scatter!(plt,[0], [1.6], mc=:black, ms=4, label=L"\hat{\theta}_{L1}")
-	
-end
-
 # ╔═╡ 6cc97cb6-a679-4aca-bd19-770c504e8440
 md"""
 Note that here $\hat{\theta}_{L1,1} = 0$.  
@@ -155,27 +114,6 @@ I.e., we can find fits that has less non-zero parameters!
 
 However, if we had chosen a smaller value of $\lambda$, then $\hat{\theta}_{L1,1} \neq 0$
 """
-
-# ╔═╡ 26520f62-95f8-45e5-a258-dfdd0c018d7c
-let
-	plt = plot(xlims=(-6,6), ylims=(-6,6), size=(500,500), xlabel="θ₁", ylabel="θ₂")
-	local lx = 2
-	local ly = 3
-	scatter!(plt,[lx], [ly], mc=:blue, ms=4, label="Likelihood")
-	plot_elipse!(plt, lx,ly; rotation=165, scale_x=1, scale_y=0.5, lc=:blue)
-	plot_elipse!(plt, lx,ly; rotation=165, scale_x=2, scale_y=1, lc=:blue)
-	#plot_elipse!(plt, lx,ly; rotation=165, scale_x=3, scale_y=1.5, lc=:blue)
-	#plot_elipse!(plt, lx,ly; rotation=165, scale_x=4, scale_y=2, lc=:blue)
-
-	scatter!(plt,[0], [0], mc=:red, ms=4, label="L1 Prior")
-	plot_diamond!(plt, 0,0; scale=1.1, lc=:red)
-	plot_diamond!(plt, 0,0; scale=2.2, lc=:red)
-	plot_diamond!(plt, 0,0; scale=3.3, lc=:red)
-	plot_diamond!(plt, 0,0; scale=4.4, lc=:red)
-		
-	scatter!(plt,[0.5], [2.6], mc=:black, ms=4, label=L"\hat{\theta}_{L1}")
-	
-end
 
 # ╔═╡ 114b37d2-dbad-4def-8d89-a8dfffc9b155
 md"""
@@ -252,22 +190,10 @@ begin
 	max_order = 120   # Maximum polynomial order allowed
 end;
 
-# ╔═╡ 36052d26-6596-43d4-80bd-f442d39ba4d6
-begin  
-	# Compute function to be approximated on dense grid
-	x_all = range(-0.5, stop=0.5, length=num_fit)
-    y_all = f.(x_all) 
-    # Create a sparse polynomial to be approximated
-	A_all = poly_design_matrix(x_all, max_order)
-	w_true = fit_L1(A_all, y_all, logλ=-1.0, tol=1e-8)
-end;
-
-# ╔═╡ 850bc6d1-c110-4df7-ab37-758b9ce2a981
-let
-	plt = plot()
-	plot!(plt,x_all,y_all, label="Original function")
-	plot!(plt,x_all,A_all * w_true, label="Polynomial")	
-end
+# ╔═╡ 9d12b8a2-d68e-4d51-9a09-3320cbec1242
+md"""
+## Visualize basis functions
+"""
 
 # ╔═╡ 3a57d2d1-0193-47c4-8038-7ddd0f4c8272
 md"""
@@ -277,7 +203,7 @@ md"""
 # ╔═╡ 67437a02-a6a5-4a14-bd75-045f2ffa28ea
 begin   # Parameters for simulated observations
 	num_obs = 50
-	σ_obs = 0.01
+	σ_obs = 0.05
 end;
 
 # ╔═╡ 4cb856d6-58d9-406c-97a2-8faad4fd72c7
@@ -300,13 +226,17 @@ filter_small_coef_from_histo = true;
 
 # ╔═╡ 737b6be3-272b-4dad-978d-ba4c1a4ed5f3
 md"""
-logλ for L1: $(@bind logλL1 Slider(-5:0.1:5; default=3.0, show_value=true))
-logλ for L2: $(@bind logλL2 Slider(-5:0.1:5; default=3.0, show_value=true)).
-
 Show No Regularization (all terms): $(@bind show_no_regularization_full CheckBox(;default=true))
 
 Show No Regularization (truncated): $(@bind show_no_regularization_trunc CheckBox(;default=true))
 Order to truncate at: $(@bind max_order_trunc Slider(1:1:max_order; default=100, show_value=true))
+
+Show L2: $(@bind show_L2 CheckBox(;default=true))
+logλ for L2: $(@bind logλL2 Slider(-5:0.1:5; default=-5.0, show_value=true)).
+
+Show L1: $(@bind show_L1 CheckBox(;default=true))
+logλ for L1: $(@bind logλL1 Slider(-8:0.1:5; default=-5.0, show_value=true))
+Show L1 refit: $(@bind show_L1_refit CheckBox(;default=false))
 """
 
 # ╔═╡ d80ad6e5-978a-4d96-9bed-dd1d6e882df0
@@ -314,43 +244,6 @@ md"""
 $(@bind regen_data Button("Generate New Data"))
 $(@bind repartition_data Button("Repartition Data"))
 """
-
-# ╔═╡ 40be6ef8-26c0-4d04-87f7-ce99bc83e925
-begin
-	regen_data
-    x_obs = range(-0.5, stop=0.5, length=num_obs)
-	A_obs = poly_design_matrix(x_obs, max_order)
-	y_obs = A_obs * w_true
-	y_obs += σ_obs .* randn(length(x_obs))
-end;
-
-# ╔═╡ 49f7b5b7-6915-46e0-b637-63a3e62db49c
-begin
-	repartition_data
-	train_data = nothing
-	test_data = nothing
-	if x_obs_regularly_spaced
-		train_data = (view(x_obs,1:2:num_obs),view(y_obs,1:2:num_obs))
-		test_data =  (view(x_obs,2:2:num_obs),view(y_obs,2:2:num_obs))
-	else
-		x_shuffled, y_shuffled = shuffleobs((x_obs,y_obs))
-		train_data, test_data = splitobs((x_shuffled, y_shuffled); at=0.5)
-	end
-	
-	df = DataFrame(:x=>x_obs, :y=>y_obs)
-	df_train = DataFrame([:x,:y].=>train_data)
-	df_test = DataFrame([:x,:y].=>test_data)
-	(;df_train, df_test)
-end
-
-# ╔═╡ 09348451-b608-4ed8-b24b-0f54d1eb2ad1
-let
-	plt = plot()
-	scatter!(plt,df_train.x,df_train.y, yerr=σ_obs, label="Train", mc=1)
-	scatter!(plt,df_test.x,df_test.y, yerr=σ_obs, label="Test", mc=2)
-	perm_plt = sortperm(df_train.x)
-	plot!(plt,x_all,A_all*w_true, label="Full function", lc=1)
-end
 
 # ╔═╡ a26602d5-eb47-4655-8cf5-8fe15a2c6c1b
 md"""
@@ -365,117 +258,6 @@ TableOfContents()
 md"""
 ## Perform Fitting
 """
-
-# ╔═╡ e6406aa7-38e0-44bb-be16-24df592a14d1
-begin
-	A_train = poly_design_matrix(df_train.x,max_order);
-	A_test = poly_design_matrix(df_test.x,max_order);
-end;
-
-# ╔═╡ 2ed1af13-123f-4625-a15b-910a845cf6af
-begin	
-	w_no_reg_full = fit_no_reg(A_train, df_train.y)
-	pred_no_reg_full = A_all * w_no_reg_full
-end;
-
-# ╔═╡ f7f30b7b-85a7-4d84-a3d9-9aea0d5d3a6c
-begin	
-	A_all_trunc = view(A_all,:,1:max_order_trunc)
-	A_train_trunc = view(A_train,:,1:max_order_trunc)
-	A_test_trunc = view(A_test,:,1:max_order_trunc)
-	w_no_reg_trunc = fit_no_reg(A_train_trunc, df_train.y)
-	pred_no_reg_trunc = A_all_trunc * w_no_reg_trunc
-end;
-
-# ╔═╡ d2badb78-9edb-490c-8f8a-ec49536b337a
-begin
-	w_L2 = fit_L2(A_train_trunc, df_train.y; logλ=logλL2)
-	pred_L2 = A_all_trunc * w_L2
-end;
-
-# ╔═╡ 3acb9e76-911d-43a1-9574-793be5db40db
-begin
-	w_L1 = fit_L1(A_train_trunc, df_train.y; logλ=logλL1)
-	pred_L1 = A_all_trunc * w_L1
-end;
-
-# ╔═╡ f4c2debc-9df9-46bb-869f-deb099f59a43
-let
-	plt = plot()
-	scatter!(plt,df_train.x,df_train.y, yerr=σ_obs, label="Train", mc=1)
-	scatter!(plt,df_test.x,df_test.y, yerr=σ_obs, label="Test", mc=2)
-	perm_plt = sortperm(df_train.x)
-	plot!(plt,x_all,A_all*w_true, label="Full function", lc=1)
-	if show_no_regularization_full
-		plot!(plt,x_all,A_all*w_no_reg_full, label="No regularization (full)",lc=3, lw=2, alpha=0.5)
-	end
-	if show_no_regularization_trunc
-		plot!(plt,x_all,A_all_trunc*w_no_reg_trunc, label="No regularization (truncated)", lc=4, lw=2, alpha=0.5)
-	end
-	plot!(plt,x_all,pred_L2, label="L2", linecolor=7, lw=3, alpha=0.5)
-	plot!(plt,x_all,pred_L1, label="L1", lc=6, lw=3, alpha=0.5)
-	xlabel!(plt,"x")
-	ylabel!(plt,"y")
-end
-
-# ╔═╡ 477db97b-61e5-466f-9c86-b53459d71a55
-begin
-	χ²_no_reg_full_train = sum((A_train*w_no_reg_full.-df_train.y).^2 ./σ_obs^2)
-	χ²_no_reg_full_test = sum((A_test*w_no_reg_full.-df_test.y).^2 ./σ_obs^2)
-	χ²_no_reg_trunc_train = sum((A_train_trunc*w_no_reg_trunc.-df_train.y).^2 ./σ_obs^2)
-	χ²_no_reg_trunc_test = sum((A_test_trunc*w_no_reg_trunc.-df_test.y).^2 ./σ_obs^2)
-	χ²_L1_train = sum((A_train_trunc*w_L1.-df_train.y).^2 ./σ_obs^2)
-	χ²_L2_train = sum((A_train_trunc*w_L2.-df_train.y).^2 ./σ_obs^2)
-	χ²_L2_test = sum((A_test_trunc*w_L2.-df_test.y).^2 ./σ_obs^2)
-	χ²_L1_test = sum((A_test_trunc*w_L1.-df_test.y).^2 ./σ_obs^2)
-end;
-
-# ╔═╡ 524a5de6-4ed2-491b-b0d4-509a24e2c185
-DataFrame(:Regularization=>["None", "None (truncated)", "L2 (log₁₀λ = " *string(logλL2)*")", "L1 (log₁₀λ = " *string(logλL1)*")"],
-		:χ²_train => [χ²_no_reg_full_train,χ²_no_reg_trunc_train,χ²_L2_train,χ²_L1_train],
-		:χ²_test => [χ²_no_reg_full_test,χ²_no_reg_trunc_test,χ²_L2_test,χ²_L1_test],
-		:num_coeffs => [calc_num_nonzero_coeff(w_no_reg_full), calc_num_nonzero_coeff(w_no_reg_trunc), calc_num_nonzero_coeff(w_L2), calc_num_nonzero_coeff(w_L1)]
-)
-
-# ╔═╡ f41675d7-a10c-4f08-9af0-a9cef55a41ee
-let
-	if filter_small_coef_from_histo
-		mask_noreg_full = abs.(w_no_reg_full).>1e-8
-		mask_noreg_trunc = abs.(w_no_reg_trunc).>1e-8
-		L1_mask = abs.(w_L1).>1e-8
-		L2_mask = abs.(w_L2).>1e-8
-	else
-		mask_noreg_full = 1:length(w_no_reg_full)
-		mask_noreg_trunc = 1:length(w_no_reg_trunc)
-		L1_mask = 1:length(w_L1)
-		L2_mask = 1:length(w_L2)
-	end
-	plt1 = plot()
-	if show_no_regularization_full
-	histogram!(plt1, w_no_reg_full[mask_noreg_full], label="No regularization (all)", nbins=40, ylabel="N")
-	end
-	plt1 = histogram!(plt1, w_no_reg_trunc[mask_noreg_trunc], label="No regularization (truncated; " * string(	sum(mask_noreg_trunc)) * ")", nbins=40, ylabel="N")
-	plt2 = histogram( w_L2[L2_mask], label="L2 (" * string(calc_num_nonzero_coeff(w_L2)) * ")", nbins=40, xlabel="Coefficient values", ylabel="N")
-	plt3 = histogram( w_L1[L1_mask], label="L1 (" * string(calc_num_nonzero_coeff(w_L1)) * ")", nbins=40, xlabel="Coefficient values", ylabel="N")
-	plt4 = histogram(w_true, label="True", nbins=40, ylabel="N")
-	plot(plt1, plt4, plt2, plt3, layout=(2,2))
-end
-
-# ╔═╡ f9e9a76c-54c0-4c2e-bc57-85664e83d8c4
-let
-	plt = plot()
-	if show_no_regularization_full
-	scatter!(plt,w_true,w_no_reg_full, label="No Regularization (full)", mc=1)
-	end
-	if show_no_regularization_trunc
-		scatter!(plt,w_true,w_no_reg_trunc, label="No Regularization (truncated)", mc=1)
-	end
-	scatter!(plt,w_true,w_L1, label="L1", mc=2)
-	scatter!(plt,w_true,w_L2, label="L2", mc=3)
-	xlabel!(plt, "True Coefficient")
-	ylabel!(plt, "Fit Coefficient")
-	
-end
 
 # ╔═╡ 0bffcfec-a707-425c-a327-0906a3b0a71d
 md"""
@@ -561,12 +343,218 @@ function poly_design_matrix(x::AbstractVector, ncol::Integer)
 	stack(n->Pl.(x, n),0:(ncol-1))
 end
 
+# ╔═╡ 36052d26-6596-43d4-80bd-f442d39ba4d6
+begin  
+	# Compute function to be approximated on dense grid
+	x_all = range(-0.5, stop=0.5, length=num_fit)
+    y_all = f.(x_all) 
+    # Create a sparse polynomial to be approximated
+	A_all = poly_design_matrix(x_all, max_order)
+	w_true = fit_L1(A_all, y_all, logλ=-1.0, tol=1e-8)
+end;
+
+# ╔═╡ 850bc6d1-c110-4df7-ab37-758b9ce2a981
+let
+	plt = plot()
+	plot!(plt,x_all,y_all, label="Original function")
+	plot!(plt,x_all,A_all * w_true, label="Polynomial")	
+end
+
+# ╔═╡ 40be6ef8-26c0-4d04-87f7-ce99bc83e925
+begin
+	regen_data
+    x_obs = range(-0.5, stop=0.5, length=num_obs)
+	A_obs = poly_design_matrix(x_obs, max_order)
+	y_obs = A_obs * w_true
+	y_obs += σ_obs .* randn(length(x_obs))
+end;
+
+# ╔═╡ c04caca4-9363-47b7-ad2a-65571d2dbcbb
+md"""
+Which Legendre Polynomial to plot: $(@bind legendre_order_plt Slider(1:size(A_obs,2), default=1, show_value=true))
+"""
+
+# ╔═╡ d7973d1c-2d13-4d23-bddb-36b2ead1f766
+let
+	plot(x_obs, view(A_obs,1:size(A_obs,1),legendre_order_plt), xlabel="x", ylabel="Legendre Polynomial $(legendre_order_plt-1)th of order $(max_order-1)", label=:none )
+	#scatter!(x_obs, view(A_obs,1:size(A_obs,1),legendre_order_plt), mc=1, label=:none)
+end
+
+# ╔═╡ 49f7b5b7-6915-46e0-b637-63a3e62db49c
+begin
+	repartition_data
+	train_data = nothing
+	test_data = nothing
+	if x_obs_regularly_spaced
+		train_data = (view(x_obs,1:2:num_obs),view(y_obs,1:2:num_obs))
+		test_data =  (view(x_obs,2:2:num_obs),view(y_obs,2:2:num_obs))
+	else
+		x_shuffled, y_shuffled = shuffleobs((x_obs,y_obs))
+		train_data, test_data = splitobs((x_shuffled, y_shuffled); at=0.5)
+	end
+	
+	df = DataFrame(:x=>x_obs, :y=>y_obs)
+	df_train = DataFrame([:x,:y].=>train_data)
+	df_test = DataFrame([:x,:y].=>test_data)
+	(;df_train, df_test)
+end
+
+# ╔═╡ 09348451-b608-4ed8-b24b-0f54d1eb2ad1
+let
+	plt = plot()
+	scatter!(plt,df_train.x,df_train.y, yerr=σ_obs, label="Train", mc=1)
+	scatter!(plt,df_test.x,df_test.y, yerr=σ_obs, label="Test", mc=2)
+	perm_plt = sortperm(df_train.x)
+	plot!(plt,x_all,A_all*w_true, label="Full function", lc=1)
+end
+
+# ╔═╡ e6406aa7-38e0-44bb-be16-24df592a14d1
+begin
+	A_train = poly_design_matrix(df_train.x,max_order);
+	A_test = poly_design_matrix(df_test.x,max_order);
+end;
+
+# ╔═╡ 2ed1af13-123f-4625-a15b-910a845cf6af
+begin	
+	w_no_reg_full = fit_no_reg(A_train, df_train.y)
+	pred_no_reg_full = A_all * w_no_reg_full
+end;
+
+# ╔═╡ f7f30b7b-85a7-4d84-a3d9-9aea0d5d3a6c
+begin	
+	A_all_trunc = view(A_all,:,1:max_order_trunc)
+	A_train_trunc = view(A_train,:,1:max_order_trunc)
+	A_test_trunc = view(A_test,:,1:max_order_trunc)
+	w_no_reg_trunc = fit_no_reg(A_train_trunc, df_train.y)
+	pred_no_reg_trunc = A_all_trunc * w_no_reg_trunc
+end;
+
+# ╔═╡ d2badb78-9edb-490c-8f8a-ec49536b337a
+begin
+	w_L2 = fit_L2(A_train_trunc, df_train.y; logλ=logλL2)
+	pred_L2 = A_all_trunc * w_L2
+end;
+
+# ╔═╡ 3acb9e76-911d-43a1-9574-793be5db40db
+begin
+	w_L1 = fit_L1(A_train_trunc, df_train.y; logλ=logλL1)
+	pred_L1 = A_all_trunc * w_L1
+end;
+
+# ╔═╡ 5a07e031-d58d-445a-84ef-c05bc464d6af
+begin
+	idx_w_L1_keep = abs.(w_L1) .> 1e-6
+	A_L1_refit_train = view(A_train_trunc,:,idx_w_L1_keep)
+	w_L1_refit = fit_no_reg(A_L1_refit_train, df_train.y)
+	A_L1_refit_test = view(A_test_trunc,:,idx_w_L1_keep)
+	A_L1_all_refit_all = view(A_all_trunc,:,idx_w_L1_keep)
+	pred_L1_refit = A_L1_all_refit_all * w_L1_refit 
+end;
+
+# ╔═╡ f4c2debc-9df9-46bb-869f-deb099f59a43
+let
+	plt = plot()
+	scatter!(plt,df_train.x,df_train.y, yerr=σ_obs, label="Train", mc=1)
+	scatter!(plt,df_test.x,df_test.y, yerr=σ_obs, label="Test", mc=2)
+	perm_plt = sortperm(df_train.x)
+	plot!(plt,x_all,A_all*w_true, label="Full function", lc=1)
+	if show_no_regularization_full
+		plot!(plt,x_all,A_all*w_no_reg_full, label="No regularization (full)",lc=3, lw=2, alpha=0.5)
+	end
+	if show_no_regularization_trunc
+		plot!(plt,x_all,A_all_trunc*w_no_reg_trunc, label="No regularization (truncated)", lc=4, lw=2, alpha=0.5)
+	end
+	if show_L2
+	plot!(plt,x_all,pred_L2, label="L2", linecolor=7, lw=3, alpha=0.5)
+	end
+	if show_L1
+	plot!(plt,x_all,pred_L1, label="L1", lc=6, lw=3, alpha=0.5)
+	end
+	if show_L1_refit
+	plot!(plt,x_all,pred_L1_refit, label="L1 (refit)", lc=5, lw=3, alpha=0.5)
+	end
+	xlabel!(plt,"x")
+	ylabel!(plt,"y")
+end
+
+# ╔═╡ 477db97b-61e5-466f-9c86-b53459d71a55
+begin
+	χ²_no_reg_full_train = sum((A_train*w_no_reg_full.-df_train.y).^2 ./σ_obs^2)
+	χ²_no_reg_full_test = sum((A_test*w_no_reg_full.-df_test.y).^2 ./σ_obs^2)
+	χ²_no_reg_trunc_train = sum((A_train_trunc*w_no_reg_trunc.-df_train.y).^2 ./σ_obs^2)
+	χ²_no_reg_trunc_test = sum((A_test_trunc*w_no_reg_trunc.-df_test.y).^2 ./σ_obs^2)
+	χ²_L1_train = sum((A_train_trunc*w_L1.-df_train.y).^2 ./σ_obs^2)
+	χ²_L1_refit_train = sum((A_L1_refit_train*w_L1_refit.-df_train.y).^2 ./σ_obs^2)
+	χ²_L2_train = sum((A_train_trunc*w_L2.-df_train.y).^2 ./σ_obs^2)
+	χ²_L2_test = sum((A_test_trunc*w_L2.-df_test.y).^2 ./σ_obs^2)
+	χ²_L1_test = sum((A_test_trunc*w_L1.-df_test.y).^2 ./σ_obs^2)
+	χ²_L1_refit_test = sum((A_L1_refit_test*w_L1_refit.-df_test.y).^2 ./σ_obs^2)
+	(;num_obs_train=size(df_train,1), num_obs_test=size(df_test,1))
+end
+
+# ╔═╡ f9e9a76c-54c0-4c2e-bc57-85664e83d8c4
+let
+	plt = plot()
+	if show_no_regularization_full
+	scatter!(plt,w_true,w_no_reg_full, label="No Regularization (full)", mc=1)
+	end
+	if show_no_regularization_trunc
+		scatter!(plt,w_true,w_no_reg_trunc, label="No Regularization (truncated)", mc=1)
+	end
+	if show_L2
+		scatter!(plt,w_true,w_L2, label="L2", mc=3)
+	end
+	if show_L1
+		scatter!(plt,w_true,w_L1, label="L1", mc=2)
+	end
+	if show_L1_refit
+	scatter!(plt,w_true,w_L1_refit, label="L1 (refit)", mc=5)
+	end
+	xlabel!(plt, "True Coefficient")
+	ylabel!(plt, "Fit Coefficient")
+	
+end
+
 # ╔═╡ 60776332-1088-4c65-be0a-7697bd63a19e
 """
 Computes number of coefficents with absolute value greater than tol (default 1e-8)
 """
 function calc_num_nonzero_coeff(w::AbstractArray; tol::Real = 1e-8)
 	sum(abs.(w).>tol)
+end
+
+# ╔═╡ 524a5de6-4ed2-491b-b0d4-509a24e2c185
+DataFrame(:Regularization=>["None", "None (truncated)", "L2 (log₁₀λ = " *string(logλL2)*")", "L1 (log₁₀λ = " *string(logλL1)*")", "L1 (refit; log₁₀λ = " *string(logλL1)*")"],
+		:χ²_train => [χ²_no_reg_full_train,χ²_no_reg_trunc_train,χ²_L2_train,χ²_L1_train,χ²_L1_refit_train],
+		:χ²_test => [χ²_no_reg_full_test,χ²_no_reg_trunc_test,χ²_L2_test,χ²_L1_test,χ²_L1_refit_test],
+		:num_coeffs => [calc_num_nonzero_coeff(w_no_reg_full), calc_num_nonzero_coeff(w_no_reg_trunc), calc_num_nonzero_coeff(w_L2), calc_num_nonzero_coeff(w_L1),calc_num_nonzero_coeff(w_L1)]
+)
+
+# ╔═╡ f41675d7-a10c-4f08-9af0-a9cef55a41ee
+let
+	if filter_small_coef_from_histo
+		mask_noreg_full = abs.(w_no_reg_full).>1e-8
+		mask_noreg_trunc = abs.(w_no_reg_trunc).>1e-8
+		L1_mask = abs.(w_L1).>1e-8
+		L1_refit_mask = abs.(w_L1_refit).>1e-8
+		L2_mask = abs.(w_L2).>1e-8
+	else
+		mask_noreg_full = 1:length(w_no_reg_full)
+		mask_noreg_trunc = 1:length(w_no_reg_trunc)
+		L1_mask = 1:length(w_L1)
+		L1_refit_mask = 1:length(w_L1_refit)
+		L2_mask = 1:length(w_L2)
+	end
+	plt1 = plot()
+	if show_no_regularization_full
+	histogram!(plt1, w_no_reg_full[mask_noreg_full], label="No regularization (all)", nbins=40, ylabel="N")
+	end
+	plt1 = histogram!(plt1, w_no_reg_trunc[mask_noreg_trunc], label="No regularization (truncated; " * string(	sum(mask_noreg_trunc)) * ")", nbins=40, ylabel="N")
+	plt2 = histogram( w_L2[L2_mask], label="L2 (" * string(calc_num_nonzero_coeff(w_L2)) * ")", nbins=40, xlabel="Coefficient values", ylabel="N")
+	plt3 = histogram( w_L1[L1_mask], label="L1 (" * string(calc_num_nonzero_coeff(w_L1)) * ")", nbins=40, xlabel="Coefficient values", ylabel="N")
+	#plt4 = histogram(w_true, label="True", nbins=40, ylabel="N")
+	plt4 = histogram(w_L1_refit[L1_refit_mask], label="L1 (refit)", nbins=40, ylabel="N")
+	plot(plt1, plt3, plt2, plt4, layout=(2,2))
 end
 
 # ╔═╡ e3dd26b0-61df-432e-b90c-30701e9a6376
@@ -592,6 +580,66 @@ function plot_elipse!(plt, x, y; rotation::Real=0, scale_x::Real=1, scale_y::Rea
 	yy = y .+ ( sθ * ct .+ cθ * st )
 	plot!(plt, xx,yy; label=:none, kwargs...)
 	plt
+end
+
+# ╔═╡ 7dc5af9e-94cc-46aa-b64b-f8007b907371
+let
+	plt = plot(xlims=(-6,6), ylims=(-6,6), size=(500,500), xlabel="θ₁", ylabel="θ₂")
+	local lx = 2
+	local ly = 3
+	scatter!(plt,[lx], [ly], mc=:blue, ms=4, label="Likelihood")
+	plot_elipse!(plt, lx,ly; rotation=165, scale_x=1, scale_y=0.5, lc=:blue)
+	plot_elipse!(plt, lx,ly; rotation=165, scale_x=2, scale_y=1, lc=:blue)
+	plot_elipse!(plt, lx,ly; rotation=165, scale_x=3, scale_y=1.5, lc=:blue)
+	plot_elipse!(plt, lx,ly; rotation=165, scale_x=4, scale_y=2, lc=:blue)
+	
+	scatter!(plt,[0], [0], mc=:red, ms=4, label="L2 Prior")
+	plot_elipse!(plt, 0,0; scale_x=0.5, scale_y=0.5, lc=:red)
+	plot_elipse!(plt, 0,0; scale_x=1, scale_y=1.0, lc=:red)
+	plot_elipse!(plt, 0,0; scale_x=1.5, scale_y=1.5, lc=:red)
+	local f = 0.42
+	scatter!(plt,[0+f*lx], [0+f*ly], mc=:black, ms=4, label=L"\hat{\theta}_{L2}")	
+end
+
+# ╔═╡ 231ffc1c-fe9a-4e52-aac3-b95e00445bb8
+let
+	plt = plot(xlims=(-6,6), ylims=(-6,6), size=(500,500), xlabel="θ₁", ylabel="θ₂")
+	local lx = 2
+	local ly = 3
+	scatter!(plt,[lx], [ly], mc=:blue, ms=4, label="Likelihood")
+	plot_elipse!(plt, lx,ly; rotation=165, scale_x=1, scale_y=0.5, lc=:blue)
+	plot_elipse!(plt, lx,ly; rotation=165, scale_x=2, scale_y=1, lc=:blue)
+	plot_elipse!(plt, lx,ly; rotation=165, scale_x=3, scale_y=1.5, lc=:blue)
+	plot_elipse!(plt, lx,ly; rotation=165, scale_x=4, scale_y=2, lc=:blue)
+
+	scatter!(plt,[0], [0], mc=:red, ms=4, label="L1 Prior")
+	plot_diamond!(plt, 0,0; scale=1, lc=:red)
+	plot_diamond!(plt, 0,0; scale=1.6, lc=:red)
+	plot_diamond!(plt, 0,0; scale=2.3, lc=:red)
+		
+	scatter!(plt,[0], [1.6], mc=:black, ms=4, label=L"\hat{\theta}_{L1}")
+	
+end
+
+# ╔═╡ 26520f62-95f8-45e5-a258-dfdd0c018d7c
+let
+	plt = plot(xlims=(-6,6), ylims=(-6,6), size=(500,500), xlabel="θ₁", ylabel="θ₂")
+	local lx = 2
+	local ly = 3
+	scatter!(plt,[lx], [ly], mc=:blue, ms=4, label="Likelihood")
+	plot_elipse!(plt, lx,ly; rotation=165, scale_x=1, scale_y=0.5, lc=:blue)
+	plot_elipse!(plt, lx,ly; rotation=165, scale_x=2, scale_y=1, lc=:blue)
+	#plot_elipse!(plt, lx,ly; rotation=165, scale_x=3, scale_y=1.5, lc=:blue)
+	#plot_elipse!(plt, lx,ly; rotation=165, scale_x=4, scale_y=2, lc=:blue)
+
+	scatter!(plt,[0], [0], mc=:red, ms=4, label="L1 Prior")
+	plot_diamond!(plt, 0,0; scale=1.1, lc=:red)
+	plot_diamond!(plt, 0,0; scale=2.2, lc=:red)
+	plot_diamond!(plt, 0,0; scale=3.3, lc=:red)
+	plot_diamond!(plt, 0,0; scale=4.4, lc=:red)
+		
+	scatter!(plt,[0.5], [2.6], mc=:black, ms=4, label=L"\hat{\theta}_{L1}")
+	
 end
 
 # ╔═╡ 00000000-0000-0000-0000-000000000001
@@ -2239,6 +2287,9 @@ version = "1.4.1+2"
 # ╠═f43408b8-e360-4c62-a438-03e3203ace13
 # ╠═36052d26-6596-43d4-80bd-f442d39ba4d6
 # ╟─850bc6d1-c110-4df7-ab37-758b9ce2a981
+# ╟─9d12b8a2-d68e-4d51-9a09-3320cbec1242
+# ╟─d7973d1c-2d13-4d23-bddb-36b2ead1f766
+# ╟─c04caca4-9363-47b7-ad2a-65571d2dbcbb
 # ╟─3a57d2d1-0193-47c4-8038-7ddd0f4c8272
 # ╠═67437a02-a6a5-4a14-bd75-045f2ffa28ea
 # ╠═40be6ef8-26c0-4d04-87f7-ce99bc83e925
@@ -2248,8 +2299,8 @@ version = "1.4.1+2"
 # ╟─e83f8d28-b5a7-401d-880e-eff523b33b4a
 # ╟─2330403e-b012-4aaf-b231-ecd142abb665
 # ╟─145f64b4-88b0-4fe7-b009-fa592c88e569
-# ╟─737b6be3-272b-4dad-978d-ba4c1a4ed5f3
 # ╟─f4c2debc-9df9-46bb-869f-deb099f59a43
+# ╟─737b6be3-272b-4dad-978d-ba4c1a4ed5f3
 # ╟─477db97b-61e5-466f-9c86-b53459d71a55
 # ╟─524a5de6-4ed2-491b-b0d4-509a24e2c185
 # ╟─f41675d7-a10c-4f08-9af0-a9cef55a41ee
@@ -2264,6 +2315,7 @@ version = "1.4.1+2"
 # ╠═f7f30b7b-85a7-4d84-a3d9-9aea0d5d3a6c
 # ╠═d2badb78-9edb-490c-8f8a-ec49536b337a
 # ╠═3acb9e76-911d-43a1-9574-793be5db40db
+# ╠═5a07e031-d58d-445a-84ef-c05bc464d6af
 # ╟─0bffcfec-a707-425c-a327-0906a3b0a71d
 # ╟─95dd360f-6a57-49cb-8169-e9f98aed5151
 # ╟─a05da4f0-d1c5-4d11-8b06-0d731f3672a5
