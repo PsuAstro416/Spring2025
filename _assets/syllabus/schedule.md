@@ -24,7 +24,7 @@ Students will submit at least one questions about the week's content prior to Fr
 | 7  | Exam week | 
 | 8  | Regularizaton & Cross-Validation |
 | SB | Spring Break |
-| 9  | Explanatory Data Analysis |
+| 9  | Classification |
 | 10 | Data Visualization |
 | 11 | Data Science Workflow | 
 | 12 | Reports & Dashboards | 
