@@ -23,6 +23,11 @@ In this lab, students will learn to:
 
 ### Instructions
 - Work through the [ex1.jl](https://psuastro416.github.io/lab8/ex1.html) (Pluto notebook) and save updates in your personal repository.  
+- Work through the [ex2.jl](https://psuastro416.github.io/lab8/ex2.html) (Pluto notebook) and save updates in your personal repository.  
 - [Commit](/tips/labs/commit) and [submit](/tips/labs/submitting/) your work.
 - Once the instrctor and/or TA has provided feedback, [review the feedback](/tips/labs/feedback/)
 
+## Resources
+- [GLM.jl](https://juliastats.org/GLM.jl/dev/)
+- [Bayesian Logistic Regression](https://turing.ml/dev/tutorials/02-logistic-regression/)
+- [Logistic regression with Flux.jl](https://fluxml.ai/Flux.jl/stable/tutorials/logistic_regression/)

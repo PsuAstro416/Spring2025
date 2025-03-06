@@ -4,7 +4,6 @@ week_num = 10
 tags = ["lessons"]
 topic = "Data Visualization"
 ds_topic = "Data Visualization"
-exo_topic =  "Exoplanet Characterization: Emission/Reflection Spectroscopy"
 +++
 
 Week {{week_num}}

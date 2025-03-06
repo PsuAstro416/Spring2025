@@ -4,7 +4,6 @@ week_num = 11
 tags = ["lessons"]
 topic = "Data Science Workflow"
 ds_topic = "Data Science Workflow"
-exo_topic =  "Exoplanet Detection: Microlensing"
 +++
 
 Week {{week_num}}
@@ -12,6 +11,8 @@ Week {{week_num}}
 
 ## Wednesday 
 - During class time, work on class project & ask questions of instructor & TA
+- [What is a Data Science Life Cycle?](https://www.datascience-pm.com/data-science-life-cycle/)
+- [Data Science Workflow](https://www.datascience-pm.com/data-science-workflow/)
 
 ### Optional Resources:
 - Dashboards w/ Pluto: [PlutoUI examples](https://juliapluto.github.io/sample-notebook-previews/PlutoUI.jl.html), [video from JuliaCon 2022](https://www.youtube.com/watch?v=dP9UuEL00iM)
