@@ -10,5 +10,7 @@ exo_topic =  "Exoplanet Detection: Disks"
 Week {{week_num}}
 # {{topic}}
 
+<!--
 ## Wednesday
 - During class time, work on class project & ask questions of instructor & TA
+-->

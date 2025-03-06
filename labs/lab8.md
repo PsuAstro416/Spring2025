@@ -17,6 +17,9 @@ In this lab, students will learn to:
 - Choose threshold to balance rates of false discoveries and false omissions
 - Use undersampling to generate a balanced sample
 - Estimate parameter uncertainties via K-fold cross validation.
+- Train a neural network to classify data
+- Improve performance of classifier by increasing size or number of hidden layers
+- Test performance using a held-out test set
 
 ### Instructions
 - Work through the [ex1.jl](https://psuastro416.github.io/lab8/ex1.html) (Pluto notebook) and save updates in your personal repository.  
