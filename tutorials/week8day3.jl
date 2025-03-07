@@ -1,19 +1,17 @@
 ### A Pluto.jl notebook ###
-# v0.20.4
+# v0.20.1
 
 using Markdown
 using InteractiveUtils
 
 # This Pluto notebook uses @bind for interactivity. When running this notebook outside of Pluto, the following 'mock version' of @bind gives bound variables a default value (instead of an error).
 macro bind(def, element)
-    #! format: off
     quote
         local iv = try Base.loaded_modules[Base.PkgId(Base.UUID("6e696c72-6542-2067-7265-42206c756150"), "AbstractPlutoDingetjes")].Bonds.initial_value catch; b -> missing; end
         local el = $(esc(element))
         global $(esc(def)) = Core.applicable(Base.get, el) ? Base.get(el) : iv(el)
         el
     end
-    #! format: on
 end
 
 # ╔═╡ f4c0e1d9-44be-4c35-ad7a-00c915d9fb61
@@ -50,9 +48,21 @@ md"""
 #### $subtitle
 """
 
+# ╔═╡ 5cfd2183-0da6-4d06-9c04-b69a08068781
+md"""
+# Announcements/Logistics
+"""
+
+# ╔═╡ cd654344-7ee6-4a1d-98e9-eb950a6e1869
+md"""
+## Penn State [AI Week](https://ai.psu.edu/ai-week-2025)
+- Events: April 14-17, 2025
+- Student poster submission deadline:  Monday, March 31, 2025
+"""
+
 # ╔═╡ 0b18b93c-0331-4de9-9af6-6c09e27fd55c
 md"""
-# MSEEQ
+## MSEEQ
 """
 
 # ╔═╡ f80ff8aa-2b4d-4468-8d4e-92d2dfd7b211
@@ -67,17 +77,23 @@ md"""
 
 # ╔═╡ 7e351c59-777e-4368-9d44-f781891ed736
 md"""
-### What's been difficult?
-- Feel like asking arbitrary questions for Fridays (1 reponse) → That's ok!
-- Reasons for learning things sometimes unclear clear (2 response) → I can begin weeks with more context.
+### What's been difficult? / Suggestions
+- Feel like asking arbitrary questions for Fridays (1 reponse) → 
+  - I get it, but...
+  - that's ok!  There are still metacognitive benefits.
+- Reasons for learning things sometimes unclear clear (2 response) → 
+  - I can provide more context for Monday discussions.
 - Didn't like labs that required a specific answer (1 response) → 
   - If the interactive feedback is more annoying than helpful, then ignore it.
   - I haven't added interactive feedback to upcoming labs.
-- Want to write your own code (2 responses) → Enjoy the project 😄
+- Want to write your own code (2 responses) → 
+   - Labs aim to provide scaffolding to ease students into indepenent coding.
+   - Enjoy the project 😄
 - More independence in in labs (1 response) → 
   - In others classes, I've found that without lots of structure, it's really easy for students to get distracted by coding details.  
-  - Some more independence in Labs 8 & 9.
-- More class time for labs/project coding (1 response) → I'm on the fence.  
+  - Increasing independence in Lab 8 (esp ex2) & Lab 9.
+- More class time for labs/project coding (1 response) → 
+  - I'm on the fence.  
   - How often would you like a day to work on project in class?
 """
 
@@ -92,6 +108,11 @@ md"""
 # ╔═╡ 98472480-8f0a-411d-9c39-7f61d826780e
 md"""
 # Q&A
+"""
+
+# ╔═╡ ef6dd0ba-2cd9-4195-a2a6-b5daf29e2afb
+md"""
+## Regularization
 """
 
 # ╔═╡ 52f72054-fb0e-11ef-3437-0968272eb20f
@@ -113,42 +134,112 @@ $\mathrm{loss}_{L1,\lambda}(\theta) = -\frac{1}{2}\left(y-A \theta\right)^T \Sig
 # ╔═╡ eb983e25-5971-4a58-9a4f-75a859475802
 question_box(md"In L2 or L1 regularization, does the log10(lambda) specify how small the permitted error is?")
 
+# ╔═╡ 6b6a37e5-867b-482c-bcaa-436f72a663e0
+md"""
+### How to choose penalty term?
+"""
+
+# ╔═╡ 4e6e32c7-55d8-4468-a85e-baf68d113ceb
+question_box(md"Is one regularization better than the other? ... 
+
+Is there a certain type of data that would be better at being regularized than others?")
+
 # ╔═╡ 438d1adb-fb72-4209-9204-b2241a27b384
 question_box(md"How do you determine when to use L1, L2, or a combination of the two regularizations?")
-
-# ╔═╡ 3f7150f4-65ad-480d-bc8f-72c950341092
-question_box(md"For L1 and L2 regularization, are there specific situations when one is more common or effective? Special cases where that changes?")
 
 # ╔═╡ f138e26b-a926-40ae-9505-cb406c77f0cc
 question_box(md"When working with big datasets like galaxy surveys or star catalogs, how do L2  and L1 regularization compare when it comes to finding important features or cutting down on noise in models used for things like star classification or galaxy shape recognition?")
 
-# ╔═╡ 82274416-af7c-425b-ac17-8996b9321a20
-question_box(md"Is there a way to change a query using a slider? For example, maybe the user wants stars of M>M_sun. Do you have to ingest all data then fit that constraint? Or can you do it in the query?")
+# ╔═╡ 3f7150f4-65ad-480d-bc8f-72c950341092
+question_box(md"For L1 and L2 regularization, are there specific situations when one is more common or effective? Special cases where that changes?")
+
+# ╔═╡ b8158adb-45d9-4ef1-a317-ce2431e0a234
+md"""
+#### Things to consider:
+- What am I trying to prevent?
+- Do I expect that most of my model parameters should be zero?
+- Do I expect that some of my model parameters should be zero?
+
+#### Often just try and see
+"""
+
+# ╔═╡ f617e812-a986-4596-9a07-0ab0436c905c
+md"""
+## Choosing Training/Validation/Test set sizes
+"""
 
 # ╔═╡ f6aef7c8-a265-4382-9ae2-d3d2b939e69a
-question_box(md"Is there a reason to not choose 50% training and 50% test data with every other point sampled? We discussed an example in class about predictive power w/ stellar variability & susceptibility to observing conditions. For example, given the spectra example, why would one chose to not use every other point?")
+question_box(md"Why not always choose 50% training and 50% test data with every other point sampled?")
 
 # ╔═╡ 350fa926-a962-41e1-962e-c7e29fabba72
 md"""
 ## Project questions
 """
 
+# ╔═╡ 82274416-af7c-425b-ac17-8996b9321a20
+question_box(md"Is there a way to change a query using a slider? For example, maybe the user wants stars of M>M_sun. Do you have to ingest all data then fit that constraint? Or can you do it in the query?")
+
 # ╔═╡ fbd57fb6-a401-4fa6-b2be-e4d4f7ebe3de
 @bind max_mag Slider(6:0.1:20; default = 15.0)
 
 # ╔═╡ 57294cc5-452d-4998-b376-49914e3b5b07
-@bind ang_sep Slider(0:0.1:5; default = 1.0)
+@bind max_ang_sep Slider(0:0.1:5; default = 1.0)
 
 # ╔═╡ d0dfe1f4-f7c7-4495-b10d-972748e029cc
-adql_query = 
-"""SELECT *, DISTANCE(81.28, -69.78, ra, dec) AS $(ang_sep)
+adql_query_sloppy = 
+"""SELECT *, DISTANCE(81.28, -69.78, ra, dec) AS $(max_ang_sep)
 FROM gaiadr3.gaia_source
 WHERE DISTANCE(81.28, -69.78, ra, dec) < 5./60.
-AND phot_g_mean_mag < $(max_mag)"""
+AND phot_g_mean_mag < $(max_mag)""";
+
+# ╔═╡ 82c219ef-1cf3-4ef8-83c2-83b3d442882f
+warning_box(md"""
+**What's the problem with that approach?**
+""")
+
+# ╔═╡ 70005b32-de23-4e73-8cc4-f3b4ad3dcb24
+md"""
+## Adding submit
+"""
+
+# ╔═╡ deb224a9-26a5-4553-89b7-1d7cb3463e31
+@bind user_input confirm(PlutoUI.combine() do Child
+md"""
+Max Magnitude: $(Child("max_mag",Slider(6:0.1:20; default = 15.0, show_value=true)))
+$nbsp 
+$nbsp 
+Max Angular Separation: $(Child("max_ang_sep",Slider(0:0.1:5; default = 1.0, show_value=true)))
+"""
+end)
+
+# ╔═╡ b4b3df23-8189-49e5-b7b2-660bd80a8e53
+typeof(user_input)
+
+# ╔═╡ d30a1547-053f-4214-94ad-7dde72791f60
+user_input.max_mag
+
+# ╔═╡ 28c931fe-66a6-4380-aedc-2e131e4d34ba
+adql_query_good = 
+"""SELECT *, DISTANCE(81.28, -69.78, ra, dec) AS $(user_input.max_ang_sep)
+FROM gaiadr3.gaia_source
+WHERE DISTANCE(81.28, -69.78, ra, dec) < 5./60.
+AND phot_g_mean_mag < $(user_input.max_mag)"""
+
+# ╔═╡ 2f62c68f-48a7-45bf-8b11-596dbbeda4a7
+function simulate_query(str::AbstractString; sleep_time::Real = 1)
+	sleep(sleep_time)
+	str
+end
+
+# ╔═╡ 16047512-3b65-4818-bc74-89f8d91399e1
+simulate_query(adql_query_sloppy)
+
+# ╔═╡ e02d7046-a5d2-4f97-8797-981845bb8b2b
+simulate_query(adql_query_good)
 
 # ╔═╡ 877165fd-70b7-492c-99a3-77634444369f
 md"""
-# Context for classification
+# Context for Week 9: Classification
 """
 
 # ╔═╡ 1f79a731-ca87-4b2d-b69a-9eda46a9fe0b
@@ -156,12 +247,45 @@ md"""
 ### Why would an astronomer want to classify things?
 """
 
+# ╔═╡ ee0133a0-0012-4c96-905c-cf7850ce520b
+md"""
+## Binary classification
+- Input Data: $x_i$: 
+- Label for data: $Y_i$ (0 or 1) 
+- Predicted catebory: $\hat{Y}_i$: 
+- Object id: i=1...$N_{\mathrm{obj}}$:
+"""
+
 # ╔═╡ 14fe81a0-dd0e-41d3-a519-a5e945c4826f
 md"""
 What is suboptimal about the following loss function?
 
-$$\mathrm{loss}_{\mathrm{class}}(\theta) = \sum_{i=1}^{N_{\mathrm{targ}}} \left[1-\delta(y^{(\mathrm{obs})}_i,\hat{y}_i(\theta))\right]$$
+$$\mathrm{loss}_{\mathrm{class}}(\theta) = \sum_{i=1}^{N_{\mathrm{targ}}} \left[1-\delta(Y_i,\hat{Y}_i(\theta))\right]$$
 
+"""
+
+# ╔═╡ 182c71d3-7b5c-4c9b-b3dd-c14efed5f756
+md"""
+## Relaxing the outputs
+- General: $$y_i(\beta) = f(x_i)$$
+- Logistic Regression: $$y_i(\beta) = f(x_i) = \beta \cdot x_i$$
+
+### Logistic Regression Likelihood
+"""
+
+# ╔═╡ 8a04e12e-1484-46a8-ad3d-a4c96c5b1ab4
+md"""
+$L(\beta) = \prod_{i:\; Y_i=1} \hat{y}(\beta)_i \prod_{i:\; Y_i=0} (1-\hat{y}_i(\beta))$
+"""
+
+# ╔═╡ 361800d0-c3c4-461a-a319-ac214f26281c
+md"""
+$\mathrm{loss}(\beta) = \sum_{i=1}^{N_{obj}} \left[ Y_i \ln(\hat{y}_i(\beta)) + (1-Y_i) \ln(1-\hat{y}_i(\beta)) \right]$
+"""
+
+# ╔═╡ 05ace14b-1eba-4654-a57b-fe8c369364c0
+md"""
+## Common activation functions
 """
 
 # ╔═╡ f645b0f1-f631-4b13-8071-4d8f62313543
@@ -187,7 +311,7 @@ let
 	scalefontsizes()
 	scalefontsizes(1.5)
 	x = range(-4,stop=4, length=100)
-	plt = plot(xlabel="x", ylabel="f(x)")
+	plt = plot(xlabel="x", ylabel="y(x)")
 	if plt_logistic 
 		y = f.(x)
 		plot!(plt,x,y, lw=4, label="Logistic Function")
@@ -214,12 +338,19 @@ end
 # ╔═╡ 4118a36b-4348-424b-b64b-80af77ccbcfd
 md"""
 ## Multi-category classification
-- i: Object id
-- k: Category id
+- Input Data: $x_i$: 
+- Label for data: $Y_i$ (integer) 
+- Object id: i=1...$N_{\mathrm{obj}}$:
+- Category ids: k=1...K: 
+
+$$\mathrm{Pr}(Y_i=k) = \frac{e^{f(i,k)}}{1+\sum_{j=1}^K e^{f(i,j)}}$$
+
+- Predicted category: $\hat{Y}_i$ = k s.t. $\mathrm{Pr}(Y_i=k) > \mathrm{Pr}(Y_i=k')$
+
+Generalize linear model for multi-category classification:
 
 $$f(i,k) = \beta_k \cdot x_i$$
 
-$$\mathrm{Pr}(Y_i=k) = \frac{e^{f(i,k)}}{1+\sum_{j=1}^K e^{f(i,j)}}$$
 """
 
 # ╔═╡ 18c6df07-5d88-4191-be6f-1350e8c3dc8d
@@ -1489,27 +1620,48 @@ version = "1.4.1+2"
 # ╟─db7b5444-437a-406e-9304-8c418c5b7156
 # ╟─bd083ebb-f84f-4737-bd49-17c25b0ba438
 # ╟─2a8139dd-475e-48f8-8544-ba4eb1b9910c
+# ╟─5cfd2183-0da6-4d06-9c04-b69a08068781
+# ╟─cd654344-7ee6-4a1d-98e9-eb950a6e1869
 # ╟─0b18b93c-0331-4de9-9af6-6c09e27fd55c
 # ╟─f80ff8aa-2b4d-4468-8d4e-92d2dfd7b211
 # ╟─7e351c59-777e-4368-9d44-f781891ed736
 # ╟─cc93a990-c81f-4ddd-95c3-828459009a5a
 # ╟─98472480-8f0a-411d-9c39-7f61d826780e
+# ╟─ef6dd0ba-2cd9-4195-a2a6-b5daf29e2afb
 # ╟─52f72054-fb0e-11ef-3437-0968272eb20f
 # ╟─2fb3fff0-7a1b-4b49-a1e6-fd82a9d43e7d
 # ╟─85894a4d-3839-45be-8318-2a84917a9dfb
 # ╟─eb983e25-5971-4a58-9a4f-75a859475802
+# ╟─6b6a37e5-867b-482c-bcaa-436f72a663e0
+# ╟─4e6e32c7-55d8-4468-a85e-baf68d113ceb
 # ╟─438d1adb-fb72-4209-9204-b2241a27b384
 # ╟─f138e26b-a926-40ae-9505-cb406c77f0cc
 # ╟─3f7150f4-65ad-480d-bc8f-72c950341092
-# ╟─82274416-af7c-425b-ac17-8996b9321a20
+# ╟─b8158adb-45d9-4ef1-a317-ce2431e0a234
+# ╟─f617e812-a986-4596-9a07-0ab0436c905c
 # ╟─f6aef7c8-a265-4382-9ae2-d3d2b939e69a
 # ╟─350fa926-a962-41e1-962e-c7e29fabba72
+# ╟─82274416-af7c-425b-ac17-8996b9321a20
 # ╠═fbd57fb6-a401-4fa6-b2be-e4d4f7ebe3de
 # ╠═57294cc5-452d-4998-b376-49914e3b5b07
 # ╠═d0dfe1f4-f7c7-4495-b10d-972748e029cc
+# ╠═16047512-3b65-4818-bc74-89f8d91399e1
+# ╟─82c219ef-1cf3-4ef8-83c2-83b3d442882f
+# ╟─70005b32-de23-4e73-8cc4-f3b4ad3dcb24
+# ╠═deb224a9-26a5-4553-89b7-1d7cb3463e31
+# ╠═b4b3df23-8189-49e5-b7b2-660bd80a8e53
+# ╠═d30a1547-053f-4214-94ad-7dde72791f60
+# ╠═28c931fe-66a6-4380-aedc-2e131e4d34ba
+# ╠═e02d7046-a5d2-4f97-8797-981845bb8b2b
+# ╟─2f62c68f-48a7-45bf-8b11-596dbbeda4a7
 # ╟─877165fd-70b7-492c-99a3-77634444369f
 # ╟─1f79a731-ca87-4b2d-b69a-9eda46a9fe0b
+# ╟─ee0133a0-0012-4c96-905c-cf7850ce520b
 # ╟─14fe81a0-dd0e-41d3-a519-a5e945c4826f
+# ╟─182c71d3-7b5c-4c9b-b3dd-c14efed5f756
+# ╟─8a04e12e-1484-46a8-ad3d-a4c96c5b1ab4
+# ╟─361800d0-c3c4-461a-a319-ac214f26281c
+# ╟─05ace14b-1eba-4654-a57b-fe8c369364c0
 # ╠═f645b0f1-f631-4b13-8071-4d8f62313543
 # ╠═64044930-279a-4cf1-8de4-8cd109249c6e
 # ╠═eceb42bd-107e-4f32-9ff2-4c844f843f7f
