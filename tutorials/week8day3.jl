@@ -119,6 +119,33 @@ question_box(md"How do you determine when to use L1, L2, or a combination of the
 # ╔═╡ 3f7150f4-65ad-480d-bc8f-72c950341092
 question_box(md"For L1 and L2 regularization, are there specific situations when one is more common or effective? Special cases where that changes?")
 
+# ╔═╡ f138e26b-a926-40ae-9505-cb406c77f0cc
+question_box(md"When working with big datasets like galaxy surveys or star catalogs, how do L2  and L1 regularization compare when it comes to finding important features or cutting down on noise in models used for things like star classification or galaxy shape recognition?")
+
+# ╔═╡ 82274416-af7c-425b-ac17-8996b9321a20
+question_box(md"Is there a way to change a query using a slider? For example, maybe the user wants stars of M>M_sun. Do you have to ingest all data then fit that constraint? Or can you do it in the query?")
+
+# ╔═╡ f6aef7c8-a265-4382-9ae2-d3d2b939e69a
+question_box(md"Is there a reason to not choose 50% training and 50% test data with every other point sampled? We discussed an example in class about predictive power w/ stellar variability & susceptibility to observing conditions. For example, given the spectra example, why would one chose to not use every other point?")
+
+# ╔═╡ 350fa926-a962-41e1-962e-c7e29fabba72
+md"""
+## Project questions
+"""
+
+# ╔═╡ fbd57fb6-a401-4fa6-b2be-e4d4f7ebe3de
+@bind max_mag Slider(6:0.1:20; default = 15.0)
+
+# ╔═╡ 57294cc5-452d-4998-b376-49914e3b5b07
+@bind ang_sep Slider(0:0.1:5; default = 1.0)
+
+# ╔═╡ d0dfe1f4-f7c7-4495-b10d-972748e029cc
+adql_query = 
+"""SELECT *, DISTANCE(81.28, -69.78, ra, dec) AS $(ang_sep)
+FROM gaiadr3.gaia_source
+WHERE DISTANCE(81.28, -69.78, ra, dec) < 5./60.
+AND phot_g_mean_mag < $(max_mag)"""
+
 # ╔═╡ 877165fd-70b7-492c-99a3-77634444369f
 md"""
 # Context for classification
@@ -1472,7 +1499,14 @@ version = "1.4.1+2"
 # ╟─85894a4d-3839-45be-8318-2a84917a9dfb
 # ╟─eb983e25-5971-4a58-9a4f-75a859475802
 # ╟─438d1adb-fb72-4209-9204-b2241a27b384
+# ╟─f138e26b-a926-40ae-9505-cb406c77f0cc
 # ╟─3f7150f4-65ad-480d-bc8f-72c950341092
+# ╟─82274416-af7c-425b-ac17-8996b9321a20
+# ╟─f6aef7c8-a265-4382-9ae2-d3d2b939e69a
+# ╟─350fa926-a962-41e1-962e-c7e29fabba72
+# ╠═fbd57fb6-a401-4fa6-b2be-e4d4f7ebe3de
+# ╠═57294cc5-452d-4998-b376-49914e3b5b07
+# ╠═d0dfe1f4-f7c7-4495-b10d-972748e029cc
 # ╟─877165fd-70b7-492c-99a3-77634444369f
 # ╟─1f79a731-ca87-4b2d-b69a-9eda46a9fe0b
 # ╟─14fe81a0-dd0e-41d3-a519-a5e945c4826f
