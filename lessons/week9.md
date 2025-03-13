@@ -14,10 +14,8 @@ Week {{week_num}}
 
 ## [Lab 8](../../labs/lab8/): {{fill title labs/lab8.md}}
 
-<!--
 ## Notebooks from class
 - [Day 1](https://psuastro416.github.io/Spring2025/tutorials/week9/)
--->
 
 ## Resources
 - [GLM.jl](https://juliastats.org/GLM.jl/dev/)
