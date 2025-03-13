@@ -261,6 +261,7 @@ hint(md"""
 - Different cost/reward for FPs vs FNs
 - Measurement uncertainties
 - Imperfect labels
+- Missing labels 
 - Unlabled data
 - Non-linear classification boundaries
 """)
@@ -268,6 +269,11 @@ hint(md"""
 # ╔═╡ 599ae71a-90d0-40cd-90c9-051259a456f4
 md"""
 ## Non-linear Classification
+"""
+
+# ╔═╡ e46e7944-5688-4660-b61b-5edfcc2c86e5
+md"""
+### Interior/Exterior sets
 """
 
 # ╔═╡ 51791bfe-b216-4bf6-8d84-e3e1b5b6ba83
@@ -298,8 +304,35 @@ let
 
 end
 
+# ╔═╡ 22c43d91-3899-49b8-9f4c-b9d9e913e645
+md"""
+### Choosing the transformation
+"""
+
+# ╔═╡ e0af81da-0c65-4b47-8354-dc1ce9891bf8
+md"""
+Distance from point at (x,y), where $nbsp $nbsp x: $(@bind center_x Slider(-2:0.1:2; default=0, show_value=true))
+$nbsp $nbsp
+y: $(@bind center_y Slider(-2:0.05:2; default=1, show_value=true))
+
+"""
+
+# ╔═╡ 997eb1a0-6e15-4084-8cb6-2a2b975ae45a
+begin
+	zz_blue = (df2_blue.x.-center_x).^2 .+ (df2_blue.y.-center_y).^2
+	zz_red = (df2_red.x.-center_x).^2 .+ (df2_red.y.-center_y).^2
+	plt = plot(;camera=(camera_1,camera_2), xlabel="x", ylabel="y", zlabel="x²+y²")
+	scatter!(df2_blue.x, df2_blue.y, zz_blue, markerstrokewidth=0, label=:none)
+	scatter!(plt,df2_red.x, df2_red.y, zz_red, markerstrokewidth=0, label=:none)
+end
+
 # ╔═╡ e65fa52b-052c-4490-a3ef-91d80f0b14d0
 linear_classifer2_boundary(x) = β0_2 + β1_2*x
+
+# ╔═╡ 46b975c9-b09b-4a3e-a820-c528a6440572
+md"""
+### XOR
+"""
 
 # ╔═╡ aee19d74-cdf4-41e2-aa03-fa6ad16ebbf3
 begin
@@ -325,13 +358,19 @@ $(@bind camera3_2 Slider(-90:90; default=45, show_value=true))
 
 # ╔═╡ 9eb5e42f-f7da-4e06-979e-6246617f9825
 let
-	plt = plot(;camera=(camera3_1,camera3_2), xlabel="x", ylabel="y", zlabel="x²+y²")
+	plt = plot(;camera=(camera3_1,camera3_2), xlabel="x", ylabel="y", zlabel="xy")
 	scatter!(df3_blue.x, df3_blue.y, df3_blue.z, markerstrokewidth=0, label=:none)
 	scatter!(plt,df3_red.x, df3_red.y, df3_red.z, markerstrokewidth=0, label=:none)
 end
 
 # ╔═╡ 836c0d9a-af47-4ad3-a9ee-5612230f11bb
 linear_classifer3_boundary(x) = β0_3 + β1_3*x
+
+# ╔═╡ 4ee9f3e1-bd68-4d04-b4dc-763969a0fb0e
+md"""
+## [Support Vector Machines](https://en.wikipedia.org/wiki/Support_vector_machine) & the [Kernel trick](https://en.wikipedia.org/wiki/Kernel_method#Mathematics:_the_kernel_trick)
+- Provide computationally efficient ways to construct non-linear classifiers
+"""
 
 # ╔═╡ 4118a36b-4348-424b-b64b-80af77ccbcfd
 md"""
@@ -1885,16 +1924,22 @@ version = "1.4.1+2"
 # ╟─d320bde9-7325-4de7-bbbe-65126faaff55
 # ╟─512445bc-a141-4db8-bd54-c413611a0bba
 # ╟─599ae71a-90d0-40cd-90c9-051259a456f4
+# ╟─e46e7944-5688-4660-b61b-5edfcc2c86e5
 # ╟─51791bfe-b216-4bf6-8d84-e3e1b5b6ba83
 # ╟─95063a94-4c34-45e0-971a-f6cdbaf8a34e
 # ╟─32737d4c-35c1-41bb-8f8b-4b4384127aa8
 # ╟─a61dfc40-a0e1-4c1e-be73-d7290fe1e945
+# ╟─22c43d91-3899-49b8-9f4c-b9d9e913e645
+# ╟─997eb1a0-6e15-4084-8cb6-2a2b975ae45a
+# ╟─e0af81da-0c65-4b47-8354-dc1ce9891bf8
 # ╟─e65fa52b-052c-4490-a3ef-91d80f0b14d0
+# ╟─46b975c9-b09b-4a3e-a820-c528a6440572
 # ╟─aee19d74-cdf4-41e2-aa03-fa6ad16ebbf3
 # ╟─d843b612-b7ed-42d1-ab63-d61f10ec120a
 # ╟─adaacd2a-8361-461e-b3a7-d07e275884c0
 # ╟─9eb5e42f-f7da-4e06-979e-6246617f9825
 # ╟─836c0d9a-af47-4ad3-a9ee-5612230f11bb
+# ╟─4ee9f3e1-bd68-4d04-b4dc-763969a0fb0e
 # ╟─4118a36b-4348-424b-b64b-80af77ccbcfd
 # ╟─18c6df07-5d88-4191-be6f-1350e8c3dc8d
 # ╠═f4c0e1d9-44be-4c35-ad7a-00c915d9fb61
