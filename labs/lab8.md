@@ -1,5 +1,5 @@
 +++
-title = "Explanatory Data Analysis"
+title = "Model Building IV:  Classification"
 lab_num = 8
 tags = ["labs"]
 +++
