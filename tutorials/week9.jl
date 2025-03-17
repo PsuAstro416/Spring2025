@@ -1,19 +1,17 @@
 ### A Pluto.jl notebook ###
-# v0.20.4
+# v0.20.1
 
 using Markdown
 using InteractiveUtils
 
 # This Pluto notebook uses @bind for interactivity. When running this notebook outside of Pluto, the following 'mock version' of @bind gives bound variables a default value (instead of an error).
 macro bind(def, element)
-    #! format: off
     quote
         local iv = try Base.loaded_modules[Base.PkgId(Base.UUID("6e696c72-6542-2067-7265-42206c756150"), "AbstractPlutoDingetjes")].Bonds.initial_value catch; b -> missing; end
         local el = $(esc(element))
         global $(esc(def)) = Core.applicable(Base.get, el) ? Base.get(el) : iv(el)
         el
     end
-    #! format: on
 end
 
 # ╔═╡ f4c0e1d9-44be-4c35-ad7a-00c915d9fb61
@@ -92,8 +90,8 @@ $nbsp $nbsp $(@bind regen_data Button("Regenerate Data"))
 # ╔═╡ 52e8269b-12b9-4265-af9b-4116b13eb222
 begin
 	regen_data
-	n = 40
-	m = 40
+	n = 100
+	m = 10
 	df_blue = DataFrame(repeat([1 1 ],n) .+ randn(n,2), [:x,:y] )
 	df_red = DataFrame(repeat([ -1 -1], m) .+ randn(m,2), [:x,:y] )
 	df_blue.label = ones(Int8,n)
@@ -132,7 +130,8 @@ $$\mathrm{loss}_{\mathrm{class}}(\theta) = \frac{1}{N_{\mathrm{targ}}} \sum_{i=1
 md"""
 ## Relaxing the outputs
 - General: $$\hat{y}_i(\beta) = f(x_i)$$
-- Logistic Regression: $$\hat{y}_i(\beta) = \beta \cdot x_i$$
+- Generalized Linear Model: $\hat{y}_i(\beta) = f(\beta \cdot x_i)$
+- Logistic Regression: $\hat{y}_i(\beta) = f(\beta \cdot x_i)$, where $f(z) = \frac{1}{1+\exp\left(-z\right)}$
 
 ### Logistic Regression Likelihood
 """
@@ -219,14 +218,14 @@ E.g., if goal of classifier is to label stars with a certain type of planet:
 |                       | Truth: Planet   |  Truth: No Palnet   |
 |:--------------------- |:---------------:|:-------------------:|
 | **Detected Planet**   | True Positives  | False Positives     |
-| **Detected Planet**   | False Negatives | True Negatives      |
+| **Detected No Planet**   | False Negatives | True Negatives      |
 
 Abbreviations:
 
 |                       | True yes   |  True no   |
 |:--------------------- |:----------:|:----------:|
-| **Prediciton**        | TP         | FP         |
-| **Prediciton**        | FN         | TN         |
+| **Predicited Yes**        | TP         | FP         |
+| **Predicited No**        | FN         | TN         |
 """
 
 # ╔═╡ 278acc8a-5e17-4929-a5f7-27f75840bc44
