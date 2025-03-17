@@ -1,17 +1,19 @@
 ### A Pluto.jl notebook ###
-# v0.20.1
+# v0.20.4
 
 using Markdown
 using InteractiveUtils
 
 # This Pluto notebook uses @bind for interactivity. When running this notebook outside of Pluto, the following 'mock version' of @bind gives bound variables a default value (instead of an error).
 macro bind(def, element)
+    #! format: off
     quote
         local iv = try Base.loaded_modules[Base.PkgId(Base.UUID("6e696c72-6542-2067-7265-42206c756150"), "AbstractPlutoDingetjes")].Bonds.initial_value catch; b -> missing; end
         local el = $(esc(element))
         global $(esc(def)) = Core.applicable(Base.get, el) ? Base.get(el) : iv(el)
         el
     end
+    #! format: on
 end
 
 # ╔═╡ f4c0e1d9-44be-4c35-ad7a-00c915d9fb61
@@ -46,7 +48,7 @@ week_num = $week
 md"""
 #### $title
 ## Week $week: $topic:
-#### $subtitle
+## $subtitle
 """
 
 # ╔═╡ 5cfd2183-0da6-4d06-9c04-b69a08068781
@@ -90,8 +92,8 @@ $nbsp $nbsp $(@bind regen_data Button("Regenerate Data"))
 # ╔═╡ 52e8269b-12b9-4265-af9b-4116b13eb222
 begin
 	regen_data
-	n = 20
-	m = 20
+	n = 40
+	m = 40
 	df_blue = DataFrame(repeat([1 1 ],n) .+ randn(n,2), [:x,:y] )
 	df_red = DataFrame(repeat([ -1 -1], m) .+ randn(m,2), [:x,:y] )
 	df_blue.label = ones(Int8,n)
@@ -129,8 +131,8 @@ $$\mathrm{loss}_{\mathrm{class}}(\theta) = \frac{1}{N_{\mathrm{targ}}} \sum_{i=1
 # ╔═╡ 182c71d3-7b5c-4c9b-b3dd-c14efed5f756
 md"""
 ## Relaxing the outputs
-- General: $$y_i(\beta) = f(x_i)$$
-- Logistic Regression: $$y_i(\beta) = f(x_i) = \beta \cdot x_i$$
+- General: $$\hat{y}_i(\beta) = f(x_i)$$
+- Logistic Regression: $$\hat{y}_i(\beta) = \beta \cdot x_i$$
 
 ### Logistic Regression Likelihood
 """
@@ -306,7 +308,7 @@ end
 
 # ╔═╡ 22c43d91-3899-49b8-9f4c-b9d9e913e645
 md"""
-### Choosing the transformation
+#### Choosing the transformation
 """
 
 # ╔═╡ e0af81da-0c65-4b47-8354-dc1ce9891bf8
@@ -346,6 +348,11 @@ begin
 	df3 = vcat(df3_blue, df3_red)
 end;
 
+# ╔═╡ eb25d766-b0c9-4a1b-9655-26283476b1f6
+md"""
+#### Choosing a transformation
+"""
+
 # ╔═╡ adaacd2a-8361-461e-b3a7-d07e275884c0
 
 md"""
@@ -368,25 +375,57 @@ linear_classifer3_boundary(x) = β0_3 + β1_3*x
 
 # ╔═╡ 4ee9f3e1-bd68-4d04-b4dc-763969a0fb0e
 md"""
+# Other Important Classification Algorithms
 ## [Support Vector Machines](https://en.wikipedia.org/wiki/Support_vector_machine) & the [Kernel trick](https://en.wikipedia.org/wiki/Kernel_method#Mathematics:_the_kernel_trick)
 - Provide computationally efficient ways to construct non-linear classifiers
 """
 
-# ╔═╡ 4118a36b-4348-424b-b64b-80af77ccbcfd
+# ╔═╡ 3efdf645-4c72-482b-9d0b-8c9d95dcee89
 md"""
-## Multi-category classification
+## [Neural Networks](https://en.wikipedia.org/wiki/Neural_network_(machine_learning))
+
+- Replace $f(i,k)$ with a more complicated function.  
+- A basic neural networks is just the composition of an activation of a linear functions of inputs, several or many, many times!
+- Lots of AI is research in desiging neural network architectures that are particularly well-suited to a common type of problem (e.g., images, video, audio, text)
+
+"""
+
+# ╔═╡ 3c3bd2a7-60dd-4d55-a96d-36e9bf946191
+md"""
+$(LocalResource("Colored_neural_network.svg",:width=>"400px", :alt=>"Diagram of small dense neural network"))
+Credit: The image above is by Glosser.ca, [CC BY-SA 3.0](https://creativecommons.org/licenses/by-sa/3.0/deed.en), via Wikimedia Commons, original source
+"""
+
+# ╔═╡ 3bab8042-3000-4f6a-b020-03a4d01f5724
+md"""
+# Multi-category classification
 - Input Data: $x_i$: 
 - Label for data: $Y_i$ (integer) 
-- Object id: i=1...$N_{\mathrm{obj}}$:
+- Convert labels to **one hot encoding**: $y_{i,k}$ (each 0 or 1)
+- Object id: i=1...$N_{\mathrm{obj}}$
 - Category ids: k=1...K: 
+"""
 
-$$\mathrm{Pr}(Y_i=k) = \frac{e^{f(i,k)}}{1+\sum_{j=1}^K e^{f(i,j)}}$$
-
-- Predicted category: $\hat{Y}_i$ = k s.t. $\mathrm{Pr}(Y_i=k) > \mathrm{Pr}(Y_i=k')$
+# ╔═╡ 18219451-5272-45f6-9677-53b49865ef74
+md"""
 
 Generalize linear model for multi-category classification:
 
 $$f(i,k) = \beta_k \cdot x_i$$
+"""
+
+# ╔═╡ c598cec6-bd3e-4663-88d2-2f17958f88f4
+md"""
+$\mathrm{loss}(\beta) = - \sum_{i=1}^{N_{obj}} \sum_{k=1}^K y_{i,k} \ln(\hat{y}_{i,k}(\beta))$
+"""
+
+# ╔═╡ 2fe54063-ed09-4209-9237-4f0ada32c938
+md"""
+$\mathrm{Pr}(Y_i=k) = \frac{e^{f(i,k)}}{1+\sum_{j=1}^K e^{f(i,j)}}$
+
+- Predicted category: 
+
+$$\hat{Y}_i = k \; \; \mathrm{s.t.} \; \; \mathrm{Pr}(Y_i=k) > \mathrm{Pr}(Y_i=k')$$
 
 """
 
@@ -1899,7 +1938,7 @@ version = "1.4.1+2"
 # ╟─633640f1-2960-48e2-8bde-cd2deb9be8c1
 # ╟─1f79a731-ca87-4b2d-b69a-9eda46a9fe0b
 # ╟─ee0133a0-0012-4c96-905c-cf7850ce520b
-# ╟─52e8269b-12b9-4265-af9b-4116b13eb222
+# ╠═52e8269b-12b9-4265-af9b-4116b13eb222
 # ╠═53be67b3-4ad9-4e6f-b92d-0b13219c8c3e
 # ╟─24f8d002-5013-4261-841d-a65069abb847
 # ╟─bc306ac6-b628-46ba-9fcf-9be03bc16b1c
@@ -1936,16 +1975,22 @@ version = "1.4.1+2"
 # ╟─46b975c9-b09b-4a3e-a820-c528a6440572
 # ╟─aee19d74-cdf4-41e2-aa03-fa6ad16ebbf3
 # ╟─d843b612-b7ed-42d1-ab63-d61f10ec120a
+# ╟─eb25d766-b0c9-4a1b-9655-26283476b1f6
 # ╟─adaacd2a-8361-461e-b3a7-d07e275884c0
 # ╟─9eb5e42f-f7da-4e06-979e-6246617f9825
 # ╟─836c0d9a-af47-4ad3-a9ee-5612230f11bb
 # ╟─4ee9f3e1-bd68-4d04-b4dc-763969a0fb0e
-# ╟─4118a36b-4348-424b-b64b-80af77ccbcfd
+# ╟─3efdf645-4c72-482b-9d0b-8c9d95dcee89
+# ╟─3c3bd2a7-60dd-4d55-a96d-36e9bf946191
+# ╟─3bab8042-3000-4f6a-b020-03a4d01f5724
+# ╟─18219451-5272-45f6-9677-53b49865ef74
+# ╟─c598cec6-bd3e-4663-88d2-2f17958f88f4
+# ╟─2fe54063-ed09-4209-9237-4f0ada32c938
 # ╟─18c6df07-5d88-4191-be6f-1350e8c3dc8d
-# ╠═f4c0e1d9-44be-4c35-ad7a-00c915d9fb61
+# ╟─f4c0e1d9-44be-4c35-ad7a-00c915d9fb61
 # ╟─231cc8c7-d325-4309-b44f-26a70394f1d9
 # ╟─e65b52e3-3db4-425f-aac1-9dce0bd2f6d8
-# ╠═12986e96-4953-4264-a332-9f2e3f1bcc38
+# ╟─12986e96-4953-4264-a332-9f2e3f1bcc38
 # ╟─2b565065-7b8b-4690-a031-b9d91e567a3f
 # ╟─4d2ddd60-c8df-46d9-9f4d-105dcb097878
 # ╟─00000000-0000-0000-0000-000000000001

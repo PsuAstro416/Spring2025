@@ -2,7 +2,7 @@
 title = "Week 12"
 week_num = 12
 tags = ["lessons"]
-topic = "Reports, Dashboards & Disks"
+topic = "Reports & Dashboards"
 ds_topic = "Reports & Dashboards"
 exo_topic =  "Exoplanet Detection: Disks"
 +++
