@@ -21,8 +21,9 @@ using Clustering, Distances, StatsPlots, Random
 # hideall
 begin
 	using SpecialFunctions
-	using GLM, MLBase
-	using DataFrames, Plots
+	#using GLM, MLBase
+	#using DataFrames
+	using Plots
 	using PlutoUI, PlutoTeachingTools
 end
 
@@ -57,6 +58,15 @@ question_box(md"""
 Why is 0.5 the default threshold value?
 """)
 
+# ╔═╡ 8699ede3-652a-45a7-a793-5a19942fb797
+md"""
+Logistic: $(@bind plt_logistic CheckBox(;default=true))
+Tanh: $(@bind plt_tanh CheckBox())
+Erf: $(@bind plt_erf CheckBox())
+Relu: $(@bind plt_relu CheckBox())
+Leaky Relu: $(@bind plt_lrelu CheckBox())
+"""
+
 # ╔═╡ 21747361-d712-42e5-b834-19891b398e26
 question_box(md"""
 What makes logistic regression a strong choice for classification tasks?
@@ -84,7 +94,7 @@ begin
 	num_pts = 200
 	idx_grps = [1:50, 51:75, 76:num_pts]
 	idx_centers = [-1 0; 0 1; 1 0]'
-	scale_fac = 4.0
+	scale_fac = 0.5
 end;
 
 # ╔═╡ c1411fa3-0e2f-4572-abec-202b7740a35b
@@ -184,8 +194,12 @@ question_box(md"""
 What is a neural network?
 """)
 
-# ╔═╡ 0344797d-a46b-4ed4-a76e-f7350dab0d5f
+# ╔═╡ 3efdf645-4c72-482b-9d0b-8c9d95dcee89
+md"""
+- A basic neural networks is just the composition of an activation of a linear functions of inputs, several or many, many times!
+- Lots of AI is research in desiging neural network architectures that are particularly well-suited to a common type of problem (e.g., images, video, audio, text)
 
+"""
 
 # ╔═╡ 9df32844-9629-4e65-a109-06a24af61074
 md"""
@@ -206,99 +220,11 @@ md"""
 # ╔═╡ cd654344-7ee6-4a1d-98e9-eb950a6e1869
 md"""
 ## Plan for Next week
-## Penn State [AI Week](https://ai.psu.edu/ai-week-2025)
-- Events: April 14-17, 2025
-- Student poster submission deadline:  Monday, March 31, 2025
 """
 
 # ╔═╡ 6431de8a-4dc7-454b-a1a2-6f551352c99f
 md"""
 # Notes from Monday 
-"""
-
-# ╔═╡ 633640f1-2960-48e2-8bde-cd2deb9be8c1
-md"""
-# Classification
-"""
-
-# ╔═╡ 1f79a731-ca87-4b2d-b69a-9eda46a9fe0b
-md"""
-### Why would an astronomer want to classify things?
-"""
-
-# ╔═╡ ee0133a0-0012-4c96-905c-cf7850ce520b
-md"""
-## Binary classification
-- Input Data: $x_i$: 
-- Label for data: $Y_i$ (0 or 1) 
-- Predicted catebory: $\hat{Y}_i$: 
-- Object id: i=1...$N_{\mathrm{obj}}$:
-"""
-
-# ╔═╡ bc306ac6-b628-46ba-9fcf-9be03bc16b1c
-md"""
-β0: $(@bind β0 Slider(-2:0.1:2; default=0, show_value=true))
-β1: $(@bind β1 Slider(-2:0.05:2; default=0, show_value=true))
-$nbsp $nbsp $(@bind regen_data Button("Regenerate Data"))
-"""
-
-# ╔═╡ 52e8269b-12b9-4265-af9b-4116b13eb222
-begin
-	regen_data
-	n = 100
-	m = 10
-	df_blue = DataFrame(repeat([1 1 ],n) .+ randn(n,2), [:x,:y] )
-	df_red = DataFrame(repeat([ -1 -1], m) .+ randn(m,2), [:x,:y] )
-	df_blue.label = ones(Int8,n)
-	df_red.label = zeros(Int8, m)
-	df = vcat(df_blue, df_red)
-end;
-
-# ╔═╡ 53be67b3-4ad9-4e6f-b92d-0b13219c8c3e
-linear_classifer_boundary(x) = β0 + β1*x
-
-# ╔═╡ 473aec58-681d-40ec-bf40-276bde579c52
-begin
-	nTP = sum(df_blue.y .>= β0.+β1.*df_blue.x)
-	nFP = sum(df_blue.y .<  β0.+β1.*df_blue.x)
-	nTN = sum(df_red.y .<   β0.+β1.*df_red.x)
-	nFN = sum(df_red.y .>=  β0.+β1.*df_red.x)
-	accuracy = (nTP+nTN)/(nTP+nTN+nFP+nFN)
-	
-md"""	
-|                       | True Blue  |  True Red  |
-|:--------------------- |:----------:|:----------:|
-| **Predicited Blue**   | $(nTP)     | $(nFP)     |
-| **Predicited Red**    | $(nFN)     | $(nTN)     |
-"""
-end
-
-# ╔═╡ 14fe81a0-dd0e-41d3-a519-a5e945c4826f
-md"""
-What is suboptimal about the following loss function?
-
-$$\mathrm{loss}_{\mathrm{class}}(\theta) = \frac{1}{N_{\mathrm{targ}}} \sum_{i=1}^{N_{\mathrm{targ}}} \left[1-\delta(Y_i,\hat{Y}_i(\theta))\right] = (1-\mathrm{accuracy})$$
-
-"""
-
-# ╔═╡ 182c71d3-7b5c-4c9b-b3dd-c14efed5f756
-md"""
-## Relaxing the outputs
-- General: $$\hat{y}_i(\beta) = f(x_i)$$
-- Generalized Linear Model: $\hat{y}_i(\beta) = f(\beta \cdot x_i)$
-- Logistic Regression: $\hat{y}_i(\beta) = f(\beta \cdot x_i)$, where $f(z) = \frac{1}{1+\exp\left(-z\right)}$
-
-### Logistic Regression Likelihood
-"""
-
-# ╔═╡ 8a04e12e-1484-46a8-ad3d-a4c96c5b1ab4
-md"""
-$L(\beta) = \prod_{i:\; Y_i=1} \hat{y}(\beta)_i \prod_{i:\; Y_i=0} (1-\hat{y}_i(\beta))$
-"""
-
-# ╔═╡ 361800d0-c3c4-461a-a319-ac214f26281c
-md"""
-$\mathrm{loss}(\beta) = \sum_{i=1}^{N_{obj}} \left[ Y_i \ln(\hat{y}_i(\beta)) + (1-Y_i) \ln(1-\hat{y}_i(\beta)) \right]$
 """
 
 # ╔═╡ 05ace14b-1eba-4654-a57b-fe8c369364c0
@@ -316,7 +242,6 @@ relu(x) = x > zero(x) ? x : zero(x)
 leaky_relu(x; α::Real = 1e-3) = x > zero(x) ? x : α*x
 
 # ╔═╡ 995f92a6-6f7d-46df-9a9c-e7f166898f2e
-#=╠═╡
 let
 	scalefontsizes()
 	scalefontsizes(1.5)
@@ -344,268 +269,6 @@ let
 	end
 	plt
 end
-  ╠═╡ =#
-
-# ╔═╡ 4b83e520-9d5a-4bd7-aeb4-a78bcf2c21d4
-#=╠═╡
-let
-	scalefontsizes()
-	scalefontsizes(1.5)
-	x = range(-4,stop=4, length=100)
-	plt = plot(xlabel="x", ylabel="y(x)")
-	if plt_logistic 
-		y = logistic.(x)
-		plot!(plt,x,y, lw=4, label="Logistic Function")
-	end
-	if plt_tanh
-		y = tanh.(x)
-		plot!(plt,x,y, lw=4, label="Tanh")
-	end
-	if plt_erf
-		y = erf.(x)
-		plot!(plt,x,y, lw=4, label="Erf")
-	end
-	if plt_relu
-		y = relu.(x)
-		plot!(plt,x,y, lw=4, label="Relu")
-	end
-	if plt_lrelu
-		y = leaky_relu.(x; α=0.05)
-		plot!(plt,x,y, lw=4, label="Leaky Relu")
-	end
-	plt
-end
-  ╠═╡ =#
-
-# ╔═╡ 5b32e41b-201a-4100-b8b7-08ce348d7657
-md"""
-## Set a threshold
-- E.g., $f(x) > \frac{1}{2}$ for binary classification
-- Can change threshold based on purpose of the classifier
-"""
-
-# ╔═╡ 56d3656e-9ae6-4a14-a957-d89516f69494
-md"""
-## Evaluating Classifiers
-"""
-
-# ╔═╡ 3252bebd-47f2-4e85-9d24-6d4682dd7738
-md"""
-## Contingency Table/ Confusion Matrix
-E.g., if goal of classifier is to label stars with a certain type of planet:
-
-|                       | Truth: Planet   |  Truth: No Palnet   |
-|:--------------------- |:---------------:|:-------------------:|
-| **Detected Planet**   | True Positives  | False Positives     |
-| **Detected No Planet**   | False Negatives | True Negatives      |
-
-Abbreviations:
-
-|                       | True yes   |  True no   |
-|:--------------------- |:----------:|:----------:|
-| **Predicited Yes**        | TP         | FP         |
-| **Predicited No**        | FN         | TN         |
-"""
-
-# ╔═╡ 278acc8a-5e17-4929-a5f7-27f75840bc44
-md"""
-#### Many terms to describe performance characteristics
-- Accuracy:  (TP+TN)/(TP+TN+FP+FN)
-- Positive Predictive Value (Precision):  TP/(TP+FP)
-- True Postive Rate (Recall, Sensitivty):     TP/(TP+FN)
-- True Negative Rate (Specificity): TN/(TN+FP)
-- False discovery rate: FP/(TP+FP)
-- False omission rate: FN/(TN+FN)
-- [Even more confusing names](https://en.wikipedia.org/wiki/Confusion_matrix)
-"""
-
-# ╔═╡ c741469a-b2f1-4fcd-b824-c35c97812e99
- model = glm(@formula(label ~ x + y), df, Binomial(), LogitLink());
-
-# ╔═╡ 57f1e4e1-282d-47ce-9562-2abf1fadd948
-let
-	thresh = range(0, step=0.01, stop=1)
-	roc_results = roc(df.label, collect(skipmissing(predict(model,df))), thresh)
-	plot(map(r->r.fp/r.n,roc_results), map(r->r.tp/r.p,roc_results), lw=4, label=:none,
-	xlabel = "False Postive Rate", ylabel="True Positive Rate", title="ROC Curve")
-end
-
-# ╔═╡ d320bde9-7325-4de7-bbbe-65126faaff55
-md"""
-# Complications
-"""
-
-# ╔═╡ 512445bc-a141-4db8-bd54-c413611a0bba
-hint(md"""
-- Unbalanced datasets
-- Different cost/reward for FPs vs FNs
-- Measurement uncertainties
-- Imperfect labels
-- Missing labels 
-- Unlabled data
-- Non-linear classification boundaries
-""")
-
-# ╔═╡ 599ae71a-90d0-40cd-90c9-051259a456f4
-md"""
-## Non-linear Classification
-"""
-
-# ╔═╡ e46e7944-5688-4660-b61b-5edfcc2c86e5
-md"""
-### Interior/Exterior sets
-"""
-
-# ╔═╡ 51791bfe-b216-4bf6-8d84-e3e1b5b6ba83
-begin
-	regen_data
-	radius = 0.5
-	df2 = DataFrame(2 .* rand(2*(n+m),2) .- 1, [:x, :y])
-	df2.z = df2.x.^2 + df2.y.^2
-	df2.label = df2.x.^2 .+ df2.y.^2 .< radius^2
-	df2_blue = filter(r->r.label==1,df2)
-	df2_red = filter(r->r.label==0,df2)
-end;
-
-# ╔═╡ 32737d4c-35c1-41bb-8f8b-4b4384127aa8
-md"""
-β0: $(@bind β0_2 Slider(-2:0.1:2; default=0, show_value=true))
-β1: $(@bind β1_2 Slider(-2:0.05:2; default=0, show_value=true))
-
-Viewing angles: $(@bind camera_1 Slider(-90:90; default=45, show_value=true))
-$(@bind camera_2 Slider(-90:90; default=45, show_value=true))
-"""
-
-# ╔═╡ a61dfc40-a0e1-4c1e-be73-d7290fe1e945
-let
-	plt = plot(;camera=(camera_1,camera_2), xlabel="x", ylabel="y", zlabel="x²+y²")
-	scatter!(df2_blue.x, df2_blue.y, df2_blue.z, markerstrokewidth=0, label=:none)
-	scatter!(plt,df2_red.x, df2_red.y, df2_red.z, markerstrokewidth=0, label=:none)
-
-end
-
-# ╔═╡ 22c43d91-3899-49b8-9f4c-b9d9e913e645
-md"""
-#### Choosing the transformation
-"""
-
-# ╔═╡ e0af81da-0c65-4b47-8354-dc1ce9891bf8
-md"""
-Distance from point at (x,y), where $nbsp $nbsp x: $(@bind center_x Slider(-2:0.1:2; default=0, show_value=true))
-$nbsp $nbsp
-y: $(@bind center_y Slider(-2:0.05:2; default=1, show_value=true))
-
-"""
-
-# ╔═╡ 997eb1a0-6e15-4084-8cb6-2a2b975ae45a
-begin
-	zz_blue = (df2_blue.x.-center_x).^2 .+ (df2_blue.y.-center_y).^2
-	zz_red = (df2_red.x.-center_x).^2 .+ (df2_red.y.-center_y).^2
-	plt = plot(;camera=(camera_1,camera_2), xlabel="x", ylabel="y", zlabel="x²+y²")
-	scatter!(df2_blue.x, df2_blue.y, zz_blue, markerstrokewidth=0, label=:none)
-	scatter!(plt,df2_red.x, df2_red.y, zz_red, markerstrokewidth=0, label=:none)
-end
-
-# ╔═╡ e65fa52b-052c-4490-a3ef-91d80f0b14d0
-linear_classifer2_boundary(x) = β0_2 + β1_2*x
-
-# ╔═╡ 46b975c9-b09b-4a3e-a820-c528a6440572
-md"""
-### XOR
-"""
-
-# ╔═╡ aee19d74-cdf4-41e2-aa03-fa6ad16ebbf3
-begin
-	regen_data
-	df3_blue = DataFrame(vcat(repeat([2 2 ],n),repeat([ -2 -2], n)) .+ randn(2*n,2), [:x,:y] )
-	df3_red = DataFrame(vcat(repeat([ 2 -2], m),repeat([ -2 2], m)) .+ randn(2*m,2), [:x,:y] )
-	df3_blue.z = df3_blue.x .* df3_blue.y
-	df3_red.z = df3_red.x .* df3_red.y
-	df3_blue.label = ones(Int8,2n)
-	df3_red.label = zeros(Int8, 2m)
-	df3 = vcat(df3_blue, df3_red)
-end;
-
-# ╔═╡ eb25d766-b0c9-4a1b-9655-26283476b1f6
-md"""
-#### Choosing a transformation
-"""
-
-# ╔═╡ adaacd2a-8361-461e-b3a7-d07e275884c0
-
-md"""
-β0: $(@bind β0_3 Slider(-2:0.1:2; default=0, show_value=true))
-β1: $(@bind β1_3 Slider(-2:0.05:2; default=0, show_value=true))
-
-Viewing angles: $(@bind camera3_1 Slider(-90:90; default=45, show_value=true))
-$(@bind camera3_2 Slider(-90:90; default=45, show_value=true))
-"""
-
-# ╔═╡ 9eb5e42f-f7da-4e06-979e-6246617f9825
-let
-	plt = plot(;camera=(camera3_1,camera3_2), xlabel="x", ylabel="y", zlabel="xy")
-	scatter!(df3_blue.x, df3_blue.y, df3_blue.z, markerstrokewidth=0, label=:none)
-	scatter!(plt,df3_red.x, df3_red.y, df3_red.z, markerstrokewidth=0, label=:none)
-end
-
-# ╔═╡ 836c0d9a-af47-4ad3-a9ee-5612230f11bb
-linear_classifer3_boundary(x) = β0_3 + β1_3*x
-
-# ╔═╡ 4ee9f3e1-bd68-4d04-b4dc-763969a0fb0e
-md"""
-# Other Important Classification Algorithms
-## [Support Vector Machines](https://en.wikipedia.org/wiki/Support_vector_machine) & the [Kernel trick](https://en.wikipedia.org/wiki/Kernel_method#Mathematics:_the_kernel_trick)
-- Provide computationally efficient ways to construct non-linear classifiers
-"""
-
-# ╔═╡ 3efdf645-4c72-482b-9d0b-8c9d95dcee89
-md"""
-## [Neural Networks](https://en.wikipedia.org/wiki/Neural_network_(machine_learning))
-
-- Replace $f(i,k)$ with a more complicated function.  
-- A basic neural networks is just the composition of an activation of a linear functions of inputs, several or many, many times!
-- Lots of AI is research in desiging neural network architectures that are particularly well-suited to a common type of problem (e.g., images, video, audio, text)
-
-"""
-
-# ╔═╡ 3c3bd2a7-60dd-4d55-a96d-36e9bf946191
-md"""
-$(LocalResource("Colored_neural_network.svg",:width=>"400px", :alt=>"Diagram of small dense neural network"))
-Credit: The image above is by Glosser.ca, [CC BY-SA 3.0](https://creativecommons.org/licenses/by-sa/3.0/deed.en), via Wikimedia Commons, original source
-"""
-
-# ╔═╡ 3bab8042-3000-4f6a-b020-03a4d01f5724
-md"""
-# Multi-category classification
-- Input Data: $x_i$: 
-- Label for data: $Y_i$ (integer) 
-- Convert labels to **one hot encoding**: $y_{i,k}$ (each 0 or 1)
-- Object id: i=1...$N_{\mathrm{obj}}$
-- Category ids: k=1...K: 
-"""
-
-# ╔═╡ 18219451-5272-45f6-9677-53b49865ef74
-md"""
-
-Generalize linear model for multi-category classification:
-
-$$f(i,k) = \beta_k \cdot x_i$$
-"""
-
-# ╔═╡ c598cec6-bd3e-4663-88d2-2f17958f88f4
-md"""
-$\mathrm{loss}(\beta) = - \sum_{i=1}^{N_{obj}} \sum_{k=1}^K y_{i,k} \ln(\hat{y}_{i,k}(\beta))$
-"""
-
-# ╔═╡ 2fe54063-ed09-4209-9237-4f0ada32c938
-md"""
-$\mathrm{Pr}(Y_i=k) = \frac{e^{f(i,k)}}{1+\sum_{j=1}^K e^{f(i,j)}}$
-
-- Predicted category: 
-
-$$\hat{Y}_i = k \; \; \mathrm{s.t.} \; \; \mathrm{Pr}(Y_i=k) > \mathrm{Pr}(Y_i=k')$$
-
-"""
 
 # ╔═╡ 18c6df07-5d88-4191-be6f-1350e8c3dc8d
 md"""
@@ -616,78 +279,11 @@ md"""
 # hideall
 TableOfContents()
 
-# ╔═╡ e65b52e3-3db4-425f-aac1-9dce0bd2f6d8
-md"""
-## Functions used
-"""
-
-# ╔═╡ 12986e96-4953-4264-a332-9f2e3f1bcc38
-function plot_classifier(df_red::AbstractDataFrame, df_blue::AbstractDataFrame, f::Function; accuracy::AbstractString = "")
-	maxabsx = maximum(abs.(extrema(vcat(df_red.x, df_blue.x))))
-	xlims = (-maxabsx,maxabsx)
-	maxabsy = maximum(abs.(extrema(vcat(df_red.y, df_blue.y))))
-	ylims = (-maxabsy,maxabsy)
-	plt = plot(;xlabel="x", ylabel="y", xlims, ylims)
-	x_plt = range(xlims[1],stop=xlims[2],length=10)
-	plot!(plt, x_plt, f.(x_plt) #=β0.+β1.*x_plt=#, lc=:black, label=:none)
-	scatter!(plt, df_red.x, df_red.y, mc=:red, label=:none, markerstrokewidth=0)
-	scatter!(plt, df_blue.x, df_blue.y, mc=:blue, label=:none, markerstrokewidth=0)
-	annotate!(plt,xlims[1]*0.8,ylims[2]*0.8,accuracy)
-end
-
-# ╔═╡ 24f8d002-5013-4261-841d-a65069abb847
-plot_classifier(df_red, df_blue, linear_classifer_boundary; accuracy=string(round(accuracy*100,digits=1))*"%")
-
-# ╔═╡ 95063a94-4c34-45e0-971a-f6cdbaf8a34e
-plot_classifier(df2_red, df2_blue, linear_classifer2_boundary)
-
-# ╔═╡ d843b612-b7ed-42d1-ab63-d61f10ec120a
-plot_classifier(df3_red, df3_blue, linear_classifer3_boundary)
-
-# ╔═╡ 4d2ddd60-c8df-46d9-9f4d-105dcb097878
-classify(df::AbstractDataFrame, m::RegressionModel; threshold::Real = 0.5) = predict(model, df) .>= threshold
-
-# ╔═╡ 2b565065-7b8b-4690-a031-b9d91e567a3f
-glm_accuracy(df::AbstractDataFrame, m::RegressionModel; threshold::Real = 0.5) = sum(classify(df,model; threshold) .== df.label)/size(df,1)
-
-# ╔═╡ a8f2fb85-97fa-412c-b695-b720dad7e804
- let
- 	thresh = range(0, step=0.005, stop=1)
-	acc = map(t->glm_accuracy(df,model; threshold=t), thresh)
-	plot(thresh,acc, label=:none, lw=4, xlabel="Threshold", ylabel="Accuracy")
- end
-
-# ╔═╡ ed652fe6-611a-4867-adf9-739366a3db2e
-# ╠═╡ disabled = true
-#=╠═╡
-md"""
-Logistic: $(@bind plt_logistic CheckBox(;default=true))
-Tanh: $(@bind plt_tanh CheckBox())
-Erf: $(@bind plt_erf CheckBox())
-Relu: $(@bind plt_relu CheckBox())
-Leaky Relu: $(@bind plt_lrelu CheckBox())
-"""
-  ╠═╡ =#
-
-# ╔═╡ 8699ede3-652a-45a7-a793-5a19942fb797
-#=╠═╡
-md"""
-Logistic: $(@bind plt_logistic CheckBox(;default=true))
-Tanh: $(@bind plt_tanh CheckBox())
-Erf: $(@bind plt_erf CheckBox())
-Relu: $(@bind plt_relu CheckBox())
-Leaky Relu: $(@bind plt_lrelu CheckBox())
-"""
-  ╠═╡ =#
-
 # ╔═╡ 00000000-0000-0000-0000-000000000001
 PLUTO_PROJECT_TOML_CONTENTS = """
 [deps]
 Clustering = "aaaa29a8-35af-508c-8bc3-b662a17a0fe5"
-DataFrames = "a93c6f00-e57d-5684-b7b6-d8193f3e46c0"
 Distances = "b4f34e82-e78d-54a5-968a-f98e89d6e8f7"
-GLM = "38e38edf-8417-5370-95a0-9cbb8c7f171a"
-MLBase = "f0e99cf1-93fa-52ec-9ecc-5026115318e0"
 Plots = "91a5bcdd-55d7-5caf-9e0b-520d859cae80"
 PlutoTeachingTools = "661c6b06-c737-4d37-b85c-46df65de6f69"
 PlutoUI = "7f904dfe-b85e-4ff6-b463-dae2292396a8"
@@ -697,10 +293,7 @@ StatsPlots = "f3b207a7-027a-5e70-b257-86293d7955fd"
 
 [compat]
 Clustering = "~0.15.8"
-DataFrames = "~1.7.0"
 Distances = "~0.10.12"
-GLM = "~1.9.0"
-MLBase = "~0.9.2"
 Plots = "~1.40.9"
 PlutoTeachingTools = "~0.3.1"
 PlutoUI = "~0.7.61"
@@ -714,7 +307,7 @@ PLUTO_MANIFEST_TOML_CONTENTS = """
 
 julia_version = "1.11.2"
 manifest_format = "2.0"
-project_hash = "b1d6a6c90048a37185650a97374530c003c2464c"
+project_hash = "582ccb47e916cb581f13f75d92c6d3ea0b4903d8"
 
 [[deps.AbstractFFTs]]
 deps = ["LinearAlgebra"]
@@ -879,21 +472,10 @@ git-tree-sha1 = "439e35b0b36e2e5881738abc8857bd92ad6ff9a8"
 uuid = "d38c429a-6771-53c6-b99e-75d170b6e991"
 version = "0.6.3"
 
-[[deps.Crayons]]
-git-tree-sha1 = "249fe38abf76d48563e2f4556bebd215aa317e15"
-uuid = "a8cc5b0e-0ffa-5ad4-8c14-923d3ee1735f"
-version = "4.1.1"
-
 [[deps.DataAPI]]
 git-tree-sha1 = "abe83f3a2f1b857aac70ef8b269080af17764bbe"
 uuid = "9a962f9c-6df0-11e9-0e5d-c546b8b5ee8a"
 version = "1.16.0"
-
-[[deps.DataFrames]]
-deps = ["Compat", "DataAPI", "DataStructures", "Future", "InlineStrings", "InvertedIndices", "IteratorInterfaceExtensions", "LinearAlgebra", "Markdown", "Missings", "PooledArrays", "PrecompileTools", "PrettyTables", "Printf", "Random", "Reexport", "SentinelArrays", "SortingAlgorithms", "Statistics", "TableTraits", "Tables", "Unicode"]
-git-tree-sha1 = "fb61b4812c49343d7ef0b533ba982c46021938a6"
-uuid = "a93c6f00-e57d-5684-b7b6-d8193f3e46c0"
-version = "1.7.0"
 
 [[deps.DataStructures]]
 deps = ["Compat", "InteractiveUtils", "OrderedCollections"]
@@ -1053,22 +635,11 @@ git-tree-sha1 = "846f7026a9decf3679419122b49f8a1fdb48d2d5"
 uuid = "559328eb-81f9-559d-9380-de523a88c83c"
 version = "1.0.16+0"
 
-[[deps.Future]]
-deps = ["Random"]
-uuid = "9fa8497b-333b-5362-9e8d-4d0656e87820"
-version = "1.11.0"
-
 [[deps.GLFW_jll]]
 deps = ["Artifacts", "JLLWrappers", "Libdl", "Libglvnd_jll", "Xorg_libXcursor_jll", "Xorg_libXi_jll", "Xorg_libXinerama_jll", "Xorg_libXrandr_jll", "libdecor_jll", "xkbcommon_jll"]
 git-tree-sha1 = "fcb0584ff34e25155876418979d4c8971243bb89"
 uuid = "0656b61e-2033-5cc2-a64a-77c0f6c09b89"
 version = "3.4.0+2"
-
-[[deps.GLM]]
-deps = ["Distributions", "LinearAlgebra", "Printf", "Reexport", "SparseArrays", "SpecialFunctions", "Statistics", "StatsAPI", "StatsBase", "StatsFuns", "StatsModels"]
-git-tree-sha1 = "273bd1cd30768a2fddfa3fd63bbc746ed7249e5f"
-uuid = "38e38edf-8417-5370-95a0-9cbb8c7f171a"
-version = "1.9.0"
 
 [[deps.GR]]
 deps = ["Artifacts", "Base64", "DelimitedFiles", "Downloads", "GR_jll", "HTTP", "JSON", "Libdl", "LinearAlgebra", "Preferences", "Printf", "Qt6Wayland_jll", "Random", "Serialization", "Sockets", "TOML", "Tar", "Test", "p7zip_jll"]
@@ -1141,19 +712,6 @@ git-tree-sha1 = "b6d6bfdd7ce25b0f9b2f6b3dd56b2673a66c8770"
 uuid = "b5f81e59-6552-4d32-b1f0-c071b021bf89"
 version = "0.2.5"
 
-[[deps.InlineStrings]]
-git-tree-sha1 = "6a9fde685a7ac1eb3495f8e812c5a7c3711c2d5e"
-uuid = "842dd82b-1e85-43dc-bf29-5d0ee9dffc48"
-version = "1.4.3"
-
-    [deps.InlineStrings.extensions]
-    ArrowTypesExt = "ArrowTypes"
-    ParsersExt = "Parsers"
-
-    [deps.InlineStrings.weakdeps]
-    ArrowTypes = "31f734f8-188a-4ce0-8406-c8a06bd891cd"
-    Parsers = "69de0a69-1ddd-5017-9359-2bf0b02dc9f0"
-
 [[deps.IntelOpenMP_jll]]
 deps = ["Artifacts", "JLLWrappers", "LazyArtifacts", "Libdl"]
 git-tree-sha1 = "0f14a5456bdc6b9731a5682f439a672750a09e48"
@@ -1175,20 +733,10 @@ weakdeps = ["Unitful"]
     [deps.Interpolations.extensions]
     InterpolationsUnitfulExt = "Unitful"
 
-[[deps.InvertedIndices]]
-git-tree-sha1 = "6da3c4316095de0f5ee2ebd875df8721e7e0bdbe"
-uuid = "41ab1584-1d38-5bbf-9106-f11c6c58b48f"
-version = "1.3.1"
-
 [[deps.IrrationalConstants]]
 git-tree-sha1 = "e2222959fbc6c19554dc15174c81bf7bf3aa691c"
 uuid = "92d709cd-6900-40b7-9082-c6be49f344b6"
 version = "0.2.4"
-
-[[deps.IterTools]]
-git-tree-sha1 = "42d5f897009e7ff2cf88db414a389e5ed1bdd023"
-uuid = "c8e1da08-722c-5040-9ed9-7db0dc04731e"
-version = "1.10.0"
 
 [[deps.IteratorInterfaceExtensions]]
 git-tree-sha1 = "a3f24677c21f5bbe9d2a714f95dcd58337fb2856"
@@ -1405,12 +953,6 @@ deps = ["Artifacts", "IntelOpenMP_jll", "JLLWrappers", "LazyArtifacts", "Libdl",
 git-tree-sha1 = "5de60bc6cb3899cd318d80d627560fae2e2d99ae"
 uuid = "856f044c-d86e-5d09-b602-aeab76dc8ba7"
 version = "2025.0.1+1"
-
-[[deps.MLBase]]
-deps = ["IterTools", "Random", "Reexport", "StatsBase"]
-git-tree-sha1 = "ac79beff4257e6e80004d5aee25ffeee79d91263"
-uuid = "f0e99cf1-93fa-52ec-9ecc-5026115318e0"
-version = "0.9.2"
 
 [[deps.MacroTools]]
 git-tree-sha1 = "72aebe0b5051e5143a079a4685a46da330a40472"
@@ -1632,12 +1174,6 @@ git-tree-sha1 = "7e71a55b87222942f0f9337be62e26b1f103d3e4"
 uuid = "7f904dfe-b85e-4ff6-b463-dae2292396a8"
 version = "0.7.61"
 
-[[deps.PooledArrays]]
-deps = ["DataAPI", "Future"]
-git-tree-sha1 = "36d8b4b899628fb92c2749eb488d884a926614d3"
-uuid = "2dfb63ee-cc39-5dd5-95bd-886bf059d720"
-version = "1.4.3"
-
 [[deps.PrecompileTools]]
 deps = ["Preferences"]
 git-tree-sha1 = "5aa36f7049a63a1528fe8f7c3f2113413ffd4e1f"
@@ -1649,12 +1185,6 @@ deps = ["TOML"]
 git-tree-sha1 = "9306f6085165d270f7e3db02af26a400d580f5c6"
 uuid = "21216c6a-2e73-6563-6e65-726566657250"
 version = "1.4.3"
-
-[[deps.PrettyTables]]
-deps = ["Crayons", "LaTeXStrings", "Markdown", "PrecompileTools", "Printf", "Reexport", "StringManipulation", "Tables"]
-git-tree-sha1 = "1101cd475833706e4d0e7b122218257178f48f34"
-uuid = "08abe8d2-0d0c-5749-adfa-8a2ac140af0d"
-version = "2.4.0"
 
 [[deps.Printf]]
 deps = ["Unicode"]
@@ -1798,11 +1328,6 @@ deps = ["Distributed", "Mmap", "Random", "Serialization"]
 uuid = "1a1011a3-84de-559e-8e89-a11a2f7dc383"
 version = "1.11.0"
 
-[[deps.ShiftedArrays]]
-git-tree-sha1 = "503688b59397b3307443af35cd953a13e8005c16"
-uuid = "1277b4bf-5013-50f5-be3d-901d8477a67a"
-version = "2.0.0"
-
 [[deps.Showoff]]
 deps = ["Dates", "Grisu"]
 git-tree-sha1 = "91eddf657aca81df9ae6ceb20b959ae5653ad1de"
@@ -1897,23 +1422,11 @@ version = "1.3.2"
     ChainRulesCore = "d360d2e6-b24c-11e9-a2a3-2a2ae2dbcce4"
     InverseFunctions = "3587e190-3f89-42d0-90ee-14403ec27112"
 
-[[deps.StatsModels]]
-deps = ["DataAPI", "DataStructures", "LinearAlgebra", "Printf", "REPL", "ShiftedArrays", "SparseArrays", "StatsAPI", "StatsBase", "StatsFuns", "Tables"]
-git-tree-sha1 = "9022bcaa2fc1d484f1326eaa4db8db543ca8c66d"
-uuid = "3eaba693-59b7-5ba5-a881-562e759f1c8d"
-version = "0.7.4"
-
 [[deps.StatsPlots]]
 deps = ["AbstractFFTs", "Clustering", "DataStructures", "Distributions", "Interpolations", "KernelDensity", "LinearAlgebra", "MultivariateStats", "NaNMath", "Observables", "Plots", "RecipesBase", "RecipesPipeline", "Reexport", "StatsBase", "TableOperations", "Tables", "Widgets"]
 git-tree-sha1 = "3b1dcbf62e469a67f6733ae493401e53d92ff543"
 uuid = "f3b207a7-027a-5e70-b257-86293d7955fd"
 version = "0.15.7"
-
-[[deps.StringManipulation]]
-deps = ["PrecompileTools"]
-git-tree-sha1 = "725421ae8e530ec29bcbdddbe91ff8053421d023"
-uuid = "892a3eda-7b42-436c-8928-eab12a02cf0e"
-version = "0.4.1"
 
 [[deps.StyledStrings]]
 uuid = "f489334b-da3d-4c2e-b8f0-e476e12c162b"
@@ -2357,7 +1870,7 @@ version = "1.4.1+2"
 # ╠═cbaeed42-c172-4f99-b2c1-226dc33f58b5
 # ╟─92243ab8-d9d7-4387-b47c-6e5dfdbd3c56
 # ╠═b5a85a07-71a5-4ef3-bd35-f6e9c1b5495c
-# ╟─1fafd2db-e41f-4733-abd5-013420991206
+# ╠═1fafd2db-e41f-4733-abd5-013420991206
 # ╟─a4401f40-3309-4009-b9e0-f379f7c0c0c3
 # ╟─c7746247-7ce0-43bf-8564-f4ab03958acd
 # ╠═7b7b84dd-f3b3-42fd-9da1-70dc43d5ae9e
@@ -2369,69 +1882,18 @@ version = "1.4.1+2"
 # ╟─6ca5361f-3cef-4a34-b637-a018a6a7d139
 # ╟─a5a6c1e8-c599-485f-b1bf-8b56597cac5c
 # ╟─e0f08713-1c23-4cf4-9c52-82c9ab5241bb
-# ╠═0344797d-a46b-4ed4-a76e-f7350dab0d5f
+# ╟─3efdf645-4c72-482b-9d0b-8c9d95dcee89
 # ╟─9df32844-9629-4e65-a109-06a24af61074
 # ╟─4c13b746-e8c7-4f1c-a9ae-124572d9f5f0
 # ╟─5cfd2183-0da6-4d06-9c04-b69a08068781
 # ╟─cd654344-7ee6-4a1d-98e9-eb950a6e1869
 # ╟─6431de8a-4dc7-454b-a1a2-6f551352c99f
-# ╟─633640f1-2960-48e2-8bde-cd2deb9be8c1
-# ╟─1f79a731-ca87-4b2d-b69a-9eda46a9fe0b
-# ╟─ee0133a0-0012-4c96-905c-cf7850ce520b
-# ╠═52e8269b-12b9-4265-af9b-4116b13eb222
-# ╠═53be67b3-4ad9-4e6f-b92d-0b13219c8c3e
-# ╟─24f8d002-5013-4261-841d-a65069abb847
-# ╟─bc306ac6-b628-46ba-9fcf-9be03bc16b1c
-# ╟─473aec58-681d-40ec-bf40-276bde579c52
-# ╟─14fe81a0-dd0e-41d3-a519-a5e945c4826f
-# ╟─182c71d3-7b5c-4c9b-b3dd-c14efed5f756
-# ╟─8a04e12e-1484-46a8-ad3d-a4c96c5b1ab4
-# ╟─361800d0-c3c4-461a-a319-ac214f26281c
 # ╟─05ace14b-1eba-4654-a57b-fe8c369364c0
 # ╠═f645b0f1-f631-4b13-8071-4d8f62313543
 # ╠═64044930-279a-4cf1-8de4-8cd109249c6e
 # ╠═eceb42bd-107e-4f32-9ff2-4c844f843f7f
-# ╟─4b83e520-9d5a-4bd7-aeb4-a78bcf2c21d4
-# ╠═ed652fe6-611a-4867-adf9-739366a3db2e
-# ╟─5b32e41b-201a-4100-b8b7-08ce348d7657
-# ╟─56d3656e-9ae6-4a14-a957-d89516f69494
-# ╟─3252bebd-47f2-4e85-9d24-6d4682dd7738
-# ╟─278acc8a-5e17-4929-a5f7-27f75840bc44
-# ╟─c741469a-b2f1-4fcd-b824-c35c97812e99
-# ╟─a8f2fb85-97fa-412c-b695-b720dad7e804
-# ╟─57f1e4e1-282d-47ce-9562-2abf1fadd948
-# ╟─d320bde9-7325-4de7-bbbe-65126faaff55
-# ╟─512445bc-a141-4db8-bd54-c413611a0bba
-# ╟─599ae71a-90d0-40cd-90c9-051259a456f4
-# ╟─e46e7944-5688-4660-b61b-5edfcc2c86e5
-# ╟─51791bfe-b216-4bf6-8d84-e3e1b5b6ba83
-# ╟─95063a94-4c34-45e0-971a-f6cdbaf8a34e
-# ╟─32737d4c-35c1-41bb-8f8b-4b4384127aa8
-# ╟─a61dfc40-a0e1-4c1e-be73-d7290fe1e945
-# ╟─22c43d91-3899-49b8-9f4c-b9d9e913e645
-# ╟─997eb1a0-6e15-4084-8cb6-2a2b975ae45a
-# ╟─e0af81da-0c65-4b47-8354-dc1ce9891bf8
-# ╟─e65fa52b-052c-4490-a3ef-91d80f0b14d0
-# ╟─46b975c9-b09b-4a3e-a820-c528a6440572
-# ╟─aee19d74-cdf4-41e2-aa03-fa6ad16ebbf3
-# ╟─d843b612-b7ed-42d1-ab63-d61f10ec120a
-# ╟─eb25d766-b0c9-4a1b-9655-26283476b1f6
-# ╟─adaacd2a-8361-461e-b3a7-d07e275884c0
-# ╟─9eb5e42f-f7da-4e06-979e-6246617f9825
-# ╟─836c0d9a-af47-4ad3-a9ee-5612230f11bb
-# ╟─4ee9f3e1-bd68-4d04-b4dc-763969a0fb0e
-# ╟─3efdf645-4c72-482b-9d0b-8c9d95dcee89
-# ╟─3c3bd2a7-60dd-4d55-a96d-36e9bf946191
-# ╟─3bab8042-3000-4f6a-b020-03a4d01f5724
-# ╟─18219451-5272-45f6-9677-53b49865ef74
-# ╟─c598cec6-bd3e-4663-88d2-2f17958f88f4
-# ╟─2fe54063-ed09-4209-9237-4f0ada32c938
 # ╟─18c6df07-5d88-4191-be6f-1350e8c3dc8d
 # ╟─f4c0e1d9-44be-4c35-ad7a-00c915d9fb61
 # ╟─231cc8c7-d325-4309-b44f-26a70394f1d9
-# ╟─e65b52e3-3db4-425f-aac1-9dce0bd2f6d8
-# ╟─12986e96-4953-4264-a332-9f2e3f1bcc38
-# ╟─2b565065-7b8b-4690-a031-b9d91e567a3f
-# ╟─4d2ddd60-c8df-46d9-9f4d-105dcb097878
 # ╟─00000000-0000-0000-0000-000000000001
 # ╟─00000000-0000-0000-0000-000000000002
