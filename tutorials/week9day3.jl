@@ -61,6 +61,11 @@ question_box(md"""
 What makes logistic regression a strong choice for classification tasks?
 """)
 
+# ╔═╡ 45f84075-6b1e-44e4-a94a-4818c8066f65
+question_box(md"""
+When determining classifications, how does one determine how many classes there should be? 
+""")
+
 # ╔═╡ e0f08713-1c23-4cf4-9c52-82c9ab5241bb
 question_box(md"""
 What is a neural network?
@@ -1956,6 +1961,7 @@ version = "1.4.1+2"
 # ╟─2a8139dd-475e-48f8-8544-ba4eb1b9910c
 # ╟─29c20aac-efec-486f-970e-5ca48724c770
 # ╟─21747361-d712-42e5-b834-19891b398e26
+# ╟─45f84075-6b1e-44e4-a94a-4818c8066f65
 # ╟─e0f08713-1c23-4cf4-9c52-82c9ab5241bb
 # ╟─4c13b746-e8c7-4f1c-a9ae-124572d9f5f0
 # ╟─5cfd2183-0da6-4d06-9c04-b69a08068781
