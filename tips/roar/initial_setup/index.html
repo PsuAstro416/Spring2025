@@ -1,0 +1,181 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <link rel="icon" type="image/png" href="/Spring2025/assets/favicon.svg">
+  <script>
+  MathJax = {
+    tex: {
+      inlineMath: [['$', '$'], ["\\(", "\\)"]],
+      processEscapes: true,
+    }
+  };
+</script>
+
+<!-- This weird alignment is required by Franklin's parser. -->
+<script
+    async
+    src="/Spring2025/assets/MathJax/MathJax-3.2.2/es5/tex-mml-chtml.js">
+</script>
+
+<style>
+@font-face {
+  src: url("/Astro416//assets/MathJax/MathJax-3.2.2/es5/output/chtml/fonts/woff-v2/MathJax_Main-Regular.woff">
+}
+</style>
+
+<style>
+@font-face {
+  src: url("/Astro416//assets/MathJax/MathJax-3.2.2/es5/output/chtml/fonts/woff-v2/MathJax_Zero.woff">
+}
+</style>
+
+<style>
+@font-face {
+  src: url("/Astro416//assets/MathJax/MathJax-3.2.2/es5/output/chtml/fonts/woff-v2/MathJax_Math-Italic.woff">
+}
+</style>
+
+  <link rel="stylesheet"
+  href="/Spring2025/assets/Highlight/cdn-release-11.5.0/build/styles/github.min.css">
+
+<script
+  src="/Spring2025/assets/Highlight/cdn-release-11.5.0/build/highlight.min.js">
+</script>
+
+<script
+  src="/Spring2025/assets/Highlight/cdn-release-11.5.0/build/languages/julia.min.js">
+</script>
+
+<script
+  src="/Spring2025/assets/Highlight/cdn-release-11.5.0/build/languages/julia-repl.min.js">
+</script>
+
+<script>
+  hljs.configure({tabReplace: '    '});
+  hljs.highlightAll();
+</script>
+
+    <style>
+    @font-face {
+      font-family: JuliaMono-Regular;
+      src: url("/Astro416//assets/JuliaMono/juliamono-0.044/webfonts/JuliaMono-Regular.woff2");
+    }
+    </style>
+
+  <link rel="stylesheet" href="/Spring2025/css/spectre.min.css">
+  <link rel="stylesheet" href="/Spring2025/css/spectre-exp.min.css">
+  <link rel="stylesheet" href="/Spring2025/css/spectre-icons.min.css">
+  <link rel="stylesheet" href="/Spring2025/css/spectre-overrides.css">
+  <link rel="stylesheet" href="/Spring2025/css/docs.min.css">
+
+  <title>Setup Script on Roar - Astro 416</title>
+  <meta name="description" content="Penn State Astro 416: Data Science Applications to Astronomy">
+
+
+    
+
+</head>
+<body>
+
+  <div class="docs-container off-canvas off-canvas-sidebar-show">
+  <div class="docs-navbar">
+    <a class="off-canvas-toggle btn btn-link btn-action" href="#sidebar"><i class="icon icon-menu"></i></a>
+    
+<div class="btns d-flex">
+      <a class="btn btn-primary ml-1" href="https://portal.hpc.psu.edu">Roar Portal</a>
+      <a class="btn btn-primary ml-1" href="https://github.com/PsuAstro416/Spring2025">Improve this site</a>
+
+    </div>
+    
+</div>
+
+<div id="sidebar" class="docs-sidebar off-canvas-sidebar">
+
+<div class="docs-brand">
+    <h5><a href="/Spring2025/">Astro 416</a></h5>
+</div>
+
+<div class="docs-nav">
+<div class="accordion-container">
+  <ul class="menu menu-nav">
+    <div class="menu-header"><a href="/Spring2025/syllabus/">Syllabus</a></div>
+    
+    
+    <div class="menu-header"><a href="/Spring2025/lessons/">Lessons</a></div>
+    
+
+    <div class="menu-header"><a href="/Spring2025/labs/">Labs</a></div>
+    
+    
+    <div class="menu-header"><a href="/Spring2025/project/">Project</a></div>
+    
+    <div class="menu-header"><a href="/Spring2025/tips/">Tips</a></div>
+    
+    <li class='menu-item '><a href='/Spring2025/tips/roar/'>Using Roar</a></li>
+
+    <li class='menu-item '><a href='/Spring2025/tips/roar/pluto/'>Starting Pluto</a></li>
+    <li class='menu-item '><a href='/Spring2025/tips/labs/'>Using Labs</a></li>
+        
+
+    
+
+    <div class="menu-header"><a href="/Spring2025/resources/">Resources</a></div>
+
+  </ul>
+</div>
+</div>
+</div>
+<a class="off-canvas-overlay" href="#close"></a>
+
+
+
+<div class="off-canvas-content">
+<div id="content" class="docs-content">
+<div class="container">
+<!-- Content appended here -->
+<div class="franklin-content">
+<h3 id="run_setup_script_on_roar"><a href="#run_setup_script_on_roar" class="header-anchor">Run Setup Script on Roar</a></h3>
+<p>To initially set up the users environment for ASTRO 416&#39;s use of Julia and Pluto, a user must run a setup script.  This initial setup step should only be performed once all semester.  &#40;If you&#39;re curious, the setup script loads modules providing access to julia, python, and anaconda. It sets some environment variables that we&#39;ll use later in the class and moves the current .julia directory &#40;if it exists&#41; from home to work.  It then creates a symlink ~/.julia -&gt; ~/work/julia_astro416.  Finally, it installs the Pluto and IJulia packages in Julia, so you can use Julia inside the JupyterLab and Pluto servers.&#41;  </p>
+<p>To make all those steps easy, ICDS has provided a script that you can easily run from a terminal window on Roar. To run this script, first, make sure you have <a href="../create_account/">created an account on ACI</a> steps. Then, </p>
+<ul>
+<li><p>Browse to <a href="https://portal.hpc.psu.edu">portal.hpc.psu.edu</a>.  Using &quot;guest&quot; or &quot;incognito&quot; mode is recommended. </p>
+</li>
+<li><p>Login and authenticate &#40;as necessary&#41;.</p>
+</li>
+<li><p>Click <em>Clusters</em> and select <em>&gt;RC Shell Access</em>.  </p>
+</li>
+<li><p>Login with your Penn State password.  You&#39;ll likely need to complete the two-factor authentication process.  </p>
+</li>
+<li><p>You&#39;ll now have a terminal where you can enter commands.  Type &#40;or copy and paste&#41;</p>
+</li>
+</ul>
+<pre><code class="language-shell">bash /storage/group/dsa2astro/default/astro_416/scripts/class_setup</code></pre>
+<p>If you already have customized your Roar environment for your research, then you may get a warning message and need to ask for help configuring your account.</p>
+<ul>
+<li><p>When the script has finished running and you have a new command prompt, exit the terminal by typeing </p>
+</li>
+</ul>
+<pre><code class="language-shell">exit</code></pre>
+<p>Your next Roar session will automatically use those settings.</p>
+<p><br/> Now you&#39;re ready to move on to <a href="../pluto/">starting Pluto</a></p>
+<script type="text/javascript" src="/Spring2025/libs/ansi_up.js" defer></script>
+
+<div id="copyright" class="docs-footer container grid-lg">
+<a href="https://www.psu.edu">Penn State</a> &mdash;
+<a href="https://science.psu.edu/astro">Astronomy & Astrophysics</a> &mdash;
+<a href="https://astrostatistics.psu.edu/">Center for Astrostatistics</a>
+<br>
+<a href="https://www.icds.psu.edu/">Institute for Computational & Data Sciences</a>
+</br>
+</br>
+<a href="http://creativecommons.org/licenses/by-sa/4.0/">CC BY-SA 4.0</a> <a href="https://science.psu.edu/astro/people/ebf11">Eric Ford</a>
+</div>
+</div><!-- CONTENT ENDS HERE -->
+    </div>
+    </div>
+    </div>
+    </div>
+  </body>
+</html>
