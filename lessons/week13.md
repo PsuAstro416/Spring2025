@@ -10,6 +10,11 @@ Week {{week_num}}
 # {{topic}}
 
 <!--
+## Notebooks from class
+- [Day 1](https://psuastro416.github.io/Spring2025/tutorials/week13/)
+-->
+
+<!--
 ## Wednesday
 - During class time, work on class project & ask questions of instructor & TA
 -->

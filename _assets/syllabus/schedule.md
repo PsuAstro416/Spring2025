@@ -26,8 +26,8 @@ Students will submit at least one questions about the week's content prior to Fr
 | SB | Spring Break |
 | 9  | Classification |
 | 10 | Data Visualization |
-| 11 | Data Science Workflow | 
-| 12 | Reports & Dashboards | 
+| 11 | Reports & Dashboards | 
+| 12 | Data Science Workflow | 
 | 13 | Reproducible Research |
 | 14 | Retrospective & Student Presentations |  
 | 15 | Student Presentations |
