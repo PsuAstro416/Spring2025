@@ -15,5 +15,7 @@ Week {{week_num}}
 ## [Lab 9](../../labs/lab9/): {{fill title labs/lab9.md}}
 
 ## Notebooks from class
-- [Day 1](https://psuastro416.github.io/Spring2025/tutorials/week9/)
+- [Day 1](https://psuastro416.github.io/Spring2025/tutorials/week10/)
 
+## Resources
+- [Marker types in Plots.jl](https://docs.juliaplots.org/stable/gallery/gr/generated/gr-ref013/)

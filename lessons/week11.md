@@ -2,19 +2,20 @@
 title = "Week 11"
 week_num = 11
 tags = ["lessons"]
-topic = "Data Science Workflow"
-ds_topic = "Data Science Workflow"
+topic = "Reports & Dashboards"
+ds_topic = "Reports & Dashboards"
 +++
 
 Week {{week_num}}
 # {{topic}}
 
-## Wednesday 
-- During class time, work on class project & ask questions of instructor & TA
-- [What is a Data Science Life Cycle?](https://www.datascience-pm.com/data-science-life-cycle/)
-- [Data Science Workflow](https://www.datascience-pm.com/data-science-workflow/)
+## Notebooks from class
+- [Day 1](https://psuastro416.github.io/Spring2025/tutorials/week10/)
 
-### Optional Resources:
+## Wednesday
+- During class time, work on class project & ask questions of instructor & TA
+
+## Resources:
 - Dashboards w/ Pluto: [PlutoUI examples](https://juliapluto.github.io/sample-notebook-previews/PlutoUI.jl.html), [video from JuliaCon 2022](https://www.youtube.com/watch?v=dP9UuEL00iM)
 - Alternative toolsets for building Dashboards:
    - Genie.jl: [docs](https://genieframework.com/docs/genie/v5/tutorials/1--Overview.html) [video overview](https://www.youtube.com/watch?v=YEQLTCWxDuM)
