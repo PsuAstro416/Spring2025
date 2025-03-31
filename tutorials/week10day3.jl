@@ -88,7 +88,7 @@ Transparency ("alpha"): $(@bind plt_α Slider(0:0.1:1, default=1))
 """
 
 # ╔═╡ c0328e74-242c-4316-bc7a-2767e840b9d6
-scatter(x,y, alpha=plt_α)
+scatter(x,y, alpha=plt_α, markerstrokewidth=0)
 
 # ╔═╡ a0c28ff0-30c6-42db-890b-e72a2dff0ad1
 question_box(md"Is there another type of plot to show the density of data that is not a contour plot?")
@@ -151,6 +151,10 @@ end
 md"""
 # Setup
 """
+
+# ╔═╡ 569d2336-c257-454f-8e09-035b4396a17d
+# hideall 
+WidthOverDocs()
 
 # ╔═╡ 231cc8c7-d325-4309-b44f-26a70394f1d9
 # hideall
@@ -1747,7 +1751,7 @@ version = "1.4.1+2"
 # ╟─4895cba8-022c-433a-8789-a18295eb6f07
 # ╟─0e2b6725-c2ec-43bc-b587-19df89cea5c3
 # ╟─419d6d0a-e989-4b72-889a-42c453734033
-# ╟─cc200f30-0397-48d3-80af-bb43c365d1ca
+# ╠═cc200f30-0397-48d3-80af-bb43c365d1ca
 # ╠═7e2ee8c8-3075-4b53-9504-0fe6bcd82a2f
 # ╟─23a38298-3046-4b55-9674-c4403b7eac99
 # ╟─0460dd17-f5d1-4456-a7c4-7352309be0bd
@@ -1758,12 +1762,13 @@ version = "1.4.1+2"
 # ╟─87049b71-8141-430d-b4a4-5e32fb166701
 # ╟─c2d7720a-7044-4ac5-8ed8-23e3b1d418ee
 # ╟─21225cec-0065-464f-aef4-79856b113700
-# ╟─32b68fbd-92a5-4b04-bc54-bf6da345253f
+# ╠═32b68fbd-92a5-4b04-bc54-bf6da345253f
 # ╟─effb29fd-528c-404b-b24c-565dec1eef89
 # ╟─e971dc87-6abf-45d1-a422-04eed9d201ae
 # ╟─3d38d698-3554-448d-86da-b9182bc94616
 # ╟─18c6df07-5d88-4191-be6f-1350e8c3dc8d
 # ╟─f4c0e1d9-44be-4c35-ad7a-00c915d9fb61
+# ╟─569d2336-c257-454f-8e09-035b4396a17d
 # ╟─231cc8c7-d325-4309-b44f-26a70394f1d9
 # ╟─00000000-0000-0000-0000-000000000001
 # ╟─00000000-0000-0000-0000-000000000002

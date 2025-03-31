@@ -127,7 +127,7 @@ md"""
 
 # ╔═╡ ebf7a98e-2fc3-4b1e-87a0-1633d074120c
 md"""
-## Oral Report/Presentations
+# Oral Reports/Presentations
 - Summarizes key elements of written report
 - Refers to written report for details (e.g., data, methodology, analysis, complete list of assumptions/caveats)
   - Should still highlight most important assumptions/caveats
@@ -162,7 +162,7 @@ Foldable("Example of Hero's Journey adapted for presentation", md"""
 
 # ╔═╡ 970f39cf-b919-4126-a68c-8e7cffeb74c8
 md"""
-### Common Presentation Elements
+## Common Presentation Elements
 - Polished opening to capture's audience's attention/imagination
 - Asking audience a question
 - Dramatic pause / use of empty space
@@ -184,7 +184,6 @@ md"""
 md"""
 ## Example Dashboard Structure
 - Select which data to display
-- Minimally processed data
 - Summary/simplified version of data
 - Temporal evolution of data and/or summary
 - Comparison dataset or model
@@ -192,13 +191,15 @@ md"""
   - Visualization of comparison data/model
   - Summary of comparison data/model
   - Temporal evolution of comparison data/model (on top of data?)
-- Opportunity to dig deeper to better understand numbers
+- Opportunities to dig deeper to better understand numbers
+  - Minimally processed data avaliable
+  - Drilldown to help users find data of interest/concern
 """
 
 # ╔═╡ 9217f2eb-9146-4212-8d18-f83d05e854f3
 md"""
 ## Examples of Dashboards at Penn State
-- [Penn State Undergraduate Admissions Dashboard](https://datadigest.psu.edu/admissions/")
+- [Penn State Undergraduate Admissions Dashboard](https://datadigest.psu.edu/admissions/)
 - [Penn State Graduation & Retension](https://datadigest.psu.edu/graduation-and-retention/)
 - [Penn State Community Survey](https://opair.psu.edu/community-survey/dashboards/total/)
 - [University Park Energy Usage](https://www.ems.psu.edu/about/strategic-initiatives/sustainability/energy-usage-dashboards?tid=274)
@@ -311,6 +312,61 @@ WidthOverDocs()
 # hideall 
 TableOfContents()
 
+# ╔═╡ 8eaf0c7c-275e-4d5a-af85-cdf7f190023c
+begin
+	datadir = joinpath(pwd(),"data")
+	mkpath(datadir)
+	filename = "nexsci_ps.tsv"
+	datapath = joinpath(datadir,filename)
+end;
+
+# ╔═╡ 5c657d85-608a-4263-ba0c-8d24543f20d9
+"Returns a vector of strings with names of columns in DataFrame containing a variable of type."
+function get_cols_containing_type(df::DataFrame, type::Type)
+		filter(c->eltype(df[!,c])<:Union{Missing,type}, names(df) )
+end
+
+# ╔═╡ b4ff7f34-e3f0-43e4-826e-d0134383e641
+"Returns a vector of strings with names of columns in DataFrame containing some form of string."
+get_cols_containing_string(df) = get_cols_containing_type(df,AbstractString)
+
+# ╔═╡ b7160dc7-5d38-4a65-af6f-fbafee284359
+"Returns a vector of strings with names of columns in DataFrame containing some form of real number."
+get_cols_containing_real(df) = get_cols_containing_type(df,Real)
+
+# ╔═╡ 20fbb80e-a078-4d3e-af5f-fa3fc0995d91
+"""
+`make_tap_query_url(base_url, query_table; ...)`
+Returns url for a Table Access Protocol (TAP) query.
+Inputs:
+- base url
+- table name
+Optional arguments:
+- max_rows (all)
+- select_cols (all)
+- where (no requirement)
+- order_by_cols (not sorted)
+- format (tsv)
+See [NExScI](https://exoplanetarchive.ipac.caltech.edu/docs/TAP/usingTAP.html#sync) or [Virtual Observatory](https://www.ivoa.net/documents/TAP/) for more info.
+"""
+function make_tap_query_url(query_base_url::String, query_table::String; max_rows::Integer = 0, select_cols::String = "", where::String = "", order_by_cols::String = "", format::String="tsv" )
+
+	query_select = "select"
+	if max_rows > 0
+		query_select *= "+top+" * string(max_rows)
+	end
+	if length(select_cols) >0
+		query_select *= "+" * select_cols
+	else
+		query_select *= "+*"
+	end
+	query_from = "+from+" * query_table
+	query_where = length(where)>0 ? "+where+" * where : ""
+	query_order_by = length(order_by_cols) > 0 ? "+order+by+" * order_by_cols : ""
+	query_format = "&format=" * format
+	url = query_base_url * query_select * query_from * query_where * query_order_by * query_format
+end
+
 # ╔═╡ a744c046-93ab-4af3-9834-94a9ca83016a
 begin
 	query_base_url = "https://exoplanetarchive.ipac.caltech.edu/TAP/sync?query="
@@ -318,14 +374,6 @@ begin
 	query_where = "default_flag=1"
 	query_max_rows = 10_000
 	url_to_use = make_tap_query_url(query_base_url, query_table, where=query_where, max_rows=query_max_rows)
-end;
-
-# ╔═╡ 8eaf0c7c-275e-4d5a-af85-cdf7f190023c
-begin
-	datadir = joinpath(pwd(),"data")
-	mkpath(datadir)
-	filename = "nexsci_ps.tsv"
-	datapath = joinpath(datadir,filename)
 end;
 
 # ╔═╡ aa7660af-e8dc-4539-96f6-edd0cbe36cb2
@@ -397,53 +445,6 @@ if drilldown_plots && (disc_method_idx >= 1)
 	xlabel!(plt,"Discovery Year")
 	ylabel!(plt,"Distance (pc)")
 	end
-end
-
-# ╔═╡ 5c657d85-608a-4263-ba0c-8d24543f20d9
-"Returns a vector of strings with names of columns in DataFrame containing a variable of type."
-function get_cols_containing_type(df::DataFrame, type::Type)
-		filter(c->eltype(df[!,c])<:Union{Missing,type}, names(df) )
-end
-
-# ╔═╡ b4ff7f34-e3f0-43e4-826e-d0134383e641
-"Returns a vector of strings with names of columns in DataFrame containing some form of string."
-get_cols_containing_string(df) = get_cols_containing_type(df,AbstractString)
-
-# ╔═╡ b7160dc7-5d38-4a65-af6f-fbafee284359
-"Returns a vector of strings with names of columns in DataFrame containing some form of real number."
-get_cols_containing_real(df) = get_cols_containing_type(df,Real)
-
-# ╔═╡ 20fbb80e-a078-4d3e-af5f-fa3fc0995d91
-"""
-`make_tap_query_url(base_url, query_table; ...)`
-Returns url for a Table Access Protocol (TAP) query.
-Inputs:
-- base url
-- table name
-Optional arguments:
-- max_rows (all)
-- select_cols (all)
-- where (no requirement)
-- order_by_cols (not sorted)
-- format (tsv)
-See [NExScI](https://exoplanetarchive.ipac.caltech.edu/docs/TAP/usingTAP.html#sync) or [Virtual Observatory](https://www.ivoa.net/documents/TAP/) for more info.
-"""
-function make_tap_query_url(query_base_url::String, query_table::String; max_rows::Integer = 0, select_cols::String = "", where::String = "", order_by_cols::String = "", format::String="tsv" )
-
-	query_select = "select"
-	if max_rows > 0
-		query_select *= "+top+" * string(max_rows)
-	end
-	if length(select_cols) >0
-		query_select *= "+" * select_cols
-	else
-		query_select *= "+*"
-	end
-	query_from = "+from+" * query_table
-	query_where = length(where)>0 ? "+where+" * where : ""
-	query_order_by = length(order_by_cols) > 0 ? "+order+by+" * order_by_cols : ""
-	query_format = "&format=" * format
-	url = query_base_url * query_select * query_from * query_where * query_order_by * query_format
 end
 
 # ╔═╡ 00000000-0000-0000-0000-000000000001
