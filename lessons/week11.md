@@ -2,15 +2,15 @@
 title = "Week 11"
 week_num = 11
 tags = ["lessons"]
-topic = "Reports & Dashboards"
-ds_topic = "Reports & Dashboards"
+topic = "Communicating Data Science"
+ds_topic = "Reports, Presentations & Dashboards"
 +++
 
 Week {{week_num}}
 # {{topic}}
 
 ## Notebooks from class
-- [Day 1](https://psuastro416.github.io/Spring2025/tutorials/week10/)
+- [Day 1](https://psuastro416.github.io/Spring2025/tutorials/week11/)
 
 ## Wednesday
 - During class time, work on class project & ask questions of instructor & TA

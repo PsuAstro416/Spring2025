@@ -74,11 +74,12 @@ lab8_due =   "Mar 24"    # Week 10, Day 1   # Eric traveling in 2025
 lab9_title = "Data Visualization"
 lab9_start = "Mar 26"    # Week 10, Day 2   # Eric traveling in 2025
 lab9_due =   "Mar 31"    # Week 11, Day 1 
-# Week 11 to focus on project
+# Week 11 to focus on project (lesson on Communications: reports, presentations, dashboards)
+# Week 12 to focus on project (lesson on Workflows)
 project_checkpoint3_title = "Project Checkpoint 3: Performs Data Analysis" 
 project_checkpoint3_due = "Apr 7" # Week 12, Day 1
 # Potentially Thanksgiving Week
-# Week 13 to focus on project
+# Week 13 to focus on project (lesson on Reproducible Research)
 project_final_title = "Project Dashboard"
 project_final_due = "Apr 21"   # Week 14, Day 1
 project_presentation_title = "Project Presentations"

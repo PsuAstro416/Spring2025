@@ -16,6 +16,8 @@ Week {{week_num}}
 
 ## Notebooks from class
 - [Day 1](https://psuastro416.github.io/Spring2025/tutorials/week10/)
+- [Day 3 (Q&A)](https://psuastro416.github.io/Spring2025/tutorials/week10day3/)
+- [Day 3 (started on Reports for next week)](https://psuastro416.github.io/Spring2025/tutorials/week11/)
 
 ## Resources
 - [Marker types in Plots.jl](https://docs.juliaplots.org/stable/gallery/gr/generated/gr-ref013/)

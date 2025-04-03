@@ -37,42 +37,6 @@ md"""
 #### $subtitle
 """
 
-# ╔═╡ 57c17cde-8763-4db2-9504-e9e74fbb0ee3
-md"""
-## File Formats
-
-### What type of data does it store?
-- Text
-- Documents
-- Numerical values
-- Time-series
-- Images
-- Data cubes
-
-### Very common file formats
-- Text (ASCII or Unicode)
-  - Delimited (e.g., CSV, TSV)
-  - Fixed-width (e.g, AAS machine-readable tables)
-  - Markup languages (e.g., html, xml, toml, yaml,...)
-- Binary
-  - FITS: Standard for astronomical observations
-  - HDF5: Standard for numerical simulations
-
-### Key questions to ask when choosing a file format
-- How big is the dataset?
-- Will users want to read all data at once or small pieces of data?
-- Is dataset highly structured (e.g., large tables or images)?
-- Is it important to include machine-readable metadata?
-- Does it make sense to compress data?
-
-### What not to use
-- Your own custom binary file format
-- File formats that depend on versions of your softare (e.g., pickle)
-- Markup languages for highly structured data 
-- Text formats for large datasets
-
-"""
-
 # ╔═╡ e51391a6-4d60-4b85-b606-04f567476d54
 md"""
 # Data Science Lifecycle
@@ -121,14 +85,14 @@ hint(md"""
 # ╔═╡ b096359d-158d-42c5-80a1-9543eb30ef9e
 md"""
 ### Some workflows common in industry
-#### OSEMN
+#### OSEMN (pronounced *awesome*)
   - Obtain
   - Scrub
   - Explore
   - Model
   - iNterpret
 
-#### CRISP-DM
+#### CRoss-Industry Standard Process for Data Mining (CRISP-DM) 
    - Business Understanding
    - Data Understanding
    - Data Preparation
@@ -137,6 +101,18 @@ md"""
    - Deployment
 
 Emphasizes loops and deployment
+
+### [SCRUM](https://scrumguides.org/scrum-guide.html)
+Three pillars:
+- Transparency: Make emergent work visible.
+- Inspection: Look out for variances.
+- Adaption: Adapt your processes to minimize adverse variances and maximize beneficial opportunities.
+
+SCRUM build on **sprints**: Divide the larger project into a series of **sprints**, each consisting of:
+- Sprint Planning
+- Daily Scrum (Standup)
+- Sprint Review: 
+- Sprint Retrospective
 
 #### Team Data Science Process (TDSP) 
 Combines a workflow with project templates and recommendations for infrastructure and tools.  Favors MS products.
@@ -199,8 +175,8 @@ md"""
 ## Tools
 - Merging updates: Git
 - Sharing screen: Zoom, Teams, Virtual Desktop
-- Collaborative coding:  [VS Code](https://www.julia-vscode.org/docs/stable/userguide/remote/)/[VS Codium](https://vscodium.com/), [Repl.it](https://replit.com/), [Google Colab](https://colab.research.google.com/)
-
+- Collaborative coding:  [VS Code](https://www.julia-vscode.org/docs/stable/userguide/remote/)/[VS Codium](https://vscodium.com/),  [Google Colab](https://colab.research.google.com/), [Julia Hub](https://juliahub.com/https://juliahub.com/), [Repl.it](https://replit.com/),...
+- Collaborative writing:  [Overleaf](https://overleaf.com/), [Google Docs](http://docs.google.com/), [MS Office 365](https://office365.psu.edu/), ...
 """
 
 # ╔═╡ 73619a67-d86c-4d03-93c8-f3c56fc79f2c
@@ -723,7 +699,6 @@ version = "17.4.0+2"
 # ╟─23153562-0811-4327-bd10-775a7b72018f
 # ╟─2169f150-56a3-40cb-8a0c-545777028211
 # ╟─9b38e84a-e128-4f2a-8926-88d5051208d3
-# ╟─57c17cde-8763-4db2-9504-e9e74fbb0ee3
 # ╟─e51391a6-4d60-4b85-b606-04f567476d54
 # ╟─c625122d-6d63-445d-9281-40971851507c
 # ╟─5f77f4db-cb91-4696-b517-28b17f51ed48
@@ -731,11 +706,11 @@ version = "17.4.0+2"
 # ╟─b096359d-158d-42c5-80a1-9543eb30ef9e
 # ╟─43dc6de8-fbab-42d3-9daa-3ac29b100764
 # ╟─e66bd4b0-0e43-4903-a10b-6fa85cad0b26
-# ╠═55bf29e0-dd30-4a77-bf0a-f62518b826bf
-# ╠═daa8f84b-dd21-4d68-82dd-d60afbfb8e3e
-# ╠═956fce96-e4ed-4432-887e-124e21b1ecd4
-# ╠═51e4377a-7602-4293-ae2e-c0096ed8ce0a
-# ╠═28174d9a-5da4-4a5a-9d2f-2bf5fe515f00
+# ╟─55bf29e0-dd30-4a77-bf0a-f62518b826bf
+# ╟─daa8f84b-dd21-4d68-82dd-d60afbfb8e3e
+# ╟─956fce96-e4ed-4432-887e-124e21b1ecd4
+# ╟─51e4377a-7602-4293-ae2e-c0096ed8ce0a
+# ╟─28174d9a-5da4-4a5a-9d2f-2bf5fe515f00
 # ╟─73619a67-d86c-4d03-93c8-f3c56fc79f2c
 # ╟─2ef8e8d0-4af9-11ed-2a34-1fe4f1ff7dc8
 # ╟─6a003863-69dc-40aa-95f3-bfe7159bdf6e

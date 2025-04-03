@@ -263,6 +263,28 @@ md"""
 Show Drilldown Plots $(@bind drilldown_plots CheckBox(default= false))
 """
 
+# ╔═╡ b58a6b05-5b2c-4e70-96f9-9b8ccf073e22
+md"""
+# Q&A
+"""
+
+# ╔═╡ 02f35c2f-25d2-4870-a908-f38583fe84ee
+question_box(md"""For our project dashboard/presentation, who is our intended audience? The class? Are there any specific considerations we should keep in mind due to this?""")
+
+# ╔═╡ e0f59500-7074-4ba0-a3d7-46cb3920ef46
+md"""
+Your `README` can state your intended audience.  Some possibilities:
+- Another member of your research group (potentially most helpful)
+- A researcher you've never met
+- An observer/telescope operator
+- Another member of this class (reasonable default option)
+"""
+
+# ╔═╡ 07c98278-4a7b-4378-b038-88c0740d5394
+question_box(md"""Should a colloquium talk be given at around the same level as a presentation to the group doing research? 
+	
+How different should the group that actively works on that project be treated from the broad astrophysics community?""")
+
 # ╔═╡ 35205515-540c-45b1-8bdc-92da97229532
 md"""
 # Collaborating
@@ -1815,6 +1837,10 @@ version = "1.4.1+2"
 # ╟─3d0e5244-2231-4a43-9cc5-07bf2ae18310
 # ╟─33ed27a3-be07-4655-8c9e-aee043a7f94e
 # ╠═23331c5b-0fba-44be-afdc-d5b5cd6e826f
+# ╟─b58a6b05-5b2c-4e70-96f9-9b8ccf073e22
+# ╟─02f35c2f-25d2-4870-a908-f38583fe84ee
+# ╟─e0f59500-7074-4ba0-a3d7-46cb3920ef46
+# ╠═07c98278-4a7b-4378-b038-88c0740d5394
 # ╟─35205515-540c-45b1-8bdc-92da97229532
 # ╟─f4babbd2-5d08-4c2f-a113-8f0f3cf6605b
 # ╟─b22080e6-23f0-4a21-ab0b-15e2e575fa27
