@@ -18,9 +18,10 @@ end
 # hideall 
 begin
 	using PlutoUI, PlutoTeachingTools
-	using CSV, DataFrames, Plots
+	using CSV, DataFrames, HTTP
+	using Plots
+	using PlutoPlotly
 	using Downloads
-	#plotly()
 end
 
 # ╔═╡ b56bf7de-b7fd-4078-a926-252576ad4e97
@@ -253,6 +254,90 @@ md"""
   - but incoming data changes with time
 """
 
+# ╔═╡ b58a6b05-5b2c-4e70-96f9-9b8ccf073e22
+md"""
+# Q&A
+"""
+
+# ╔═╡ d151eaeb-06c6-4afc-bd1c-83c68059ed03
+md"""
+## Accessibility
+"""
+
+# ╔═╡ dcbc0236-ee26-46d9-95fd-2ef2803429eb
+question_box(md"Should we choose colors for our dashboard assuming there is someone who is colorblind? Or can I choose any?")
+
+# ╔═╡ 613457eb-f1b8-4cae-a7f8-562f89232691
+question_box(md"In the dashboard project, how much time should be spend on accessibility?")
+
+# ╔═╡ f1947512-396a-4de4-9a25-08d0f584ea4c
+md"""
+## Projects
+"""
+
+# ╔═╡ 02f35c2f-25d2-4870-a908-f38583fe84ee
+question_box(md"""For our project dashboard/presentation, who is our intended audience? The class? Are there any specific considerations we should keep in mind due to this?""")
+
+# ╔═╡ e0f59500-7074-4ba0-a3d7-46cb3920ef46
+md"""
+For presentation, the audience is your peers in the class.
+
+For dashboard, your `README` can state your intended audience.  Some possibilities:
+- Another member of your research group (potentially most helpful)
+- A researcher you've never met
+- An observer/telescope operator
+- Another member of this class (reasonable default option)
+"""
+
+# ╔═╡ bec3842b-e06e-46f7-9fc9-03be3c32fcd7
+question_box(md"""Will presentation dates be assigned soon?""")
+
+# ╔═╡ df02fcc4-fa51-46bc-988a-2772bc2fea18
+question_box(md"
+How can I make an interactive 3d plot in Julia?")
+
+# ╔═╡ 9ebf683b-9cd3-48d5-b442-3574a14d427c
+md"""
+#### [PlutoPlotly](https://github.com/JuliaPluto/PlutoPlotly.jl)
+"""
+
+# ╔═╡ 2c4a1a77-40ab-4f4a-b835-cda3bc148e7d
+let
+	local n = 20
+	labels = ["Type Ia", "Type Ib", "Type IIa", "Type IIb"] 
+	df = DataFrame(:col_x=>rand(n), :col_y=>randn(n), :col_sz=>0.2.+0.8.*rand(n), :col_color=>labels[rand(1:4,n)])
+	PlutoPlotly.plot(
+    	df, x=:col_x, y=:col_y, color=:col_color,
+    	marker=attr(size=:col_sz, sizeref=maximum(df.col_sz)/100, sizemode="area"),
+    	mode="markers")
+end
+
+# ╔═╡ ed8f4974-a27c-4626-b958-cfb19cdb38ef
+begin
+df_3d = CSV.File(  HTTP.get("https://raw.githubusercontent.com/plotly/datasets/master/api_docs/mt_bruno_elevation.csv").body ) |> DataFrame 
+z_data = Matrix{Float64}(df_3d);
+end;
+
+# ╔═╡ 93b12667-0ba0-443f-9f76-38468e00e07a
+layout = Layout(  title="Mt Bruno Elevation",  autosize=false,  width=500,  height=500,  margin=attr(l=65, r=50, b=65, t=90) );
+
+# ╔═╡ f74b38df-4d42-40f9-9757-1c1c24cd7bf2
+PlutoPlotly.plot(PlutoPlotly.surface(z=z_data), layout)
+
+# ╔═╡ 96896d7e-de2b-477f-9ce6-48fecb6bb308
+md"""
+```julia
+using PlutoPlotly
+layout = Layout(  title="Mt Bruno Elevation",  autosize=false,  width=500,  height=500,  margin=attr(l=65, r=50, b=65, t=90) ) 
+plot(surface(z=z_data), layout)
+```
+"""
+
+# ╔═╡ f2267b4c-1479-4619-b19e-ff34ae18f87d
+md"""
+[Plotly Gallery](https://plotly.com/julia/)
+"""
+
 # ╔═╡ 800070be-23f6-4ab2-ac42-0aec543e4472
 md"""
 ## Data Disagregation & Drilldown
@@ -263,21 +348,31 @@ md"""
 Show Drilldown Plots $(@bind drilldown_plots CheckBox(default= false))
 """
 
-# ╔═╡ b58a6b05-5b2c-4e70-96f9-9b8ccf073e22
+# ╔═╡ f5030766-2877-408f-9152-071675916d94
+question_box(md"I'm having trouble having plots pop up in another window.")
+
+# ╔═╡ 9d538aa5-ea5f-4786-be90-8db0df3fa257
 md"""
-# Q&A
+## Misc
 """
 
-# ╔═╡ 02f35c2f-25d2-4870-a908-f38583fe84ee
-question_box(md"""For our project dashboard/presentation, who is our intended audience? The class? Are there any specific considerations we should keep in mind due to this?""")
+# ╔═╡ e2eb1eba-845f-4ed5-9d21-8378199fbf1a
+question_box(md"Is flux as good as tensorflow?")
 
-# ╔═╡ e0f59500-7074-4ba0-a3d7-46cb3920ef46
+# ╔═╡ 9ee5566b-6ca4-42b1-844f-d708be46d83c
 md"""
-Your `README` can state your intended audience.  Some possibilities:
-- Another member of your research group (potentially most helpful)
-- A researcher you've never met
-- An observer/telescope operator
-- Another member of this class (reasonable default option)
+Deep Learning Frameworks
+- Python-based
+   - [Tensorflow](https://www.tensorflow.org/)
+   - [PyTorch](https://pytorch.org/)
+- [JAX](https://github.com/jax-ml/jax)
+   - [Equinox](https://github.com/patrick-kidger/equinox)
+- Julia-based
+   - [Flux.jl](https://fluxml.ai/)
+   - [Lux.jl](https://lux.csail.mit.edu/stable/)
+   - [TensorFlow.jl](https://malmaud.github.io/tfdocs/)
+   - [Torch.jl](https://github.com/FluxML/Torch.jl)
+   - [SimpleChains.jl](https://github.com/PumasAI/SimpleChains.jl)
 """
 
 # ╔═╡ 07c98278-4a7b-4378-b038-88c0740d5394
@@ -444,10 +539,10 @@ end
 begin
 	scalefontsizes()
 	scalefontsizes(1.5)
-	local plt = plot()
+	local plt = Plots.plot()
 	years_plt = range(2000,stop=2022)
 	if disc_method_idx >= 1
-		 df_plt = df_by_method[disc_method_idx]
+		df_plt = df_by_method[disc_method_idx]
 		histogram!(plt, df_plt.disc_year, df_plt.disc_year, bin=years_plt, title=menu_values[disc_method_idx+1], legend=:none )
 	else
 		histogram!(plt,df.disc_year, df.disc_year, bin=range(2000,stop=2022), title="All Exoplanets", legend=:none )
@@ -461,7 +556,7 @@ if drilldown_plots && (disc_method_idx >= 1)
 	let
 	scalefontsizes()
 	scalefontsizes(1.5)
-	plt = plot(legend=:none)
+	plt = Plots.plot(legend=:none)
 	scatter!(plt, df_plt.disc_year, df_plt.sy_dist,
 	title=menu_values[disc_method_idx+1])
 	xlabel!(plt,"Discovery Year")
@@ -475,14 +570,18 @@ PLUTO_PROJECT_TOML_CONTENTS = """
 CSV = "336ed68f-0bac-5ca0-87d4-7b16caf5d00b"
 DataFrames = "a93c6f00-e57d-5684-b7b6-d8193f3e46c0"
 Downloads = "f43a241f-c20a-4ad4-852c-f6b1247861c6"
+HTTP = "cd3eb016-35fb-5094-929b-558a96fad6f3"
 Plots = "91a5bcdd-55d7-5caf-9e0b-520d859cae80"
+PlutoPlotly = "8e989ff0-3d88-8e9f-f020-2b208a939ff0"
 PlutoTeachingTools = "661c6b06-c737-4d37-b85c-46df65de6f69"
 PlutoUI = "7f904dfe-b85e-4ff6-b463-dae2292396a8"
 
 [compat]
 CSV = "~0.10.15"
 DataFrames = "~1.7.0"
+HTTP = "~1.10.15"
 Plots = "~1.40.11"
+PlutoPlotly = "~0.6.2"
 PlutoTeachingTools = "~0.3.1"
 PlutoUI = "~0.7.61"
 """
@@ -576,9 +675,9 @@ version = "0.10.0"
 
 [[Colors]]
 deps = ["ColorTypes", "FixedPointNumbers", "Reexport"]
-git-tree-sha1 = "64e15186f0aa277e174aa81798f7eb8598e0157e"
+git-tree-sha1 = "362a287c3aa50601b0bc359053d5c2468f0e7ce0"
 uuid = "5ae59095-9a9b-59fe-a467-6f913c188581"
-version = "0.13.0"
+version = "0.12.11"
 
 [[Compat]]
 deps = ["TOML", "UUIDs"]
@@ -792,6 +891,11 @@ deps = ["Artifacts", "Cairo_jll", "Fontconfig_jll", "FreeType2_jll", "Glib_jll",
 git-tree-sha1 = "55c53be97790242c29031e5cd45e8ac296dadda3"
 uuid = "2e76f6c2-a576-52d4-95c1-20adfe4de566"
 version = "8.5.0+0"
+
+[[HashArrayMappedTries]]
+git-tree-sha1 = "2eaa69a7cab70a52b9687c8bf950a5a93ec895ae"
+uuid = "076d061b-32b6-4027-95e0-9a2c6f6d7e74"
+version = "0.2.0"
 
 [[Hyperscript]]
 deps = ["Test"]
@@ -1138,6 +1242,12 @@ git-tree-sha1 = "3b31172c032a1def20c98dae3f2cdc9d10e3b561"
 uuid = "36c8627f-9965-5494-a995-c6b170f724f3"
 version = "1.56.1+0"
 
+[[Parameters]]
+deps = ["OrderedCollections", "UnPack"]
+git-tree-sha1 = "34c0e9ad262e5f7fc75b10a9952ca7692cfc5fbe"
+uuid = "d96e819e-fc66-5662-9728-84c9c7592b0a"
+version = "0.12.3"
+
 [[Parsers]]
 deps = ["Dates", "PrecompileTools", "UUIDs"]
 git-tree-sha1 = "8489905bcdbcfac64d1daa51ca07c0d8f0283821"
@@ -1176,6 +1286,24 @@ git-tree-sha1 = "3ca9a356cd2e113c420f2c13bea19f8d3fb1cb18"
 uuid = "995b91a9-d308-5afd-9ec6-746e21dbc043"
 version = "1.4.3"
 
+[[PlotlyBase]]
+deps = ["ColorSchemes", "Colors", "Dates", "DelimitedFiles", "DocStringExtensions", "JSON", "LaTeXStrings", "Logging", "Parameters", "Pkg", "REPL", "Requires", "Statistics", "UUIDs"]
+git-tree-sha1 = "90af5c9238c1b3b25421f1fdfffd1e8fca7a7133"
+uuid = "a03496cd-edff-5a9b-9e67-9cda94a718b5"
+version = "0.8.20"
+
+    [PlotlyBase.extensions]
+    DataFramesExt = "DataFrames"
+    DistributionsExt = "Distributions"
+    IJuliaExt = "IJulia"
+    JSON3Ext = "JSON3"
+
+    [PlotlyBase.weakdeps]
+    DataFrames = "a93c6f00-e57d-5684-b7b6-d8193f3e46c0"
+    Distributions = "31c24e10-a181-5473-b8eb-7969acd0382f"
+    IJulia = "7073ff75-c697-5162-941a-fcdaad2a7d2a"
+    JSON3 = "0f8b85d8-7281-11e9-16c2-39a750bddbf1"
+
 [[Plots]]
 deps = ["Base64", "Contour", "Dates", "Downloads", "FFMPEG", "FixedPointNumbers", "GR", "JLFzf", "JSON", "LaTeXStrings", "Latexify", "LinearAlgebra", "Measures", "NaNMath", "Pkg", "PlotThemes", "PlotUtils", "PrecompileTools", "Printf", "REPL", "Random", "RecipesBase", "RecipesPipeline", "Reexport", "RelocatableFolders", "Requires", "Scratch", "Showoff", "SparseArrays", "Statistics", "StatsBase", "TOML", "UUIDs", "UnicodeFun", "UnitfulLatexify", "Unzip"]
 git-tree-sha1 = "24be21541580495368c35a6ccef1454e7b5015be"
@@ -1207,6 +1335,20 @@ deps = ["FileWatching", "InteractiveUtils", "Markdown", "PlutoHooks", "Revise", 
 git-tree-sha1 = "8f5fa7056e6dcfb23ac5211de38e6c03f6367794"
 uuid = "0ff47ea0-7a50-410d-8455-4348d5de0420"
 version = "0.1.6"
+
+[[PlutoPlotly]]
+deps = ["AbstractPlutoDingetjes", "Artifacts", "ColorSchemes", "Colors", "Dates", "Downloads", "HypertextLiteral", "InteractiveUtils", "LaTeXStrings", "Markdown", "Pkg", "PlotlyBase", "PrecompileTools", "Reexport", "ScopedValues", "Scratch", "TOML"]
+git-tree-sha1 = "9ebe25fc4703d4112cc418834d5e4c9a4b29087d"
+uuid = "8e989ff0-3d88-8e9f-f020-2b208a939ff0"
+version = "0.6.2"
+
+    [PlutoPlotly.extensions]
+    PlotlyKaleidoExt = "PlotlyKaleido"
+    UnitfulExt = "Unitful"
+
+    [PlutoPlotly.weakdeps]
+    PlotlyKaleido = "f2990250-8cf9-495f-b13a-cce12b45703c"
+    Unitful = "1986cc42-f94f-5a68-af5c-568840ba703d"
 
 [[PlutoTeachingTools]]
 deps = ["Downloads", "HypertextLiteral", "Latexify", "Markdown", "PlutoLinks", "PlutoUI"]
@@ -1332,6 +1474,12 @@ version = "3.7.2"
 [[SHA]]
 uuid = "ea8e919c-243c-51af-8825-aaa63cd721ce"
 version = "0.7.0"
+
+[[ScopedValues]]
+deps = ["HashArrayMappedTries", "Logging"]
+git-tree-sha1 = "1147f140b4c8ddab224c94efa9569fc23d63ab44"
+uuid = "7e506255-f358-4e82-b7e4-beb19740aa63"
+version = "1.3.0"
 
 [[Scratch]]
 deps = ["Dates"]
@@ -1470,6 +1618,11 @@ version = "1.5.1"
 deps = ["Random", "SHA"]
 uuid = "cf7118a7-6976-5b1a-9a39-7adc72f591a4"
 version = "1.11.0"
+
+[[UnPack]]
+git-tree-sha1 = "387c1f73762231e86e0c9c5443ce3b4a0a9a0c2b"
+uuid = "3a884ed6-31ef-47d7-9d2a-63182c4928ed"
+version = "1.0.2"
 
 [[Unicode]]
 uuid = "4ec0a83e-493e-50e2-b9ac-8f72acf5a8f5"
@@ -1831,16 +1984,33 @@ version = "1.4.1+2"
 # ╟─7adfadea-9e17-4194-bb7a-6fa4132ca900
 # ╟─78f8aa5c-7291-4466-b91f-c250409ecb0d
 # ╟─1afd9eb5-2943-47cd-a938-fe519a058ab5
+# ╟─b58a6b05-5b2c-4e70-96f9-9b8ccf073e22
+# ╟─d151eaeb-06c6-4afc-bd1c-83c68059ed03
+# ╟─dcbc0236-ee26-46d9-95fd-2ef2803429eb
+# ╟─613457eb-f1b8-4cae-a7f8-562f89232691
+# ╟─f1947512-396a-4de4-9a25-08d0f584ea4c
+# ╟─02f35c2f-25d2-4870-a908-f38583fe84ee
+# ╟─e0f59500-7074-4ba0-a3d7-46cb3920ef46
+# ╟─bec3842b-e06e-46f7-9fc9-03be3c32fcd7
+# ╟─df02fcc4-fa51-46bc-988a-2772bc2fea18
+# ╟─9ebf683b-9cd3-48d5-b442-3574a14d427c
+# ╠═2c4a1a77-40ab-4f4a-b835-cda3bc148e7d
+# ╟─ed8f4974-a27c-4626-b958-cfb19cdb38ef
+# ╟─93b12667-0ba0-443f-9f76-38468e00e07a
+# ╟─f74b38df-4d42-40f9-9757-1c1c24cd7bf2
+# ╟─96896d7e-de2b-477f-9ce6-48fecb6bb308
+# ╟─f2267b4c-1479-4619-b19e-ff34ae18f87d
 # ╟─800070be-23f6-4ab2-ac42-0aec543e4472
 # ╠═6745536b-d96b-4181-b83a-cd50852f58d0
 # ╟─bb0ff6b0-18b9-4056-8bdc-ecd344232f4e
 # ╟─3d0e5244-2231-4a43-9cc5-07bf2ae18310
 # ╟─33ed27a3-be07-4655-8c9e-aee043a7f94e
-# ╠═23331c5b-0fba-44be-afdc-d5b5cd6e826f
-# ╟─b58a6b05-5b2c-4e70-96f9-9b8ccf073e22
-# ╟─02f35c2f-25d2-4870-a908-f38583fe84ee
-# ╟─e0f59500-7074-4ba0-a3d7-46cb3920ef46
-# ╠═07c98278-4a7b-4378-b038-88c0740d5394
+# ╟─23331c5b-0fba-44be-afdc-d5b5cd6e826f
+# ╟─f5030766-2877-408f-9152-071675916d94
+# ╟─9d538aa5-ea5f-4786-be90-8db0df3fa257
+# ╟─e2eb1eba-845f-4ed5-9d21-8378199fbf1a
+# ╟─9ee5566b-6ca4-42b1-844f-d708be46d83c
+# ╟─07c98278-4a7b-4378-b038-88c0740d5394
 # ╟─35205515-540c-45b1-8bdc-92da97229532
 # ╟─f4babbd2-5d08-4c2f-a113-8f0f3cf6605b
 # ╟─b22080e6-23f0-4a21-ab0b-15e2e575fa27
