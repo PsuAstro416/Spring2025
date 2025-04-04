@@ -1,0 +1,222 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <link rel="icon" type="image/png" href="/Spring2025/assets/favicon.svg">
+  <script>
+  MathJax = {
+    tex: {
+      inlineMath: [['$', '$'], ["\\(", "\\)"]],
+      processEscapes: true,
+    }
+  };
+</script>
+
+<!-- This weird alignment is required by Franklin's parser. -->
+<script
+    async
+    src="/Spring2025/assets/MathJax/MathJax-3.2.2/es5/tex-mml-chtml.js">
+</script>
+
+<style>
+@font-face {
+  src: url("/Astro416//assets/MathJax/MathJax-3.2.2/es5/output/chtml/fonts/woff-v2/MathJax_Main-Regular.woff">
+}
+</style>
+
+<style>
+@font-face {
+  src: url("/Astro416//assets/MathJax/MathJax-3.2.2/es5/output/chtml/fonts/woff-v2/MathJax_Zero.woff">
+}
+</style>
+
+<style>
+@font-face {
+  src: url("/Astro416//assets/MathJax/MathJax-3.2.2/es5/output/chtml/fonts/woff-v2/MathJax_Math-Italic.woff">
+}
+</style>
+
+  <link rel="stylesheet"
+  href="/Spring2025/assets/Highlight/cdn-release-11.5.0/build/styles/github.min.css">
+
+<script
+  src="/Spring2025/assets/Highlight/cdn-release-11.5.0/build/highlight.min.js">
+</script>
+
+<script
+  src="/Spring2025/assets/Highlight/cdn-release-11.5.0/build/languages/julia.min.js">
+</script>
+
+<script
+  src="/Spring2025/assets/Highlight/cdn-release-11.5.0/build/languages/julia-repl.min.js">
+</script>
+
+<script>
+  hljs.configure({tabReplace: '    '});
+  hljs.highlightAll();
+</script>
+
+    <style>
+    @font-face {
+      font-family: JuliaMono-Regular;
+      src: url("/Astro416//assets/JuliaMono/juliamono-0.044/webfonts/JuliaMono-Regular.woff2");
+    }
+    </style>
+
+  <link rel="stylesheet" href="/Spring2025/css/spectre.min.css">
+  <link rel="stylesheet" href="/Spring2025/css/spectre-exp.min.css">
+  <link rel="stylesheet" href="/Spring2025/css/spectre-icons.min.css">
+  <link rel="stylesheet" href="/Spring2025/css/spectre-overrides.css">
+  <link rel="stylesheet" href="/Spring2025/css/docs.min.css">
+
+  <title>Pluto Notebooks on Roar - Astro 416</title>
+  <meta name="description" content="Penn State Astro 416: Data Science Applications to Astronomy">
+
+
+    
+
+</head>
+<body>
+
+  <div class="docs-container off-canvas off-canvas-sidebar-show">
+  <div class="docs-navbar">
+    <a class="off-canvas-toggle btn btn-link btn-action" href="#sidebar"><i class="icon icon-menu"></i></a>
+    
+<div class="btns d-flex">
+      <a class="btn btn-primary ml-1" href="https://portal.hpc.psu.edu">Roar Portal</a>
+      <a class="btn btn-primary ml-1" href="https://github.com/PsuAstro416/Spring2025">Improve this site</a>
+
+    </div>
+    
+</div>
+
+<div id="sidebar" class="docs-sidebar off-canvas-sidebar">
+
+<div class="docs-brand">
+    <h5><a href="/Spring2025/">Astro 416</a></h5>
+</div>
+
+<div class="docs-nav">
+<div class="accordion-container">
+  <ul class="menu menu-nav">
+    <div class="menu-header"><a href="/Spring2025/syllabus/">Syllabus</a></div>
+    
+    
+    <div class="menu-header"><a href="/Spring2025/lessons/">Lessons</a></div>
+    
+
+    <div class="menu-header"><a href="/Spring2025/labs/">Labs</a></div>
+    
+    
+    <div class="menu-header"><a href="/Spring2025/project/">Project</a></div>
+    
+    <div class="menu-header"><a href="/Spring2025/tips/">Tips</a></div>
+    
+    <li class='menu-item '><a href='/Spring2025/tips/roar/'>Using Roar</a></li>
+
+    <li class='menu-item active'><a href='/Spring2025/tips/roar/pluto/'>Starting Pluto</a></li>
+    <li class='menu-item '><a href='/Spring2025/tips/labs/'>Using Labs</a></li>
+        
+
+    
+
+    <div class="menu-header"><a href="/Spring2025/resources/">Resources</a></div>
+
+  </ul>
+</div>
+</div>
+</div>
+<a class="off-canvas-overlay" href="#close"></a>
+
+
+
+<div class="off-canvas-content">
+<div id="content" class="docs-content">
+<div class="container">
+<!-- Content appended here -->
+<div class="franklin-content">
+<h1 id="start_roar_session_with_pluto_server"><a href="#start_roar_session_with_pluto_server" class="header-anchor">Start Roar Session with Pluto Server</a></h1>
+<p>If this is your first time to run Pluto on Roar, then first make sure you have an account on ACI and have completed the <a href="/Spring2025/tips/roar/">initial setup</a> steps. Then, each time you want to start a Jupyter notebook session on Roar, you&#39;ll follow the instructions below:</p>
+<ol>
+<li><p>Browse to <a href="https://portal.hpc.psu.edu">portal.hpc.psu.edu</a>.</p>
+</li>
+</ol>
+<p>Using &quot;guest&quot; or &quot;incognito&quot; mode is recommended. Login and authenticate &#40;as necessary&#41;.</p>
+<ol>
+<li><p>Under <em>Interactive Apps</em>, choose <em>Jupyter</em> &#40;under Server Applications&#41;.</p>
+</li>
+<li><p>Select:</p>
+<ul>
+<li><p>Jupyter Interface: &quot;Jupyter Lab&quot;</p>
+</li>
+<li><p>Environment type: &quot;Use custom environment&quot;</p>
+</li>
+<li><p>Environment setup: <code>source /storage/group/dsa2astro/default/astro_416/scripts/env_setup</code></p>
+</li>
+<li><p>Account: <code>dsa2astro_bc</code> &#40;if that&#39;s not avaliable choose <em>open</em>&#41;</p>
+</li>
+<li><p>Partition: <code>dsa2astro_bc</code> &#40;if that&#39;s not avaliable choose <em>open</em>; this option might not be displayed&#41; </p>
+</li>
+<li><p>Number of hours: 2 hours  &#40;you can choose longer if you plan to continue after class or outside of class&#41;</p>
+</li>
+<li><p>Number of cores: 3</p>
+</li>
+<li><p>Memory: 12 GB  <strong>&#40;Note increase from previous suggestion&#41;</strong></p>
+</li>
+<li><p>Enable advanced Slurm options: Leave unchecked</p>
+</li>
+<li><p>I would like to receive an email when the session starts: Your choice of whether to check or not.</p>
+</li>
+<li><p>Note that the script and account above will be avaliable between January 13 and the end of the semester.</p>
+</li>
+</ul>
+</li>
+<li><p>Click <em>Launch</em>.  And wait while your job starts.</p>
+</li>
+<li><p>Once the <em>Connect to Jupyter Server</em> button appears, click it.</p>
+<ul>
+<li><p>The top row of tiles &#40;labeled &quot;Notebook&quot;&#41; should include a tile labeled &quot;Pluto.jl&quot;.  Click it.  </p>
+</li>
+<li><p>A new browser tab should open with a Pluto session.</p>
+</li>
+<li><p>The first time you open Pluto it will take a few minutes and is likely to time out.  Just wait five minutes and try again.  &#40;Behind the scenes, it&#39;s installing a lot of packages.  It will start promptly in the future.&#41;</p>
+</li>
+<li><p>For a blank notebook, click &quot;new notebook&quot;, or enter the path to a notebook you&#39;d like to open in the text box under &quot;Open from file&quot; and click the &quot;Open&quot; button.</p>
+</li>
+<li><p>Do your work, remembering to save your notebook before you quit.</p>
+</li>
+</ul>
+</li>
+<li><p>See <a href="/Spring2025/tips/labs/">Starting &amp; Submitting Assignments</a> for more information on accessing and submitting assignments.</p>
+</li>
+<li><p>When you&#39;re done using Roar:</p>
+</li>
+</ol>
+<ul>
+<li><p>From your Pluto notebook, click the <em>Ctrl&#43;S/Save all changes</em> icon &#40;or press Ctrl&#43;S&#41; to save your changes.</p>
+</li>
+<li><p>From the Jupyter server, close notebook tabs and click the logout icon in in upper right.</p>
+</li>
+<li><p>In the Roar Collab Portal, click the &quot;My Interactive Sessions&quot; icon &#40;to the right of Interactive Apps&#41; and click &quot;Delete&quot; for this session and confirm.</p>
+</li>
+</ul>
+<script type="text/javascript" src="/Spring2025/libs/ansi_up.js" defer></script>
+
+<div id="copyright" class="docs-footer container grid-lg">
+<a href="https://www.psu.edu">Penn State</a> &mdash;
+<a href="https://science.psu.edu/astro">Astronomy & Astrophysics</a> &mdash;
+<a href="https://astrostatistics.psu.edu/">Center for Astrostatistics</a>
+<br>
+<a href="https://www.icds.psu.edu/">Institute for Computational & Data Sciences</a>
+</br>
+</br>
+<a href="http://creativecommons.org/licenses/by-sa/4.0/">CC BY-SA 4.0</a> <a href="https://science.psu.edu/astro/people/ebf11">Eric Ford</a>
+</div>
+</div><!-- CONTENT ENDS HERE -->
+    </div>
+    </div>
+    </div>
+    </div>
+  </body>
+</html>

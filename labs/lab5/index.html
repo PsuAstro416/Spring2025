@@ -1,0 +1,220 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <link rel="icon" type="image/png" href="/Spring2025/assets/favicon.svg">
+  <script>
+  MathJax = {
+    tex: {
+      inlineMath: [['$', '$'], ["\\(", "\\)"]],
+      processEscapes: true,
+    }
+  };
+</script>
+
+<!-- This weird alignment is required by Franklin's parser. -->
+<script
+    async
+    src="/Spring2025/assets/MathJax/MathJax-3.2.2/es5/tex-mml-chtml.js">
+</script>
+
+<style>
+@font-face {
+  src: url("/Astro416//assets/MathJax/MathJax-3.2.2/es5/output/chtml/fonts/woff-v2/MathJax_Main-Regular.woff">
+}
+</style>
+
+<style>
+@font-face {
+  src: url("/Astro416//assets/MathJax/MathJax-3.2.2/es5/output/chtml/fonts/woff-v2/MathJax_Zero.woff">
+}
+</style>
+
+<style>
+@font-face {
+  src: url("/Astro416//assets/MathJax/MathJax-3.2.2/es5/output/chtml/fonts/woff-v2/MathJax_Math-Italic.woff">
+}
+</style>
+
+  <link rel="stylesheet"
+  href="/Spring2025/assets/Highlight/cdn-release-11.5.0/build/styles/github.min.css">
+
+<script
+  src="/Spring2025/assets/Highlight/cdn-release-11.5.0/build/highlight.min.js">
+</script>
+
+<script
+  src="/Spring2025/assets/Highlight/cdn-release-11.5.0/build/languages/julia.min.js">
+</script>
+
+<script
+  src="/Spring2025/assets/Highlight/cdn-release-11.5.0/build/languages/julia-repl.min.js">
+</script>
+
+<script>
+  hljs.configure({tabReplace: '    '});
+  hljs.highlightAll();
+</script>
+
+    <style>
+    @font-face {
+      font-family: JuliaMono-Regular;
+      src: url("/Astro416//assets/JuliaMono/juliamono-0.044/webfonts/JuliaMono-Regular.woff2");
+    }
+    </style>
+
+  <link rel="stylesheet" href="/Spring2025/css/spectre.min.css">
+  <link rel="stylesheet" href="/Spring2025/css/spectre-exp.min.css">
+  <link rel="stylesheet" href="/Spring2025/css/spectre-icons.min.css">
+  <link rel="stylesheet" href="/Spring2025/css/spectre-overrides.css">
+  <link rel="stylesheet" href="/Spring2025/css/docs.min.css">
+
+  <title>Data Wrangling - Astro 416</title>
+  <meta name="description" content="Penn State Astro 416: Data Science Applications to Astronomy">
+
+
+    
+
+</head>
+<body>
+
+  <div class="docs-container off-canvas off-canvas-sidebar-show">
+  <div class="docs-navbar">
+    <a class="off-canvas-toggle btn btn-link btn-action" href="#sidebar"><i class="icon icon-menu"></i></a>
+    
+<div class="btns d-flex">
+      <a class="btn btn-primary ml-1" href="https://portal.hpc.psu.edu">Roar Portal</a>
+      <a class="btn btn-primary ml-1" href="https://github.com/PsuAstro416/Spring2025">Improve this site</a>
+
+    </div>
+    
+</div>
+
+<div id="sidebar" class="docs-sidebar off-canvas-sidebar">
+
+<div class="docs-brand">
+    <h5><a href="/Spring2025/">Astro 416</a></h5>
+</div>
+
+<div class="docs-nav">
+<div class="accordion-container">
+  <ul class="menu menu-nav">
+    <div class="menu-header"><a href="/Spring2025/syllabus/">Syllabus</a></div>
+    
+    
+    <div class="menu-header"><a href="/Spring2025/lessons/">Lessons</a></div>
+    
+
+    <div class="menu-header"><a href="/Spring2025/labs/">Labs</a></div>
+    
+    <li class='menu-item '><a href='/Spring2025/labs/lab1/'>Lab 1</a></li>
+    <li class='menu-item '><a href='/Spring2025/labs/lab2/'>Lab 2</a></li>
+    <li class='menu-item '><a href='/Spring2025/labs/lab3/'>Lab 3</a></li>
+    <li class='menu-item '><a href='/Spring2025/labs/lab4/'>Lab 4</a></li>
+    <li class='menu-item active'><a href='/Spring2025/labs/lab5/'>Lab 5</a></li>
+    <li class='menu-item '><a href='/Spring2025/labs/lab6/'>Lab 6</a></li>
+    <li class='menu-item '><a href='/Spring2025/labs/lab7/'>Lab 7</a></li>
+    <li class='menu-item '><a href='/Spring2025/labs/lab8/'>Lab 8</a></li>
+    <li class='menu-item '><a href='/Spring2025/labs/lab9/'>Lab 9</a></li>
+    
+    
+    <div class="menu-header"><a href="/Spring2025/project/">Project</a></div>
+    
+    <div class="menu-header"><a href="/Spring2025/tips/">Tips</a></div>
+    
+
+    <div class="menu-header"><a href="/Spring2025/resources/">Resources</a></div>
+
+  </ul>
+</div>
+</div>
+</div>
+<a class="off-canvas-overlay" href="#close"></a>
+
+
+
+<div class="off-canvas-content">
+<div id="content" class="docs-content">
+<div class="container">
+<!-- Content appended here -->
+<div class="franklin-content">
+<h2 id="a_hrefhttpsgithubcompsuastro416lab5lab_lab_num_title"><a href="#a_hrefhttpsgithubcompsuastro416lab5lab_lab_num_title" class="header-anchor"><a href="https://github.com/PsuAstro416/lab5">Lab 5: Data Wrangling</a></a></h2>
+<p>Start Feb 12 –- Due Feb 19  </p>
+<h3 id="goals"><a href="#goals" class="header-anchor">Goals</a></h3>
+<p>In this lab, students will learn to:</p>
+<ul>
+<li><p>Write queries using ADQL and TAP</p>
+</li>
+<li><p>Access tables with results of queries</p>
+</li>
+<li><p>Download datafiles from a major astronomical archives via astroquery</p>
+</li>
+<li><p>Access data from FITS files</p>
+</li>
+<li><p>Crossmatch objects between two catalogs</p>
+</li>
+<li><p>Wrange data in DataFrames using select, filter, join, groupby &amp; transform</p>
+</li>
+<li><p>Access python packages via Julia</p>
+</li>
+</ul>
+<h3 id="instructions"><a href="#instructions" class="header-anchor">Instructions</a></h3>
+<ul>
+<li><p>Work through the <a href="https://psuastro416.github.io/lab5/ex1.html">ex1.jl</a> and <a href="https://psuastro416.github.io/lab5/ex2.html">ex2.jl</a> &#40;Pluto notebooks&#41; and save updates in your personal repository.  </p>
+</li>
+<li><p>Look over <a href="https://psuastro416.github.io/lab5/ex3.html">ex3.jl</a> and start working on it.  But stop after 6 hours total work on this week&#39;s labs.</p>
+</li>
+<li><p><a href="/Spring2025/tips/labs/commit">Commit</a> and <a href="/Spring2025/tips/labs/submitting/">submit</a> your work.</p>
+</li>
+<li><p>Once the instrctor and/or TA has provided feedback, <a href="/Spring2025/tips/labs/feedback/">review the feedback</a></p>
+</li>
+</ul>
+<h3 id="resources"><a href="#resources" class="header-anchor">Resources </a></h3>
+<ul>
+<li><p><a href="https://astroquery.readthedocs.io/en/latest/index.html">astroquery</a></p>
+</li>
+<li><p><a href="https://gea.esac.esa.int/archive/">ESA Gaia Archive</a></p>
+</li>
+<li><p>More information about building queries:</p>
+<ul>
+<li><p><a href="https://www.khanacademy.org/computing/computer-programming/sql">SQL Tutorial</a></p>
+</li>
+<li><p><a href="http://docs.g-vo.org/adql-gaia/html/twoup.pdf">Gaia Data Queries with ADQL</a></p>
+</li>
+<li><p><a href="https://www.gaia.ac.uk/data/gaia-data-release-1/adql-cookbook">ADQL Cookbook for Gaia &#40;DR1&#41;</a></p>
+</li>
+<li><p><a href="https://exoplanetarchive.ipac.caltech.edu/docs/TAP/usingTAP.html">Retrieving Exoplanet Archive Data With Table Access Protocol</a></p>
+</li>
+<li><p><a href="https://gaia.ari.uni-heidelberg.de/tap.html">Web Table Access Protocol client for Gaia</a></p>
+</li>
+</ul>
+</li>
+<li><p>Reference Resources:</p>
+<ul>
+<li><p><a href="https://www.ivoa.net/documents/ADQL/">Astronomical Data Query Language &#40;ADQL&#41;</a></p>
+</li>
+<li><p><a href="https://www.ivoa.net/documents/TAP/">Table Access Protocol &#40;TAP&#41;</a></p>
+</li>
+</ul>
+</li>
+</ul>
+<script type="text/javascript" src="/Spring2025/libs/ansi_up.js" defer></script>
+
+<div id="copyright" class="docs-footer container grid-lg">
+<a href="https://www.psu.edu">Penn State</a> &mdash;
+<a href="https://science.psu.edu/astro">Astronomy & Astrophysics</a> &mdash;
+<a href="https://astrostatistics.psu.edu/">Center for Astrostatistics</a>
+<br>
+<a href="https://www.icds.psu.edu/">Institute for Computational & Data Sciences</a>
+</br>
+</br>
+<a href="http://creativecommons.org/licenses/by-sa/4.0/">CC BY-SA 4.0</a> <a href="https://science.psu.edu/astro/people/ebf11">Eric Ford</a>
+</div>
+</div><!-- CONTENT ENDS HERE -->
+    </div>
+    </div>
+    </div>
+    </div>
+  </body>
+</html>
