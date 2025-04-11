@@ -187,6 +187,19 @@ md"""
 # Q&A
 """
 
+# ╔═╡ 81e1f704-d000-4e85-a5d6-b7ada9a7ee66
+question_box(md"Is there a good way to verify the effectiveness of a classification model aside from checking which points it identifies correctly?")
+
+# ╔═╡ 472a548e-4b5d-4fce-b51d-d04c81ab69a6
+question_box(md"""
+Does Scrum stand for anything?
+""")
+
+# ╔═╡ 463a9e35-9e61-423d-ba81-dd980364fdd0
+md"""
+No
+"""
+
 # ╔═╡ 169862d3-b3e7-40a7-9a14-fa63fcd375ad
 question_box(md"What is a good process for trying to speed up code run time?")
 
@@ -220,8 +233,14 @@ md"""
 - See [Performance Tips](https://docs.julialang.org/en/v1/manual/performance-tips/) for more details.
 """
 
-# ╔═╡ 81e1f704-d000-4e85-a5d6-b7ada9a7ee66
-question_box(md"Is there a good way to verify the effectiveness of a classification model aside from checking which points it identifies correctly?")
+# ╔═╡ 1be0290c-f44b-4f41-99f9-66cd49bf0594
+question_box(md"I would love a small rundown of the best packages you reccommend [for interactivity].")
+
+# ╔═╡ 327b6084-d83a-4adc-976b-5df276f27a19
+md"""
+- [PlutoUI.jl](https://featured.plutojl.org/basic/plutoui.jl)
+- [PlutoPlotly.jl](https://github.com/JuliaPluto/PlutoPlotly.jl)
+"""
 
 # ╔═╡ 73619a67-d86c-4d03-93c8-f3c56fc79f2c
 md"""
@@ -768,9 +787,13 @@ version = "17.4.0+2"
 # ╟─28174d9a-5da4-4a5a-9d2f-2bf5fe515f00
 # ╟─cafb27b3-5369-480f-937b-dbe7218c3e3d
 # ╟─81e1f704-d000-4e85-a5d6-b7ada9a7ee66
+# ╟─472a548e-4b5d-4fce-b51d-d04c81ab69a6
+# ╟─463a9e35-9e61-423d-ba81-dd980364fdd0
 # ╟─169862d3-b3e7-40a7-9a14-fa63fcd375ad
 # ╟─a910cd8b-9edf-407d-ba6d-b608f95dfb2e
 # ╟─b66aec37-2437-441b-88e5-eb24fbf1b2b6
+# ╟─1be0290c-f44b-4f41-99f9-66cd49bf0594
+# ╟─327b6084-d83a-4adc-976b-5df276f27a19
 # ╟─73619a67-d86c-4d03-93c8-f3c56fc79f2c
 # ╟─2ef8e8d0-4af9-11ed-2a34-1fe4f1ff7dc8
 # ╟─6a003863-69dc-40aa-95f3-bfe7159bdf6e
