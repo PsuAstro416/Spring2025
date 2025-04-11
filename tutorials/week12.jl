@@ -187,18 +187,57 @@ md"""
 # Q&A
 """
 
-# ╔═╡ 81e1f704-d000-4e85-a5d6-b7ada9a7ee66
-question_box(md"Is there a good way to verify the effectiveness of a classification model aside from checking which points it identifies correctly?")
-
-# ╔═╡ 472a548e-4b5d-4fce-b51d-d04c81ab69a6
-question_box(md"""
-Does Scrum stand for anything?
-""")
-
-# ╔═╡ 463a9e35-9e61-423d-ba81-dd980364fdd0
+# ╔═╡ 6b5796f1-7659-4530-be33-6cb895babdde
 md"""
-No
+## Project
 """
+
+# ╔═╡ 48850229-edf5-45b0-a7f8-cc970b9dfba6
+question_box(md"Should the presentation be more focused on a demo of the dashboard or on detailed explanations of the fitting equations/models?")
+
+# ╔═╡ 758e0567-b3df-4dbc-9347-ac94b156241d
+md"""
+#### Presentation Rubric
+- Clarity of explanation of purpose of the dashboard and data set(s) used (1 point)
+- Clarity of explanation of the models fit to data and their motivation (1 point)
+- Effective demonstration of the dashboard in action (1 point)
+- Clarity of explanation of how dashboard performs model assessment and of any potential failure modes that are not reliably recognized by the dashboard (1 point)
+- Thoughtful discussion of challenges encountered during project and lessons learned (1 point)
+"""
+
+# ╔═╡ 2fc2252b-a899-4081-8602-e9b6ee37594d
+question_box(md"When is the individual write up due?")
+
+# ╔═╡ bfd059ae-4248-4e5f-8561-7d9e64e4483b
+md"""
+- April 21 (Dashboard itself)
+- May 2 (Report & Reflection)
+"""
+
+# ╔═╡ ab19fbfe-59b9-485b-8421-69ad798d23b4
+md"""
+#### Report/Reflection Rubric
+- their contributions to the dashboard project and the contributions of their teammates (1 point),
+- what the next steps would be if there were more time to make improvements to the dashboard (1 point),
+- reflecting on what they learned from the experience (2 points),
+- offering any suggestions for how to make a similar project more valuable in future semesters (1 point), and
+- offering any suggestions for how to make the course more valuable in future semesters (optional, 0 points).
+
+"""
+
+# ╔═╡ 1be0290c-f44b-4f41-99f9-66cd49bf0594
+question_box(md"I would love a small rundown of the best packages you reccommend [for interactivity].")
+
+# ╔═╡ 327b6084-d83a-4adc-976b-5df276f27a19
+md"""
+- [PlutoUI.jl](https://featured.plutojl.org/basic/plutoui.jl)
+- [PlutoPlotly.jl](https://github.com/JuliaPluto/PlutoPlotly.jl)
+"""
+
+# ╔═╡ 08636cb1-dcc5-4e0b-8b34-48716a4d26ad
+question_box(md"""
+What are some ways that we can make them look cleaner and more user friendly
+""")
 
 # ╔═╡ 169862d3-b3e7-40a7-9a14-fa63fcd375ad
 question_box(md"What is a good process for trying to speed up code run time?")
@@ -226,20 +265,29 @@ md"""
   - Not taking advantage of fusing and broadcasting
   - Making copies instead of using a view (`array[1:5,:] instead of view(array,1:5,:)`)
   - Many small allocations on heap (instead use StaticArrays.jl)
-
+- Organize functions into a package (so it only needs to be precompiled once)
 - Adding annotations that allow for compiler optimizations (e.g., @inbounds, @fastmath, @simd, @turbo) but only when appropriate
 - Avoid unnecessary use of strings or string interpolation
 - Write code so that it can be parallelized in the future 
 - See [Performance Tips](https://docs.julialang.org/en/v1/manual/performance-tips/) for more details.
 """
 
-# ╔═╡ 1be0290c-f44b-4f41-99f9-66cd49bf0594
-question_box(md"I would love a small rundown of the best packages you reccommend [for interactivity].")
+# ╔═╡ 81e1f704-d000-4e85-a5d6-b7ada9a7ee66
+question_box(md"Is there a good way to verify the effectiveness of a classification model aside from checking which points it identifies correctly?")
 
-# ╔═╡ 327b6084-d83a-4adc-976b-5df276f27a19
+# ╔═╡ ad651939-f0c5-48ab-9336-0bd6c260edf5
 md"""
-- [PlutoUI.jl](https://featured.plutojl.org/basic/plutoui.jl)
-- [PlutoPlotly.jl](https://github.com/JuliaPluto/PlutoPlotly.jl)
+#### Random
+"""
+
+# ╔═╡ 472a548e-4b5d-4fce-b51d-d04c81ab69a6
+question_box(md"""
+Does Scrum stand for anything?
+""")
+
+# ╔═╡ 463a9e35-9e61-423d-ba81-dd980364fdd0
+md"""
+No
 """
 
 # ╔═╡ 73619a67-d86c-4d03-93c8-f3c56fc79f2c
@@ -786,14 +834,22 @@ version = "17.4.0+2"
 # ╟─51e4377a-7602-4293-ae2e-c0096ed8ce0a
 # ╟─28174d9a-5da4-4a5a-9d2f-2bf5fe515f00
 # ╟─cafb27b3-5369-480f-937b-dbe7218c3e3d
-# ╟─81e1f704-d000-4e85-a5d6-b7ada9a7ee66
-# ╟─472a548e-4b5d-4fce-b51d-d04c81ab69a6
-# ╟─463a9e35-9e61-423d-ba81-dd980364fdd0
+# ╟─6b5796f1-7659-4530-be33-6cb895babdde
+# ╟─48850229-edf5-45b0-a7f8-cc970b9dfba6
+# ╟─758e0567-b3df-4dbc-9347-ac94b156241d
+# ╟─2fc2252b-a899-4081-8602-e9b6ee37594d
+# ╟─bfd059ae-4248-4e5f-8561-7d9e64e4483b
+# ╟─ab19fbfe-59b9-485b-8421-69ad798d23b4
+# ╟─1be0290c-f44b-4f41-99f9-66cd49bf0594
+# ╟─327b6084-d83a-4adc-976b-5df276f27a19
+# ╟─08636cb1-dcc5-4e0b-8b34-48716a4d26ad
 # ╟─169862d3-b3e7-40a7-9a14-fa63fcd375ad
 # ╟─a910cd8b-9edf-407d-ba6d-b608f95dfb2e
 # ╟─b66aec37-2437-441b-88e5-eb24fbf1b2b6
-# ╟─1be0290c-f44b-4f41-99f9-66cd49bf0594
-# ╟─327b6084-d83a-4adc-976b-5df276f27a19
+# ╟─81e1f704-d000-4e85-a5d6-b7ada9a7ee66
+# ╟─ad651939-f0c5-48ab-9336-0bd6c260edf5
+# ╟─472a548e-4b5d-4fce-b51d-d04c81ab69a6
+# ╟─463a9e35-9e61-423d-ba81-dd980364fdd0
 # ╟─73619a67-d86c-4d03-93c8-f3c56fc79f2c
 # ╟─2ef8e8d0-4af9-11ed-2a34-1fe4f1ff7dc8
 # ╟─6a003863-69dc-40aa-95f3-bfe7159bdf6e
