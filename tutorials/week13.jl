@@ -1,5 +1,5 @@
 ### A Pluto.jl notebook ###
-# v0.20.4
+# v0.20.1
 
 using Markdown
 using InteractiveUtils
@@ -262,11 +262,11 @@ question_box(md"How can a researcher assess the validity of a study that has not
 question_box(md"For reproducibility, replicability, and validity of research, is it the same standards across all of astronomy/astrophysics? 
 Do you know if it extends into physics too?")
 
-# ╔═╡ f4a6ec56-ad89-47bf-824f-805027680da1
-question_box(md"Does knowing two parameters for a basic model serve as a good prior to use when analyzing our data with a more complex model?")
-
 # ╔═╡ d99ff82d-b1a9-4001-aab7-dda55d26b3e8
 question_box(md"Does a more complex model mean more parameters or a firmer scientific model?")
+
+# ╔═╡ f4a6ec56-ad89-47bf-824f-805027680da1
+question_box(md"Does knowing two parameters for a basic model serve as a good prior to use when analyzing our data with a more complex model?")
 
 # ╔═╡ 59edf487-4e88-4357-a699-a34d0bae81b7
 md"""
@@ -275,6 +275,9 @@ md"""
 
 # ╔═╡ d5f50c67-f6f5-4f70-a18b-8dbef77c76f5
 question_box(md"How long have written reports typically been, historically?")
+
+# ╔═╡ 5361bdf7-5b6a-40f4-b687-865422669d59
+question_box(md"What are some ways that we can make our dashboard look cleaner and more user friendly?")
 
 # ╔═╡ 6a6f159b-09b1-4a53-bfa9-ffcbe20b94dd
 md"""
@@ -705,6 +708,7 @@ version = "17.4.0+2"
 # ╟─d99ff82d-b1a9-4001-aab7-dda55d26b3e8
 # ╟─f4a6ec56-ad89-47bf-824f-805027680da1
 # ╟─59edf487-4e88-4357-a699-a34d0bae81b7
+# ╟─5361bdf7-5b6a-40f4-b687-865422669d59
 # ╟─d5f50c67-f6f5-4f70-a18b-8dbef77c76f5
 # ╟─6a6f159b-09b1-4a53-bfa9-ffcbe20b94dd
 # ╟─a4574030-1a50-4988-a46b-becf718148a5
