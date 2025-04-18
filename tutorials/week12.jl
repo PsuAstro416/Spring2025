@@ -232,6 +232,7 @@ question_box(md"I would love a small rundown of the best packages you reccommend
 md"""
 - [PlutoUI.jl](https://featured.plutojl.org/basic/plutoui.jl)
 - [PlutoPlotly.jl](https://github.com/JuliaPluto/PlutoPlotly.jl)
+- [PlutoTeachingTools.jl](https://juliapluto.github.io/PlutoTeachingTools.jl/example.html):  Formatting like labs
 """
 
 # ╔═╡ 08636cb1-dcc5-4e0b-8b34-48716a4d26ad
