@@ -273,11 +273,21 @@ md"""
 ## Project
 """
 
+# ╔═╡ 5361bdf7-5b6a-40f4-b687-865422669d59
+question_box(md"What are some ways that we can make our dashboard look cleaner and more user friendly?")
+
 # ╔═╡ d5f50c67-f6f5-4f70-a18b-8dbef77c76f5
 question_box(md"How long have written reports typically been, historically?")
 
-# ╔═╡ 5361bdf7-5b6a-40f4-b687-865422669d59
-question_box(md"What are some ways that we can make our dashboard look cleaner and more user friendly?")
+# ╔═╡ 4bab7e71-4e15-4166-8cf9-65789498a08d
+md"""
+The report/reflection will be graded based on:
+- their contributions to the dashboard project and the contributions of their teammates (1 point),
+- what the next steps would be if there were more time to make improvements to the dashboard (1 point),
+- reflecting on what they learned from the experience (2 points),
+- offering any suggestions for how to make a similar project more valuable in future semesters (1 point), and
+- offering any suggestions for how to make the course more valuable in future semesters (optional, 0 points).
+"""
 
 # ╔═╡ 6a6f159b-09b1-4a53-bfa9-ffcbe20b94dd
 md"""
@@ -710,6 +720,7 @@ version = "17.4.0+2"
 # ╟─59edf487-4e88-4357-a699-a34d0bae81b7
 # ╟─5361bdf7-5b6a-40f4-b687-865422669d59
 # ╟─d5f50c67-f6f5-4f70-a18b-8dbef77c76f5
+# ╟─4bab7e71-4e15-4166-8cf9-65789498a08d
 # ╟─6a6f159b-09b1-4a53-bfa9-ffcbe20b94dd
 # ╟─a4574030-1a50-4988-a46b-becf718148a5
 # ╟─27a55fd4-5c0d-4b5f-9dd8-3dd04a36dc68

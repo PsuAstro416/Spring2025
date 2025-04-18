@@ -11,7 +11,7 @@ Week {{week_num}}
 
 
 ## Notebooks from class
-- [Day 1](https://psuastro416.github.io/Spring2025/tutorials/week13/)
+- [Day 1 & 3](https://psuastro416.github.io/Spring2025/tutorials/week13/)
 
 <!--
 ## Wednesday

@@ -15,9 +15,9 @@ end
 # hideall
 begin
   title = "Data Science Applications for Astronomy";
-  topic = "Artificial Intelligence for Mathematical & Physical Sciences"
-  subtitle = "Future or Hype?"
-  week = 14
+  topic = "Course Reflections"
+  subtitle = "Putting the Pieces Together"
+  week = 15
 end;
 
 # ╔═╡ 2169f150-56a3-40cb-8a0c-545777028211
@@ -37,194 +37,139 @@ md"""
 #### $subtitle
 """
 
-# ╔═╡ 33f3a962-ad90-4599-a2af-6165af4d7ddc
+# ╔═╡ 017cc6d3-4377-4c6e-804b-9e524f2c8be5
 md"""
-### Recent AI-themed Events
-- Penn State's [AI Week](https://ai.psu.edu/aiweek2025agenda/)
-- [NSF Workshop on the Future of AI+MPS](https://indico.mit.edu/event/1486/)
+# Looking back
 """
 
-# ╔═╡ 298ff175-9aaa-48af-b3ab-2b23cd658291
+# ╔═╡ 197b929d-7f28-404c-b217-bd63d2fb64d1
 md"""
-[National Science Foundation](https://www.nsf.gov/) Directorates:
-- [Mathematical & Physical Sciences (MPS)](https://www.nsf.gov/mps)
-- [Computer and Information Science and Engineering (CISE)](https://www.nsf.gov/cise)
-- Biological Sciences
-- Engineering
-- Geosciences
-- Social, Behavioral and Economic Sciences
-- STEM Education
-- Technology, Innovation and Partnerships
-"""
+# Course Overview
+Students will build practical data science skills (e.g., querying astronomical databases, data storage and manipulation, data visualization, exploratory and explanatory data analysis, Bayesian modeling workflows, and reproducible research practices) and apply these lessons to analyzing data from astronomical surveys.
 
-# ╔═╡ cd8e7008-39fa-4a45-bda3-c56b77e283a1
-md"""
-### Divisions of NSF CISE:
-- Computer and Network Systems (CISE/CNS)
-- Computing and Communication Foundations (CISE/CCF)
-- Information and Intelligent Systems (CISE/IIS)
-- Office of Advanced Cyberinfrastructure (CISE/OAC)
-
-### Divisions of NSF MPS:
-- [Astronomical Sciences (MPS/AST)](https://www.nsf.gov/mps/ast)
-- [Physics (MPS/PHY)](https://www.nsf.gov/mps/phy)
-- Chemistry (MPS/CHE)
-- Materials Research (MPS/DMR)
-- Mathematical Sciences (MPS/DMS)
-- Office of Strategic Initiatives (MPS/OSI)
+## Goals
+- Increase their data acumen[^data_acumen], and
+- Appreciate how building data science skills can benefit astronomy & astrophysics research.
 
 """
 
-# ╔═╡ 578a866f-31ab-4b78-973e-47058beaf794
+# ╔═╡ 0e929ee2-b356-427a-8114-90d1610180e6
 md"""
-## [NSF Workshop on the Future of AI+MPS](https://indico.mit.edu/event/1486/)
-
-### Themes:
-- Interdisciplinary Research: Challenges and Opportunities
-- Interdisciplinary Research: Resources Needed
-- Education, Training, and Workforce
-- Responsible AI
+[^data_acumen]: "We define data acumen as the ability to make good judgements about the use of data to support problem solutions." (Keller et al. 2020)
 """
 
-# ╔═╡ e4cabfae-ce0e-4bd4-bb39-8821d9680090
+# ╔═╡ d60f1af9-47de-4465-82a2-41af788b4a94
 md"""
-## AI in the Astronomical Sciences
-- How AST is Advancing AI
-- How AI is advancing AST
-- Progress at Intersection of AI & AST
+## Objectives
+- Ingest and manipulate data from astronomical surveys.
+- Build, apply, assess and update astrophysically motivated models for astronomical observations.
+- Create visualizations for exploratory and explanatory data analyses of observations from astronomical surveys.
+- Synthesize the above into a dashboard to support the efficient analysis of astronomical observations.
+- Incorporate principles of reproducible research into their class project.
 """
 
-# ╔═╡ 8af44864-dee8-45ec-ac96-e8e7b7019583
+# ╔═╡ 3086ef8d-52f5-4002-9bb4-ea8782ff9c9f
 md"""
-### How AST is Advancing AI
-- Rich, open datasets
-- Well-curated scientific literature
-- Physics-informed machine learning frameworks
-- Multi-modal data integration
-- Experimental design optimization
-- Multi-agent AI systems
+## What Data Science skills have we developed?
 """
 
-# ╔═╡ c0dfed54-73b3-47ae-b1cd-024475b99427
+# ╔═╡ 58cc400d-739f-46d6-a957-4d68a4a58afa
 md"""
-### How AI is advancing AST
-#### Cosmology: 
-- Deep learning for parameter inferences on large scale structure & Comsic Microwave Background
-- Neural network surrogate models for expensive N-body simulations
-- Specialized architectures (e.g., Graph Neural Networks) to work with structure of cosmological simulation data sets
-
-#### Time-domain Astronomy:
-- Neural networks for real-time classification & early detection of transit events (e.g., supernovae, graviational waves) 
-- Irregular sampling and heterogeneous noise characteristics of astronomical time-series data (?)
-- Unsupervised techniques (e.g., clustering algorithsm) to identify new classes of transients
-
-#### Exoplanet Research:
-- Machine learning to distinguish planetary signals from stellar variability
-- Efficient exploration of highly multimodal posterior distributions (e.g., microlensing events)
-
-#### Stellar Astrophysics:
-- Spectral analysis of surveys (SDSS) to extract physical parameters from low-resolution and/or low signal-to-noise spectra
-- Automating pipelines for analyzing eclipsing binary stars to search for stellar-mass black holes
-- Neural networks to analyze stellar oscilation data to characterize stellar interiors and evolution
-
-#### Galactic Evolution:
-- Deep learning for extracting galaxy morphology from surveys
-- Generating synthetic datasets for augmenting training data
-- Reducing cost of inference with complex models
-
-
-### Heliophysics:
-- Ensemble methods for Forecasting space weather
-- Identifying and classifying sunspot groups and photospheric vector magnetic fields
-- Neural fields for reconstruction of solar surface features to provide more complete picture of dynamics
-
-### Gravitational Waves:
-- Deep learning for signal processing to separate true GW signals from noise
-- Rapid identification and localization to support follow-up observations
-- Reduce computational cost compared to matched filtering
+- Data Acumen
+- Databases, queries & storage 
+- Ingesting data & Data wrangling
+- Exploratory data analysis
+- Model building & assessment
+- Explanatory data analysis
+- Data visualization
+- Reproducible research
+- Scientific workflows
+- Technical collaboration (if teamed up for project)
+- Scientific communications
 """
 
-# ╔═╡ 0e115de5-73a6-4dc4-adee-2206fcad1e0b
+# ╔═╡ 3b3d7b32-0cf2-4863-93e1-9f33d3e18e29
 md"""
-### Progress at Intersection of AI & AST
-- Data processing scalability
-- Anomaly detection & novel discovery
-- Parameter inference through Simulation-based Inference
-- Acceleration of simulations 
-- AI in control systems for instruments
+## What Data Science skills have we skipped $br (or only skimmed the surface of)? 
+- Probability & Statistics
+- Machine Learning (ML)
+  - Non-parametric regression
+  - Classification
+  - Clustering
+  - Density estimation
+  - Anomaly detection
+  - Image analysis
+- Artificial Intelligence (AI)
+  - Deep learning
+
+- Computing
+  - Data structures
+  - Algorithms
+  - Databases
+  - Parallel computing
+  
+- Applications
+  - Hardware
+  - Big Data frameworks
+  - ML/AI tools
+  - Software engineering
+  - Deployment & operations
 """
 
-# ╔═╡ 13dc47c6-59ed-4d7a-bf36-a370071c6a20
+# ╔═╡ b4700739-463a-490a-a7dd-b4c0f2b7de2b
 md"""
-## Cross-Disciplinary Opportunities:
-- Pursue the **Science of AI**
-- Leverage AI for Conducting Research
-- Promote Responsible AI
-- Establish Robust AI Infrastructures
-- Facilitate Interdisciplinary Collaborations
-- Advocate for Diverse Funding Streams
-- Educate and Train an AI+MPS Workforce
+# Looking forward
 """
 
-# ╔═╡ d03e5170-32d7-44ff-951b-4d2df5cc77f0
+# ╔═╡ cc1bc88a-a8e5-491b-839f-3c98af5b135e
 md"""
-### Pursue the **Science of AI**
-  + AI Innovations from Science
-  + Understanding AI
-  + Robust and Interpretable AI
-### Leverage AI for Conducting Research
-  + Hypothesis Generation
-  + Self-Driving Labs
-  + Synthesis and Communication
-### Promote Responsible AI
-  + Scientific Integrity
-  + Cost-Efficient Computing
-  + Public Engagement on AI+Science
-### Establish Robust AI Infrastructures
-  + Computing Resources
-  + Data Management and Access
-  + Benchmarking and Reproducibility
-  + Design Methods Optimized for **AI for Science**
-    - Simulation-Based Inference
-    - Uncertainty Quantification
-    - Foundation Models
-    - Reinforcement Learning for Experimental Control
-    - AI for Quantum 2.0
-    - Data-Efficient Methods
-### Facilitate Interdisciplinary Collaborations
-  + Research Opportunities
-  + Workshops and Conferences
-  + Knowledge Transfer
-  + Collaborating Beyond MPS
-### Advocate for Diverse Funding Streams
-  + Institute-Scale Activities
-  + Project-Scale Activities
-  + Individual Investigators
-  + Industry Collaborations
+## Foundational Classes to learn more about Data Sciences
+#### Mathematics
+- **Linear Algebra** (MATH 220)
+- **Probability** 
+  - Elementary Probability (STAT 318)
+  - Probability Theory (STAT/MATH 414)
+  - Introduction to Probability and Stochastic Processes for Engineering (STAT/MATH 418)
+  - Astrostatistics (ASTRO 415)
 
-### Educate and Train an AI+MPS Workforce
-  + Faculty Training
-  + Postdoctoral Training
-  + Graduate Education
-  + Undergraduate Education
-  + K-12 and Public Education
-  + AI Literacy
+#### Programming
+- Intro to Programming (e.g., CMPSC 121, 122)
+- Data management/databases (DS 220, but one DS or CMPSC preqreq beyond CMPSC 122)
+- Programming Models for Big Data (DS/CMPSC 410, but several CMPSC prereqs)
+- Information Retrieval and Organization (e.g., IST 441, but several IST prereqs)
+
+#### Machine Learning/AI
+- **Machine Learning** (DS 310; prereqs: (CMPSC 121 or CMPSC 131) and (STAT/MATH 318 or STAT/MATH 414 or STAT/MATH 418))
+- AI (e.g., DS/CMPSC 442, but several CMPSC prereqs)
+  
 """
 
-# ╔═╡ 2a93b56d-c63f-4cb9-a48b-91d113b626fc
+# ╔═╡ 680b43fd-a2f6-4ebe-a366-c041ba2fc97f
 md"""
-### Opportunities in AI+AST
-- Black-box nature of many existing methods
-  - Developing more powerful and more efficient glass-box models that improve interpretability and explanability
-  - Establishing metrics for evaluating AI 
-- Developing methods that are data-efficient
-- Accuracy of AI is fundamentally limited by fidelity of simulations
-   - If AI extracts more information from data, systematics likely more important
-- Earning trust requires extensive testing and comparisons
-   - Reliable uncertainty & bias quantification to understand limitations and robustness of AI approaches
-   - Account for risk of bias in model development
-   - Develop systematic frameworks for blind analyses.
-- Creating systmes to actively participate in experimental design and potentially hypothesis generation
+## Applied classes that connect to Data Sciences
+- Astrostatistics (ASTRO 415, Spring 2023)
+- Computational Astrophysics (ASTRO/PHYS 410, Spring 2023)
+- Astronomical Techniques? (ASTRO 451, Fall 2022)
+- Data Science Through Statistical Reasoning and Computation (STAT 380; but prereq STAT 184)
+- Visual Analytics for Data Sciences (DS 330; but prereq DS 220)
+- Research projects (e.g., ASTRO 496, summer project or thesis)
+"""
+
+# ╔═╡ 2afd0a0b-372f-4257-8f91-4b83f0dbff5b
+md"""
+## Project-based learning
+Pros:  
+- Help to motivate why need to learn things
+- Emphasize practical problems
+Cons: 
+- Forces you to work through implementation details
+- Risk learning specific tools, rather than underlying mathematics/algorithms
+- Specific tools used are very likely certainly become obsolete soon
+"""
+
+# ╔═╡ 463a9e35-9e61-423d-ba81-dd980364fdd0
+md"""
+No
 """
 
 # ╔═╡ 73619a67-d86c-4d03-93c8-f3c56fc79f2c
@@ -754,17 +699,18 @@ version = "17.4.0+2"
 # ╟─23153562-0811-4327-bd10-775a7b72018f
 # ╟─2169f150-56a3-40cb-8a0c-545777028211
 # ╟─9b38e84a-e128-4f2a-8926-88d5051208d3
-# ╟─33f3a962-ad90-4599-a2af-6165af4d7ddc
-# ╟─298ff175-9aaa-48af-b3ab-2b23cd658291
-# ╟─cd8e7008-39fa-4a45-bda3-c56b77e283a1
-# ╟─578a866f-31ab-4b78-973e-47058beaf794
-# ╟─e4cabfae-ce0e-4bd4-bb39-8821d9680090
-# ╟─8af44864-dee8-45ec-ac96-e8e7b7019583
-# ╟─c0dfed54-73b3-47ae-b1cd-024475b99427
-# ╟─0e115de5-73a6-4dc4-adee-2206fcad1e0b
-# ╟─13dc47c6-59ed-4d7a-bf36-a370071c6a20
-# ╟─d03e5170-32d7-44ff-951b-4d2df5cc77f0
-# ╟─2a93b56d-c63f-4cb9-a48b-91d113b626fc
+# ╟─017cc6d3-4377-4c6e-804b-9e524f2c8be5
+# ╟─197b929d-7f28-404c-b217-bd63d2fb64d1
+# ╟─0e929ee2-b356-427a-8114-90d1610180e6
+# ╟─d60f1af9-47de-4465-82a2-41af788b4a94
+# ╟─3086ef8d-52f5-4002-9bb4-ea8782ff9c9f
+# ╟─58cc400d-739f-46d6-a957-4d68a4a58afa
+# ╟─3b3d7b32-0cf2-4863-93e1-9f33d3e18e29
+# ╟─b4700739-463a-490a-a7dd-b4c0f2b7de2b
+# ╟─cc1bc88a-a8e5-491b-839f-3c98af5b135e
+# ╟─680b43fd-a2f6-4ebe-a366-c041ba2fc97f
+# ╟─2afd0a0b-372f-4257-8f91-4b83f0dbff5b
+# ╟─463a9e35-9e61-423d-ba81-dd980364fdd0
 # ╟─73619a67-d86c-4d03-93c8-f3c56fc79f2c
 # ╟─2ef8e8d0-4af9-11ed-2a34-1fe4f1ff7dc8
 # ╟─6a003863-69dc-40aa-95f3-bfe7159bdf6e
