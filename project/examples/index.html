@@ -1,0 +1,258 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <link rel="icon" type="image/png" href="/Spring2025/assets/favicon.svg">
+  <script>
+  MathJax = {
+    tex: {
+      inlineMath: [['$', '$'], ["\\(", "\\)"]],
+      processEscapes: true,
+    }
+  };
+</script>
+
+<!-- This weird alignment is required by Franklin's parser. -->
+<script
+    async
+    src="/Spring2025/assets/MathJax/MathJax-3.2.2/es5/tex-mml-chtml.js">
+</script>
+
+<style>
+@font-face {
+  src: url("/Astro416//assets/MathJax/MathJax-3.2.2/es5/output/chtml/fonts/woff-v2/MathJax_Main-Regular.woff">
+}
+</style>
+
+<style>
+@font-face {
+  src: url("/Astro416//assets/MathJax/MathJax-3.2.2/es5/output/chtml/fonts/woff-v2/MathJax_Zero.woff">
+}
+</style>
+
+<style>
+@font-face {
+  src: url("/Astro416//assets/MathJax/MathJax-3.2.2/es5/output/chtml/fonts/woff-v2/MathJax_Math-Italic.woff">
+}
+</style>
+
+  <link rel="stylesheet"
+  href="/Spring2025/assets/Highlight/cdn-release-11.5.0/build/styles/github.min.css">
+
+<script
+  src="/Spring2025/assets/Highlight/cdn-release-11.5.0/build/highlight.min.js">
+</script>
+
+<script
+  src="/Spring2025/assets/Highlight/cdn-release-11.5.0/build/languages/julia.min.js">
+</script>
+
+<script
+  src="/Spring2025/assets/Highlight/cdn-release-11.5.0/build/languages/julia-repl.min.js">
+</script>
+
+<script>
+  hljs.configure({tabReplace: '    '});
+  hljs.highlightAll();
+</script>
+
+    <style>
+    @font-face {
+      font-family: JuliaMono-Regular;
+      src: url("/Astro416//assets/JuliaMono/juliamono-0.044/webfonts/JuliaMono-Regular.woff2");
+    }
+    </style>
+
+  <link rel="stylesheet" href="/Spring2025/css/spectre.min.css">
+  <link rel="stylesheet" href="/Spring2025/css/spectre-exp.min.css">
+  <link rel="stylesheet" href="/Spring2025/css/spectre-icons.min.css">
+  <link rel="stylesheet" href="/Spring2025/css/spectre-overrides.css">
+  <link rel="stylesheet" href="/Spring2025/css/docs.min.css">
+
+  <title>Exoplanet Examples - Astro 416</title>
+  <meta name="description" content="Penn State Astro 416: Data Science Applications to Astronomy">
+
+
+    
+
+</head>
+<body>
+
+  <div class="docs-container off-canvas off-canvas-sidebar-show">
+  <div class="docs-navbar">
+    <a class="off-canvas-toggle btn btn-link btn-action" href="#sidebar"><i class="icon icon-menu"></i></a>
+    
+<div class="btns d-flex">
+      <a class="btn btn-primary ml-1" href="https://portal.hpc.psu.edu">Roar Portal</a>
+      <a class="btn btn-primary ml-1" href="https://github.com/PsuAstro416/Spring2025">Improve this site</a>
+
+    </div>
+    
+</div>
+
+<div id="sidebar" class="docs-sidebar off-canvas-sidebar">
+
+<div class="docs-brand">
+    <h5><a href="/Spring2025/">Astro 416</a></h5>
+</div>
+
+<div class="docs-nav">
+<div class="accordion-container">
+  <ul class="menu menu-nav">
+    <div class="menu-header"><a href="/Spring2025/syllabus/">Syllabus</a></div>
+    
+    
+    <div class="menu-header"><a href="/Spring2025/lessons/">Lessons</a></div>
+    
+
+    <div class="menu-header"><a href="/Spring2025/labs/">Labs</a></div>
+    
+    
+    <div class="menu-header"><a href="/Spring2025/project/">Project</a></div>
+    
+    <li class='menu-item '><a href='/Spring2025/project/plan/'>Plan</a></li>
+    <li class='menu-item '><a href='/Spring2025/project/checkpoint/'>Checkpoints</a></li>
+    <li class='menu-item '><a href='/Spring2025/project/final/'>Final Project</a></li>
+    <li class='menu-item '><a href='/Spring2025/project/presentation/'>Presentation</a></li>
+    <li class='menu-item '><a href='/Spring2025/project/report/'>Report & Reflection</a></li>
+    
+    <div class="menu-header"><a href="/Spring2025/tips/">Tips</a></div>
+    
+
+    <div class="menu-header"><a href="/Spring2025/resources/">Resources</a></div>
+
+  </ul>
+</div>
+</div>
+</div>
+<a class="off-canvas-overlay" href="#close"></a>
+
+
+
+<div class="off-canvas-content">
+<div id="content" class="docs-content">
+<div class="container">
+<!-- Content appended here -->
+<div class="franklin-content"><h2 id="exoplanet_examples"><a href="#exoplanet_examples" class="header-anchor">Exoplanet Examples</a></h2>
+<ul>
+<li><p>Transits</p>
+<ul>
+<li><p>Analyze transit light curves to vet planet candidates from potential astrophysical false positives</p>
+</li>
+<li><p>Analyze transit light curves to inform planning of follow-up observations</p>
+</li>
+</ul>
+</li>
+<li><p>Transit Timing Variations</p>
+<ul>
+<li><p>Analyze TTV observations to assess whether TTVs are likely due to known transiting planets or additional unknown  planets</p>
+</li>
+<li><p>Analyze TTV observations to assess whether TTVs are more likely due to dynamical effects or stellar variability.</p>
+</li>
+<li><p>Analyze TTV observations to identify candidates for RV follow-up observations</p>
+</li>
+</ul>
+</li>
+<li><p>Radial Velocity Observations</p>
+<ul>
+<li><p>Analyze radial velocity observations to assess whether a planet candidate&#39;s orbit is well characterized and ready for publication</p>
+</li>
+<li><p>Analyze radial velocity observations of stars with planet candidates to inform planning of future RV measurements</p>
+</li>
+<li><p>Analyze NEID standard star observations to identify any measurements which are not robust &#40;e.g., comparing RVs derived from each order of the spectra&#41;</p>
+</li>
+<li><p>Analyze NEID solar observations to fit a differential extinction model specific to each day and to assess whether it is adequate to use for subsequent analysis</p>
+</li>
+</ul>
+</li>
+<li><p>Microlensing</p>
+<ul>
+<li><p>Analyze microlensing light curves to assess whether a microlensing event shows evidence for a planet or binary star</p>
+</li>
+<li><p>Analyze microlensing light curves to inform planning of follow-up observations</p>
+</li>
+</ul>
+</li>
+<li><p>Other ideas</p>
+<ul>
+<li><p>Synthesize observations of host stars being targeted by exoplanet surveys</p>
+</li>
+<li><p>Analyze pyrheliometer data and exposure meter data accompanying NEID solar observations to determine which days observations were likely contaminated by poor atmospheric conditions</p>
+</li>
+</ul>
+</li>
+</ul>
+<h3 id="potential_data_sources"><a href="#potential_data_sources" class="header-anchor">Potential Data Sources</a></h3>
+<ul>
+<li><p>Transit light curves:  </p>
+<ul>
+<li><p>Kepler/K2</p>
+</li>
+<li><p>TESS</p>
+</li>
+</ul>
+</li>
+<li><p>Transit Timing Variations:  </p>
+<ul>
+<li><p>Table of transit times from Holczer et al. &#40;2016&#41;</p>
+</li>
+</ul>
+</li>
+<li><p>Radial Velocities:</p>
+<ul>
+<li><p>California Legacy Survey RVs</p>
+</li>
+<li><p>NEID standard star observations</p>
+</li>
+<li><p>NEID solar observations</p>
+</li>
+</ul>
+</li>
+<li><p>Host star properties</p>
+<ul>
+<li><p>California Legacy Survey spectra</p>
+</li>
+<li><p>NEID standard star spectra</p>
+</li>
+</ul>
+</li>
+</ul>
+<h2 id="resources"><a href="#resources" class="header-anchor">Resources</a></h2>
+<ul>
+<li><p><a href="https://exoplanetarchive.ipac.caltech.edu/docs/data.html">Exoplanet Archive</a></p>
+</li>
+<li><p><a href="https://github.com/leerosenthalj/CLSI">California Legacy Survey RVs</a> &#40;see csv files in legacy_tables directory&#41;</p>
+</li>
+<li><p><a href="https://california-planet-search.github.io/cks-website/">California-Kepler Survey &#40;spectra &amp; RVs&#41;</a></p>
+</li>
+<li><p><a href="https://archive.stsci.edu/kepler/publiclightcurves.html">Kepler light curves</a></p>
+</li>
+<li><p><a href="https://docs.lightkurve.org/tutorials/1-getting-started/searching-for-data-products.html">Lightkurve package for downloading Kepler, K2 &amp; TESS data</a></p>
+</li>
+<li><p><a href="https://exoplanetarchive.ipac.caltech.edu/docs/KeplerSimulated.html">Kepler Simulated data products</a></p>
+</li>
+<li><p><a href="https://cdsarc.cds.unistra.fr/viz-bin/cat/J/ApJS/225/9#/browse">Transit Timing Variations observed by Kepler &#40;Holczer et al. 2016&#41;</a></p>
+</li>
+<li><p><a href="http://research.iac.es/proyecto/exoatmospheres/table.php">IAC community database for exoplanet atmospheric observations</a></p>
+</li>
+</ul>
+<script type="text/javascript" src="/Spring2025/libs/ansi_up.js" defer></script>
+
+<div id="copyright" class="docs-footer container grid-lg">
+<a href="https://www.psu.edu">Penn State</a> &mdash;
+<a href="https://science.psu.edu/astro">Astronomy & Astrophysics</a> &mdash;
+<a href="https://astrostatistics.psu.edu/">Center for Astrostatistics</a>
+<br>
+<a href="https://www.icds.psu.edu/">Institute for Computational & Data Sciences</a>
+</br>
+</br>
+<a href="http://creativecommons.org/licenses/by-sa/4.0/">CC BY-SA 4.0</a> <a href="https://science.psu.edu/astro/people/ebf11">Eric Ford</a>
+</div>
+</div><!-- CONTENT ENDS HERE -->
+    </div>
+    </div>
+    </div>
+    </div>
+  </body>
+</html>

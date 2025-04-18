@@ -1,0 +1,4 @@
+Sitemap: https://PsuAstro416.github.io/Spring2025/sitemap.xml
+
+User-agent: *
+Disallow:
