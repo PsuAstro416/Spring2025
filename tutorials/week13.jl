@@ -5,6 +5,7 @@ using Markdown
 using InteractiveUtils
 
 # ╔═╡ 27a55fd4-5c0d-4b5f-9dd8-3dd04a36dc68
+# hideall 
 using PlutoUI, PlutoTeachingTools
 
 # ╔═╡ 0131302e-76e6-46fa-89e3-835976588d49
@@ -199,7 +200,7 @@ md"""
 
 # ╔═╡ 8265dc36-55a6-4420-a063-ff5b3c53b088
 md"""
-### Tools to automate workflows
+## Tools to automate workflows
 - Build tools: make, cmake
 - Package managers
 - Scientific workflows: [Snakemake](https://snakemake.readthedocs.io/en/stable/), Galaxy, Nextflow, BigDataScript, ...
@@ -237,13 +238,52 @@ md"""
 #### Transparency
 """
 
+# ╔═╡ 28492f79-64f4-413c-9a44-2f6106cb745e
+md"""
+# Q&A
+"""
+
+# ╔═╡ 3496fe30-8f36-4a7b-9a5e-361ae352baca
+md"""
+## Reproducibility
+"""
+
+# ╔═╡ 2b99e9af-73d9-4891-9d54-10e1cabc7067
+question_box(md"""How many astronomers focus on replicating results? Most astronomy papers I see published are on novel research? 
+
+Should more astronomers focus on replicating results?
+
+Or do they just not achieve the front page of sites often?""")
+
+# ╔═╡ 10da2d57-8a82-45b3-8e11-ded52d75ada0
+question_box(md"How can a researcher assess the validity of a study that has not been replicated yet?")
+
+# ╔═╡ b677f5af-48c5-4f7c-8992-cf90afa1708c
+question_box(md"For reproducibility, replicability, and validity of research, is it the same standards across all of astronomy/astrophysics? 
+Do you know if it extends into physics too?")
+
+# ╔═╡ f4a6ec56-ad89-47bf-824f-805027680da1
+question_box(md"Does knowing two parameters for a basic model serve as a good prior to use when analyzing our data with a more complex model?")
+
+# ╔═╡ d99ff82d-b1a9-4001-aab7-dda55d26b3e8
+question_box(md"Does a more complex model mean more parameters or a firmer scientific model?")
+
+# ╔═╡ 59edf487-4e88-4357-a699-a34d0bae81b7
+md"""
+## Project
+"""
+
+# ╔═╡ d5f50c67-f6f5-4f70-a18b-8dbef77c76f5
+question_box(md"How long have written reports typically been, historically?")
+
 # ╔═╡ 6a6f159b-09b1-4a53-bfa9-ffcbe20b94dd
 md"""
 # Setup/Helper Code
 """
 
 # ╔═╡ a4574030-1a50-4988-a46b-becf718148a5
-ChooseDisplayMode()
+# hideall
+WidthOverDocs()
 
 # ╔═╡ 00000000-0000-0000-0000-000000000001
 PLUTO_PROJECT_TOML_CONTENTS = """
@@ -657,8 +697,17 @@ version = "17.4.0+2"
 # ╟─8265dc36-55a6-4420-a063-ff5b3c53b088
 # ╟─1048e2eb-37a8-41bb-9f4b-72ad85243e37
 # ╟─a74af3c1-48e3-4a10-9a99-b473de53e0c2
+# ╟─28492f79-64f4-413c-9a44-2f6106cb745e
+# ╟─3496fe30-8f36-4a7b-9a5e-361ae352baca
+# ╟─2b99e9af-73d9-4891-9d54-10e1cabc7067
+# ╟─10da2d57-8a82-45b3-8e11-ded52d75ada0
+# ╟─b677f5af-48c5-4f7c-8992-cf90afa1708c
+# ╟─d99ff82d-b1a9-4001-aab7-dda55d26b3e8
+# ╟─f4a6ec56-ad89-47bf-824f-805027680da1
+# ╟─59edf487-4e88-4357-a699-a34d0bae81b7
+# ╟─d5f50c67-f6f5-4f70-a18b-8dbef77c76f5
 # ╟─6a6f159b-09b1-4a53-bfa9-ffcbe20b94dd
 # ╟─a4574030-1a50-4988-a46b-becf718148a5
-# ╠═27a55fd4-5c0d-4b5f-9dd8-3dd04a36dc68
+# ╟─27a55fd4-5c0d-4b5f-9dd8-3dd04a36dc68
 # ╟─00000000-0000-0000-0000-000000000001
 # ╟─00000000-0000-0000-0000-000000000002
